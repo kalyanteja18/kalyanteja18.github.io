@@ -565,7 +565,7 @@
             line-height: 1.55;
         }
 
-        /* CERTIFICATE CARDS */
+        /* CERTIFICATE DISPLAY CARDS */
         .cert-display-card {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
@@ -1056,7 +1056,7 @@
 
             <div class="profile-area">
                 <div class="avatar-box">
-                    <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" id="profileImg" alt="Gaddam Kalyan Teja" onerror="renderProfileFallback('profileImg');">
+                    <img src="https://lh3.googleusercontent.com/d/1VyM78hzITJsQr05NEHr5NCYEtwZJHoV8" id="profileImg" alt="Gaddam Kalyan Teja" onerror="renderProfileFallback('profileImg');">
                 </div>
                 <div class="profile-info">
                     <h1>Gaddam Kalyan Teja</h1>
@@ -1081,9 +1081,9 @@
             </div>
 
             <div class="header-actions">
-                <button onclick="downloadResumePDF()" class="btn-main">
+                <a href="https://drive.google.com/uc?export=download&id=1U89E24kKR169yDMJINyBP5Vljrsq8ypi" target="_blank" onclick="downloadResumePDF()" class="btn-main">
                     <i class="fas fa-download"></i> Download CV
-                </button>
+                </a>
                 <div class="header-socials">
                     <a href="mailto:kalyanteja18@gmail.com" title="Email"><i class="far fa-envelope"></i></a>
                     <a href="https://x.com/KALYANT06423430" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
@@ -1421,7 +1421,7 @@
                     <div class="cards-grid">
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="Docker MasterClass Certificate" id="cert1" onerror="renderCertFallback('cert1', 'Docker MasterClass', 'TechLynk Selenium | Nov 12, 2025');">
+                                <img src="https://lh3.googleusercontent.com/d/1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" alt="Docker MasterClass Certificate" id="cert1" onerror="renderCertFallback('cert1', 'Docker MasterClass', 'TechLynk Selenium | Nov 12, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1435,7 +1435,7 @@
 
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="Ultimate YAML Course Certificate" id="cert2" onerror="renderCertFallback('cert2', 'Ultimate YAML Course', 'TechLynk Selenium | Nov 7, 2025');">
+                                <img src="https://lh3.googleusercontent.com/d/1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" alt="Ultimate YAML Course Certificate" id="cert2" onerror="renderCertFallback('cert2', 'Ultimate YAML Course', 'TechLynk Selenium | Nov 7, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1449,7 +1449,7 @@
 
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="AWS Certified Cloud Practitioner" id="cert3" onerror="renderCertFallback('cert3', 'AWS Cloud Practitioner', 'Chetan Agrawal | Sept 26, 2025');">
+                                <img src="https://lh3.googleusercontent.com/d/1mt7dY7Wcvg2Dz1pRAkU9ypzmVVc2KNTU" alt="AWS Certified Cloud Practitioner" id="cert3" onerror="renderCertFallback('cert3', 'AWS Cloud Practitioner', 'Chetan Agrawal | Sept 26, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1463,7 +1463,7 @@
 
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="Python Programming Certificate" id="cert4" onerror="renderCertFallback('cert4', 'Python Programming', 'Maria EduCare | July 31, 2025');">
+                                <img src="https://lh3.googleusercontent.com/d/1xHmE4jm3GBSlu9O8XxXdXLH0Wp0QLyuc" alt="Python Programming Certificate" id="cert4" onerror="renderCertFallback('cert4', 'Python Programming', 'Maria EduCare | July 31, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1610,21 +1610,21 @@
     </div>
 
     <script>
-        // Profile Image Fallback (Renders styled avatar if Drive image link fails locally)
+        // Profile Fallback
         function renderProfileFallback(imgId) {
             const img = document.getElementById(imgId);
             const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e2230'/><circle cx='50' cy='36' r='18' fill='%233b82f6'/><path d='M20 85 C 20 60, 80 60, 80 85 Z' fill='%233b82f6'/></svg>`;
             img.src = "data:image/svg+xml;utf8," + svg;
         }
 
-        // Certificate Fallback Generator (Guarantees clean display if external Drive images are restricted)
+        // Certificate Fallback
         function renderCertFallback(imgId, title, sub) {
             const img = document.getElementById(imgId);
             const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'><rect width='600' height='380' fill='%2314161d'/><rect x='15' y='15' width='570' height='350' fill='none' stroke='%233b82f6' stroke-width='4' rx='8'/><text x='300' y='80' fill='%23ffffff' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>CERTIFICATE OF COMPLETION</text><text x='300' y='160' fill='%233b82f6' font-family='sans-serif' font-size='24' font-weight='bold' text-anchor='middle'>${title}</text><text x='300' y='220' fill='%239ea4b5' font-family='sans-serif' font-size='16' text-anchor='middle'>Presented to: Gaddam Kalyan Teja</text><text x='300' y='280' fill='%2362687a' font-family='sans-serif' font-size='14' text-anchor='middle'>${sub}</text></svg>`;
             img.src = "data:image/svg+xml;utf8," + svg;
         }
 
-        // PDF Generator matching exact resume details
+        // PDF Generator fallback matching exact resume details
         function downloadResumePDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -1755,7 +1755,7 @@
             }
         }
 
-        // Fullscreen Modal for Certificates
+        // Modal for Certificates
         function viewCertModal(imgSrc) {
             const modal = document.getElementById('certModal');
             const modalImg = document.getElementById('certModalImg');
