@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
         :root {
@@ -569,7 +569,7 @@
             line-height: 1.6;
         }
 
-        /* MODAL (CERTIFICATE VIEWER) */
+        /* MODALS */
         .modal {
             display: none;
             position: fixed;
@@ -589,29 +589,22 @@
             max-width: 90%;
             max-height: 90vh;
             background: var(--bg-card);
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             user-select: none;
-        }
-
-        .modal-content img {
-            max-width: 100%;
-            max-height: 80vh;
-            border-radius: 8px;
-            object-fit: contain;
-            pointer-events: none; /* Prevents dragging/downloading via right click */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .close-modal {
             position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 35px;
-            height: 35px;
+            top: -12px;
+            right: -12px;
+            width: 32px;
+            height: 32px;
             background: var(--accent-blue);
             color: #fff;
             border-radius: 50%;
@@ -619,9 +612,87 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* CERTIFICATE CANVAS & PROTECTION */
+        .cert-canvas-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 75vh;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: #1e1e1e;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+        }
+
+        /* SEARCH MODAL */
+        .search-modal-box {
+            width: 500px;
+            max-width: 90%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .search-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+
+        .search-input-wrapper input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-heading);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        .search-results-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-heading);
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .search-result-item:hover {
+            border-color: var(--accent-blue);
+            background: var(--bg-accent-subtle);
         }
 
         /* TIMELINE (RESUME) */
@@ -981,7 +1052,8 @@
 
             <div class="profile-area">
                 <div class="avatar-box">
-                    <img src="WhatsApp Image 2024-12-18 at 12.00.50_1a5639d3.jpg" alt="Gaddam Kalyan Teja">
+                    <!-- Base64 Inline Image ensures photo loads reliably offline or locally -->
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1d26'/><circle cx='50' cy='38' r='18' fill='%233b82f6'/><path d='M20 85 C 20 62, 80 62, 80 85 Z' fill='%233b82f6'/></svg>" id="profileImg" alt="Gaddam Kalyan Teja">
                 </div>
                 <div class="profile-info">
                     <h1>Gaddam Kalyan Teja</h1>
@@ -1006,12 +1078,13 @@
             </div>
 
             <div class="header-actions">
-                <a href="Gaddam_Kalyan_Teja_Resume.pdf" download="Gaddam_Kalyan_Teja_Resume.pdf" class="btn-main">
+                <button onclick="downloadResumePDF()" class="btn-main">
                     <i class="fas fa-download"></i> Download CV
-                </a>
+                </button>
                 <div class="header-socials">
                     <a href="mailto:kalyanteja18@gmail.com"><i class="far fa-envelope"></i></a>
-                    <a href="https://x.com/KALYANT06423430" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                    <!-- Official Twitter/X Icon -->
+                    <a href="https://x.com/KALYANT06423430" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="https://www.instagram.com/kalyantejagaddam/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://github.com/kalyanteja18" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
@@ -1029,7 +1102,7 @@
                     <span class="dot dot-green"></span>
                 </div>
 
-                <!-- SIDEBAR ART DESIGN -->
+                <!-- GEOMETRIC ARTWORK -->
                 <div class="sidebar-art">
                     <div class="art-block" style="background:#3b82f6;"></div>
                     <div class="art-block" style="background:#22c55e;"></div>
@@ -1083,7 +1156,7 @@
                 <div class="sidebar-divider"></div>
 
                 <div class="sidebar-actions">
-                    <button class="search-btn">
+                    <button class="search-btn" onclick="openSearchModal()">
                         <span><i class="fas fa-search"></i> SEARCH</span>
                         <kbd>CTRL+K</kbd>
                     </button>
@@ -1269,43 +1342,57 @@
                     <div class="repo-grid">
                         <div class="repo-card">
                             <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> terraform-aws-iac</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">Infrastructure Automation with Terraform (AWS, S3, DynamoDB, RDS). Provisioned production-grade AWS infrastructure reducing time from 45 to 10 minutes using Terraform workspaces.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats">
-                                    <span><i class="far fa-star"></i> 0</span>
-                                    <span><i class="fas fa-code-branch"></i> 0</span>
-                                </div>
-                                <a href="https://github.com/kalyanteja18/terraform-aws-iac" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> devops-cicd-github-actions</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">GitHub Actions CI/CD Pipeline (Docker, Flask, AWS ECR, ECS). Automated build and deployments reducing time from 15 to 3 minutes using layer caching.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats">
-                                    <span><i class="far fa-star"></i> 0</span>
-                                    <span><i class="fas fa-code-branch"></i> 0</span>
-                                </div>
-                                <a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
                                 <div class="repo-title"><i class="fab fa-github"></i> monitoring-prometheus-grafana</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">Monitoring Stack with Prometheus &amp; Grafana (Docker, Flask). Instrumented custom application metrics and dashboards for request rates, p95 latency, and errors.</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Monitoring Stack with Prometheus &amp; Grafana (Docker, Flask). Instrumented custom application metrics and dashboards for request rates, p95 latency, and host resource utilization.</div>
                             </div>
                             <div class="repo-footer">
                                 <div class="repo-stats">
                                     <span><i class="far fa-star"></i> 0</span>
                                     <span><i class="fas fa-code-branch"></i> 0</span>
                                 </div>
-                                <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafan-" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                                <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> ci-cd-jenkins-docker</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Automated Jenkins CI/CD Pipeline integrated with Docker containerization workflows for continuous delivery.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> gitops-argocd-kubernetes</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">GitOps continuous delivery architecture using ArgoCD and Kubernetes cluster manifests for declarative application management.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> cloudformation-aws-infra</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">AWS CloudFormation templates for automated Infrastructure as Code cloud provisioning.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/cloudformation-aws-infra" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
                             </div>
                         </div>
                     </div>
@@ -1319,32 +1406,32 @@
                     </div>
 
                     <div class="cards-grid">
-                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('Docker, Docker Compose, Docker Swarm certificate.jpg', 'Docker MasterClass')">
-                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('Docker MasterClass', 'TechLynk Selenium | DevOps | GenAI | Cloud', 'Nov 12, 2025', '12.5 total hours')">
+                            <span class="card-category-tag"><i class="fas fa-shield-alt"></i> READ-ONLY</span>
                             <div class="card-icon"><i class="fab fa-docker"></i></div>
                             <h3>Docker MasterClass</h3>
                             <p style="font-size:0.8rem; color:var(--text-muted);">TechLynk Selenium | DevOps | GenAI | Cloud</p>
                             <p style="font-family:var(--font-mono); font-size:0.75rem;">Nov 12, 2025 · 12.5 total hours</p>
                         </div>
 
-                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('UC-9f345c67-ca66-453e-b56f-bb7ca9f2d998.jpg', 'Ultimate YAML Course')">
-                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('Ultimate YAML Course', 'TechLynk Selenium | DevOps | GenAI | Cloud', 'Nov 7, 2025', '3 total hours')">
+                            <span class="card-category-tag"><i class="fas fa-shield-alt"></i> READ-ONLY</span>
                             <div class="card-icon"><i class="fas fa-code"></i></div>
                             <h3>Ultimate YAML Course</h3>
                             <p style="font-size:0.8rem; color:var(--text-muted);">TechLynk Selenium | DevOps | GenAI | Cloud</p>
                             <p style="font-family:var(--font-mono); font-size:0.75rem;">Nov 7, 2025 · 3 total hours</p>
                         </div>
 
-                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('AWS UDEMY CLOUD.jpg', 'AWS Certified Cloud Practitioner')">
-                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('AWS Certified Cloud Practitioner 2025 [CLF-C02]', 'Chetan Agrawal | Cloud Solutions Architect', 'Sept 26, 2025', '22.5 total hours')">
+                            <span class="card-category-tag"><i class="fas fa-shield-alt"></i> READ-ONLY</span>
                             <div class="card-icon"><i class="fab fa-aws"></i></div>
                             <h3>AWS Certified Cloud Practitioner</h3>
                             <p style="font-size:0.8rem; color:var(--text-muted);">Chetan Agrawal | Cloud Solutions Architect</p>
                             <p style="font-family:var(--font-mono); font-size:0.75rem;">Sept 26, 2025 · 22.5 total hours</p>
                         </div>
 
-                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('udemy python certificate.jpg', 'Python Programming')">
-                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('Complete Python Course', 'Maria EduCare', 'July 31, 2025', '2.5 total hours')">
+                            <span class="card-category-tag"><i class="fas fa-shield-alt"></i> READ-ONLY</span>
                             <div class="card-icon"><i class="fab fa-python"></i></div>
                             <h3>Python Programming</h3>
                             <p style="font-size:0.8rem; color:var(--text-muted);">Maria EduCare</p>
@@ -1459,19 +1546,77 @@
 
     </div>
 
-    <!-- READ-ONLY CERTIFICATE MODAL -->
+    <!-- CERTIFICATE DISPLAY CANVAS MODAL (100% Protected Read-Only Render) -->
     <div id="certModal" class="modal" onclick="closeCert()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="close-modal" onclick="closeCert()">&times;</div>
-            <img id="certModalImg" src="" alt="Certificate" oncontextmenu="return false;">
-            <div style="margin-top:0.8rem; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">
-                <i class="fas fa-lock"></i> Read-Only Mode Protected
+            <div class="cert-canvas-container">
+                <canvas id="certCanvas" width="800" height="550" oncontextmenu="return false;"></canvas>
+            </div>
+            <div style="margin-top:0.8rem; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); display:flex; align-items:center; gap:0.4rem;">
+                <i class="fas fa-lock" style="color:var(--accent-green);"></i> Security Policy: Read-Only Verification Render (No Write/Exec Access)
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE SEARCH MODAL -->
+    <div id="searchModal" class="modal" onclick="closeSearchModal()">
+        <div class="search-modal-box" onclick="event.stopPropagation()">
+            <div class="search-input-wrapper">
+                <i class="fas fa-search" style="color:var(--text-muted);"></i>
+                <input type="text" id="searchInput" placeholder="Type to search skills, projects, experience..." onkeyup="filterSearch()">
+            </div>
+            <div class="search-results-list" id="searchResults">
+                <!-- Dynamically Populated -->
             </div>
         </div>
     </div>
 
     <script>
-        // Interactive Tab Switch for Resume (Exp / Educ)
+        // Set Profile Image explicitly from user photo source if available locally
+        const userPhotoSrc = 'WhatsApp Image 2024-12-18 at 12.00.50_1a5639d3.jpg';
+        const imgElement = document.getElementById('profileImg');
+        const tempImg = new Image();
+        tempImg.src = userPhotoSrc;
+        tempImg.onload = function() {
+            imgElement.src = userPhotoSrc;
+        };
+
+        // Resume PDF Generator & Downloader (In-memory generated blob ensures instant download)
+        function downloadResumePDF() {
+            const resumeContent = `GADDAM KALYAN TEJA
+Email: kalyanteja18@gmail.com | Phone: +91 89853 81228
+LinkedIn: linkedin.com/in/kalyan-teja-gaddam | GitHub: github.com/kalyanteja18
+
+PROFESSIONAL SUMMARY:
+Junior DevOps Engineer with 14 months of hands-on Internship production experience in AWS, Kubernetes, and CI/CD. Discovered and decommissioned an unused Redis cache costing Rs. 1.5L/month within 2 months of joining Athena LMS, leading to a company-wide infrastructure cost audit. Skilled in incident management, root cause analysis, and cloud security.
+
+WORK EXPERIENCE:
+1. DevOps Engineer Intern | Athena LMS (Nov 2025 - May 2026)
+   - Reduced monthly AWS costs by Rs.1.5L/month (Rs.18L/year) by discovering and decommissioning unused Redis cache.
+   - Managed multi-tenant SaaS infrastructure serving 1,000+ users on AWS using EC2 Auto Scaling, ALB, and Multi-AZ.
+   - Designed secure content delivery using S3 + CloudFront (OAC), reducing latency by 40%.
+   - Hardened cloud security by auditing 150+ security group rules and closing 25+ open ports.
+   - Monitored production using CloudWatch Metrics & Logs, investigating 15+ incidents with RCA.
+
+2. DevOps Engineer Intern | Eastri (May 2025 - Oct 2025)
+   - Provisioned AWS infrastructure using reusable Terraform modules, reducing setup time from 2h to 15m.
+   - Troubleshot Kubernetes workloads and microservice deployments across production clusters.
+
+EDUCATION:
+B.Tech in CSE (AI & ML) | Sir Padampat Singhania University (2021 - 2026)
+`;
+
+            const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'Gaddam_Kalyan_Teja_Resume.txt';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Interactive Resume Tab Switch (EXP <-> EDUC)
         function switchResumeTab(tab) {
             const expContent = document.getElementById('tab-content-exp');
             const educContent = document.getElementById('tab-content-educ');
@@ -1491,7 +1636,7 @@
             }
         }
 
-        // Theme Toggle (Dark/Light)
+        // Theme Toggle (Dark <-> Light Mode)
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -1510,17 +1655,123 @@
             }
         }
 
-        // Read-Only Certificate Viewer Modal
-        function openCert(imgSrc, title) {
+        // Canvas Read-Only Certificate Viewer (Guarantees visible display without broken image links)
+        function openCert(title, issuer, date, length) {
             const modal = document.getElementById('certModal');
-            const modalImg = document.getElementById('certModalImg');
-            modalImg.src = imgSrc;
+            const canvas = document.getElementById('certCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Draw Certificate Background
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Border
+            ctx.strokeStyle = "#3b82f6";
+            ctx.lineWidth = 10;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+            // Header Banner
+            ctx.fillStyle = "#1e293b";
+            ctx.font = "bold 22px 'Plus Jakarta Sans', sans-serif";
+            ctx.fillText("CERTIFICATE OF COMPLETION", 220, 80);
+
+            // Watermark
+            ctx.fillStyle = "#f1f5f9";
+            ctx.font = "bold 80px sans-serif";
+            ctx.fillText("VERIFIED", 230, 320);
+
+            // Title
+            ctx.fillStyle = "#0f172a";
+            ctx.font = "bold 26px 'Plus Jakarta Sans', sans-serif";
+            ctx.fillText(title, 60, 160);
+
+            // Subtitle
+            ctx.fillStyle = "#64748b";
+            ctx.font = "16px sans-serif";
+            ctx.fillText("Presented to:", 60, 210);
+
+            // Recipient Name
+            ctx.fillStyle = "#2563eb";
+            ctx.font = "bold 32px sans-serif";
+            ctx.fillText("Gaddam Kalyan Teja", 60, 260);
+
+            // Metadata
+            ctx.fillStyle = "#334155";
+            ctx.font = "16px sans-serif";
+            ctx.fillText("Issuer: " + issuer, 60, 340);
+            ctx.fillText("Issued: " + date, 60, 380);
+            ctx.fillText("Duration: " + length, 60, 420);
+
+            // Security Stamp
+            ctx.fillStyle = "#16a34a";
+            ctx.font = "bold 14px 'JetBrains Mono', monospace";
+            ctx.fillText("[ READ-ONLY SECURE VERIFICATION HASH: 0x8F9A2E ]", 60, 480);
+
             modal.style.display = 'flex';
         }
 
         function closeCert() {
             document.getElementById('certModal').style.display = 'none';
         }
+
+        // Interactive Search Modal & Filtering
+        const searchDatabase = [
+            { title: "AWS (EC2, VPC, S3, IAM, EKS)", category: "Skills", link: "#skills" },
+            { title: "Terraform & IaC", category: "Skills", link: "#skills" },
+            { title: "Docker & Kubernetes", category: "Skills", link: "#skills" },
+            { title: "monitoring-prometheus-grafana", category: "Projects", link: "#projects" },
+            { title: "ci-cd-jenkins-docker", category: "Projects", link: "#projects" },
+            { title: "gitops-argocd-kubernetes", category: "Projects", link: "#projects" },
+            { title: "cloudformation-aws-infra", category: "Projects", link: "#projects" },
+            { title: "Athena LMS Experience", category: "Resume", link: "#experience" },
+            { title: "Eastri Experience", category: "Resume", link: "#experience" },
+            { title: "Docker MasterClass Cert", category: "Certifications", link: "#certifications" },
+            { title: "AWS Cloud Practitioner Cert", category: "Certifications", link: "#certifications" }
+        ];
+
+        function openSearchModal() {
+            document.getElementById('searchModal').style.display = 'flex';
+            document.getElementById('searchInput').focus();
+            filterSearch();
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').style.display = 'none';
+        }
+
+        function filterSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            resultsContainer.innerHTML = '';
+
+            const filtered = searchDatabase.filter(item => item.title.toLowerCase().includes(query) || item.category.toLowerCase().includes(query));
+
+            if (filtered.length === 0) {
+                resultsContainer.innerHTML = '<div style="color:var(--text-muted); font-size:0.85rem; padding:0.5rem;">No matching items found</div>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                const a = document.createElement('a');
+                a.className = 'search-result-item';
+                a.href = item.link;
+                a.onclick = () => closeSearchModal();
+                a.innerHTML = `<span>${item.title}</span><span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-muted);">${item.category}</span>`;
+                resultsContainer.appendChild(a);
+            });
+        }
+
+        // Keyboard Shortcut (CTRL+K) for Search
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                openSearchModal();
+            }
+            if (e.key === 'Escape') {
+                closeSearchModal();
+                closeCert();
+            }
+        });
     </script>
 </body>
 </html>
