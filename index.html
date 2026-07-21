@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
         :root {
@@ -1052,8 +1053,7 @@
 
             <div class="profile-area">
                 <div class="avatar-box">
-                    <!-- Base64 Inline Image ensures photo loads reliably offline or locally -->
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231a1d26'/><circle cx='50' cy='38' r='18' fill='%233b82f6'/><path d='M20 85 C 20 62, 80 62, 80 85 Z' fill='%233b82f6'/></svg>" id="profileImg" alt="Gaddam Kalyan Teja">
+                    <img src="WhatsApp Image 2024-12-18 at 12.00.50_1a5639d3.jpg" id="profileImg" alt="Gaddam Kalyan Teja" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%231a1d26\'/><circle cx=\'50\' cy=\'38\' r=\'18\' fill=\'%233b82f6\'/><path d=\'M20 85 C 20 62, 80 62, 80 85 Z\' fill=\'%233b82f6\'/></svg>';">
                 </div>
                 <div class="profile-info">
                     <h1>Gaddam Kalyan Teja</h1>
@@ -1083,7 +1083,6 @@
                 </button>
                 <div class="header-socials">
                     <a href="mailto:kalyanteja18@gmail.com"><i class="far fa-envelope"></i></a>
-                    <!-- Official Twitter/X Icon -->
                     <a href="https://x.com/KALYANT06423430" target="_blank" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="https://www.instagram.com/kalyantejagaddam/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
                     <a href="https://github.com/kalyanteja18" target="_blank"><i class="fab fa-github"></i></a>
@@ -1285,12 +1284,13 @@
                                 <div class="timeline-meta">7 months</div>
                                 <div class="timeline-body">
                                     <ul>
-                                        <li>Discovered and decommissioned an unused Redis cache (billing since Aug 2025), reducing AWS costs by <strong>Rs.1.5L/month</strong> (Rs.18L/year) – triggered company-wide cost audit.</li>
-                                        <li>Managed multi-tenant SaaS infrastructure serving 1,000+ users on AWS using EC2 Auto Scaling Groups, ALB, and Multi-AZ deployments.</li>
-                                        <li>Designed secure content delivery using <strong>S3 + CloudFront (OAC)</strong>, reducing latency by 40%.</li>
-                                        <li>Hardened cloud security: audited 150+ security group rules, closed 25+ open ports, implemented least-privilege firewall policies across 20+ EC2 instances.</li>
-                                        <li>Monitored production using CloudWatch Metrics &amp; Logs, investigated 15+ incidents, performed RCA, and reduced MTTR.</li>
-                                        <li>Implemented <strong>JWT authentication &amp; RBAC</strong> access controls across dev, staging, and production environments.</li>
+                                        <li>Discovered and decommissioned an unused Redis cache (billing since Aug 2025), reducing AWS costs by <strong>Rs.1.5L/month</strong> (Rs.18L/year) within 2 months of joining - led to a company-wide infrastructure cost optimization audit.</li>
+                                        <li>Managed multi-tenant SaaS infrastructure serving <strong>1,000+ users</strong> on AWS, ensuring tenant isolation, high availability, and scalable architecture using EC2 Auto Scaling Groups, ALB, and Multi-AZ deployments.</li>
+                                        <li>Designed secure content delivery using <strong>Amazon S3 + CloudFront (OAC)</strong> with origin access control, reducing latency by 40% and improving content delivery security.</li>
+                                        <li>Hardened cloud security: audited 150+ security group rules, closed 25+ unnecessary open ports, and implemented least-privilege firewall policies across 20+ EC2 instances.</li>
+                                        <li>Monitored production infrastructure using Amazon CloudWatch Metrics & Logs, investigated 15+ production incidents, performed root cause analysis (RCA), and collaborated with developers to reduce mean time to resolution (MTTR).</li>
+                                        <li>Implemented <strong>JWT authentication &amp; RBAC</strong> authorization across dev, staging, and production environments, ensuring secure tenant-aware access controls for 1,000+ users.</li>
+                                        <li>Maintained infrastructure documentation, deployment runbooks, troubleshooting guides, and architecture diagrams to support consistent deployments and operational support.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1307,9 +1307,9 @@
                                 <div class="timeline-meta">6 months</div>
                                 <div class="timeline-body">
                                     <ul>
-                                        <li>Provisioned AWS infrastructure using reusable Terraform modules (EC2, VPC, Security Groups, S3) with remote state, reducing provisioning time from 2 hours to 15 minutes.</li>
-                                        <li>Troubleshot production Kubernetes workloads, networking issues, and container failures using logs, metrics, and Linux utilities, reducing downtime by 25%.</li>
-                                        <li>Managed Kubernetes microservice deployments using YAML manifests, Deployments, Services, ConfigMaps, Secrets, Ingress Controllers, and HPA across production clusters, achieving 99.9% availability.</li>
+                                        <li>Provisioned AWS infrastructure using reusable Terraform modules (EC2, VPC, Security Groups, S3) with variables, outputs, and remote state, reducing infrastructure provisioning time from 2 hours to 15 minutes across dev, staging, and production.</li>
+                                        <li>Troubleshot production Kubernetes workloads, networking issues, and container failures using logs, metrics, and Linux utilities, reducing downtime by 25% and improving service reliability.</li>
+                                        <li>Managed Kubernetes microservice deployments using YAML manifests, Deployments, Services, Config Maps, Secrets, Ingress Controllers, and Horizontal Pod Autoscalers across production clusters, achieving 99.9% availability.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1546,7 +1546,7 @@
 
     </div>
 
-    <!-- CERTIFICATE DISPLAY CANVAS MODAL (100% Protected Read-Only Render) -->
+    <!-- CERTIFICATE DISPLAY CANVAS MODAL -->
     <div id="certModal" class="modal" onclick="closeCert()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <div class="close-modal" onclick="closeCert()">&times;</div>
@@ -1573,47 +1573,96 @@
     </div>
 
     <script>
-        // Set Profile Image explicitly from user photo source if available locally
-        const userPhotoSrc = 'WhatsApp Image 2024-12-18 at 12.00.50_1a5639d3.jpg';
-        const imgElement = document.getElementById('profileImg');
-        const tempImg = new Image();
-        tempImg.src = userPhotoSrc;
-        tempImg.onload = function() {
-            imgElement.src = userPhotoSrc;
-        };
-
-        // Resume PDF Generator & Downloader (In-memory generated blob ensures instant download)
+        // PDF Generator function matching exact resume content
         function downloadResumePDF() {
-            const resumeContent = `GADDAM KALYAN TEJA
-Email: kalyanteja18@gmail.com | Phone: +91 89853 81228
-LinkedIn: linkedin.com/in/kalyan-teja-gaddam | GitHub: github.com/kalyanteja18
-
-PROFESSIONAL SUMMARY:
-Junior DevOps Engineer with 14 months of hands-on Internship production experience in AWS, Kubernetes, and CI/CD. Discovered and decommissioned an unused Redis cache costing Rs. 1.5L/month within 2 months of joining Athena LMS, leading to a company-wide infrastructure cost audit. Skilled in incident management, root cause analysis, and cloud security.
-
-WORK EXPERIENCE:
-1. DevOps Engineer Intern | Athena LMS (Nov 2025 - May 2026)
-   - Reduced monthly AWS costs by Rs.1.5L/month (Rs.18L/year) by discovering and decommissioning unused Redis cache.
-   - Managed multi-tenant SaaS infrastructure serving 1,000+ users on AWS using EC2 Auto Scaling, ALB, and Multi-AZ.
-   - Designed secure content delivery using S3 + CloudFront (OAC), reducing latency by 40%.
-   - Hardened cloud security by auditing 150+ security group rules and closing 25+ open ports.
-   - Monitored production using CloudWatch Metrics & Logs, investigating 15+ incidents with RCA.
-
-2. DevOps Engineer Intern | Eastri (May 2025 - Oct 2025)
-   - Provisioned AWS infrastructure using reusable Terraform modules, reducing setup time from 2h to 15m.
-   - Troubleshot Kubernetes workloads and microservice deployments across production clusters.
-
-EDUCATION:
-B.Tech in CSE (AI & ML) | Sir Padampat Singhania University (2021 - 2026)
-`;
-
-            const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'Gaddam_Kalyan_Teja_Resume.txt';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(18);
+            doc.text("Gaddam Kalyan Teja", 105, 15, { align: "center" });
+            
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            doc.text("Phone: 8985381228 | Email: kalyanteja18@gmail.com", 105, 22, { align: "center" });
+            doc.text("LinkedIn: linkedin.com/in/kalyan-teja-gaddam | GitHub: github.com/kalyanteja18", 105, 27, { align: "center" });
+            
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.text("Professional Summary", 14, 37);
+            doc.line(14, 39, 196, 39);
+            
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9.5);
+            const summary = "Junior DevOps Engineer with 14 months of hands-on Internship production experience in AWS, Kubernetes, and CI/CD. Discovered and decommissioned an unused Redis cache costing Rs. 1.5L/month within 2 months of joining Athena LMS, leading to a company-wide infrastructure cost audit. Experienced in managing multi-tenant SaaS infrastructure for 1,000+ users, automating deployments with Terraform & GitHub Actions, and monitoring with Prometheus/Grafana. Skilled in incident management, root cause analysis, and cloud security. Seeking an entry-level DevOps/Cloud role to optimize infrastructure and drive automation.";
+            const splitSummary = doc.splitTextToSize(summary, 180);
+            doc.text(splitSummary, 14, 45);
+            
+            let y = 68;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.text("Work Experience", 14, y);
+            doc.line(14, y + 2, 196, y + 2);
+            
+            y += 8;
+            doc.setFontSize(11);
+            doc.text("Athena LMS - DevOps Engineer Intern", 14, y);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9.5);
+            doc.text("Nov 2025 – May 2026 | New Delhi", 196, y, { align: "right" });
+            
+            y += 6;
+            const athenaBullets = [
+                "Discovered and decommissioned an unused Redis cache that had been billing since August 2025, reducing monthly AWS costs by Rs.1.5L/month (Rs.18L/year) within 2 months of joining - led to a company-wide infrastructure cost optimization audit.",
+                "Managed multi-tenant SaaS infrastructure serving 1,000+ users on AWS, ensuring tenant isolation, high availability, and scalable architecture using EC2 Auto Scaling Groups, ALB, and Multi-AZ deployments.",
+                "Designed secure content delivery using Amazon S3 + CloudFront (OAC) with origin access control, reducing latency by 40% and improving content delivery security.",
+                "Hardened cloud security by auditing 150+ security group rules, closing 25+ unnecessary open ports, and implementing least-privilege firewall policies across 20+ EC2 instances.",
+                "Monitored production infrastructure using Amazon CloudWatch Metrics & Logs, investigated 15+ production incidents, performed root cause analysis (RCA), and collaborated with developers to reduce mean time to resolution (MTTR).",
+                "Implemented JWT authentication and RBAC authorization across dev, staging, and production environments, ensuring secure tenant-aware access controls for 1,000+ users.",
+                "Maintained infrastructure documentation, deployment runbooks, troubleshooting guides, and architecture diagrams to support consistent deployments and operational support."
+            ];
+            
+            athenaBullets.forEach(bullet => {
+                const lines = doc.splitTextToSize("• " + bullet, 175);
+                doc.text(lines, 16, y);
+                y += (lines.length * 4.5);
+            });
+            
+            y += 3;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(11);
+            doc.text("Eastri - DevOps Engineer Intern", 14, y);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9.5);
+            doc.text("May 2025 – Oct 2025 | Mumbai (Remote)", 196, y, { align: "right" });
+            
+            y += 6;
+            const eastriBullets = [
+                "Provisioned AWS infrastructure using reusable Terraform modules (EC2, VPC, Security Groups, S3) with variables, outputs, and remote state, reducing infrastructure provisioning time from 2 hours to 15 minutes across dev, staging, and production.",
+                "Troubleshot production Kubernetes workloads, networking issues, and container failures using logs, metrics, and Linux utilities, reducing downtime by 25% and improving service reliability.",
+                "Managed Kubernetes microservice deployments using YAML manifests, Deployments, Services, Config Maps, Secrets, Ingress Controllers, and Horizontal Pod Autoscalers across production clusters, achieving 99.9% availability."
+            ];
+            
+            eastriBullets.forEach(bullet => {
+                const lines = doc.splitTextToSize("• " + bullet, 175);
+                doc.text(lines, 16, y);
+                y += (lines.length * 4.5);
+            });
+            
+            y += 3;
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.text("Education", 14, y);
+            doc.line(14, y + 2, 196, y + 2);
+            
+            y += 8;
+            doc.setFontSize(10.5);
+            doc.text("Sir Padampat Singhania University - B.Tech in CSE (AI & ML Specialization)", 14, y);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9.5);
+            doc.text("2021 – 2026 | Udaipur, Rajasthan", 196, y, { align: "right" });
+            
+            doc.save("Gaddam_Kalyan_Teja_Resume.pdf");
         }
 
         // Interactive Resume Tab Switch (EXP <-> EDUC)
@@ -1655,54 +1704,45 @@ B.Tech in CSE (AI & ML) | Sir Padampat Singhania University (2021 - 2026)
             }
         }
 
-        // Canvas Read-Only Certificate Viewer (Guarantees visible display without broken image links)
+        // Canvas Read-Only Certificate Viewer
         function openCert(title, issuer, date, length) {
             const modal = document.getElementById('certModal');
             const canvas = document.getElementById('certCanvas');
             const ctx = canvas.getContext('2d');
 
-            // Draw Certificate Background
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Border
             ctx.strokeStyle = "#3b82f6";
             ctx.lineWidth = 10;
             ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
 
-            // Header Banner
             ctx.fillStyle = "#1e293b";
             ctx.font = "bold 22px 'Plus Jakarta Sans', sans-serif";
             ctx.fillText("CERTIFICATE OF COMPLETION", 220, 80);
 
-            // Watermark
             ctx.fillStyle = "#f1f5f9";
             ctx.font = "bold 80px sans-serif";
             ctx.fillText("VERIFIED", 230, 320);
 
-            // Title
             ctx.fillStyle = "#0f172a";
-            ctx.font = "bold 26px 'Plus Jakarta Sans', sans-serif";
+            ctx.font = "bold 24px 'Plus Jakarta Sans', sans-serif";
             ctx.fillText(title, 60, 160);
 
-            // Subtitle
             ctx.fillStyle = "#64748b";
             ctx.font = "16px sans-serif";
             ctx.fillText("Presented to:", 60, 210);
 
-            // Recipient Name
             ctx.fillStyle = "#2563eb";
             ctx.font = "bold 32px sans-serif";
             ctx.fillText("Gaddam Kalyan Teja", 60, 260);
 
-            // Metadata
             ctx.fillStyle = "#334155";
             ctx.font = "16px sans-serif";
             ctx.fillText("Issuer: " + issuer, 60, 340);
             ctx.fillText("Issued: " + date, 60, 380);
             ctx.fillText("Duration: " + length, 60, 420);
 
-            // Security Stamp
             ctx.fillStyle = "#16a34a";
             ctx.font = "bold 14px 'JetBrains Mono', monospace";
             ctx.fillText("[ READ-ONLY SECURE VERIFICATION HASH: 0x8F9A2E ]", 60, 480);
@@ -1714,7 +1754,7 @@ B.Tech in CSE (AI & ML) | Sir Padampat Singhania University (2021 - 2026)
             document.getElementById('certModal').style.display = 'none';
         }
 
-        // Interactive Search Modal & Filtering
+        // Search Modal Database & Filtering
         const searchDatabase = [
             { title: "AWS (EC2, VPC, S3, IAM, EKS)", category: "Skills", link: "#skills" },
             { title: "Terraform & IaC", category: "Skills", link: "#skills" },
@@ -1761,7 +1801,6 @@ B.Tech in CSE (AI & ML) | Sir Padampat Singhania University (2021 - 2026)
             });
         }
 
-        // Keyboard Shortcut (CTRL+K) for Search
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
                 e.preventDefault();
