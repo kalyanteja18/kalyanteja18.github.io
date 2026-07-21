@@ -247,7 +247,6 @@
             transition: background-color 0.3s, border-color 0.3s;
         }
 
-        /* GEOMETRIC SIDEBAR ART */
         .sidebar-art {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -351,20 +350,15 @@
         }
 
         .lang-btn {
-            flex: 1;
-            background: transparent;
+            width: 100%;
+            background: var(--accent-blue);
             border: none;
-            color: var(--text-muted);
-            padding: 0.25rem;
-            font-size: 0.68rem;
+            color: #ffffff;
+            padding: 0.3rem;
+            font-size: 0.7rem;
             font-weight: 700;
             border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .lang-btn.active {
-            background: var(--accent-blue);
-            color: #ffffff;
+            text-align: center;
         }
 
         .theme-btn {
@@ -571,7 +565,7 @@
             line-height: 1.55;
         }
 
-        /* CERTIFICATE DISPLAY LIST */
+        /* CERTIFICATE CARDS */
         .cert-display-card {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
@@ -589,6 +583,7 @@
             overflow: hidden;
             border: 1px solid var(--border-color);
             background: #1e1e1e;
+            position: relative;
         }
 
         .cert-img-frame img {
@@ -1061,7 +1056,7 @@
 
             <div class="profile-area">
                 <div class="avatar-box">
-                    <img src="WhatsApp Image 2024-12-18 at 12.00.50_1a5639d3.jpg" id="profileImg" alt="Gaddam Kalyan Teja" onerror="this.onerror=null; this.src='WhatsApp Image 2024-12-18 at 12.00.50_1a5639d3_2.jpg';">
+                    <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" id="profileImg" alt="Gaddam Kalyan Teja" onerror="renderProfileFallback('profileImg');">
                 </div>
                 <div class="profile-info">
                     <h1>Gaddam Kalyan Teja</h1>
@@ -1170,8 +1165,7 @@
                     </button>
 
                     <div class="lang-toggle">
-                        <button class="lang-btn active">EN</button>
-                        <button class="lang-btn">IN</button>
+                        <div class="lang-btn">EN</div>
                     </div>
 
                     <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">
@@ -1427,7 +1421,7 @@
                     <div class="cards-grid">
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="Docker, Docker Compose, Docker Swarm certificate.jpg" alt="Docker Certificate" onerror="this.onerror=null; this.src='Docker, Docker Compose, Docker Swarm certificate_2.jpg';">
+                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="Docker MasterClass Certificate" id="cert1" onerror="renderCertFallback('cert1', 'Docker MasterClass', 'TechLynk Selenium | Nov 12, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1435,13 +1429,13 @@
                                     <p style="font-size:0.75rem; color:var(--text-muted);">TechLynk Selenium | DevOps | Cloud</p>
                                     <p style="font-family:var(--font-mono); font-size:0.7rem;">Nov 12, 2025 · 12.5 total hours</p>
                                 </div>
-                                <button onclick="viewCertModal('Docker, Docker Compose, Docker Swarm certificate.jpg')" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
+                                <button onclick="viewCertModal(document.getElementById('cert1').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
                             </div>
                         </div>
 
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="UC-9f345c67-ca66-453e-b56f-bb7ca9f2d998.jpg" alt="YAML Certificate" onerror="this.onerror=null; this.src='UC-9f345c67-ca66-453e-b56f-bb7ca9f2d998_2.jpg';">
+                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="Ultimate YAML Course Certificate" id="cert2" onerror="renderCertFallback('cert2', 'Ultimate YAML Course', 'TechLynk Selenium | Nov 7, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1449,13 +1443,13 @@
                                     <p style="font-size:0.75rem; color:var(--text-muted);">TechLynk Selenium | DevOps | Cloud</p>
                                     <p style="font-family:var(--font-mono); font-size:0.7rem;">Nov 7, 2025 · 3 total hours</p>
                                 </div>
-                                <button onclick="viewCertModal('UC-9f345c67-ca66-453e-b56f-bb7ca9f2d998.jpg')" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
+                                <button onclick="viewCertModal(document.getElementById('cert2').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
                             </div>
                         </div>
 
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="AWS UDEMY CLOUD.jpg" alt="AWS Certificate" onerror="this.onerror=null; this.src='AWS UDEMY CLOUD_2.jpg';">
+                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="AWS Certified Cloud Practitioner" id="cert3" onerror="renderCertFallback('cert3', 'AWS Cloud Practitioner', 'Chetan Agrawal | Sept 26, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1463,13 +1457,13 @@
                                     <p style="font-size:0.75rem; color:var(--text-muted);">Chetan Agrawal | Solutions Architect</p>
                                     <p style="font-family:var(--font-mono); font-size:0.7rem;">Sept 26, 2025 · 22.5 total hours</p>
                                 </div>
-                                <button onclick="viewCertModal('AWS UDEMY CLOUD.jpg')" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
+                                <button onclick="viewCertModal(document.getElementById('cert3').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
                             </div>
                         </div>
 
                         <div class="cert-display-card">
                             <div class="cert-img-frame">
-                                <img src="udemy python certificate.jpg" alt="Python Certificate" onerror="this.onerror=null; this.src='udemy python certificate_2.jpg';">
+                                <img src="https://lh3.googleusercontent.com/d/1be7B1k5dYi0Oj5Zf2va01c9gyfivxQuQ" alt="Python Programming Certificate" id="cert4" onerror="renderCertFallback('cert4', 'Python Programming', 'Maria EduCare | July 31, 2025');">
                             </div>
                             <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                                 <div>
@@ -1477,7 +1471,7 @@
                                     <p style="font-size:0.75rem; color:var(--text-muted);">Maria EduCare</p>
                                     <p style="font-family:var(--font-mono); font-size:0.7rem;">July 31, 2025 · 2.5 total hours</p>
                                 </div>
-                                <button onclick="viewCertModal('udemy python certificate.jpg')" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
+                                <button onclick="viewCertModal(document.getElementById('cert4').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
                             </div>
                         </div>
                     </div>
@@ -1616,7 +1610,21 @@
     </div>
 
     <script>
-        // PDF Generator function matching exact resume content
+        // Profile Image Fallback (Renders styled avatar if Drive image link fails locally)
+        function renderProfileFallback(imgId) {
+            const img = document.getElementById(imgId);
+            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e2230'/><circle cx='50' cy='36' r='18' fill='%233b82f6'/><path d='M20 85 C 20 60, 80 60, 80 85 Z' fill='%233b82f6'/></svg>`;
+            img.src = "data:image/svg+xml;utf8," + svg;
+        }
+
+        // Certificate Fallback Generator (Guarantees clean display if external Drive images are restricted)
+        function renderCertFallback(imgId, title, sub) {
+            const img = document.getElementById(imgId);
+            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'><rect width='600' height='380' fill='%2314161d'/><rect x='15' y='15' width='570' height='350' fill='none' stroke='%233b82f6' stroke-width='4' rx='8'/><text x='300' y='80' fill='%23ffffff' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>CERTIFICATE OF COMPLETION</text><text x='300' y='160' fill='%233b82f6' font-family='sans-serif' font-size='24' font-weight='bold' text-anchor='middle'>${title}</text><text x='300' y='220' fill='%239ea4b5' font-family='sans-serif' font-size='16' text-anchor='middle'>Presented to: Gaddam Kalyan Teja</text><text x='300' y='280' fill='%2362687a' font-family='sans-serif' font-size='14' text-anchor='middle'>${sub}</text></svg>`;
+            img.src = "data:image/svg+xml;utf8," + svg;
+        }
+
+        // PDF Generator matching exact resume details
         function downloadResumePDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -1708,7 +1716,7 @@
             doc.save("Gaddam_Kalyan_Teja_DevOps_Engineer.pdf");
         }
 
-        // Interactive Resume Tab Switch (EXP <-> EDUC)
+        // Tab Navigation
         function switchResumeTab(tab) {
             const expContent = document.getElementById('tab-content-exp');
             const educContent = document.getElementById('tab-content-educ');
@@ -1728,7 +1736,7 @@
             }
         }
 
-        // Theme Toggle (Dark <-> Light Mode)
+        // Dark/Light Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -1747,7 +1755,7 @@
             }
         }
 
-        // Fullscreen Certificate Image Modal
+        // Fullscreen Modal for Certificates
         function viewCertModal(imgSrc) {
             const modal = document.getElementById('certModal');
             const modalImg = document.getElementById('certModalImg');
@@ -1759,7 +1767,7 @@
             document.getElementById('certModal').style.display = 'none';
         }
 
-        // Search Modal Database & Filtering
+        // Search Engine
         const searchDatabase = [
             { title: "AWS (EC2, VPC, S3, IAM, EKS)", category: "Skills", link: "#skills" },
             { title: "Terraform & IaC", category: "Skills", link: "#skills" },
