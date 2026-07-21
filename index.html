@@ -1,6 +1,3 @@
-I have refactored your complete HTML portfolio code so that it exactly matches the visual UI layout, styling, and design system shown in your target interface screenshots (operator console header, vertical sidebar with status indicators, pill tabs, dark theme palette, cards, and grid system).
-
-```html
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -36,6 +33,25 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             --font-mono: 'JetBrains Mono', monospace;
         }
 
+        [data-theme="light"] {
+            --bg-main: #f3f4f6;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-input: #e5e7eb;
+            --bg-accent-subtle: #eff6ff;
+            
+            --border-color: #e5e7eb;
+            --border-light: #d1d5db;
+            
+            --text-heading: #111827;
+            --text-body: #4b5563;
+            --text-muted: #9ca3af;
+            
+            --accent-blue: #2563eb;
+            --accent-blue-hover: #1d4ed8;
+            --accent-green: #16a34a;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -52,6 +68,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             padding: 2rem 1rem;
             display: flex;
             justify-content: center;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .wrapper {
@@ -62,7 +79,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             gap: 1.5rem;
         }
 
-        /* ─── OPERATOR CONSOLE HEADER ─── */
+        /* HEADER */
         .console-header {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -74,6 +91,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 1.5rem;
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .window-dots {
@@ -93,15 +111,6 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
         .dot-yellow { background: #f59e0b; }
         .dot-green { background: #10b981; }
 
-        .console-label {
-            position: absolute;
-            top: 0.8rem;
-            right: 1.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
         .profile-area {
             display: flex;
             align-items: center;
@@ -110,17 +119,21 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
         }
 
         .avatar-box {
-            width: 72px;
-            height: 72px;
+            width: 76px;
+            height: 76px;
             border-radius: 18px;
-            border: 2px solid #ea580c;
+            border: 2px solid var(--accent-blue);
             overflow: hidden;
             background: var(--bg-input);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
-            font-size: 2rem;
+        }
+
+        .avatar-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-info h1 {
@@ -132,21 +145,9 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             gap: 0.4rem;
         }
 
-        .profile-info h1 span {
-            color: var(--text-body);
-            font-weight: 400;
-        }
-
         .profile-info .subtitle {
             font-size: 0.9rem;
             color: var(--text-body);
-        }
-
-        .profile-info .op-id {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.2rem;
         }
 
         .status-block {
@@ -191,20 +192,14 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             margin-top: 0.8rem;
         }
 
-        .btn-group {
-            display: flex;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
         .btn-main {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--accent-blue);
             border: none;
-            color: var(--text-heading);
-            padding: 0.5rem 1rem;
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 600;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -213,16 +208,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             text-decoration: none;
         }
 
-        .btn-main:hover { background: rgba(255, 255, 255, 0.08); }
-
-        .btn-arrow {
-            background: rgba(255, 255, 255, 0.03);
-            border: none;
-            border-left: 1px solid var(--border-color);
-            color: var(--text-heading);
-            padding: 0.5rem 0.6rem;
-            cursor: pointer;
-        }
+        .btn-main:hover { background: var(--accent-blue-hover); }
 
         .header-socials {
             display: flex;
@@ -237,7 +223,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
 
         .header-socials a:hover { color: var(--text-heading); }
 
-        /* ─── MAIN LAYOUT GRID ─── */
+        /* LAYOUT */
         .main-layout {
             display: grid;
             grid-template-columns: 240px 1fr;
@@ -245,7 +231,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             align-items: start;
         }
 
-        /* ─── SIDEBAR NAVIGATION ─── */
+        /* SIDEBAR */
         .sidebar {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -253,16 +239,26 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             padding: 1.25rem 0.8rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
             position: sticky;
             top: 2rem;
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
-        .sidebar-window-dots {
-            display: flex;
-            gap: 6px;
-            padding-left: 0.5rem;
-            margin-bottom: 0.5rem;
+        /* GEOMETRIC SIDEBAR ART */
+        .sidebar-art {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            padding: 0.5rem;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .art-block {
+            height: 12px;
+            border-radius: 2px;
         }
 
         .nav-list {
@@ -373,17 +369,19 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             background: var(--bg-input);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 0.4rem;
-            color: var(--text-muted);
+            padding: 0.5rem;
+            color: var(--text-heading);
             font-size: 0.75rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
+            gap: 0.5rem;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
-        /* ─── CONTENT AREA ─── */
+        /* CONTENT */
         .content-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -392,6 +390,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             display: flex;
             flex-direction: column;
             gap: 2.5rem;
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .section-header h2 {
@@ -452,7 +451,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
 
         .link-text:hover { gap: 0.5rem; }
 
-        /* TAB NAVIGATION (INSIDE CARDS) */
+        /* TAB NAVIGATION */
         .pill-tabs {
             display: flex;
             background: var(--bg-input);
@@ -482,7 +481,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             color: #ffffff;
         }
 
-        /* NUMBERS / STATS GRID */
+        /* NUMBERS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -513,7 +512,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             margin-top: 0.3rem;
         }
 
-        /* WHAT I'M DOING / CARDS GRID */
+        /* CARDS GRID */
         .cards-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -568,6 +567,61 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             font-size: 0.85rem;
             color: var(--text-body);
             line-height: 1.6;
+        }
+
+        /* MODAL (CERTIFICATE VIEWER) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            object-fit: contain;
+            pointer-events: none; /* Prevents dragging/downloading via right click */
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 35px;
+            height: 35px;
+            background: var(--accent-blue);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         /* TIMELINE (RESUME) */
@@ -856,7 +910,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             background: var(--accent-blue-hover);
         }
 
-        /* ─── FOOTER ─── */
+        /* FOOTER */
         .console-footer {
             border-top: 1px solid var(--border-color);
             padding-top: 1.5rem;
@@ -917,23 +971,21 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
 <body>
     <div class="wrapper">
 
-        <!-- ═══ TOP OPERATOR CONSOLE HEADER ═══ -->
+        <!-- HEADER -->
         <header class="console-header">
             <div class="window-dots">
                 <span class="dot dot-red"></span>
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
             </div>
-            <div class="console-label">operator console</div>
 
             <div class="profile-area">
                 <div class="avatar-box">
-                    <i class="fas fa-user-astronaut"></i>
+                    <img src="WhatsApp Image 2024-12-18 at 12.00.50_1a5639d3.jpg" alt="Gaddam Kalyan Teja">
                 </div>
                 <div class="profile-info">
                     <h1>Gaddam Kalyan Teja</h1>
                     <div class="subtitle">DevOps &amp; Cloud Engineer</div>
-                    <div class="op-id">operator/01</div>
                 </div>
             </div>
 
@@ -954,10 +1006,9 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             </div>
 
             <div class="header-actions">
-                <div class="btn-group">
-                    <a href="mailto:kalyanteja18@gmail.com" class="btn-main"><i class="fas fa-download"></i> Download CV</a>
-                    <button class="btn-arrow"><i class="fas fa-chevron-down"></i></button>
-                </div>
+                <a href="Gaddam_Kalyan_Teja_Resume.pdf" download="Gaddam_Kalyan_Teja_Resume.pdf" class="btn-main">
+                    <i class="fas fa-download"></i> Download CV
+                </a>
                 <div class="header-socials">
                     <a href="mailto:kalyanteja18@gmail.com"><i class="far fa-envelope"></i></a>
                     <a href="https://x.com/KALYANT06423430" target="_blank"><i class="fab fa-x-twitter"></i></a>
@@ -967,15 +1018,27 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
             </div>
         </header>
 
-        <!-- ═══ MAIN TWO-COLUMN LAYOUT ═══ -->
+        <!-- MAIN LAYOUT -->
         <div class="main-layout">
 
-            <!-- LEFT SIDEBAR NAV -->
+            <!-- SIDEBAR NAV -->
             <aside class="sidebar">
-                <div class="sidebar-window-dots">
+                <div class="window-dots" style="position:static; margin-bottom:0.2rem;">
                     <span class="dot dot-red"></span>
                     <span class="dot dot-yellow"></span>
                     <span class="dot dot-green"></span>
+                </div>
+
+                <!-- SIDEBAR ART DESIGN -->
+                <div class="sidebar-art">
+                    <div class="art-block" style="background:#3b82f6;"></div>
+                    <div class="art-block" style="background:#22c55e;"></div>
+                    <div class="art-block" style="background:#f59e0b;"></div>
+                    <div class="art-block" style="background:#ef4444;"></div>
+                    <div class="art-block" style="background:#8b5cf6;"></div>
+                    <div class="art-block" style="background:#ec4899;"></div>
+                    <div class="art-block" style="background:#06b6d4;"></div>
+                    <div class="art-block" style="background:#10b981;"></div>
                 </div>
 
                 <ul class="nav-list">
@@ -993,7 +1056,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                     </li>
                     <li class="nav-item">
                         <a href="#projects">
-                            <span class="nav-text"><i class="fas fa-cubes"></i> PORTFOLIO</span>
+                            <span class="nav-text"><i class="fas fa-cubes"></i> PROJECTS</span>
                             <span class="nav-dot"></span>
                         </a>
                     </li>
@@ -1030,13 +1093,13 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                         <button class="lang-btn">IN</button>
                     </div>
 
-                    <button class="theme-btn">
-                        <i class="far fa-moon"></i> DARK
+                    <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()">
+                        <i class="far fa-moon" id="themeIcon"></i> <span id="themeText">DARK</span>
                     </button>
                 </div>
             </aside>
 
-            <!-- RIGHT MAIN CONTENT PANEL -->
+            <!-- MAIN CONTENT -->
             <main class="content-card">
 
                 <!-- ABOUT SECTION -->
@@ -1049,26 +1112,20 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
 
                     <div class="about-text" style="margin-top:1.5rem;">
                         <p>
-                            Junior DevOps Engineer with <strong>14 months</strong> of hands-on production experience in 
+                            Junior DevOps Engineer with <strong>14 months</strong> of hands-on Internship production experience in 
                             <strong>AWS, Kubernetes, and CI/CD</strong>. Discovered and decommissioned an unused Redis cache 
                             costing <strong>Rs.1.5L/month</strong> within 2 months of joining Athena LMS, leading to a 
                             company-wide infrastructure cost audit.
                         </p>
                         <p>
-                            Experienced in managing multi-tenant SaaS infrastructure for 1,000+ users, automating deployments with Terraform &amp; GitHub Actions, and monitoring with Prometheus/Grafana. Skilled in incident management, root cause analysis, and cloud security.
+                            Experienced in managing multi-tenant SaaS infrastructure for 1,000+ users, automating deployments with Terraform &amp; GitHub Actions, and monitoring with Prometheus/Grafana. Skilled in incident management, root cause analysis, and cloud security. Seeking an entry-level DevOps/Cloud role to optimize infrastructure and drive automation.
                         </p>
-                        <a href="#projects" class="link-text">See my DevOps Cloud portfolio →</a>
+                        <a href="#projects" class="link-text">See my DevOps Cloud projects →</a>
                     </div>
                 </section>
 
                 <!-- STATS SECTION -->
                 <section>
-                    <div class="pill-tabs">
-                        <button class="tab-btn active">STATS</button>
-                        <button class="tab-btn">SCOPE</button>
-                        <button class="tab-btn">CLIENT</button>
-                    </div>
-
                     <div class="section-header" style="margin-bottom: 1.25rem;">
                         <h3 style="font-size: 1.25rem; color: var(--text-heading);">By the Numbers</h3>
                     </div>
@@ -1138,30 +1195,29 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                     </div>
 
                     <div class="pill-tabs">
-                        <button class="tab-btn active">EXP.</button>
-                        <button class="tab-btn">EDUC.</button>
-                        <button class="tab-btn">CORE.</button>
-                        <button class="tab-btn">TOOL.</button>
+                        <button class="tab-btn active" id="btn-exp" onclick="switchResumeTab('exp')">EXP.</button>
+                        <button class="tab-btn" id="btn-educ" onclick="switchResumeTab('educ')">EDUC.</button>
                     </div>
 
-                    <div class="timeline">
+                    <!-- EXP CONTENT -->
+                    <div id="tab-content-exp" class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
                             <div class="timeline-card">
                                 <div class="timeline-header">
                                     <div class="timeline-role">DevOps Engineer Intern</div>
-                                    <span class="badge-now">NOW</span>
+                                    <span class="badge-now">NOV 2025 - MAY 2026</span>
                                 </div>
                                 <div class="timeline-company">Athena LMS · New Delhi</div>
-                                <div class="timeline-meta">Nov 2025 – May 2026 · 7 months</div>
+                                <div class="timeline-meta">7 months</div>
                                 <div class="timeline-body">
                                     <ul>
                                         <li>Discovered and decommissioned an unused Redis cache (billing since Aug 2025), reducing AWS costs by <strong>Rs.1.5L/month</strong> (Rs.18L/year) – triggered company-wide cost audit.</li>
-                                        <li>Managed multi-tenant SaaS infrastructure for <strong>1,000+ users</strong> on AWS with EC2 Auto Scaling, ALB, and Multi-AZ deployments.</li>
-                                        <li>Designed secure content delivery using <strong>S3 + CloudFront (OAC)</strong>, reducing latency by 40% and improving security.</li>
-                                        <li>Hardened security: audited 150+ security group rules, closed 25+ open ports, implemented least-privilege policies across 20+ EC2 instances.</li>
-                                        <li>Monitored production with CloudWatch Metrics &amp; Logs; investigated 15+ incidents, performed RCA, and reduced MTTR.</li>
-                                        <li>Implemented <strong>JWT authentication &amp; RBAC</strong> across dev/staging/prod for tenant-aware access control.</li>
+                                        <li>Managed multi-tenant SaaS infrastructure serving 1,000+ users on AWS using EC2 Auto Scaling Groups, ALB, and Multi-AZ deployments.</li>
+                                        <li>Designed secure content delivery using <strong>S3 + CloudFront (OAC)</strong>, reducing latency by 40%.</li>
+                                        <li>Hardened cloud security: audited 150+ security group rules, closed 25+ open ports, implemented least-privilege firewall policies across 20+ EC2 instances.</li>
+                                        <li>Monitored production using CloudWatch Metrics &amp; Logs, investigated 15+ incidents, performed RCA, and reduced MTTR.</li>
+                                        <li>Implemented <strong>JWT authentication &amp; RBAC</strong> access controls across dev, staging, and production environments.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1171,10 +1227,33 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                             <div class="timeline-dot" style="background:var(--text-muted);"></div>
                             <div class="timeline-card">
                                 <div class="timeline-header">
+                                    <div class="timeline-role">DevOps Engineer Intern</div>
+                                    <span class="badge-now" style="color:var(--text-muted); background:var(--bg-input);">MAY 2025 - OCT 2025</span>
+                                </div>
+                                <div class="timeline-company">Eastri · Mumbai (Remote)</div>
+                                <div class="timeline-meta">6 months</div>
+                                <div class="timeline-body">
+                                    <ul>
+                                        <li>Provisioned AWS infrastructure using reusable Terraform modules (EC2, VPC, Security Groups, S3) with remote state, reducing provisioning time from 2 hours to 15 minutes.</li>
+                                        <li>Troubleshot production Kubernetes workloads, networking issues, and container failures using logs, metrics, and Linux utilities, reducing downtime by 25%.</li>
+                                        <li>Managed Kubernetes microservice deployments using YAML manifests, Deployments, Services, ConfigMaps, Secrets, Ingress Controllers, and HPA across production clusters, achieving 99.9% availability.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDUC CONTENT -->
+                    <div id="tab-content-educ" class="timeline" style="display: none;">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
                                     <div class="timeline-role">B.Tech in CSE (AI &amp; ML Specialization)</div>
+                                    <span class="badge-now">GRADUATED: MAY 2026</span>
                                 </div>
                                 <div class="timeline-company">Sir Padampat Singhania University · Udaipur, Rajasthan</div>
-                                <div class="timeline-meta">2021 – 2026 · Graduated: May 2026</div>
+                                <div class="timeline-meta">2021 – 2026</div>
                             </div>
                         </div>
                     </div>
@@ -1190,36 +1269,8 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                     <div class="repo-grid">
                         <div class="repo-card">
                             <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> gitops-argocd-kubernetes</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">GitOps continuous delivery setup using ArgoCD and Kubernetes cluster manifests.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats">
-                                    <span><i class="far fa-star"></i> 0</span>
-                                    <span><i class="fas fa-code-branch"></i> 0</span>
-                                </div>
-                                <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> cloudformation-aws-infra</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">AWS CloudFormation templates for automated infrastructure as code deployment.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats">
-                                    <span><i class="far fa-star"></i> 0</span>
-                                    <span><i class="fas fa-code-branch"></i> 0</span>
-                                </div>
-                                <a href="https://github.com/kalyanteja18/cloudformation-aws-infra" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
                                 <div class="repo-title"><i class="fab fa-github"></i> terraform-aws-iac</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">Terraform HCL modules for provisioned AWS cloud architectures.</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Infrastructure Automation with Terraform (AWS, S3, DynamoDB, RDS). Provisioned production-grade AWS infrastructure reducing time from 45 to 10 minutes using Terraform workspaces.</div>
                             </div>
                             <div class="repo-footer">
                                 <div class="repo-stats">
@@ -1233,7 +1284,7 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                         <div class="repo-card">
                             <div>
                                 <div class="repo-title"><i class="fab fa-github"></i> devops-cicd-github-actions</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">Flask application CI/CD pipelines deploying Docker containers to Amazon ECS.</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">GitHub Actions CI/CD Pipeline (Docker, Flask, AWS ECR, ECS). Automated build and deployments reducing time from 15 to 3 minutes using layer caching.</div>
                             </div>
                             <div class="repo-footer">
                                 <div class="repo-stats">
@@ -1247,28 +1298,14 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                         <div class="repo-card">
                             <div>
                                 <div class="repo-title"><i class="fab fa-github"></i> monitoring-prometheus-grafana</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">Full observability stack setup with Prometheus, Grafana, and Docker Compose.</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Monitoring Stack with Prometheus &amp; Grafana (Docker, Flask). Instrumented custom application metrics and dashboards for request rates, p95 latency, and errors.</div>
                             </div>
                             <div class="repo-footer">
                                 <div class="repo-stats">
                                     <span><i class="far fa-star"></i> 0</span>
                                     <span><i class="fas fa-code-branch"></i> 0</span>
                                 </div>
-                                <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> ci-cd-jenkins-docker</div>
-                                <div class="repo-desc" style="margin-top:0.4rem;">Automated Jenkins CI/CD pipeline integrated with Docker containerization workflows.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats">
-                                    <span><i class="far fa-star"></i> 0</span>
-                                    <span><i class="fas fa-code-branch"></i> 0</span>
-                                </div>
-                                <a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                                <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafan-" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
                             </div>
                         </div>
                     </div>
@@ -1282,36 +1319,36 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
                     </div>
 
                     <div class="cards-grid">
-                        <div class="feature-card">
-                            <span class="card-category-tag">DOCKER</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('Docker, Docker Compose, Docker Swarm certificate.jpg', 'Docker MasterClass')">
+                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
                             <div class="card-icon"><i class="fab fa-docker"></i></div>
                             <h3>Docker MasterClass</h3>
                             <p style="font-size:0.8rem; color:var(--text-muted);">TechLynk Selenium | DevOps | GenAI | Cloud</p>
                             <p style="font-family:var(--font-mono); font-size:0.75rem;">Nov 12, 2025 · 12.5 total hours</p>
                         </div>
 
-                        <div class="feature-card">
-                            <span class="card-category-tag">YAML</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('UC-9f345c67-ca66-453e-b56f-bb7ca9f2d998.jpg', 'Ultimate YAML Course')">
+                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
                             <div class="card-icon"><i class="fas fa-code"></i></div>
                             <h3>Ultimate YAML Course</h3>
                             <p style="font-size:0.8rem; color:var(--text-muted);">TechLynk Selenium | DevOps | GenAI | Cloud</p>
                             <p style="font-family:var(--font-mono); font-size:0.75rem;">Nov 7, 2025 · 3 total hours</p>
                         </div>
 
-                        <div class="feature-card">
-                            <span class="card-category-tag">AWS</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('AWS UDEMY CLOUD.jpg', 'AWS Certified Cloud Practitioner')">
+                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
                             <div class="card-icon"><i class="fab fa-aws"></i></div>
                             <h3>AWS Certified Cloud Practitioner</h3>
                             <p style="font-size:0.8rem; color:var(--text-muted);">Chetan Agrawal | Cloud Solutions Architect</p>
                             <p style="font-family:var(--font-mono); font-size:0.75rem;">Sept 26, 2025 · 22.5 total hours</p>
                         </div>
 
-                        <div class="feature-card">
-                            <span class="card-category-tag">PYTHON</span>
+                        <div class="feature-card" style="cursor: pointer;" onclick="openCert('udemy python certificate.jpg', 'Python Programming')">
+                            <span class="card-category-tag"><i class="fas fa-eye"></i> VIEW ONLY</span>
                             <div class="card-icon"><i class="fab fa-python"></i></div>
                             <h3>Python Programming</h3>
-                            <p style="font-size:0.8rem; color:var(--text-muted);">Learnify IT</p>
-                            <p style="font-family:var(--font-mono); font-size:0.75rem;">July 20, 2025 · 6 total hours</p>
+                            <p style="font-size:0.8rem; color:var(--text-muted);">Maria EduCare</p>
+                            <p style="font-family:var(--font-mono); font-size:0.75rem;">July 31, 2025 · 2.5 total hours</p>
                         </div>
                     </div>
                 </section>
@@ -1421,7 +1458,69 @@ I have refactored your complete HTML portfolio code so that it exactly matches t
         </div>
 
     </div>
+
+    <!-- READ-ONLY CERTIFICATE MODAL -->
+    <div id="certModal" class="modal" onclick="closeCert()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="close-modal" onclick="closeCert()">&times;</div>
+            <img id="certModalImg" src="" alt="Certificate" oncontextmenu="return false;">
+            <div style="margin-top:0.8rem; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">
+                <i class="fas fa-lock"></i> Read-Only Mode Protected
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Interactive Tab Switch for Resume (Exp / Educ)
+        function switchResumeTab(tab) {
+            const expContent = document.getElementById('tab-content-exp');
+            const educContent = document.getElementById('tab-content-educ');
+            const btnExp = document.getElementById('btn-exp');
+            const btnEduc = document.getElementById('btn-educ');
+
+            if (tab === 'exp') {
+                expContent.style.display = 'flex';
+                educContent.style.display = 'none';
+                btnExp.classList.add('active');
+                btnEduc.classList.remove('active');
+            } else if (tab === 'educ') {
+                expContent.style.display = 'none';
+                educContent.style.display = 'flex';
+                btnEduc.classList.add('active');
+                btnExp.classList.remove('active');
+            }
+        }
+
+        // Theme Toggle (Dark/Light)
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+
+            if (newTheme === 'light') {
+                icon.className = 'far fa-sun';
+                text.textContent = 'LIGHT';
+            } else {
+                icon.className = 'far fa-moon';
+                text.textContent = 'DARK';
+            }
+        }
+
+        // Read-Only Certificate Viewer Modal
+        function openCert(imgSrc, title) {
+            const modal = document.getElementById('certModal');
+            const modalImg = document.getElementById('certModalImg');
+            modalImg.src = imgSrc;
+            modal.style.display = 'flex';
+        }
+
+        function closeCert() {
+            document.getElementById('certModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
-
-```
