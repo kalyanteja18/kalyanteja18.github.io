@@ -3,915 +3,1420 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalyan Teja · DevOps Engineer</title>
+    <title>Gaddam Kalyan Teja · DevOps & Cloud Engineer</title>
 
-    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
-        /* ============================================================
-           DESIGN SYSTEM — inspired by adityacprtm.dev
-           ============================================================ */
+        :root {
+            --bg-main: #0c0d10;
+            --bg-card: #14161d;
+            --bg-sidebar: #12141a;
+            --bg-input: #1a1d26;
+            --bg-accent-subtle: #1e2230;
+            
+            --border-color: #232733;
+            --border-light: #2c3242;
+            
+            --text-heading: #ffffff;
+            --text-body: #9ea4b5;
+            --text-muted: #62687a;
+            
+            --accent-blue: #3b82f6;
+            --accent-blue-hover: #2563eb;
+            --accent-green: #22c55e;
+            
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --c-bg: #0d0e12;
-            --c-surface: #16181f;
-            --c-surface-alt: #1e2129;
-            --c-border: #2a2e3a;
-            --c-border-ui: #6e7a96;
-            --c-text: #c8cdd8;
-            --c-heading: #f0f1f5;
-            --c-muted: #8b8fa3;
-            --c-accent: #5b8def;
-            --c-accent-light: #3b9fea;
-            --c-accent-2: #ff965d;
-            --c-accent-dark: #3b6dcf;
-            --c-success: #34d399;
-            --c-warning: #fbbf24;
-            --c-error: #f87171;
-            --c-dot-green: #4ade80;
-            --c-rack: #111318;
-            --c-nav-hover: rgba(91, 141, 239, .08);
-            --c-nav-active-bg: rgba(91, 141, 239, .12);
-            --c-shadow-sm: rgba(0, 0, 0, .2);
-            --c-shadow-md: rgba(0, 0, 0, .32);
-            --c-shadow-lg: rgba(0, 0, 0, .5);
-            --c-glow: rgba(91, 141, 239, .35);
-            --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background: var(--c-bg);
-            color: var(--c-text);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            line-height: 1.7;
-            padding: 0 1.5rem;
+            background-color: var(--bg-main);
+            color: var(--text-body);
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            line-height: 1.6;
             min-height: 100vh;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            max-width: 1200px;
+            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            gap: 1.5rem;
         }
 
-        a {
-            color: var(--c-accent);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        a:hover {
-            color: var(--c-accent-light);
-        }
-
-        .container {
-            max-width: 1000px;
-            width: 100%;
-            padding: 2rem 0 3rem;
-        }
-
-        /* ----- STATUS BAR (operator style) ----- */
-        .status-bar {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--c-muted);
-            border-bottom: 1px solid var(--c-border);
-            padding-bottom: 0.75rem;
-            margin-bottom: 2rem;
+        /* ─── OPERATOR CONSOLE HEADER ─── */
+        .console-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            position: relative;
             display: flex;
-            flex-wrap: wrap;
-            gap: 1.2rem 2rem;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
-        .status-bar .status-item {
+        .window-dots {
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .console-label {
+            position: absolute;
+            top: 0.8rem;
+            right: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-top: 0.8rem;
+        }
+
+        .avatar-box {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            border: 2px solid #ea580c;
+            overflow: hidden;
+            background: var(--bg-input);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 2rem;
+        }
+
+        .profile-info h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-heading);
             display: flex;
             align-items: center;
             gap: 0.4rem;
         }
 
-        .status-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--c-dot-green);
-            animation: status-pulse 1.8s ease-in-out infinite;
+        .profile-info h1 span {
+            color: var(--text-body);
+            font-weight: 400;
         }
 
-        @keyframes status-pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.25; }
+        .profile-info .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-body);
         }
 
-        @keyframes ledPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.15; }
-        }
-
-        .status-bar .badge {
-            background: var(--c-surface-alt);
-            padding: 0.1rem 0.7rem;
-            border-radius: 20px;
-            border: 1px solid var(--c-border);
-            font-size: 0.6rem;
-        }
-
-        /* ----- HEADER IDENTITY ----- */
-        .identity {
-            margin-bottom: 2.5rem;
-        }
-
-        .identity h1 {
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--c-heading);
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-        }
-
-        .identity h1 span {
-            color: var(--c-accent);
-        }
-
-        .identity .tagline {
-            font-size: 1.1rem;
-            color: var(--c-muted);
+        .profile-info .op-id {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
             margin-top: 0.2rem;
         }
 
-        .identity .tagline .highlight {
-            color: var(--c-text);
-        }
-
-        .identity .operator-tag {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--c-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-top: 0.3rem;
-        }
-
-        /* ----- RACK NAVIGATION ----- */
-        .rack {
-            background: var(--c-rack);
-            border: 1px solid var(--c-border);
-            border-radius: 12px;
-            padding: 0.7rem 1.5rem;
-            margin-bottom: 2.5rem;
+        .status-block {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem 2rem;
+            flex-direction: column;
+            gap: 0.3rem;
+            border-left: 1px solid var(--border-color);
+            padding-left: 2rem;
             font-family: var(--font-mono);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
+            font-size: 0.8rem;
         }
 
-        .rack a {
-            color: var(--c-muted);
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .rack a:hover {
-            color: var(--c-heading);
-        }
-
-        .rack a.active {
-            color: var(--c-heading);
-        }
-
-        .rack a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--c-accent);
-            border-radius: 4px;
-        }
-
-        .rack .led {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--c-dot-green);
-            margin-right: 0.3rem;
-            animation: ledPulse 2s ease-in-out infinite;
-        }
-
-        /* ----- SECTION TITLES ----- */
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--c-heading);
-            margin-bottom: 1.25rem;
-            letter-spacing: -0.01em;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .section-title .overhead {
-            font-family: var(--font-mono);
+        .status-title {
             font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            color: var(--c-muted);
-            background: var(--c-surface-alt);
-            padding: 0.1rem 0.7rem;
-            border-radius: 20px;
-        }
-
-        /* ----- CARDS / BOXES ----- */
-        .card-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .card-grid.two {
-                grid-template-columns: 1fr 1fr;
-            }
-            .card-grid.three {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-        }
-
-        .box {
-            background: var(--c-surface);
-            border: 1px solid var(--c-border);
-            border-radius: 16px;
-            padding: 1.5rem 1.75rem;
-            box-shadow: 0 4px 12px var(--c-shadow-sm);
-            transition: box-shadow 0.25s, transform 0.2s;
-        }
-
-        .box:hover {
-            box-shadow: 0 8px 28px var(--c-shadow-md);
-            transform: translateY(-2px);
-        }
-
-        .box .title {
-            font-weight: 600;
-            color: var(--c-heading);
-            font-size: 1.0625rem;
+            color: var(--text-muted);
             margin-bottom: 0.2rem;
         }
 
-        .box .sub {
-            font-size: 0.875rem;
-            color: var(--c-muted);
-            margin-bottom: 0.3rem;
-        }
-
-        .box .meta {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--c-muted);
-            margin-bottom: 0.6rem;
-        }
-
-        .box .desc {
-            font-size: 0.9375rem;
-            line-height: 1.7;
-        }
-
-        .box .desc ul {
-            padding-left: 1.2rem;
-            list-style: disc;
-            color: var(--c-text);
-        }
-
-        .box .desc ul li {
-            margin-bottom: 0.3rem;
-        }
-
-        /* ----- STAT CARDS ----- */
-        .stat-number {
-            font-size: 1.875rem;
-            font-weight: 600;
-            color: var(--c-heading);
-            line-height: 1.2;
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            color: var(--c-muted);
-        }
-
-        /* ----- PILLS / TAGS ----- */
-        .pill-group {
+        .status-row {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem 0.6rem;
-            margin-top: 0.6rem;
+            gap: 1.5rem;
         }
 
-        .pill {
-            background: var(--c-surface-alt);
-            border: 1px solid var(--c-border);
-            border-radius: 40px;
-            padding: 0.15rem 0.9rem;
-            font-size: 0.7rem;
-            font-family: var(--font-mono);
-            color: var(--c-muted);
-            letter-spacing: 0.02em;
+        .status-key { color: var(--text-muted); min-width: 70px; }
+        .status-val { color: var(--text-heading); display: flex; align-items: center; gap: 0.4rem; }
+
+        .pulse-indicator {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
         }
 
-        .pill--active {
-            border-color: var(--c-accent);
-            color: var(--c-accent);
-            background: var(--c-nav-active-bg);
+        .header-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
         }
 
-        /* ----- CERTIFICATIONS ----- */
-        .cert-card {
+        .btn-group {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .btn-main {
+            background: rgba(255, 255, 255, 0.03);
+            border: none;
+            color: var(--text-heading);
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            background: var(--c-surface);
-            border: 1px solid var(--c-border);
-            border-radius: 14px;
-            padding: 0.9rem 1.2rem;
+            gap: 0.5rem;
             transition: background 0.2s;
+            text-decoration: none;
         }
 
-        .cert-card:hover {
-            background: var(--c-surface-alt);
+        .btn-main:hover { background: rgba(255, 255, 255, 0.08); }
+
+        .btn-arrow {
+            background: rgba(255, 255, 255, 0.03);
+            border: none;
+            border-left: 1px solid var(--border-color);
+            color: var(--text-heading);
+            padding: 0.5rem 0.6rem;
+            cursor: pointer;
         }
 
-        .cert-card .icon {
-            font-size: 1.8rem;
-            color: var(--c-accent);
-            width: 2.4rem;
+        .header-socials {
+            display: flex;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .header-socials a {
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .header-socials a:hover { color: var(--text-heading); }
+
+        /* ─── MAIN LAYOUT GRID ─── */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        /* ─── SIDEBAR NAVIGATION ─── */
+        .sidebar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem 0.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar-window-dots {
+            display: flex;
+            gap: 6px;
+            padding-left: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .nav-item a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.65rem 0.8rem;
+            border-radius: 8px;
+            color: var(--text-body);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            transition: all 0.2s;
+        }
+
+        .nav-item a i { width: 18px; font-size: 0.9rem; }
+        .nav-item a .nav-text { display: flex; align-items: center; gap: 0.6rem; }
+        .nav-item a .nav-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+
+        .nav-item a:hover {
+            background: var(--bg-accent-subtle);
+            color: var(--text-heading);
+        }
+
+        .nav-item.active a {
+            background: var(--accent-blue);
+            color: #ffffff;
+        }
+
+        .nav-item.active a .nav-dot {
+            background: var(--accent-green);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 0 0.5rem;
+        }
+
+        .sidebar-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding: 0 0.3rem;
+        }
+
+        .search-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .search-btn kbd {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.1rem 0.3rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+        }
+
+        .lang-toggle {
+            display: flex;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2px;
+        }
+
+        .lang-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.3rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: var(--accent-blue);
+            color: #ffffff;
+        }
+
+        .theme-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.4rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            cursor: pointer;
+        }
+
+        /* ─── CONTENT AREA ─── */
+        .content-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 0.4rem;
+        }
+
+        .section-header h2 span { color: var(--accent-blue); }
+
+        .title-underline {
+            width: 32px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .meta-tagline {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-tagline::before {
+            content: '◆';
+            color: var(--text-muted);
+            font-size: 0.6rem;
+        }
+
+        .about-text {
+            color: var(--text-body);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .about-text strong {
+            color: var(--text-heading);
+            font-weight: 600;
+        }
+
+        .link-text {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s;
+        }
+
+        .link-text:hover { gap: 0.5rem; }
+
+        /* TAB NAVIGATION (INSIDE CARDS) */
+        .pill-tabs {
+            display: flex;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 3px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-blue);
+            color: #ffffff;
+        }
+
+        /* NUMBERS / STATS GRID */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem 1rem;
             text-align: center;
         }
 
-        .cert-card .info .name {
-            font-weight: 500;
-            color: var(--c-heading);
-            font-size: 0.9375rem;
+        .stat-card .num {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            line-height: 1.2;
         }
 
-        .cert-card .info .issuer {
-            font-size: 0.8rem;
-            color: var(--c-muted);
-        }
-
-        .cert-card .info .date {
-            font-family: var(--font-mono);
+        .stat-card .label {
             font-size: 0.7rem;
-            color: var(--c-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 0.3rem;
         }
 
-        /* ----- GITHUB REPOS ----- */
-        .repo-item {
-            background: var(--c-surface);
-            border: 1px solid var(--c-border);
-            border-radius: 12px;
-            padding: 0.9rem 1.2rem;
-            margin-bottom: 0.7rem;
-            transition: background 0.2s;
+        /* WHAT I'M DOING / CARDS GRID */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
         }
 
-        .repo-item:hover {
-            background: var(--c-surface-alt);
-        }
-
-        .repo-item .repo-name {
-            font-weight: 500;
-            color: var(--c-heading);
-            font-size: 0.9375rem;
-        }
-
-        .repo-item .repo-name i {
-            color: var(--c-muted);
-            margin-right: 0.4rem;
-        }
-
-        .repo-item .repo-desc {
-            font-size: 0.875rem;
-            color: var(--c-muted);
-            margin: 0.15rem 0 0.3rem;
-        }
-
-        .repo-item .repo-meta {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            color: var(--c-muted);
+        .feature-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem;
+            position: relative;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 0.8rem;
         }
 
-        /* ----- CONTACT FORM (simple) ----- */
-        .contact-grid {
+        .card-category-tag {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-blue);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+
+        /* TIMELINE (RESUME) */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-green);
+        }
+
+        .timeline-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-role {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-heading);
+        }
+
+        .badge-now {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            background: rgba(34, 197, 94, 0.1);
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .badge-now::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-green);
+        }
+
+        .timeline-company {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-meta {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-body ul {
+            padding-left: 1.2rem;
+            font-size: 0.88rem;
+            color: var(--text-body);
+        }
+
+        .timeline-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* REPO GRID (PROJECTS) */
+        .repo-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .repo-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .repo-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .repo-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-heading);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .repo-desc {
+            font-size: 0.85rem;
+            color: var(--text-body);
+        }
+
+        .repo-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 0.75rem;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        /* SKILLS PILLS */
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-pill {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-body);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .skill-pill:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* CONTACT SECTION */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
             gap: 2rem;
         }
 
-        @media (max-width: 700px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
+        .contact-info-box {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
         }
 
-        .contact-info .detail {
-            margin-bottom: 1rem;
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-body);
+            font-size: 0.9rem;
         }
 
-        .contact-info .detail i {
-            width: 1.5rem;
-            color: var(--c-accent);
+        .contact-detail i {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .contact-detail a {
+            color: var(--text-body);
+            text-decoration: none;
+        }
+
+        .contact-detail a:hover { color: var(--text-heading); }
+
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
         }
 
         .form-group label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--c-muted);
-            margin-bottom: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-body);
         }
 
         .form-group input,
         .form-group textarea {
-            width: 100%;
-            padding: 0.6rem 0.9rem;
-            background: var(--c-surface-alt);
-            border: 1px solid var(--c-border);
-            border-radius: 10px;
-            color: var(--c-text);
-            font-family: var(--font-body);
-            font-size: 0.9rem;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--text-heading);
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            outline: none;
             transition: border-color 0.2s;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
-            outline: none;
-            border-color: var(--c-accent);
+            border-color: var(--accent-blue);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 110px;
         }
 
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--c-accent);
-            color: #fff;
-            font-weight: 500;
-            font-size: 0.8125rem;
-            padding: 0.6rem 1.8rem;
-            border-radius: 40px;
+        .form-meta {
+            text-align: right;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .btn-submit {
+            background: var(--accent-blue);
+            color: #ffffff;
             border: none;
+            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            font-family: var(--font-body);
-        }
-
-        .btn-primary:hover {
-            background: var(--c-accent-dark);
-            color: #fff;
-        }
-
-        .btn-primary:active {
-            transform: scale(0.97);
-        }
-
-        /* ----- FOOTER ----- */
-        .footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--c-border);
-            font-size: 0.8rem;
-            color: var(--c-muted);
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-blue-hover);
+        }
+
+        /* ─── FOOTER ─── */
+        .console-footer {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
         }
 
-        .footer .socials a {
-            color: var(--c-muted);
-            margin-left: 1rem;
-            font-size: 1.1rem;
-            transition: color 0.2s;
+        .footer-status {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
-        .footer .socials a:hover {
-            color: var(--c-heading);
-        }
-
-        /* ----- RESPONSIVE ----- */
-        @media (max-width: 550px) {
-            body {
-                padding: 0 1rem;
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
             }
-
-            .identity h1 {
-                font-size: 1.7rem;
+            .sidebar {
+                position: static;
             }
-
-            .rack {
-                font-size: 0.6rem;
-                gap: 0.5rem 1rem;
-                padding: 0.5rem 0.8rem;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
-
-            .box {
-                padding: 1rem;
-            }
-
-            .status-bar {
-                font-size: 0.6rem;
-                gap: 0.6rem 1rem;
-            }
-
-            .contact-grid {
+            .cards-grid,
+            .repo-grid,
+            .contact-layout {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* ----- ACCESSIBILITY ----- */
-        a:focus-visible,
-        .btn-primary:focus-visible,
-        input:focus-visible,
-        textarea:focus-visible {
-            outline: 2px solid var(--c-accent);
-            outline-offset: 2px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+        @media (max-width: 600px) {
+            .console-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .status-block {
+                border-left: none;
+                padding-left: 0;
+                border-top: 1px solid var(--border-color);
+                padding-top: 1rem;
+                width: 100%;
+            }
+            .header-actions {
+                align-items: flex-start;
+                width: 100%;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="wrapper">
 
-        <!-- ===== STATUS BAR ===== -->
-        <div class="status-bar">
-            <span class="status-item">
-                <span class="status-dot"></span> available
-            </span>
-            <span class="status-item"><i class="far fa-clock"></i> GMT+5:30</span>
-            <span class="status-item"><i class="far fa-envelope"></i> response &lt; 24h</span>
-            <span class="status-item badge"><i class="fas fa-code"></i> DevOps · SRE</span>
-        </div>
-
-        <!-- ===== IDENTITY ===== -->
-        <div class="identity">
-            <h1>Gaddam <span>Kalyan Teja</span></h1>
-            <div class="tagline">
-                Junior DevOps Engineer · <span class="highlight">AWS · Kubernetes · CI/CD</span>
+        <!-- ═══ TOP OPERATOR CONSOLE HEADER ═══ -->
+        <header class="console-header">
+            <div class="window-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
             </div>
-            <div class="operator-tag">operator / 01</div>
-        </div>
+            <div class="console-label">operator console</div>
 
-        <!-- ===== RACK NAV ===== -->
-        <nav class="rack">
-            <a href="#about" class="active"><span class="led"></span>01 · about</a>
-            <a href="#experience">02 · experience</a>
-            <a href="#projects">03 · projects</a>
-            <a href="#certifications">04 · certs</a>
-            <a href="#skills">05 · skills</a>
-            <a href="#contact">06 · contact</a>
-        </nav>
-
-        <!-- ===== ABOUT ===== -->
-        <section id="about">
-            <div class="section-title">
-                About Me
-                <span class="overhead">operator</span>
-            </div>
-
-            <div class="box" style="margin-bottom:2rem;">
-                <p class="desc">
-                    Junior DevOps Engineer with <strong>14 months</strong> of hands-on production experience in
-                    <strong>AWS, Kubernetes, and CI/CD</strong>. Discovered and decommissioned an unused Redis cache
-                    costing <strong>Rs.1.5L/month</strong> within 2 months of joining Athena LMS, leading to a
-                    company-wide infrastructure cost audit. Experienced in managing multi-tenant SaaS infrastructure
-                    for 1,000+ users, automating deployments with Terraform &amp; GitHub Actions, and monitoring with
-                    Prometheus/Grafana. Skilled in incident management, root cause analysis, and cloud security.
-                    Seeking an entry-level DevOps/Cloud role to optimize infrastructure and drive automation.
-                </p>
-            </div>
-
-            <!-- Stats -->
-            <div class="card-grid two">
-                <div class="box">
-                    <div class="stat-number">14</div>
-                    <div class="stat-label">months production experience</div>
+            <div class="profile-area">
+                <div class="avatar-box">
+                    <i class="fas fa-user-astronaut"></i>
                 </div>
-                <div class="box">
-                    <div class="stat-number">1,000+</div>
-                    <div class="stat-label">users · multi-tenant SaaS</div>
-                </div>
-                <div class="box">
-                    <div class="stat-number">₹18L</div>
-                    <div class="stat-label">annual cost savings (Redis)</div>
-                </div>
-                <div class="box">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">incidents investigated · RCA</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== EXPERIENCE ===== -->
-        <section id="experience">
-            <div class="section-title">
-                Experience
-                <span class="overhead">resume</span>
-            </div>
-
-            <div class="box" style="margin-bottom:1.5rem;">
-                <div class="title">DevOps Engineer Intern</div>
-                <div class="sub">Athena LMS · New Delhi</div>
-                <div class="meta">Nov 2025 – May 2026 · 7 months</div>
-                <div class="desc">
-                    <ul>
-                        <li>Discovered and decommissioned an unused Redis cache (billing since Aug 2025), reducing AWS costs by <strong>Rs.1.5L/month</strong> (Rs.18L/year) – triggered company-wide cost audit.</li>
-                        <li>Managed multi-tenant SaaS infrastructure for <strong>1,000+ users</strong> on AWS with EC2 Auto Scaling, ALB, and Multi-AZ deployments.</li>
-                        <li>Designed secure content delivery using <strong>S3 + CloudFront (OAC)</strong>, reducing latency by 40% and improving security.</li>
-                        <li>Hardened security: audited 150+ security group rules, closed 25+ open ports, implemented least-privilege policies across 20+ EC2 instances.</li>
-                        <li>Monitored production with CloudWatch Metrics &amp; Logs; investigated 15+ incidents, performed RCA, and reduced MTTR.</li>
-                        <li>Implemented <strong>JWT authentication &amp; RBAC</strong> across dev/staging/prod for tenant-aware access control.</li>
-                        <li>Maintained infrastructure documentation, runbooks, and architecture diagrams.</li>
-                    </ul>
+                <div class="profile-info">
+                    <h1>Gaddam Kalyan Teja</h1>
+                    <div class="subtitle">DevOps &amp; Cloud Engineer</div>
+                    <div class="op-id">operator/01</div>
                 </div>
             </div>
 
-            <!-- Education -->
-            <div class="box">
-                <div class="title">B.Tech in CSE (AI &amp; ML Specialization)</div>
-                <div class="sub">Sir Padampat Singhania University · Udaipur, Rajasthan</div>
-                <div class="meta">2021 – 2026 · Graduated: May 2026</div>
-            </div>
-        </section>
-
-        <!-- ===== PROJECTS ===== -->
-        <section id="projects">
-            <div class="section-title">
-                Projects
-                <span class="overhead">github</span>
-            </div>
-
-            <div class="repo-item">
-                <div class="repo-name"><i class="fab fa-github"></i> gitops-argocd-kubernetes</div>
-                <div class="repo-desc">GitOps · ArgoCD · Kubernetes</div>
-                <div class="repo-meta">
-                    <span><i class="far fa-star"></i> 0</span>
-                    <span><i class="fas fa-code-branch"></i> 0</span>
-                    <span><i class="far fa-clock"></i> updated 3 weeks ago</span>
-                    <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank">→ repo</a>
+            <div class="status-block">
+                <div class="status-title">System Status</div>
+                <div class="status-row">
+                    <span class="status-key">status :</span>
+                    <span class="status-val"><span class="pulse-indicator"></span> available</span>
+                </div>
+                <div class="status-row">
+                    <span class="status-key">tz :</span>
+                    <span class="status-val">GMT+5:30</span>
+                </div>
+                <div class="status-row">
+                    <span class="status-key">response :</span>
+                    <span class="status-val">&lt;24h</span>
                 </div>
             </div>
 
-            <div class="repo-item">
-                <div class="repo-name"><i class="fab fa-github"></i> cloudformation-aws-infra</div>
-                <div class="repo-desc">AWS CloudFormation · infrastructure as code</div>
-                <div class="repo-meta">
-                    <span><i class="far fa-star"></i> 0</span>
-                    <span><i class="fas fa-code-branch"></i> 0</span>
-                    <span><i class="far fa-clock"></i> updated 3 weeks ago</span>
-                    <a href="https://github.com/kalyanteja18/cloudformation-aws-infra" target="_blank">→ repo</a>
+            <div class="header-actions">
+                <div class="btn-group">
+                    <a href="mailto:kalyanteja18@gmail.com" class="btn-main"><i class="fas fa-download"></i> Download CV</a>
+                    <button class="btn-arrow"><i class="fas fa-chevron-down"></i></button>
+                </div>
+                <div class="header-socials">
+                    <a href="mailto:kalyanteja18@gmail.com"><i class="far fa-envelope"></i></a>
+                    <a href="https://x.com/KALYANT06423430" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/kalyantejagaddam/?hl=en" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://github.com/kalyanteja18" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
             </div>
+        </header>
 
-            <div class="repo-item">
-                <div class="repo-name"><i class="fab fa-github"></i> terraform-aws-iac</div>
-                <div class="repo-desc">Terraform · AWS · HCL · reusable modules</div>
-                <div class="repo-meta">
-                    <span><i class="far fa-star"></i> 0</span>
-                    <span><i class="fas fa-code-branch"></i> 0</span>
-                    <span><i class="far fa-clock"></i> updated 3 weeks ago</span>
-                    <a href="https://github.com/kalyanteja18/terraform-aws-iac" target="_blank">→ repo</a>
+        <!-- ═══ MAIN TWO-COLUMN LAYOUT ═══ -->
+        <div class="main-layout">
+
+            <!-- LEFT SIDEBAR NAV -->
+            <aside class="sidebar">
+                <div class="sidebar-window-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-yellow"></span>
+                    <span class="dot dot-green"></span>
                 </div>
-            </div>
 
-            <div class="repo-item">
-                <div class="repo-name"><i class="fab fa-github"></i> devops-cicd-github-actions</div>
-                <div class="repo-desc">Flask app · GitHub Actions CI/CD · Docker · ECS</div>
-                <div class="repo-meta">
-                    <span><i class="far fa-star"></i> 0</span>
-                    <span><i class="fas fa-code-branch"></i> 0</span>
-                    <a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank">→ repo</a>
-                </div>
-            </div>
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#about">
+                            <span class="nav-text"><i class="far fa-user"></i> ABOUT</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#experience">
+                            <span class="nav-text"><i class="fas fa-briefcase"></i> RESUME</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#projects">
+                            <span class="nav-text"><i class="fas fa-cubes"></i> PORTFOLIO</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#certifications">
+                            <span class="nav-text"><i class="fas fa-certificate"></i> CERTS</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills">
+                            <span class="nav-text"><i class="fas fa-terminal"></i> SKILLS</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact">
+                            <span class="nav-text"><i class="far fa-envelope"></i> CONTACT</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                </ul>
 
-            <div class="repo-item">
-                <div class="repo-name"><i class="fab fa-github"></i> monitoring-prometheus-grafana</div>
-                <div class="repo-desc">Prometheus · Grafana · Flask · Docker Compose</div>
-                <div class="repo-meta">
-                    <span><i class="far fa-star"></i> 0</span>
-                    <span><i class="fas fa-code-branch"></i> 0</span>
-                    <span><i class="far fa-clock"></i> updated 3 weeks ago</span>
-                    <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank">→ repo</a>
-                </div>
-            </div>
+                <div class="sidebar-divider"></div>
 
-            <div class="repo-item">
-                <div class="repo-name"><i class="fab fa-github"></i> ci-cd-jenkins-docker</div>
-                <div class="repo-desc">Jenkins · Docker · CI/CD pipeline</div>
-                <div class="repo-meta">
-                    <span><i class="far fa-star"></i> 0</span>
-                    <span><i class="fas fa-code-branch"></i> 0</span>
-                    <a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank">→ repo</a>
-                </div>
-            </div>
-        </section>
+                <div class="sidebar-actions">
+                    <button class="search-btn">
+                        <span><i class="fas fa-search"></i> SEARCH</span>
+                        <kbd>CTRL+K</kbd>
+                    </button>
 
-        <!-- ===== CERTIFICATIONS ===== -->
-        <section id="certifications">
-            <div class="section-title">
-                Certifications
-                <span class="overhead">credentials</span>
-            </div>
-
-            <div style="display:grid; gap:0.8rem;">
-                <div class="cert-card">
-                    <div class="icon"><i class="fab fa-docker"></i></div>
-                    <div class="info">
-                        <div class="name">Docker MasterClass : Docker - Compose - SWARM - DevOps</div>
-                        <div class="issuer">TechLynk Selenium | DevOps | GenAI | Cloud</div>
-                        <div class="date">Nov 12, 2025 · 12.5 total hours</div>
+                    <div class="lang-toggle">
+                        <button class="lang-btn active">EN</button>
+                        <button class="lang-btn">IN</button>
                     </div>
+
+                    <button class="theme-btn">
+                        <i class="far fa-moon"></i> DARK
+                    </button>
                 </div>
+            </aside>
 
-                <div class="cert-card">
-                    <div class="icon"><i class="fas fa-code"></i></div>
-                    <div class="info">
-                        <div class="name">Ultimate YAML Course : YAML JSON JSONPath Zero Master</div>
-                        <div class="issuer">TechLynk Selenium | DevOps | GenAI | Cloud</div>
-                        <div class="date">Nov 7, 2025 · 3 total hours</div>
-                    </div>
-                </div>
+            <!-- RIGHT MAIN CONTENT PANEL -->
+            <main class="content-card">
 
-                <div class="cert-card">
-                    <div class="icon"><i class="fab fa-aws"></i></div>
-                    <div class="info">
-                        <div class="name">[NEW] AWS Certified Cloud Practitioner 2025 [CLF-C02]</div>
-                        <div class="issuer">Chetan Agrawal | Cloud Solutions Architect</div>
-                        <div class="date">Sept 26, 2025 · 22.5 total hours</div>
+                <!-- ABOUT SECTION -->
+                <section id="about">
+                    <div class="section-header">
+                        <h2>About Me<span>.</span></h2>
+                        <div class="title-underline"></div>
+                        <div class="meta-tagline">Junior DevOps Cloud &amp; SRE · India · 14 months at scale</div>
                     </div>
-                </div>
 
-                <div class="cert-card">
-                    <div class="icon"><i class="fab fa-python"></i></div>
-                    <div class="info">
-                        <div class="name">Python Programming for Beginners: Learn Python from Scratch</div>
-                        <div class="issuer">Learnify IT</div>
-                        <div class="date">July 20, 2025 · 6 total hours</div>
+                    <div class="about-text" style="margin-top:1.5rem;">
+                        <p>
+                            Junior DevOps Engineer with <strong>14 months</strong> of hands-on production experience in 
+                            <strong>AWS, Kubernetes, and CI/CD</strong>. Discovered and decommissioned an unused Redis cache 
+                            costing <strong>Rs.1.5L/month</strong> within 2 months of joining Athena LMS, leading to a 
+                            company-wide infrastructure cost audit.
+                        </p>
+                        <p>
+                            Experienced in managing multi-tenant SaaS infrastructure for 1,000+ users, automating deployments with Terraform &amp; GitHub Actions, and monitoring with Prometheus/Grafana. Skilled in incident management, root cause analysis, and cloud security.
+                        </p>
+                        <a href="#projects" class="link-text">See my DevOps Cloud portfolio →</a>
                     </div>
-                </div>
-            </div>
-        </section>
+                </section>
 
-        <!-- ===== SKILLS ===== -->
-        <section id="skills">
-            <div class="section-title">
-                Tech Stack
-                <span class="overhead">toolkit</span>
-            </div>
+                <!-- STATS SECTION -->
+                <section>
+                    <div class="pill-tabs">
+                        <button class="tab-btn active">STATS</button>
+                        <button class="tab-btn">SCOPE</button>
+                        <button class="tab-btn">CLIENT</button>
+                    </div>
 
-            <div class="box">
-                <div style="display:flex; flex-wrap:wrap; gap:0.4rem 0.8rem;">
-                    <span class="pill pill--active">AWS (EC2, VPC, S3, IAM, RDS, CloudWatch, ALB, Auto Scaling, CloudFront, EKS)</span>
-                    <span class="pill pill--active">Terraform</span>
-                    <span class="pill pill--active">CloudFormation</span>
-                    <span class="pill pill--active">ArgoCD</span>
-                    <span class="pill pill--active">Docker</span>
-                    <span class="pill pill--active">Kubernetes (EKS)</span>
-                    <span class="pill pill--active">Helm</span>
-                    <span class="pill pill--active">GitHub Actions</span>
-                    <span class="pill pill--active">Jenkins</span>
-                    <span class="pill pill--active">Prometheus</span>
-                    <span class="pill pill--active">Grafana</span>
-                    <span class="pill pill--active">CloudWatch</span>
-                    <span class="pill pill--active">PostgreSQL</span>
-                    <span class="pill pill--active">MySQL</span>
-                    <span class="pill pill--active">Redis</span>
-                    <span class="pill pill--active">Python</span>
-                    <span class="pill pill--active">Bash</span>
-                    <span class="pill pill--active">Shell</span>
-                    <span class="pill pill--active">IAM · RBAC · JWT</span>
-                    <span class="pill pill--active">Linux (Ubuntu)</span>
-                    <span class="pill pill--active">Git · GitHub</span>
-                </div>
-            </div>
-        </section>
+                    <div class="section-header" style="margin-bottom: 1.25rem;">
+                        <h3 style="font-size: 1.25rem; color: var(--text-heading);">By the Numbers</h3>
+                    </div>
 
-        <!-- ===== CONTACT ===== -->
-        <section id="contact">
-            <div class="section-title">
-                Contact
-                <span class="overhead">reach out</span>
-            </div>
-
-            <div class="contact-grid">
-                <!-- Left: Info -->
-                <div class="contact-info">
-                    <div class="detail">
-                        <i class="far fa-envelope"></i>
-                        <a href="mailto:kalyanteja18@gmail.com">kalyanteja18@gmail.com</a>
-                    </div>
-                    <div class="detail">
-                        <i class="fas fa-phone"></i>
-                        <a href="tel:+918985381228">+91 89853 81228</a>
-                    </div>
-                    <div class="detail">
-                        <i class="fas fa-map-marker-alt"></i>
-                        India · GMT+5:30
-                    </div>
-                    <div class="detail">
-                        <i class="far fa-clock"></i>
-                        Usually responds within 24 hours
-                    </div>
-                    <div style="margin-top:1.5rem;">
-                        <span class="status-dot" style="display:inline-block; margin-right:0.3rem;"></span>
-                        <span style="color:var(--c-text);">Available for opportunities</span>
-                    </div>
-                </div>
-
-                <!-- Right: Simple Form -->
-                <div>
-                    <form action="#" method="POST">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" placeholder="Your name" />
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="num">14</div>
+                            <div class="label">Months Exp</div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" placeholder="you@example.com" />
+                        <div class="stat-card">
+                            <div class="num">1,000+</div>
+                            <div class="label">SaaS Users</div>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" placeholder="Say hello..."></textarea>
+                        <div class="stat-card">
+                            <div class="num">₹18L</div>
+                            <div class="label">Annual Savings</div>
                         </div>
-                        <button type="submit" class="btn-primary">
-                            <i class="far fa-paper-plane"></i> Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
+                        <div class="stat-card">
+                            <div class="num">15+</div>
+                            <div class="label">RCA Incidents</div>
+                        </div>
+                    </div>
+                </section>
 
-        <!-- ===== FOOTER ===== -->
-        <div class="footer">
-            <div>
-                <strong>Gaddam Kalyan Teja</strong><br />
-                <span style="font-size:0.75rem; color:var(--c-muted);">All systems operational</span>
-            </div>
-            <div class="socials">
-                <a href="https://github.com/kalyanteja18" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://x.com/KALYANT06423430" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/kalyantejagaddam/?hl=en" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
+                <!-- WHAT I'M DOING SECTION -->
+                <section>
+                    <div class="section-header" style="margin-bottom: 1.5rem;">
+                        <h3 style="font-size: 1.25rem; color: var(--text-heading);">What I'm Doing</h3>
+                    </div>
 
-        <div style="text-align:center; font-size:0.7rem; color:var(--c-muted); margin-top:0.5rem; padding-top:0.5rem; border-top:1px solid var(--c-border);">
-            © 2026 Gaddam Kalyan Teja
-            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--c-dot-green); margin-left:0.4rem; animation:status-pulse 1.8s ease-in-out infinite;"></span>
+                    <div class="cards-grid">
+                        <div class="feature-card">
+                            <span class="card-category-tag">SECURITY</span>
+                            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3>DevSecOps</h3>
+                            <p>Hardening security groups, implementing JWT &amp; RBAC access control, closing exposed ports, and baking security baselines directly into CI/CD pipelines.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="card-category-tag">CLOUD</span>
+                            <div class="card-icon"><i class="fas fa-cloud"></i></div>
+                            <h3>Cloud Engineering</h3>
+                            <p>Managing AWS multi-tenant infrastructure with EC2 Auto Scaling, ALB, Multi-AZ deployments, S3 + CloudFront (OAC), and cost optimization audits.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="card-category-tag">RELIABILITY</span>
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                            <h3>SRE &amp; Observability</h3>
+                            <p>Monitoring production environments with Prometheus, Grafana, and CloudWatch. Investigating root causes and lowering MTTR across production incidents.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="card-category-tag">AUTOMATION</span>
+                            <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                            <h3>Infrastructure Automation</h3>
+                            <p>Building reusable IaC with Terraform &amp; CloudFormation, GitOps delivery via ArgoCD, containerizing workloads with Docker, and orchestrating EKS clusters.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- EXPERIENCE / RESUME SECTION -->
+                <section id="experience">
+                    <div class="section-header">
+                        <h2>Resume<span>.</span></h2>
+                        <div class="title-underline"></div>
+                    </div>
+
+                    <div class="pill-tabs">
+                        <button class="tab-btn active">EXP.</button>
+                        <button class="tab-btn">EDUC.</button>
+                        <button class="tab-btn">CORE.</button>
+                        <button class="tab-btn">TOOL.</button>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div class="timeline-role">DevOps Engineer Intern</div>
+                                    <span class="badge-now">NOW</span>
+                                </div>
+                                <div class="timeline-company">Athena LMS · New Delhi</div>
+                                <div class="timeline-meta">Nov 2025 – May 2026 · 7 months</div>
+                                <div class="timeline-body">
+                                    <ul>
+                                        <li>Discovered and decommissioned an unused Redis cache (billing since Aug 2025), reducing AWS costs by <strong>Rs.1.5L/month</strong> (Rs.18L/year) – triggered company-wide cost audit.</li>
+                                        <li>Managed multi-tenant SaaS infrastructure for <strong>1,000+ users</strong> on AWS with EC2 Auto Scaling, ALB, and Multi-AZ deployments.</li>
+                                        <li>Designed secure content delivery using <strong>S3 + CloudFront (OAC)</strong>, reducing latency by 40% and improving security.</li>
+                                        <li>Hardened security: audited 150+ security group rules, closed 25+ open ports, implemented least-privilege policies across 20+ EC2 instances.</li>
+                                        <li>Monitored production with CloudWatch Metrics &amp; Logs; investigated 15+ incidents, performed RCA, and reduced MTTR.</li>
+                                        <li>Implemented <strong>JWT authentication &amp; RBAC</strong> across dev/staging/prod for tenant-aware access control.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot" style="background:var(--text-muted);"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div class="timeline-role">B.Tech in CSE (AI &amp; ML Specialization)</div>
+                                </div>
+                                <div class="timeline-company">Sir Padampat Singhania University · Udaipur, Rajasthan</div>
+                                <div class="timeline-meta">2021 – 2026 · Graduated: May 2026</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PROJECTS SECTION -->
+                <section id="projects">
+                    <div class="section-header">
+                        <h2>Projects<span>.</span></h2>
+                        <div class="title-underline"></div>
+                    </div>
+
+                    <div class="repo-grid">
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> gitops-argocd-kubernetes</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">GitOps continuous delivery setup using ArgoCD and Kubernetes cluster manifests.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> cloudformation-aws-infra</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">AWS CloudFormation templates for automated infrastructure as code deployment.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/cloudformation-aws-infra" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> terraform-aws-iac</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Terraform HCL modules for provisioned AWS cloud architectures.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/terraform-aws-iac" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> devops-cicd-github-actions</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Flask application CI/CD pipelines deploying Docker containers to Amazon ECS.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> monitoring-prometheus-grafana</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Full observability stack setup with Prometheus, Grafana, and Docker Compose.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+
+                        <div class="repo-card">
+                            <div>
+                                <div class="repo-title"><i class="fab fa-github"></i> ci-cd-jenkins-docker</div>
+                                <div class="repo-desc" style="margin-top:0.4rem;">Automated Jenkins CI/CD pipeline integrated with Docker containerization workflows.</div>
+                            </div>
+                            <div class="repo-footer">
+                                <div class="repo-stats">
+                                    <span><i class="far fa-star"></i> 0</span>
+                                    <span><i class="fas fa-code-branch"></i> 0</span>
+                                </div>
+                                <a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CERTIFICATIONS SECTION -->
+                <section id="certifications">
+                    <div class="section-header">
+                        <h2>Certifications<span>.</span></h2>
+                        <div class="title-underline"></div>
+                    </div>
+
+                    <div class="cards-grid">
+                        <div class="feature-card">
+                            <span class="card-category-tag">DOCKER</span>
+                            <div class="card-icon"><i class="fab fa-docker"></i></div>
+                            <h3>Docker MasterClass</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted);">TechLynk Selenium | DevOps | GenAI | Cloud</p>
+                            <p style="font-family:var(--font-mono); font-size:0.75rem;">Nov 12, 2025 · 12.5 total hours</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="card-category-tag">YAML</span>
+                            <div class="card-icon"><i class="fas fa-code"></i></div>
+                            <h3>Ultimate YAML Course</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted);">TechLynk Selenium | DevOps | GenAI | Cloud</p>
+                            <p style="font-family:var(--font-mono); font-size:0.75rem;">Nov 7, 2025 · 3 total hours</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="card-category-tag">AWS</span>
+                            <div class="card-icon"><i class="fab fa-aws"></i></div>
+                            <h3>AWS Certified Cloud Practitioner</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted);">Chetan Agrawal | Cloud Solutions Architect</p>
+                            <p style="font-family:var(--font-mono); font-size:0.75rem;">Sept 26, 2025 · 22.5 total hours</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <span class="card-category-tag">PYTHON</span>
+                            <div class="card-icon"><i class="fab fa-python"></i></div>
+                            <h3>Python Programming</h3>
+                            <p style="font-size:0.8rem; color:var(--text-muted);">Learnify IT</p>
+                            <p style="font-family:var(--font-mono); font-size:0.75rem;">July 20, 2025 · 6 total hours</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SKILLS SECTION -->
+                <section id="skills">
+                    <div class="section-header">
+                        <h2>Tech Stack<span>.</span></h2>
+                        <div class="title-underline"></div>
+                    </div>
+
+                    <div class="skills-wrapper">
+                        <span class="skill-pill">AWS (EC2, VPC, S3, IAM, RDS, CloudWatch, ALB, Auto Scaling, CloudFront, EKS)</span>
+                        <span class="skill-pill">Terraform</span>
+                        <span class="skill-pill">CloudFormation</span>
+                        <span class="skill-pill">ArgoCD</span>
+                        <span class="skill-pill">Docker</span>
+                        <span class="skill-pill">Kubernetes (EKS)</span>
+                        <span class="skill-pill">Helm</span>
+                        <span class="skill-pill">GitHub Actions</span>
+                        <span class="skill-pill">Jenkins</span>
+                        <span class="skill-pill">Prometheus</span>
+                        <span class="skill-pill">Grafana</span>
+                        <span class="skill-pill">CloudWatch</span>
+                        <span class="skill-pill">PostgreSQL</span>
+                        <span class="skill-pill">MySQL</span>
+                        <span class="skill-pill">Redis</span>
+                        <span class="skill-pill">Python</span>
+                        <span class="skill-pill">Bash</span>
+                        <span class="skill-pill">Shell</span>
+                        <span class="skill-pill">IAM · RBAC · JWT</span>
+                        <span class="skill-pill">Linux (Ubuntu)</span>
+                        <span class="skill-pill">Git · GitHub</span>
+                    </div>
+                </section>
+
+                <!-- CONTACT SECTION -->
+                <section id="contact">
+                    <div class="section-header">
+                        <h2>Contact<span>.</span></h2>
+                        <div class="title-underline"></div>
+                        <p style="color:var(--text-body); font-size:0.9rem;">Have a project in mind or just want to say hi? Fill out the form below.</p>
+                    </div>
+
+                    <div class="badge-now" style="width: fit-content; margin-bottom: 1.5rem; padding: 0.3rem 0.8rem;">
+                        AVAILABLE FOR PROJECTS
+                    </div>
+
+                    <div class="contact-layout">
+                        <div class="contact-info-box">
+                            <h3 style="font-size: 1.1rem; color: var(--text-heading);">Let's collaborate</h3>
+                            
+                            <div class="contact-detail">
+                                <i class="far fa-envelope"></i>
+                                <a href="mailto:kalyanteja18@gmail.com">kalyanteja18@gmail.com</a>
+                            </div>
+
+                            <div class="contact-detail">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+918985381228">+91 89853 81228</a>
+                            </div>
+
+                            <div class="contact-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>India · GMT+5:30</span>
+                            </div>
+
+                            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
+                                <i class="far fa-clock"></i> Usually responds within 24 hours
+                            </div>
+                        </div>
+
+                        <form class="form-grid" action="#">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="fname">Full Name</label>
+                                    <input type="text" id="fname" placeholder="Full Name" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" id="email" placeholder="Email Address" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="msg">Your Message</label>
+                                <textarea id="msg" placeholder="Your Message"></textarea>
+                                <div class="form-meta">0/500</div>
+                            </div>
+
+                            <button type="submit" class="btn-submit">
+                                <i class="far fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- FOOTER -->
+                <footer class="console-footer">
+                    <div>© 2026 Gaddam Kalyan Teja</div>
+                    <div class="footer-status">
+                        <span class="pulse-indicator"></span> All systems operational
+                    </div>
+                </footer>
+
+            </main>
         </div>
 
     </div>
-    <!-- /container -->
 </body>
 </html>
