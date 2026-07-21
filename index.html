@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
         :root {
@@ -1081,7 +1080,8 @@
             </div>
 
             <div class="header-actions">
-                <a href="https://drive.google.com/uc?export=download&id=1U89E24kKR169yDMJINyBP5Vljrsq8ypi" target="_blank" onclick="downloadResumePDF()" class="btn-main">
+                <!-- DIRECT GOOGLE DRIVE RESUME DOWNLOAD LINK -->
+                <a href="https://drive.google.com/uc?export=download&id=1U89E24kKR169yDMJINyBP5Vljrsq8ypi" target="_blank" download="Gaddam_Kalyan_Teja_Resume.pdf" class="btn-main">
                     <i class="fas fa-download"></i> Download CV
                 </a>
                 <div class="header-socials">
@@ -1622,98 +1622,6 @@
             const img = document.getElementById(imgId);
             const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'><rect width='600' height='380' fill='%2314161d'/><rect x='15' y='15' width='570' height='350' fill='none' stroke='%233b82f6' stroke-width='4' rx='8'/><text x='300' y='80' fill='%23ffffff' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>CERTIFICATE OF COMPLETION</text><text x='300' y='160' fill='%233b82f6' font-family='sans-serif' font-size='24' font-weight='bold' text-anchor='middle'>${title}</text><text x='300' y='220' fill='%239ea4b5' font-family='sans-serif' font-size='16' text-anchor='middle'>Presented to: Gaddam Kalyan Teja</text><text x='300' y='280' fill='%2362687a' font-family='sans-serif' font-size='14' text-anchor='middle'>${sub}</text></svg>`;
             img.src = "data:image/svg+xml;utf8," + svg;
-        }
-
-        // PDF Generator fallback matching exact resume details
-        function downloadResumePDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(18);
-            doc.text("Gaddam Kalyan Teja", 105, 15, { align: "center" });
-            
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(9.5);
-            doc.text("Phone: 8985381228 | Email: kalyanteja18@gmail.com", 105, 21, { align: "center" });
-            doc.text("LinkedIn: linkedin.com/in/kalyan-teja-gaddam | GitHub: github.com/kalyanteja18", 105, 26, { align: "center" });
-            
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(11);
-            doc.text("Professional Summary", 14, 34);
-            doc.line(14, 36, 196, 36);
-            
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(9);
-            const summary = "Junior DevOps Engineer with 14 months of hands-on Internship production experience in AWS, Kubernetes, and CI/CD. Discovered and decommissioned an unused Redis cache costing Rs. 1.5L/month within 2 months of joining Athena LMS, leading to a company-wide infrastructure cost audit. Experienced in managing multi-tenant SaaS infrastructure for 1,000+ users, automating deployments with Terraform & GitHub Actions, and monitoring with Prometheus/Grafana. Skilled in incident management, root cause analysis, and cloud security. Seeking an entry-level DevOps/Cloud role to optimize infrastructure and drive automation.";
-            const splitSummary = doc.splitTextToSize(summary, 182);
-            doc.text(splitSummary, 14, 41);
-            
-            let y = 63;
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(11);
-            doc.text("Work Experience", 14, y);
-            doc.line(14, y + 2, 196, y + 2);
-            
-            y += 7;
-            doc.setFontSize(10);
-            doc.text("Athena LMS - DevOps Engineer Intern", 14, y);
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(9);
-            doc.text("Nov 2025 – May 2026 | New Delhi", 196, y, { align: "right" });
-            
-            y += 5;
-            const athenaBullets = [
-                "Discovered and decommissioned an unused Redis cache that had been billing since August 2025, reducing monthly AWS costs by Rs.1.5L/month (Rs.18L/year) within 2 months of joining - led to a company-wide infrastructure cost optimization audit.",
-                "Managed multi-tenant SaaS infrastructure serving 1,000+ users on AWS, ensuring tenant isolation, high availability, and scalable architecture using EC2 Auto Scaling Groups, ALB, and Multi-AZ deployments.",
-                "Designed secure content delivery using Amazon S3 + CloudFront (OAC) with origin access control, reducing latency by 40% and improving content delivery security.",
-                "Hardened cloud security by auditing 150+ security group rules, closing 25+ unnecessary open ports, and implementing least-privilege firewall policies across 20+ EC2 instances.",
-                "Monitored production infrastructure using Amazon CloudWatch Metrics & Logs, investigated 15+ production incidents, performed root cause analysis (RCA), and collaborated with developers to reduce mean time to resolution (MTTR).",
-                "Implemented JWT authentication and RBAC authorization across dev, staging, and production environments, ensuring secure tenant-aware access controls for 1,000+ users.",
-                "Maintained infrastructure documentation, deployment runbooks, troubleshooting guides, and architecture diagrams to support consistent deployments and operational support."
-            ];
-            
-            athenaBullets.forEach(bullet => {
-                const lines = doc.splitTextToSize("• " + bullet, 178);
-                doc.text(lines, 16, y);
-                y += (lines.length * 4.2);
-            });
-            
-            y += 2;
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(10);
-            doc.text("Eastri - DevOps Engineer Intern", 14, y);
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(9);
-            doc.text("May 2025 – Oct 2025 | Mumbai (Remote)", 196, y, { align: "right" });
-            
-            y += 5;
-            const eastriBullets = [
-                "Provisioned AWS infrastructure using reusable Terraform modules (EC2, VPC, Security Groups, S3) with variables, outputs, and remote state, reducing infrastructure provisioning time from 2 hours to 15 minutes across dev, staging, and production.",
-                "Troubleshot production Kubernetes workloads, networking issues, and container failures using logs, metrics, and Linux utilities, reducing downtime by 25% and improving service reliability.",
-                "Managed Kubernetes microservice deployments using YAML manifests, Deployments, Services, Config Maps, Secrets, Ingress Controllers, and Horizontal Pod Autoscalers across production clusters, achieving 99.9% availability."
-            ];
-            
-            eastriBullets.forEach(bullet => {
-                const lines = doc.splitTextToSize("• " + bullet, 178);
-                doc.text(lines, 16, y);
-                y += (lines.length * 4.2);
-            });
-            
-            y += 2;
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(11);
-            doc.text("Education", 14, y);
-            doc.line(14, y + 2, 196, y + 2);
-            
-            y += 7;
-            doc.setFontSize(10);
-            doc.text("Sir Padampat Singhania University - B.Tech in CSE (AI & ML Specialization)", 14, y);
-            doc.setFont("helvetica", "normal");
-            doc.setFontSize(9);
-            doc.text("2021 – 2026 | Graduated: May 2026 | Udaipur, Rajasthan", 196, y, { align: "right" });
-            
-            doc.save("Gaddam_Kalyan_Teja_DevOps_Engineer.pdf");
         }
 
         // Tab Navigation
