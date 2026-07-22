@@ -69,8 +69,24 @@
             display: flex;
             justify-content: center;
             transition: background-color 0.3s, color 0.3s;
-            zoom: 0.92;
+            zoom: 0.85;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* ─── GEOMETRIC POLYGON BACKGROUND ARTWORK ─── */
+        .bg-poly-left, .bg-poly-right {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 320px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.85;
+        }
+
+        .bg-poly-left { left: 0; }
+        .bg-poly-right { right: 0; }
 
         .wrapper {
             max-width: 1100px;
@@ -78,6 +94,8 @@
             display: flex;
             flex-direction: column;
             gap: 1.25rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* HEADER */
@@ -589,7 +607,7 @@
             object-fit: cover;
         }
 
-        /* ─── TOOLS & TECHNOLOGIES SECTION ─── */
+        /* TOOLS & TECHNOLOGIES SECTION */
         .tech-category-card {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
@@ -648,6 +666,102 @@
         .badge-int {
             background: rgba(139, 92, 246, 0.15);
             color: #a78bfa;
+        }
+
+        /* GAINED SKILLS BADGES IN EXPERIENCE */
+        .skills-gained-box {
+            margin-top: 0.85rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .skills-gained-title {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .skills-gained-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .skill-tag {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--accent-blue);
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+        }
+
+        /* INTERACTIVE TERMINAL WINDOW */
+        .terminal-box {
+            background: #090a0d;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-bar {
+            background: #14161f;
+            padding: 0.5rem 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        .terminal-body {
+            padding: 1rem;
+            min-height: 280px;
+            max-height: 400px;
+            overflow-y: auto;
+            color: #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .terminal-line {
+            line-height: 1.5;
+            word-break: break-all;
+        }
+
+        .terminal-prompt {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .terminal-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .terminal-input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-heading);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            width: 100%;
         }
 
         /* MODALS */
@@ -808,19 +922,21 @@
             font-weight: 700;
             color: var(--accent-green);
             background: rgba(34, 197, 94, 0.1);
-            padding: 0.1rem 0.45rem;
+            padding: 0.15rem 0.55rem;
             border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.35rem;
+            border: 1px solid rgba(34, 197, 94, 0.2);
         }
 
         .badge-now::before {
             content: '';
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--accent-green);
+            box-shadow: 0 0 6px var(--accent-green);
         }
 
         .timeline-company {
@@ -1060,6 +1176,9 @@
             .contact-layout {
                 grid-template-columns: 1fr;
             }
+            .bg-poly-left, .bg-poly-right {
+                display: none;
+            }
         }
 
         @media (max-width: 600px) {
@@ -1086,6 +1205,34 @@
 </head>
 
 <body>
+
+    <!-- LEFT GEOMETRIC POLYGON BACKGROUND ARTWORK -->
+    <svg class="bg-poly-left" viewBox="0 0 320 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="0,0 180,0 90,140" fill="#ef4444" opacity="0.85"/>
+        <polygon points="180,0 320,0 230,120 90,140" fill="#f59e0b" opacity="0.85"/>
+        <polygon points="0,0 90,140 0,260" fill="#10b981" opacity="0.85"/>
+        <polygon points="90,140 230,120 160,280" fill="#3b82f6" opacity="0.85"/>
+        <polygon points="230,120 320,0 320,240 160,280" fill="#f97316" opacity="0.85"/>
+        <polygon points="0,260 90,140 160,280 40,380" fill="#06b6d4" opacity="0.85"/>
+        <polygon points="160,280 320,240 280,420 180,450" fill="#8b5cf6" opacity="0.85"/>
+        <polygon points="0,260 40,380 0,520" fill="#ec4899" opacity="0.85"/>
+        <polygon points="40,380 180,450 80,600" fill="#10b981" opacity="0.85"/>
+        <polygon points="180,450 280,420 320,620 190,650" fill="#f59e0b" opacity="0.85"/>
+        <polygon points="80,600 190,650 100,780" fill="#3b82f6" opacity="0.85"/>
+        <polygon points="0,520 40,380 80,600 0,720" fill="#f43f5e" opacity="0.85"/>
+    </svg>
+
+    <!-- RIGHT GEOMETRIC POLYGON BACKGROUND ARTWORK -->
+    <svg class="bg-poly-right" viewBox="0 0 320 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="140,0 320,0 230,140" fill="#f59e0b" opacity="0.85"/>
+        <polygon points="0,0 140,0 230,140 90,120" fill="#ef4444" opacity="0.85"/>
+        <polygon points="230,140 320,0 320,260" fill="#3b82f6" opacity="0.85"/>
+        <polygon points="90,120 230,140 160,280" fill="#10b981" opacity="0.85"/>
+        <polygon points="160,280 320,260 280,420 180,450" fill="#ec4899" opacity="0.85"/>
+        <polygon points="280,420 320,260 320,540" fill="#f97316" opacity="0.85"/>
+        <polygon points="180,450 280,420 320,540 220,640" fill="#8b5cf6" opacity="0.85"/>
+    </svg>
+
     <div class="wrapper">
 
         <!-- HEADER -->
@@ -1193,6 +1340,12 @@
                     <li class="nav-item">
                         <a href="#contact">
                             <span class="nav-text"><i class="far fa-envelope"></i> CONTACT</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#terminal-section">
+                            <span class="nav-text"><i class="fas fa-code"></i> TERMINAL</span>
                             <span class="nav-dot"></span>
                         </a>
                     </li>
@@ -1337,16 +1490,32 @@
                                         <li>Implemented <strong>JWT authentication &amp; RBAC</strong> authorization across dev, staging, and production environments, ensuring secure tenant-aware access controls for 1,000+ users.</li>
                                         <li>Maintained infrastructure documentation, deployment runbooks, troubleshooting guides, and architecture diagrams to support consistent deployments and operational support.</li>
                                     </ul>
+
+                                    <!-- Gained Skills Badges -->
+                                    <div class="skills-gained-box">
+                                        <div class="skills-gained-title"><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Skills &amp; Technologies Gained:</div>
+                                        <div class="skills-gained-list">
+                                            <span class="skill-tag">AWS EC2</span>
+                                            <span class="skill-tag">CloudFront (OAC)</span>
+                                            <span class="skill-tag">S3</span>
+                                            <span class="skill-tag">ALB</span>
+                                            <span class="skill-tag">Auto Scaling</span>
+                                            <span class="skill-tag">CloudWatch</span>
+                                            <span class="skill-tag">JWT</span>
+                                            <span class="skill-tag">RBAC</span>
+                                            <span class="skill-tag">Cost Auditing</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="timeline-item">
-                            <div class="timeline-dot" style="background:var(--text-muted);"></div>
+                            <div class="timeline-dot"></div>
                             <div class="timeline-card">
                                 <div class="timeline-header">
                                     <div class="timeline-role">DevOps Engineer Intern</div>
-                                    <span class="badge-now" style="color:var(--text-muted); background:var(--bg-input);">MAY 2025 - OCT 2025</span>
+                                    <span class="badge-now">MAY 2025 - OCT 2025</span>
                                 </div>
                                 <div class="timeline-company">Eastri · Mumbai (Remote)</div>
                                 <div class="timeline-meta">6 months</div>
@@ -1356,12 +1525,26 @@
                                         <li>Troubleshot production Kubernetes workloads, networking issues, and container failures using logs, metrics, and Linux utilities, reducing downtime by 25% and improving service reliability.</li>
                                         <li>Managed Kubernetes microservice deployments using YAML manifests, Deployments, Services, Config Maps, Secrets, Ingress Controllers, and Horizontal Pod Autoscalers across production clusters, achieving 99.9% availability.</li>
                                     </ul>
+
+                                    <!-- Gained Skills Badges -->
+                                    <div class="skills-gained-box">
+                                        <div class="skills-gained-title"><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Skills &amp; Technologies Gained:</div>
+                                        <div class="skills-gained-list">
+                                            <span class="skill-tag">Terraform Modules</span>
+                                            <span class="skill-tag">Kubernetes</span>
+                                            <span class="skill-tag">Docker</span>
+                                            <span class="skill-tag">YAML Manifests</span>
+                                            <span class="skill-tag">Ingress Controllers</span>
+                                            <span class="skill-tag">HPA</span>
+                                            <span class="skill-tag">Linux Utilities</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- EDUC CONTENT -->
+                    <!-- EDUC CONTENT (INCLUDES 10TH, 12TH & B.TECH) -->
                     <div id="tab-content-educ" class="timeline" style="display: none;">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
@@ -1372,6 +1555,30 @@
                                 </div>
                                 <div class="timeline-company">Sir Padampat Singhania University · Udaipur, Rajasthan</div>
                                 <div class="timeline-meta">2021 – 2026</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div class="timeline-role">Intermediate Public Examination (IPE), MPC</div>
+                                    <span class="badge-now">GRADE: 9.0</span>
+                                </div>
+                                <div class="timeline-company">Narayana Junior College · India</div>
+                                <div class="timeline-meta">Jun 2019 – Mar 2021</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <div class="timeline-role">Secondary School Certificate (SSC), MPC</div>
+                                    <span class="badge-now">GRADE: 9.3</span>
+                                </div>
+                                <div class="timeline-company">Narayana Institute · India</div>
+                                <div class="timeline-meta">Jun 2018 – Mar 2019</div>
                             </div>
                         </div>
                     </div>
@@ -1522,7 +1729,7 @@
                 <!-- TOOLS & TECHNOLOGIES SECTION -->
                 <section id="skills">
                     <div class="section-header">
-                        <h2><i class="fas fa-rhombus" style="color:var(--text-muted); font-size:1.2rem; margin-right:0.3rem;"></i> Tools &amp; Technologies</h2>
+                        <h2>Tools &amp; Technologies</h2>
                         <div class="title-underline"></div>
                     </div>
 
@@ -1599,7 +1806,7 @@
                         <p style="color:var(--text-body); font-size:0.85rem;">Have a project in mind or just want to say hi? Fill out the form below.</p>
                     </div>
 
-                    <div class="badge-now" style="width: fit-content; margin-bottom: 1.25rem; padding: 0.25rem 0.7rem;">
+                    <div class="badge-now" style="width: fit-content; margin-bottom: 1.25rem;">
                         AVAILABLE FOR PROJECTS
                     </div>
 
@@ -1632,7 +1839,7 @@
                             </div>
                         </div>
 
-                        <!-- FORMSPREE JSON AJAX FORM SUBMISSION -->
+                        <!-- FORMSPREE AJAX SUBMISSION FORM -->
                         <form class="form-grid" id="contactForm" onsubmit="submitFormspree(event)">
                             <div class="form-row">
                                 <div class="form-group">
@@ -1656,6 +1863,34 @@
                             </button>
                             <div id="formStatus" class="form-status-msg"></div>
                         </form>
+                    </div>
+                </section>
+
+                <!-- INTERACTIVE TERMINAL SECTION -->
+                <section id="terminal-section">
+                    <div class="section-header">
+                        <h2>Terminal Shell</h2>
+                        <div class="title-underline"></div>
+                    </div>
+
+                    <div class="terminal-box">
+                        <div class="terminal-bar">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                            <span style="margin-left:0.5rem;"><i class="fas fa-terminal"></i> kalyan@portfolio:~</span>
+                        </div>
+                        <div class="terminal-body" id="terminalOutput">
+                            <div class="terminal-line"><span style="color:var(--accent-blue);">Interactive Terminal Shell Portfolio</span></div>
+                            <div class="terminal-line" style="color:var(--text-muted);">Type '<span style="color:var(--accent-green);">help</span>' to list all available CLI commands.</div>
+                            <div class="terminal-line">----------------------------------------------------</div>
+                        </div>
+                        <div style="padding:0.5rem 1rem; border-top:1px solid var(--border-color); background:#0c0d12;">
+                            <form class="terminal-input-wrapper" onsubmit="handleTerminalCommand(event)">
+                                <span class="terminal-prompt">kalyan@portfolio:~$</span>
+                                <input type="text" id="terminalInput" class="terminal-input" placeholder="Type a command (e.g. help, ls, about, skills, clear)..." autocomplete="off">
+                            </form>
+                        </div>
                     </div>
                 </section>
 
@@ -1802,6 +2037,76 @@
             document.getElementById('certModal').style.display = 'none';
         }
 
+        // Interactive Terminal Command Handler
+        function handleTerminalCommand(e) {
+            e.preventDefault();
+            const input = document.getElementById('terminalInput');
+            const output = document.getElementById('terminalOutput');
+            const cmd = input.value.trim().toLowerCase();
+
+            if (!cmd) return;
+
+            // Echo command
+            const userLine = document.createElement('div');
+            userLine.className = 'terminal-line';
+            userLine.innerHTML = `<span class="terminal-prompt">kalyan@portfolio:~$</span> ${cmd}`;
+            output.appendChild(userLine);
+
+            const response = document.createElement('div');
+            response.className = 'terminal-line';
+            response.style.color = '#94a3b8';
+
+            switch (cmd) {
+                case 'help':
+                    response.innerHTML = `
+                        Available CLI commands:<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">about</span>&nbsp;&nbsp;&nbsp;&nbsp;- Summary profile<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">projects</span>&nbsp;&nbsp;- List GitHub repositories<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">skills</span>&nbsp;&nbsp;&nbsp;&nbsp;- Show technical skills<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">contact</span>&nbsp;&nbsp;&nbsp;- Email & phone details<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">ls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List directory sections<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">whoami</span>&nbsp;&nbsp;&nbsp;- Current active user<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;- Clear shell terminal screen
+                    `;
+                    break;
+                case 'ls':
+                    response.innerHTML = `<span style="color:var(--accent-green);">about/&nbsp;&nbsp;experience/&nbsp;&nbsp;projects/&nbsp;&nbsp;certifications/&nbsp;&nbsp;skills/&nbsp;&nbsp;contact/</span>`;
+                    break;
+                case 'about':
+                    response.innerHTML = `Gaddam Kalyan Teja | Junior DevOps Engineer with 14 months of hands-on production experience in AWS, Kubernetes, and CI/CD. Decommissioned unused Redis cache saving Rs. 1.5L/month at Athena LMS.`;
+                    break;
+                case 'projects':
+                    response.innerHTML = `
+                        1. monitoring-prometheus-grafana<br>
+                        2. ci-cd-jenkins-docker<br>
+                        3. gitops-argocd-kubernetes<br>
+                        4. cloudformation-aws-infra<br>
+                        5. terraform-aws-iac<br>
+                        6. devops-cicd-github-actions
+                    `;
+                    break;
+                case 'skills':
+                    response.innerHTML = `AWS (EC2, S3, ALB, CloudFront), Terraform, Docker, Kubernetes (EKS), Helm, Jenkins, GitHub Actions, Prometheus, Grafana, Linux, Python, Bash.`;
+                    break;
+                case 'contact':
+                    response.innerHTML = `Email: kalyanteja18@gmail.com | Phone: +91 89853 81228 | LinkedIn: kalyan-teja-gaddam`;
+                    break;
+                case 'whoami':
+                    response.innerHTML = `visitor@kalyan-teja-portfolio`;
+                    break;
+                case 'clear':
+                    output.innerHTML = '';
+                    input.value = '';
+                    return;
+                default:
+                    response.innerHTML = `<span style="color:#ef4444;">Command not found: ${cmd}</span>. Type '<span style="color:var(--accent-green);">help</span>' for available options.`;
+            }
+
+            output.appendChild(response);
+            input.value = '';
+            output.scrollTop = output.scrollHeight;
+        }
+
         // Search Engine
         const searchDatabase = [
             { title: "AWS (EC2, VPC, S3, IAM, EKS)", category: "Skills", link: "#skills" },
@@ -1815,6 +2120,8 @@
             { title: "devops-cicd-github-actions", category: "Projects", link: "#projects" },
             { title: "Athena LMS Experience", category: "Resume", link: "#experience" },
             { title: "Eastri Experience", category: "Resume", link: "#experience" },
+            { title: "Narayana Junior College (Intermediate)", category: "Education", link: "#experience" },
+            { title: "Narayana Institute (10th Class)", category: "Education", link: "#experience" },
             { title: "Docker MasterClass Cert", category: "Certifications", link: "#certifications" },
             { title: "AWS Cloud Practitioner Cert", category: "Certifications", link: "#certifications" }
         ];
