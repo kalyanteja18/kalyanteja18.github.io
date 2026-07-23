@@ -56,6 +56,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -477,9 +478,9 @@
             background: transparent;
             border: none;
             color: var(--text-muted);
-            padding: 0.45rem 0.8rem;
+            padding: 0.5rem 0.8rem;
             font-family: var(--font-mono);
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.05em;
             border-radius: 8px;
@@ -494,6 +495,7 @@
         .tab-btn.active {
             background: var(--accent-blue);
             color: #ffffff;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
         }
 
         .tab-badge {
@@ -1327,7 +1329,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#experience">
+                        <a href="#experience" onclick="switchResumeTab('exp');">
                             <span class="nav-text"><i class="fas fa-briefcase"></i> RESUME</span>
                             <span class="nav-dot"></span>
                         </a>
@@ -1421,7 +1423,7 @@
                             <div class="label">Annual Savings</div>
                         </div>
                         <div class="stat-card">
-                            <div class="num">25</div>
+                            <div class="num">26</div>
                             <div class="label">Certifications</div>
                         </div>
                     </div>
@@ -1474,7 +1476,7 @@
                     <div class="pill-tabs">
                         <button class="tab-btn active" id="btn-exp" onclick="switchResumeTab('exp')">💼 Experience</button>
                         <button class="tab-btn" id="btn-educ" onclick="switchResumeTab('educ')">🎓 Education</button>
-                        <button class="tab-btn" id="btn-cert" onclick="switchResumeTab('cert')">🏆 Certification <span class="tab-badge">25</span></button>
+                        <button class="tab-btn" id="btn-cert" onclick="switchResumeTab('cert')">🏆 Certification <span class="tab-badge">26</span></button>
                     </div>
 
                     <!-- EXP CONTENT -->
@@ -1552,7 +1554,7 @@
                         </div>
                     </div>
 
-                    <!-- EDUC CONTENT (INCLUDES 10TH, 12TH & B.TECH) -->
+                    <!-- EDUC CONTENT -->
                     <div id="tab-content-educ" class="timeline" style="display: none;">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
@@ -1593,7 +1595,7 @@
 
                     <!-- CERT CONTENT INSIDE RESUME SECTION -->
                     <div id="tab-content-cert" class="cards-grid" style="display: none;">
-                        <!-- CERTIFICATES RENDERED HERE DYNAMICALLY -->
+                        <!-- ALL 26 CERTIFICATES RENDERED HERE -->
                     </div>
                 </section>
 
@@ -1902,13 +1904,14 @@
             { id: "c22", title: "AWS Auto Scaling & Load Balancing", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1F-fTUSjf9pHgAMbi8mjou2n_ujA6ePkL" },
             { id: "c23", title: "AWS Core IAM & Governance", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "117u_PXqM5KCDyBpssXDA4e1WtBmGBSO1" },
             { id: "c24", title: "CI/CD Pipeline Automation", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1LWxL4wrp1WdVow9mv02R0-_XBJYzE_uz" },
-            { id: "c25", title: "DevOps & Cloud Specialization", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" }
-            { id: "c26", title: "AWS AI Cloud Computing ", sub: "Cloud Credentials", date: "2026", length: "Verified Completion", fileId: "13gqEUWnDUQWJIAAlGlp-YHJVusI4kjAS" }
+            { id: "c25", title: "DevOps & Cloud Specialization", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" },
+            { id: "c26", title: "Cloud Engineering Certification", sub: "Cloud Credentials", date: "2026", length: "Verified Completion", fileId: "13gqEUWnDUQWJIAAlGlp-YHJVusI4kjAS" }
         ];
 
         // RENDER ALL CERTIFICATES INTO RESUME CERT TAB
         function renderCertificates() {
             const tabGrid = document.getElementById('tab-content-cert');
+            if (!tabGrid) return;
             tabGrid.innerHTML = '';
 
             certificatesList.forEach(cert => {
@@ -1991,7 +1994,7 @@
         }
 
         // Tab Navigation
-        function switchResumeTab(tab) {
+        function switchResumeTab(tab, scroll = false) {
             const expContent = document.getElementById('tab-content-exp');
             const educContent = document.getElementById('tab-content-educ');
             const certContent = document.getElementById('tab-content-cert');
@@ -1999,6 +2002,8 @@
             const btnExp = document.getElementById('btn-exp');
             const btnEduc = document.getElementById('btn-educ');
             const btnCert = document.getElementById('btn-cert');
+
+            if (!expContent || !educContent || !certContent) return;
 
             expContent.style.display = 'none';
             educContent.style.display = 'none';
@@ -2017,6 +2022,10 @@
             } else if (tab === 'cert') {
                 certContent.style.display = 'grid';
                 btnCert.classList.add('active');
+            }
+
+            if (scroll) {
+                document.getElementById('experience').scrollIntoView({ behavior: 'smooth' });
             }
         }
 
@@ -2090,7 +2099,8 @@
                     response.innerHTML = `Gaddam Kalyan Teja | Junior DevOps Engineer with 14 months of hands-on production experience in AWS, Kubernetes, and CI/CD. Decommissioned unused Redis cache saving Rs. 1.5L/month at Athena LMS.`;
                     break;
                 case 'certs':
-                    response.innerHTML = `Total Verified Certifications: 25 (AWS Cloud Practitioner, Docker MasterClass, Ultimate YAML, Python, Kubernetes, Terraform, etc.)`;
+                    switchResumeTab('cert', true);
+                    response.innerHTML = `Total Verified Certifications: 26. Switched view to Certification tab.`;
                     break;
                 case 'projects':
                     response.innerHTML = `
@@ -2135,12 +2145,11 @@
             { title: "cloudformation-aws-infra", category: "Projects", link: "#projects" },
             { title: "terraform-aws-iac", category: "Projects", link: "#projects" },
             { title: "devops-cicd-github-actions", category: "Projects", link: "#projects" },
-            { title: "Athena LMS Experience", category: "Resume", link: "#experience" },
-            { title: "Eastri Experience", category: "Resume", link: "#experience" },
-            { title: "Narayana Junior College (Intermediate)", category: "Education", link: "#experience" },
-            { title: "Narayana Institute (10th Class)", category: "Education", link: "#experience" },
-            { title: "Docker MasterClass Cert", category: "Certifications", link: "#experience" },
-            { title: "AWS Cloud Practitioner Cert", category: "Certifications", link: "#experience" }
+            { title: "Athena LMS Experience", category: "Resume", link: "exp" },
+            { title: "Eastri Experience", category: "Resume", link: "exp" },
+            { title: "Narayana Junior College (Intermediate)", category: "Education", link: "educ" },
+            { title: "Narayana Institute (10th Class)", category: "Education", link: "educ" },
+            { title: "Certifications & Credentials", category: "Certifications", link: "cert" }
         ];
 
         function openSearchModal() {
@@ -2168,8 +2177,13 @@
             filtered.forEach(item => {
                 const a = document.createElement('a');
                 a.className = 'search-result-item';
-                a.href = item.link;
-                a.onclick = () => closeSearchModal();
+                a.href = item.link.startsWith('#') ? item.link : '#experience';
+                a.onclick = () => {
+                    closeSearchModal();
+                    if (['exp', 'educ', 'cert'].includes(item.link)) {
+                        switchResumeTab(item.link, true);
+                    }
+                };
                 a.innerHTML = `<span>${item.title}</span><span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-muted);">${item.category}</span>`;
                 resultsContainer.appendChild(a);
             });
