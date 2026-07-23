@@ -1339,12 +1339,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#certifications">
-                            <span class="nav-text"><i class="fas fa-certificate"></i> CERTS</span>
-                            <span class="nav-dot"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="#skills">
                             <span class="nav-text"><i class="fas fa-terminal"></i> TECH STACK</span>
                             <span class="nav-dot"></span>
@@ -1478,9 +1472,9 @@
                     </div>
 
                     <div class="pill-tabs">
-                        <button class="tab-btn active" id="btn-exp" onclick="switchResumeTab('exp')">EXP.</button>
-                        <button class="tab-btn" id="btn-educ" onclick="switchResumeTab('educ')">EDUC.</button>
-                        <button class="tab-btn" id="btn-cert" onclick="switchResumeTab('cert')">🏆 CERT. <span class="tab-badge">24</span></button>
+                        <button class="tab-btn active" id="btn-exp" onclick="switchResumeTab('exp')">💼 Experience</button>
+                        <button class="tab-btn" id="btn-educ" onclick="switchResumeTab('educ')">🎓 Education</button>
+                        <button class="tab-btn" id="btn-cert" onclick="switchResumeTab('cert')">🏆 Certification <span class="tab-badge">24</span></button>
                     </div>
 
                     <!-- EXP CONTENT -->
@@ -1558,7 +1552,7 @@
                         </div>
                     </div>
 
-                    <!-- EDUC CONTENT -->
+                    <!-- EDUC CONTENT (INCLUDES 10TH, 12TH & B.TECH) -->
                     <div id="tab-content-educ" class="timeline" style="display: none;">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
@@ -1676,18 +1670,6 @@
                                 <a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
                             </div>
                         </div>
-                    </div>
-                </section>
-
-                <!-- CERTIFICATIONS SECTION -->
-                <section id="certifications">
-                    <div class="section-header">
-                        <h2>Certifications</h2>
-                        <div class="title-underline"></div>
-                    </div>
-
-                    <div class="cards-grid" id="mainCertGrid">
-                        <!-- ALL 24 CERTIFICATES RENDERED HERE -->
                     </div>
                 </section>
 
@@ -1922,19 +1904,16 @@
             { id: "c24", title: "Python for Infrastructure Operations", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1Nxw9WJ_YheHJltbFBjshCuT0iFMVOEJg" }
         ];
 
-        // RENDER ALL CERTIFICATES INTO GRIDS
+        // RENDER ALL CERTIFICATES INTO RESUME CERT TAB
         function renderCertificates() {
-            const mainGrid = document.getElementById('mainCertGrid');
             const tabGrid = document.getElementById('tab-content-cert');
-
-            mainGrid.innerHTML = '';
             tabGrid.innerHTML = '';
 
             certificatesList.forEach(cert => {
                 const cardHtml = `
                     <div class="cert-display-card">
                         <div class="cert-img-frame">
-                            <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" id="${cert.id}" onerror="renderCertFallback('${cert.id}', '${cert.title}', '${cert.sub}');">
+                            <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" id="tab_${cert.id}" onerror="renderCertFallback('tab_${cert.id}', '${cert.title}', '${cert.sub}');">
                         </div>
                         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
                             <div>
@@ -1942,15 +1921,11 @@
                                 <p style="font-size:0.75rem; color:var(--text-muted);">${cert.sub}</p>
                                 <p style="font-family:var(--font-mono); font-size:0.7rem;">${cert.date} · ${cert.length}</p>
                             </div>
-                            <button onclick="viewCertModal(document.getElementById('${cert.id}').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
+                            <button onclick="viewCertModal(document.getElementById('tab_${cert.id}').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
                         </div>
                     </div>
                 `;
-                mainGrid.innerHTML += cardHtml;
-
-                // Alternate IDs for tab content clone
-                const tabCardHtml = cardHtml.replace(`id="${cert.id}"`, `id="tab_${cert.id}"`).replace(`'${cert.id}'`, `'tab_${cert.id}'`);
-                tabGrid.innerHTML += tabCardHtml;
+                tabGrid.innerHTML += cardHtml;
             });
         }
 
@@ -2162,8 +2137,8 @@
             { title: "Eastri Experience", category: "Resume", link: "#experience" },
             { title: "Narayana Junior College (Intermediate)", category: "Education", link: "#experience" },
             { title: "Narayana Institute (10th Class)", category: "Education", link: "#experience" },
-            { title: "Docker MasterClass Cert", category: "Certifications", link: "#certifications" },
-            { title: "AWS Cloud Practitioner Cert", category: "Certifications", link: "#certifications" }
+            { title: "Docker MasterClass Cert", category: "Certifications", link: "#experience" },
+            { title: "AWS Cloud Practitioner Cert", category: "Certifications", link: "#experience" }
         ];
 
         function openSearchModal() {
