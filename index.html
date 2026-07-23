@@ -75,7 +75,7 @@
             overflow-x: hidden;
         }
 
-        /* ─── GEOMETRIC POLYGON BACKGROUND ARTWORK ─── */
+        /* GEOMETRIC POLYGON BACKGROUND ARTWORK */
         .bg-poly-left, .bg-poly-right {
             position: fixed;
             top: 0;
@@ -1554,7 +1554,7 @@
                         </div>
                     </div>
 
-                    <!-- EDUC CONTENT -->
+                    <!-- EDUC CONTENT (INCLUDES 10TH, 12TH & B.TECH) -->
                     <div id="tab-content-educ" class="timeline" style="display: none;">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
@@ -1878,34 +1878,34 @@
     </div>
 
     <script>
-        // MASTER CERTIFICATES LIST (26 Total Certificates mapped to exact Drive File IDs)
+        // MASTER CERTIFICATES LIST (Exact titles with clean layout)
         const certificatesList = [
-            { id: "c1", title: "Docker MasterClass", sub: "TechLynk Selenium | DevOps | Cloud", date: "Nov 12, 2025", length: "12.5 total hours", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
-            { id: "c2", title: "Ultimate YAML Course", sub: "TechLynk Selenium | DevOps | Cloud", date: "Nov 7, 2025", length: "3 total hours", fileId: "1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" },
-            { id: "c3", title: "AWS Certified Cloud Practitioner", sub: "Chetan Agrawal | Solutions Architect", date: "Sept 26, 2025", length: "22.5 total hours", fileId: "1mt7dY7Wcvg2Dz1pRAkU9ypzmVVc2KNTU" },
-            { id: "c4", title: "Python Programming", sub: "Maria EduCare", date: "July 31, 2025", length: "2.5 total hours", fileId: "1xHmE4jm3GBSlu9O8XxXdXLH0Wp0QLyuc" },
-            { id: "c5", title: "CloudWatch Incident & Monitoring", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1DfS5u10_C9oPAggehDFLHT97x6vpILcc" },
-            { id: "c6", title: "Jenkins & Docker Integration", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "146OT1t8aBAsVtDrTKmZSFAjUsK8DnslO" },
-            { id: "c7", title: "S3 & CloudFront Security", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1-T9WH_mfPmCsjWTPcAVko8JybY25NKbF" },
-            { id: "c8", title: "PostgreSQL Database Operations", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1XqP62eSwwp7PxXYCVQ7R8Ce1IgPwXLhY" },
-            { id: "c9", title: "Cloud Infrastructure Cost Audit", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "14tRh7KawBc7IGNZonMcYDucZjHPW5VJ7" },
-            { id: "c10", title: "Microservices Containerization", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1bGSJGOWlbnFHVEYDJXbovXALPEEdk5tm" },
-            { id: "c11", title: "Shell Scripting & Automation", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1Qdv6FUOeHnZsDrJ2prGdUKBR6DYo93qX" },
-            { id: "c12", title: "Cloud Networking & VPC", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1hTj_5KfAnIlueajIB4LNGFA1RINfsBsD" },
-            { id: "c13", title: "DevOps Pipeline Architecture", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1TXez349ytdPcDHjLcY0ht-Nyt-xWpQXP" },
-            { id: "c14", title: "GitOps & ArgoCD Architecture", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1kmDRac2dzsqrAnXeiIB8MxmTOYu_CQAu" },
-            { id: "c15", title: "Linux Administration & Ops", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1wvDY71r_WuTg4y85bGHgDJVjDNGYusJM" },
-            { id: "c16", title: "Prometheus & Grafana Setup", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "18rDHPmjlR2eAW4v2D-WPeq_hTA6CkJAm" },
-            { id: "c17", title: "Terraform Infrastructure as Code", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1oxd1_IMxB-85RstI4pXSg9SUCNo1yesV" },
-            { id: "c18", title: "Kubernetes Cluster Management", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1jFrIfy1TXYm6GVVcn77y_tPqgcS3N4mP" },
-            { id: "c19", title: "Python Infrastructure Automation", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1Nxw9WJ_YheHJltbFBjshCuT0iFMVOEJg" },
-            { id: "c20", title: "Git & GitHub Version Control", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1WfJMWAEQYH8VMDfMgYr5NB1np_Gj3B0p" },
-            { id: "c21", title: "JWT & RBAC Access Security", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1O3pjuPyVHjZFFWiW-Q2VFETkd-5tgTWv" },
-            { id: "c22", title: "AWS Auto Scaling & Load Balancing", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1F-fTUSjf9pHgAMbi8mjou2n_ujA6ePkL" },
-            { id: "c23", title: "AWS Core IAM & Governance", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "117u_PXqM5KCDyBpssXDA4e1WtBmGBSO1" },
-            { id: "c24", title: "CI/CD Pipeline Automation", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1LWxL4wrp1WdVow9mv02R0-_XBJYzE_uz" },
-            { id: "c25", title: "DevOps & Cloud Specialization", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" },
-            { id: "c26", title: "Cloud Engineering Certification", sub: "Cloud Credentials", date: "2026", length: "Verified Completion", fileId: "13gqEUWnDUQWJIAAlGlp-YHJVusI4kjAS" }
+            { id: "c1", title: "Docker MasterClass", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
+            { id: "c2", title: "Ultimate YAML Course", fileId: "1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" },
+            { id: "c3", title: "AWS Certified Cloud Practitioner", fileId: "1mt7dY7Wcvg2Dz1pRAkU9ypzmVVc2KNTU" },
+            { id: "c4", title: "Python Programming", fileId: "1xHmE4jm3GBSlu9O8XxXdXLH0Wp0QLyuc" },
+            { id: "c5", title: "CloudWatch Incident & Monitoring", fileId: "1DfS5u10_C9oPAggehDFLHT97x6vpILcc" },
+            { id: "c6", title: "Jenkins & Docker Integration", fileId: "146OT1t8aBAsVtDrTKmZSFAjUsK8DnslO" },
+            { id: "c7", title: "S3 & CloudFront Security", fileId: "1-T9WH_mfPmCsjWTPcAVko8JybY25NKbF" },
+            { id: "c8", title: "PostgreSQL Database Operations", fileId: "1XqP62eSwwp7PxXYCVQ7R8Ce1IgPwXLhY" },
+            { id: "c9", title: "Cloud Infrastructure Cost Audit", fileId: "14tRh7KawBc7IGNZonMcYDucZjHPW5VJ7" },
+            { id: "c10", title: "Microservices Containerization", fileId: "1bGSJGOWlbnFHVEYDJXbovXALPEEdk5tm" },
+            { id: "c11", title: "Shell Scripting & Automation", fileId: "1Qdv6FUOeHnZsDrJ2prGdUKBR6DYo93qX" },
+            { id: "c12", title: "Cloud Networking & VPC", fileId: "1hTj_5KfAnIlueajIB4LNGFA1RINfsBsD" },
+            { id: "c13", title: "DevOps Pipeline Architecture", fileId: "1TXez349ytdPcDHjLcY0ht-Nyt-xWpQXP" },
+            { id: "c14", title: "GitOps & ArgoCD Architecture", fileId: "1kmDRac2dzsqrAnXeiIB8MxmTOYu_CQAu" },
+            { id: "c15", title: "Linux Administration & Ops", fileId: "1wvDY71r_WuTg4y85bGHgDJVjDNGYusJM" },
+            { id: "c16", title: "Prometheus & Grafana Setup", fileId: "18rDHPmjlR2eAW4v2D-WPeq_hTA6CkJAm" },
+            { id: "c17", title: "Terraform Infrastructure as Code", fileId: "1oxd1_IMxB-85RstI4pXSg9SUCNo1yesV" },
+            { id: "c18", title: "Kubernetes Cluster Management", fileId: "1jFrIfy1TXYm6GVVcn77y_tPqgcS3N4mP" },
+            { id: "c19", title: "Python Infrastructure Automation", fileId: "1Nxw9WJ_YheHJltbFBjshCuT0iFMVOEJg" },
+            { id: "c20", title: "Git & GitHub Version Control", fileId: "1WfJMWAEQYH8VMDfMgYr5NB1np_Gj3B0p" },
+            { id: "c21", title: "JWT & RBAC Access Security", fileId: "1O3pjuPyVHjZFFWiW-Q2VFETkd-5tgTWv" },
+            { id: "c22", title: "AWS Auto Scaling & Load Balancing", fileId: "1F-fTUSjf9pHgAMbi8mjou2n_ujA6ePkL" },
+            { id: "c23", title: "AWS Core IAM & Governance", fileId: "117u_PXqM5KCDyBpssXDA4e1WtBmGBSO1" },
+            { id: "c24", title: "CI/CD Pipeline Automation", fileId: "1LWxL4wrp1WdVow9mv02R0-_XBJYzE_uz" },
+            { id: "c25", title: "DevOps & Cloud Specialization", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" },
+            { id: "c26", title: "Cloud Engineering Certification", fileId: "13gqEUWnDUQWJIAAlGlp-YHJVusI4kjAS" }
         ];
 
         // RENDER ALL CERTIFICATES INTO RESUME CERT TAB
@@ -1918,15 +1918,11 @@
                 const cardHtml = `
                     <div class="cert-display-card">
                         <div class="cert-img-frame">
-                            <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" id="tab_${cert.id}" onerror="renderCertFallback('tab_${cert.id}', '${cert.title}', '${cert.sub}');">
+                            <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" id="tab_${cert.id}" onerror="renderCertFallback('tab_${cert.id}', '${cert.title}');">
                         </div>
-                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                            <div>
-                                <h3 style="font-size:0.95rem; color:var(--text-heading);">${cert.title}</h3>
-                                <p style="font-size:0.75rem; color:var(--text-muted);">${cert.sub}</p>
-                                <p style="font-family:var(--font-mono); font-size:0.7rem;">${cert.date} · ${cert.length}</p>
-                            </div>
-                            <button onclick="viewCertModal(document.getElementById('tab_${cert.id}').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
+                        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+                            <h3 style="font-size:0.95rem; color:var(--text-heading); font-weight:600;">${cert.title}</h3>
+                            <button onclick="viewCertModal(document.getElementById('tab_${cert.id}').src)" class="btn-main" style="padding:0.3rem 0.65rem; font-size:0.72rem; flex-shrink:0;"><i class="fas fa-expand"></i> View</button>
                         </div>
                     </div>
                 `;
@@ -1987,9 +1983,9 @@
         }
 
         // Certificate Fallback
-        function renderCertFallback(imgId, title, sub) {
+        function renderCertFallback(imgId, title) {
             const img = document.getElementById(imgId);
-            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'><rect width='600' height='380' fill='%2314161d'/><rect x='15' y='15' width='570' height='350' fill='none' stroke='%233b82f6' stroke-width='4' rx='8'/><text x='300' y='80' fill='%23ffffff' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>CERTIFICATE OF COMPLETION</text><text x='300' y='160' fill='%233b82f6' font-family='sans-serif' font-size='24' font-weight='bold' text-anchor='middle'>${title}</text><text x='300' y='220' fill='%239ea4b5' font-family='sans-serif' font-size='16' text-anchor='middle'>Presented to: Gaddam Kalyan Teja</text><text x='300' y='280' fill='%2362687a' font-family='sans-serif' font-size='14' text-anchor='middle'>${sub}</text></svg>`;
+            const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'><rect width='600' height='380' fill='%2314161d'/><rect x='15' y='15' width='570' height='350' fill='none' stroke='%233b82f6' stroke-width='4' rx='8'/><text x='300' y='100' fill='%23ffffff' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>CERTIFICATE OF COMPLETION</text><text x='300' y='190' fill='%233b82f6' font-family='sans-serif' font-size='24' font-weight='bold' text-anchor='middle'>${title}</text><text x='300' y='260' fill='%239ea4b5' font-family='sans-serif' font-size='16' text-anchor='middle'>Presented to: Gaddam Kalyan Teja</text></svg>`;
             img.src = "data:image/svg+xml;utf8," + svg;
         }
 
