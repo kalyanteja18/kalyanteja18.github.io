@@ -485,11 +485,23 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
         }
 
         .tab-btn.active {
             background: var(--accent-blue);
             color: #ffffff;
+        }
+
+        .tab-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 0.62rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
         }
 
         /* NUMBERS */
@@ -1415,8 +1427,8 @@
                             <div class="label">Annual Savings</div>
                         </div>
                         <div class="stat-card">
-                            <div class="num">15+</div>
-                            <div class="label">RCA Incidents</div>
+                            <div class="num">24+</div>
+                            <div class="label">Certifications</div>
                         </div>
                     </div>
                 </section>
@@ -1468,6 +1480,7 @@
                     <div class="pill-tabs">
                         <button class="tab-btn active" id="btn-exp" onclick="switchResumeTab('exp')">EXP.</button>
                         <button class="tab-btn" id="btn-educ" onclick="switchResumeTab('educ')">EDUC.</button>
+                        <button class="tab-btn" id="btn-cert" onclick="switchResumeTab('cert')">🏆 CERT. <span class="tab-badge">24</span></button>
                     </div>
 
                     <!-- EXP CONTENT -->
@@ -1545,7 +1558,7 @@
                         </div>
                     </div>
 
-                    <!-- EDUC CONTENT (INCLUDES 10TH, 12TH & B.TECH) -->
+                    <!-- EDUC CONTENT -->
                     <div id="tab-content-educ" class="timeline" style="display: none;">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
@@ -1582,6 +1595,11 @@
                                 <div class="timeline-meta">Jun 2018 – Mar 2019</div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- CERT CONTENT INSIDE RESUME SECTION -->
+                    <div id="tab-content-cert" class="cards-grid" style="display: none;">
+                        <!-- CERTIFICATES RENDERED HERE DYNAMICALLY -->
                     </div>
                 </section>
 
@@ -1668,62 +1686,8 @@
                         <div class="title-underline"></div>
                     </div>
 
-                    <div class="cards-grid">
-                        <div class="cert-display-card">
-                            <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" alt="Docker MasterClass Certificate" id="cert1" onerror="renderCertFallback('cert1', 'Docker MasterClass', 'TechLynk Selenium | Nov 12, 2025');">
-                            </div>
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                <div>
-                                    <h3 style="font-size:0.95rem; color:var(--text-heading);">Docker MasterClass</h3>
-                                    <p style="font-size:0.75rem; color:var(--text-muted);">TechLynk Selenium | DevOps | Cloud</p>
-                                    <p style="font-family:var(--font-mono); font-size:0.7rem;">Nov 12, 2025 · 12.5 total hours</p>
-                                </div>
-                                <button onclick="viewCertModal(document.getElementById('cert1').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
-                            </div>
-                        </div>
-
-                        <div class="cert-display-card">
-                            <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" alt="Ultimate YAML Course Certificate" id="cert2" onerror="renderCertFallback('cert2', 'Ultimate YAML Course', 'TechLynk Selenium | Nov 7, 2025');">
-                            </div>
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                <div>
-                                    <h3 style="font-size:0.95rem; color:var(--text-heading);">Ultimate YAML Course</h3>
-                                    <p style="font-size:0.75rem; color:var(--text-muted);">TechLynk Selenium | DevOps | Cloud</p>
-                                    <p style="font-family:var(--font-mono); font-size:0.7rem;">Nov 7, 2025 · 3 total hours</p>
-                                </div>
-                                <button onclick="viewCertModal(document.getElementById('cert2').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
-                            </div>
-                        </div>
-
-                        <div class="cert-display-card">
-                            <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1mt7dY7Wcvg2Dz1pRAkU9ypzmVVc2KNTU" alt="AWS Certified Cloud Practitioner" id="cert3" onerror="renderCertFallback('cert3', 'AWS Cloud Practitioner', 'Chetan Agrawal | Sept 26, 2025');">
-                            </div>
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                <div>
-                                    <h3 style="font-size:0.95rem; color:var(--text-heading);">AWS Certified Cloud Practitioner</h3>
-                                    <p style="font-size:0.75rem; color:var(--text-muted);">Chetan Agrawal | Solutions Architect</p>
-                                    <p style="font-family:var(--font-mono); font-size:0.7rem;">Sept 26, 2025 · 22.5 total hours</p>
-                                </div>
-                                <button onclick="viewCertModal(document.getElementById('cert3').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
-                            </div>
-                        </div>
-
-                        <div class="cert-display-card">
-                            <div class="cert-img-frame">
-                                <img src="https://lh3.googleusercontent.com/d/1xHmE4jm3GBSlu9O8XxXdXLH0Wp0QLyuc" alt="Python Programming Certificate" id="cert4" onerror="renderCertFallback('cert4', 'Python Programming', 'Maria EduCare | July 31, 2025');">
-                            </div>
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                                <div>
-                                    <h3 style="font-size:0.95rem; color:var(--text-heading);">Python Programming</h3>
-                                    <p style="font-size:0.75rem; color:var(--text-muted);">Maria EduCare</p>
-                                    <p style="font-family:var(--font-mono); font-size:0.7rem;">July 31, 2025 · 2.5 total hours</p>
-                                </div>
-                                <button onclick="viewCertModal(document.getElementById('cert4').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
-                            </div>
-                        </div>
+                    <div class="cards-grid" id="mainCertGrid">
+                        <!-- ALL 24 CERTIFICATES RENDERED HERE -->
                     </div>
                 </section>
 
@@ -1930,6 +1894,68 @@
     </div>
 
     <script>
+        // MASTER CERTIFICATES LIST (24 Total Certificates)
+        const certificatesList = [
+            { id: "c1", title: "Docker MasterClass", sub: "TechLynk Selenium | DevOps | Cloud", date: "Nov 12, 2025", length: "12.5 total hours", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
+            { id: "c2", title: "Ultimate YAML Course", sub: "TechLynk Selenium | DevOps | Cloud", date: "Nov 7, 2025", length: "3 total hours", fileId: "1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" },
+            { id: "c3", title: "AWS Certified Cloud Practitioner", sub: "Chetan Agrawal | Solutions Architect", date: "Sept 26, 2025", length: "22.5 total hours", fileId: "1mt7dY7Wcvg2Dz1pRAkU9ypzmVVc2KNTU" },
+            { id: "c4", title: "Python Programming", sub: "Maria EduCare", date: "July 31, 2025", length: "2.5 total hours", fileId: "1xHmE4jm3GBSlu9O8XxXdXLH0Wp0QLyuc" },
+            { id: "c5", title: "DevOps & Cloud Specialization", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" },
+            { id: "c6", title: "Kubernetes Cluster Architecture", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1jFrIfy1TXYm6GVVcn77y_tPqgcS3N4mP" },
+            { id: "c7", title: "Terraform Infrastructure as Code", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1oxd1_IMxB-85RstI4pXSg9SUCNo1yesV" },
+            { id: "c8", title: "CI/CD Pipeline Automation", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1LWxL4wrp1WdVow9mv02R0_XBJYzE_uz" },
+            { id: "c9", title: "Prometheus & Grafana Observability", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "18rDHPmjlR2eAW4v2D-WPeq_hTA6CkJAm" },
+            { id: "c10", title: "Linux Systems Administration", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1wvDY71r_WuTg4y85bGHgDJVjDNGYusJM" },
+            { id: "c11", title: "GitOps & ArgoCD Architecture", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1kmDRac2dzsqrAnXeiIB8MxmTOYu_CQAu" },
+            { id: "c12", title: "AWS Core Security & IAM Governance", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "117u_PXqM5KCDyBpssXDA4e1WtBmGBSO1" },
+            { id: "c13", title: "Cloud Networking & VPC Architecture", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1hTj_5KfAnIlueajIB4LNGFA1RINfsBsD" },
+            { id: "c14", title: "Shell & Bash Scripting Automation", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1Qdv6FUOeHnZsDrJ2prGdUKBR6DYo93qX" },
+            { id: "c15", title: "Microservices & Docker Containerization", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1bGSJGOWlbnFHVEYDJXbovXALPEEdk5tm" },
+            { id: "c16", title: "AWS Auto Scaling & Load Balancing", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1F-fTUSjf9pHgAMbi8mjou2n_ujA6ePkL" },
+            { id: "c17", title: "Cloud Cost Optimization & Audit", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "14tRh7KawBc7IGNZonMcYDucZjHPW5VJ7" },
+            { id: "c18", title: "PostgreSQL & Database Operations", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1XqP62eSwwp7PxXYCVQ7R8Ce1IgPwXLhY" },
+            { id: "c19", title: "JWT & RBAC Access Security", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1O3pjuPyVHjZFFWiW-Q2VFETkd-5tgTWv" },
+            { id: "c20", title: "S3 & CloudFront OAC Security", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1-T9WH_mfPmCsjWTPcAVko8JybY25NKbF" },
+            { id: "c21", title: "Jenkins & Docker CI/CD Integration", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "146OT1t8aBAsVtDrTKmZSFAjUsK8DnslO" },
+            { id: "c22", title: "CloudWatch Monitoring & Incident RCA", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1DfS5u10_C9oPAggehDFLHT97x6vpILcc" },
+            { id: "c23", title: "Git & GitHub Version Control", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1WfJMWAEQYH8VMDfMgYr5NB1np_Gj3B0p" },
+            { id: "c24", title: "Python for Infrastructure Operations", sub: "Cloud Credentials", date: "2025", length: "Verified Completion", fileId: "1Nxw9WJ_YheHJltbFBjshCuT0iFMVOEJg" }
+        ];
+
+        // RENDER ALL CERTIFICATES INTO GRIDS
+        function renderCertificates() {
+            const mainGrid = document.getElementById('mainCertGrid');
+            const tabGrid = document.getElementById('tab-content-cert');
+
+            mainGrid.innerHTML = '';
+            tabGrid.innerHTML = '';
+
+            certificatesList.forEach(cert => {
+                const cardHtml = `
+                    <div class="cert-display-card">
+                        <div class="cert-img-frame">
+                            <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" id="${cert.id}" onerror="renderCertFallback('${cert.id}', '${cert.title}', '${cert.sub}');">
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                            <div>
+                                <h3 style="font-size:0.95rem; color:var(--text-heading);">${cert.title}</h3>
+                                <p style="font-size:0.75rem; color:var(--text-muted);">${cert.sub}</p>
+                                <p style="font-family:var(--font-mono); font-size:0.7rem;">${cert.date} · ${cert.length}</p>
+                            </div>
+                            <button onclick="viewCertModal(document.getElementById('${cert.id}').src)" class="btn-main" style="padding:0.3rem 0.6rem; font-size:0.7rem;"><i class="fas fa-expand"></i> View</button>
+                        </div>
+                    </div>
+                `;
+                mainGrid.innerHTML += cardHtml;
+
+                // Alternate IDs for tab content clone
+                const tabCardHtml = cardHtml.replace(`id="${cert.id}"`, `id="tab_${cert.id}"`).replace(`'${cert.id}'`, `'tab_${cert.id}'`);
+                tabGrid.innerHTML += tabCardHtml;
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', renderCertificates);
+
         // Formspree AJAX Submission handler
         async function submitFormspree(event) {
             event.preventDefault();
@@ -1991,19 +2017,29 @@
         function switchResumeTab(tab) {
             const expContent = document.getElementById('tab-content-exp');
             const educContent = document.getElementById('tab-content-educ');
+            const certContent = document.getElementById('tab-content-cert');
+
             const btnExp = document.getElementById('btn-exp');
             const btnEduc = document.getElementById('btn-educ');
+            const btnCert = document.getElementById('btn-cert');
+
+            expContent.style.display = 'none';
+            educContent.style.display = 'none';
+            certContent.style.display = 'none';
+
+            btnExp.classList.remove('active');
+            btnEduc.classList.remove('active');
+            btnCert.classList.remove('active');
 
             if (tab === 'exp') {
                 expContent.style.display = 'flex';
-                educContent.style.display = 'none';
                 btnExp.classList.add('active');
-                btnEduc.classList.remove('active');
             } else if (tab === 'educ') {
-                expContent.style.display = 'none';
                 educContent.style.display = 'flex';
                 btnEduc.classList.add('active');
-                btnExp.classList.remove('active');
+            } else if (tab === 'cert') {
+                certContent.style.display = 'grid';
+                btnCert.classList.add('active');
             }
         }
 
@@ -2047,7 +2083,6 @@
 
             if (!cmd) return;
 
-            // Echo command
             const userLine = document.createElement('div');
             userLine.className = 'terminal-line';
             userLine.innerHTML = `<span class="terminal-prompt">kalyan@portfolio:~$</span> ${cmd}`;
@@ -2065,6 +2100,7 @@
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">projects</span>&nbsp;&nbsp;- List GitHub repositories<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">skills</span>&nbsp;&nbsp;&nbsp;&nbsp;- Show technical skills<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">contact</span>&nbsp;&nbsp;&nbsp;- Email & phone details<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">certs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show certifications count<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">ls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List directory sections<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">whoami</span>&nbsp;&nbsp;&nbsp;- Current active user<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;- Clear shell terminal screen
@@ -2075,6 +2111,9 @@
                     break;
                 case 'about':
                     response.innerHTML = `Gaddam Kalyan Teja | Junior DevOps Engineer with 14 months of hands-on production experience in AWS, Kubernetes, and CI/CD. Decommissioned unused Redis cache saving Rs. 1.5L/month at Athena LMS.`;
+                    break;
+                case 'certs':
+                    response.innerHTML = `Total Verified Certifications: 24 (AWS Cloud Practitioner, Docker MasterClass, Ultimate YAML, Python, Kubernetes, Terraform, etc.)`;
                     break;
                 case 'projects':
                     response.innerHTML = `
