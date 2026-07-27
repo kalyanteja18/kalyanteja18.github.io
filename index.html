@@ -1341,6 +1341,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#blogs">
+                            <span class="nav-text"><i class="fas fa-newspaper"></i> BLOGS</span>
+                            <span class="nav-dot"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#skills">
                             <span class="nav-text"><i class="fas fa-terminal"></i> TECH STACK</span>
                             <span class="nav-dot"></span>
@@ -1595,7 +1601,7 @@
 
                     <!-- CERT CONTENT INSIDE RESUME SECTION -->
                     <div id="tab-content-cert" class="cards-grid" style="display: none;">
-                        <!-- ALL 26 CERTIFICATES RENDERED HERE -->
+                        <!-- ALL 30 CERTIFICATES RENDERED HERE -->
                     </div>
                 </section>
 
@@ -1671,6 +1677,67 @@
                                 <div class="repo-stats"><span><i class="far fa-star"></i> 0</span><span><i class="fas fa-code-branch"></i> 0</span></div>
                                 <a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
                             </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- BLOGS SECTION -->
+                <section id="blogs">
+                    <div class="section-header">
+                        <h2>Blogs</h2>
+                        <div class="title-underline"></div>
+                        <div class="meta-tagline">Technical insights, production incident RCA, and cloud engineering takeaways</div>
+                    </div>
+
+                    <div class="cards-grid">
+                        <!-- BLOG 1 -->
+                        <div class="feature-card">
+                            <span class="card-category-tag">ARTIFICIAL INTELLIGENCE</span>
+                            <div class="card-icon"><i class="fas fa-brain"></i></div>
+                            <h3>Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">July 2026 · 6 min read</p>
+                            <p>Demystifying operational paradigms: how software delivery evolved from CI/CD automation (DevOps) to machine learning lifecycle management (MLOps), automated telemetry analysis (AIOps), and autonomous self-healing execution (Agentic AIOps).</p>
+                            <button onclick="openBlogModal('blog1')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                        </div>
+
+                        <!-- BLOG 2 -->
+                        <div class="feature-card">
+                            <span class="card-category-tag">CLOUD COST OPTIMIZATION</span>
+                            <div class="card-icon"><i class="fas fa-wallet"></i></div>
+                            <h3>How Auditing Zombie Caches Saved ₹1.5L/Month in AWS Infrastructure</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">May 2026 · 5 min read</p>
+                            <p>A deep dive into discovering and safely decommissioning an unindexed ElastiCache Redis cluster at Athena LMS that had been billing unnoticed since August 2025, leading to a company-wide cloud audit framework.</p>
+                            <button onclick="openBlogModal('blog2')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                        </div>
+
+                        <!-- BLOG 3 -->
+                        <div class="feature-card">
+                            <span class="card-category-tag">KUBERNETES & GITOPS</span>
+                            <div class="card-icon"><i class="fas fa-dharmachakra"></i></div>
+                            <h3>Zero-Downtime Microservice Deployments with ArgoCD and Helm on AWS EKS</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">March 2026 · 7 min read</p>
+                            <p>Exploring declarative GitOps continuous delivery workflows. Learn how pairing ArgoCD with Helm charts and Horizontal Pod Autoscalers (HPA) achieves 99.9% uptime across production clusters.</p>
+                            <button onclick="openBlogModal('blog3')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                        </div>
+
+                        <!-- BLOG 4 -->
+                        <div class="feature-card">
+                            <span class="card-category-tag">CLOUD SECURITY</span>
+                            <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                            <h3>Hardening Multi-Tenant SaaS Access: Implementing JWT & RBAC at Scale</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">January 2026 · 6 min read</p>
+                            <p>Strategies for establishing strict tenant isolation and least-privilege security across Dev, Staging, and Production environments for platforms serving over 1,000 active concurrent users.</p>
+                            <button onclick="openBlogModal('blog4')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                        </div>
+
+                        <!-- BLOG 5 -->
+                        <div class="feature-card">
+                            <span class="card-category-tag">OBSERVABILITY</span>
+                            <div class="card-icon"><i class="fas fa-chart-area"></i></div>
+                            <h3>Lowering MTTR: Setting Up Custom Prometheus Alerts and Grafana Dashboards</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">November 2025 · 5 min read</p>
+                            <p>A practical guide on instrumenting Flask microservices with custom request counters and latency histograms to detect production anomalies before end-users report them.</p>
+                            <button onclick="openBlogModal('blog5')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
                         </div>
                     </div>
                 </section>
@@ -1864,6 +1931,16 @@
         </div>
     </div>
 
+    <!-- FULLSCREEN BLOG READER MODAL -->
+    <div id="blogModal" class="modal" onclick="closeBlogModal()">
+        <div class="modal-content" onclick="event.stopPropagation()" style="max-width:800px; width:90%; max-height:85vh; overflow-y:auto; align-items:flex-start; padding:2rem;">
+            <div class="close-modal" onclick="closeBlogModal()">&times;</div>
+            <div id="blogModalBody" style="line-height:1.7; color:var(--text-body); width:100%;">
+                <!-- Content injected dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- INTERACTIVE SEARCH MODAL -->
     <div id="searchModal" class="modal" onclick="closeSearchModal()">
         <div class="search-modal-box" onclick="event.stopPropagation()">
@@ -1878,8 +1955,8 @@
     </div>
 
     <script>
-        // MASTER CERTIFICATES LIST (Exact titles with clean layout)
-const certificatesList = [
+        // MASTER CERTIFICATES LIST (30 Exact Items mapped to Google Drive File IDs)
+        const certificatesList = [
             { id: "c1", title: "Python Beginner to Advanced", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
             { id: "c2", title: "Ultimate YAML Course", fileId: "1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" },
             { id: "c3", title: "Docker Swarm and Docker Compose", fileId: "1mt7dY7Wcvg2Dz1pRAkU9ypzmVVc2KNTU" },
@@ -1904,13 +1981,83 @@ const certificatesList = [
             { id: "c22", title: "Mongo DB Encryption at Rest with BYOK", fileId: "1F-fTUSjf9pHgAMbi8mjou2n_ujA6ePkL" },
             { id: "c23", title: "Building an App with Code Agents and Mongo DB", fileId: "117u_PXqM5KCDyBpssXDA4e1WtBmGBSO1" },
             { id: "c24", title: "Introduction to Gen AI (AWS)", fileId: "1LWxL4wrp1WdVow9mv02R0-_XBJYzE_uz" },
-            { id: "c25", title: "AI Chatbots, RAG, & Governence with Data Workflows", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" },
+            { id: "c25", title: "AI Chatbots, RAG, & Governance with Data Workflows", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" },
             { id: "c26", title: "Cloud Computing 101 (AWS)", fileId: "13gqEUWnDUQWJIAAlGlp-YHJVusI4kjAS" },
             { id: "c27", title: "Git and GitHub MasterClass: Git Workflow, Commands", fileId: "1XBWxeMCt1Dn-xpF60AxOK5roiHBitqyN" },
             { id: "c28", title: "PostgreSQL Bootcamp : Complete Beginner to Advanced Course", fileId: "1UbwmZ0G0mEe2MQvVNyA7wM3Iqq_TcgXi" },
             { id: "c29", title: "DevOps MasterClass: Terraform Kubernetes Ansible Docker", fileId: "1QWGWot_cFSNF06kqV5qTkvMYcLglF8e5" },
             { id: "c30", title: "Docker Kubernetes MasterClass: DevOps from Scratch", fileId: "1sRzh6kMgVDBMAtY_8BpB5B3MGmpL5ZAz" }
         ];
+
+        // BLOG ARTICLES DATABASE
+        const blogsDatabase = {
+            blog1: {
+                title: "Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps",
+                content: `
+                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: July 2026 · By Gaddam Kalyan Teja · 6 min read</p>
+                    
+                    <p style="margin-bottom:1rem;">As modern cloud infrastructure expands, the terminology surrounding operational engineering has diversified rapidly. Here is an architectural comparison breaking down the differences between DevOps, MLOps, AIOps, and Agentic AIOps.</p>
+                    
+                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">1. DevOps (Development & Operations)</h4>
+                    <p style="margin-bottom:1rem;">DevOps unifies software development and IT operations through continuous integration and continuous delivery (CI/CD). Tools like Terraform, Docker, and GitHub Actions allow engineers to manage infrastructure as code (IaC) and automate release pipelines.</p>
+
+                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">2. MLOps (Machine Learning Operations)</h4>
+                    <p style="margin-bottom:1rem;">MLOps extends DevOps principles to machine learning models. Instead of managing static code artifacts, MLOps governs data versioning, model training, feature stores, model registries, and drift detection in production environments.</p>
+
+                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">3. AIOps (Artificial Intelligence for IT Operations)</h4>
+                    <p style="margin-bottom:1rem;">AIOps uses machine learning to process massive streams of telemetry data (logs, metrics, and traces). Instead of setting manual alert thresholds in Prometheus or CloudWatch, AIOps platforms autonomously detect metric anomalies and correlate root causes across complex systems.</p>
+
+                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">4. Agentic AIOps (Autonomous System Remediation)</h4>
+                    <p style="margin-bottom:1rem;">Agentic AIOps represents the next frontier: moving from detection to autonomous execution. Autonomous LLM agents equipped with system tool-calling privileges parse incident tickets, perform root cause analysis (RCA), execute corrective runbooks (such as scaling auto-scaling groups or rolling back broken Kubernetes pods), and document resolved incidents with zero manual intervention.</p>
+                `
+            },
+            blog2: {
+                title: "How Auditing Zombie Caches Saved ₹1.5L/Month in AWS Infrastructure",
+                content: `
+                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">How Auditing Zombie Caches Saved ₹1.5L/Month in AWS Infrastructure</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: May 2026 · By Gaddam Kalyan Teja · 5 min read</p>
+                    
+                    <p style="margin-bottom:1rem;">Within two months of joining Athena LMS, I discovered an idle ElastiCache Redis cluster that had been generating recurring charges since August 2025 without serving live traffic.</p>
+                    
+                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">Investigation & Identification</h4>
+                    <p style="margin-bottom:1rem;">By inspecting CloudWatch metrics for Read/Write Ops and Network Throughput across our Multi-AZ AWS infrastructure, I noticed zero active cache connections on a high-spec Redis instance. Cross-referencing application deployment manifests confirmed the cache was rendered obsolete following a previous architecture migration.</p>
+
+                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">Impact & Audit Framework</h4>
+                    <p style="margin-bottom:1rem;">Decommissioning this single orphaned resource saved <strong>₹1.5 Lakhs/month (₹18 Lakhs/year)</strong>. This success triggered a company-wide cost optimization audit, where we audited 150+ security group rules, standardized instance sizes with AWS Cost Explorer, and optimized S3 storage lifecycles.</p>
+                `
+            },
+            blog3: {
+                title: "Zero-Downtime Microservice Deployments with ArgoCD and Helm on AWS EKS",
+                content: `
+                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Zero-Downtime Microservice Deployments with ArgoCD and Helm on AWS EKS</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: March 2026 · By Gaddam Kalyan Teja · 7 min read</p>
+                    
+                    <p style="margin-bottom:1rem;">Maintaining high availability across microservices requires moving from manual deployment scripts to GitOps continuous delivery.</p>
+                    <p style="margin-bottom:1rem;">By pairing <strong>ArgoCD</strong> with version-controlled <strong>Helm charts</strong> on Amazon EKS, state synchronization becomes declarative. In this post, I detail configuring readiness and liveness probes, rolling update strategies, and Horizontal Pod Autoscaling (HPA) to maintain 99.9% uptime during peak application loads.</p>
+                `
+            },
+            blog4: {
+                title: "Hardening Multi-Tenant SaaS Access: Implementing JWT & RBAC at Scale",
+                content: `
+                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Hardening Multi-Tenant SaaS Access: Implementing JWT & RBAC at Scale</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: January 2026 · By Gaddam Kalyan Teja · 6 min read</p>
+                    
+                    <p style="margin-bottom:1rem;">Managing multi-tenant infrastructure for over 1,000 concurrent users requires robust security architecture to prevent cross-tenant data leaks.</p>
+                    <p style="margin-bottom:1rem;">This article outlines our approach to implementing JSON Web Token (JWT) verification alongside Role-Based Access Control (RBAC) across Dev, Staging, and Production. We also discuss closing 25+ unnecessary open ports and establishing least-privilege security group rules across 20+ EC2 instances.</p>
+                `
+            },
+            blog5: {
+                title: "Lowering MTTR: Setting Up Custom Prometheus Alerts and Grafana Dashboards",
+                content: `
+                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Lowering MTTR: Setting Up Custom Prometheus Alerts and Grafana Dashboards</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: November 2025 · By Gaddam Kalyan Teja · 5 min read</p>
+                    
+                    <p style="margin-bottom:1rem;">Mean Time to Resolution (MTTR) is a key Site Reliability Engineering (SRE) metric. When system failures occur, instant observability makes all the difference.</p>
+                    <p style="margin-bottom:1rem;">This guide explains how to instrument Python/Flask microservices with custom Prometheus metrics (counter rates, histogram latency buckets) and provision Grafana dashboards to monitor request throughput, error percentages, and Node Exporter system telemetry.</p>
+                `
+            }
+        };
 
         // RENDER ALL CERTIFICATES INTO RESUME CERT TAB
         function renderCertificates() {
@@ -2060,6 +2207,20 @@ const certificatesList = [
             document.getElementById('certModal').style.display = 'none';
         }
 
+        // Modal for Blogs
+        function openBlogModal(blogId) {
+            const modal = document.getElementById('blogModal');
+            const body = document.getElementById('blogModalBody');
+            if (blogsDatabase[blogId]) {
+                body.innerHTML = blogsDatabase[blogId].content;
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeBlogModal() {
+            document.getElementById('blogModal').style.display = 'none';
+        }
+
         // Interactive Terminal Command Handler
         function handleTerminalCommand(e) {
             e.preventDefault();
@@ -2085,6 +2246,7 @@ const certificatesList = [
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">about</span>&nbsp;&nbsp;&nbsp;&nbsp;- Summary profile<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">projects</span>&nbsp;&nbsp;- List GitHub repositories<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">skills</span>&nbsp;&nbsp;&nbsp;&nbsp;- Show technical skills<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">blogs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List written articles<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">contact</span>&nbsp;&nbsp;&nbsp;- Email & phone details<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">certs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show certifications count<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">ls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List directory sections<br>
@@ -2093,7 +2255,7 @@ const certificatesList = [
                     `;
                     break;
                 case 'ls':
-                    response.innerHTML = `<span style="color:var(--accent-green);">about/&nbsp;&nbsp;experience/&nbsp;&nbsp;projects/&nbsp;&nbsp;certifications/&nbsp;&nbsp;skills/&nbsp;&nbsp;contact/</span>`;
+                    response.innerHTML = `<span style="color:var(--accent-green);">about/&nbsp;&nbsp;experience/&nbsp;&nbsp;projects/&nbsp;&nbsp;blogs/&nbsp;&nbsp;certifications/&nbsp;&nbsp;skills/&nbsp;&nbsp;contact/</span>`;
                     break;
                 case 'about':
                     response.innerHTML = `Gaddam Kalyan Teja | Junior DevOps Engineer with 14 months of hands-on production experience in AWS, Kubernetes, and CI/CD. Decommissioned unused Redis cache saving Rs. 1.5L/month at Athena LMS.`;
@@ -2101,6 +2263,10 @@ const certificatesList = [
                 case 'certs':
                     switchResumeTab('cert', true);
                     response.innerHTML = `Total Verified Certifications: 30. Switched view to Certification tab.`;
+                    break;
+                case 'blogs':
+                    document.getElementById('blogs').scrollIntoView({ behavior: 'smooth' });
+                    response.innerHTML = `5 published articles available: AIOps vs DevOps, AWS Cost Audit, ArgoCD GitOps, JWT & RBAC SaaS Security, Prometheus Monitoring.`;
                     break;
                 case 'projects':
                     response.innerHTML = `
@@ -2139,17 +2305,14 @@ const certificatesList = [
             { title: "AWS (EC2, VPC, S3, IAM, EKS)", category: "Skills", link: "#skills" },
             { title: "Terraform & IaC", category: "Skills", link: "#skills" },
             { title: "Docker & Kubernetes", category: "Skills", link: "#skills" },
-            { title: "monitoring-prometheus-grafana", category: "Projects", link: "#projects" },
-            { title: "ci-cd-jenkins-docker", category: "Projects", link: "#projects" },
-            { title: "gitops-argocd-kubernetes", category: "Projects", link: "#projects" },
-            { title: "cloudformation-aws-infra", category: "Projects", link: "#projects" },
-            { title: "terraform-aws-iac", category: "Projects", link: "#projects" },
-            { title: "devops-cicd-github-actions", category: "Projects", link: "#projects" },
+            { title: "Ops Explained: AIOps vs DevOps vs MLOps vs Agentic AIOps", category: "Blogs", link: "#blogs" },
+            { title: "How Auditing Zombie Caches Saved ₹1.5L/Month", category: "Blogs", link: "#blogs" },
+            { title: "Zero-Downtime Deployments with ArgoCD and Helm", category: "Blogs", link: "#blogs" },
             { title: "Athena LMS Experience", category: "Resume", link: "exp" },
             { title: "Eastri Experience", category: "Resume", link: "exp" },
             { title: "Narayana Junior College (Intermediate)", category: "Education", link: "educ" },
             { title: "Narayana Institute (10th Class)", category: "Education", link: "educ" },
-            { title: "Certifications & Credentials", category: "Certifications", link: "cert" }
+            { title: "Certifications & Credentials (30)", category: "Certifications", link: "cert" }
         ];
 
         function openSearchModal() {
@@ -2197,6 +2360,7 @@ const certificatesList = [
             if (e.key === 'Escape') {
                 closeSearchModal();
                 closeCertModal();
+                closeBlogModal();
             }
         });
     </script>
