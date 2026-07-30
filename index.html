@@ -43,7 +43,7 @@
             --accent-purple: #c084fc;
         }
 
-        /* ── RESET & BASE ── */
+        /* ── RESET & BASE (Fast Native Scrolling) ── */
         * {
             margin: 0;
             padding: 0;
@@ -51,7 +51,7 @@
         }
 
         html {
-            scroll-behavior: auto !important; /* Managed by Lenis for smooth performance */
+            scroll-behavior: smooth;
         }
 
         body {
@@ -79,19 +79,6 @@
             background-size: 80px 80px;
             pointer-events: none;
             z-index: 0;
-            will-change: transform;
-        }
-
-        /* ── CANVAS OVERLAYS ── */
-        #hero-3d-canvas, #ripple-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.45;
         }
 
         /* ── STICKERS ── */
@@ -112,7 +99,6 @@
             user-select: none;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.25));
-            will-change: transform;
         }
 
         .sticker:hover {
@@ -128,23 +114,23 @@
             padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 6rem;
+            gap: 5rem;
         }
 
         /* ═══════════════════════════════════════════════
-                   BEN CELINSKI SIGNATURE ANIMATIONS
+                   BEN CELINSKI SCROLL ANIMATIONS
            ═══════════════════════════════════════════════ */
         .celinski-scroll-section {
-            min-height: 75vh;
+            min-height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             opacity: 0;
-            transform: translateY(50px) scale(0.97);
-            filter: blur(10px);
-            transition: opacity 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
-                        transform 0.7s cubic-bezier(0.215, 0.61, 0.355, 1),
-                        filter 0.7s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transform: translateY(40px) scale(0.98);
+            filter: blur(8px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform, filter;
         }
 
@@ -156,9 +142,9 @@
 
         .celinski-scroll-section .stagger-child {
             opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1),
-                        transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .celinski-scroll-section.visible .stagger-child {
@@ -166,10 +152,10 @@
             transform: translateY(0);
         }
 
-        .celinski-scroll-section.visible .stagger-child:nth-child(1) { transition-delay: 0.1s; }
-        .celinski-scroll-section.visible .stagger-child:nth-child(2) { transition-delay: 0.2s; }
-        .celinski-scroll-section.visible .stagger-child:nth-child(3) { transition-delay: 0.3s; }
-        .celinski-scroll-section.visible .stagger-child:nth-child(4) { transition-delay: 0.4s; }
+        .celinski-scroll-section.visible .stagger-child:nth-child(1) { transition-delay: 0.05s; }
+        .celinski-scroll-section.visible .stagger-child:nth-child(2) { transition-delay: 0.10s; }
+        .celinski-scroll-section.visible .stagger-child:nth-child(3) { transition-delay: 0.15s; }
+        .celinski-scroll-section.visible .stagger-child:nth-child(4) { transition-delay: 0.20s; }
 
         /* ── NAV ── */
         .haoqi-nav {
@@ -232,15 +218,14 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.2s;
             text-decoration: none;
         }
 
         .haoqi-btn:hover {
             border-color: var(--accent-blue);
             color: var(--accent-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.25);
+            transform: translateY(-2px);
         }
 
         /* ── HERO ── */
@@ -262,7 +247,8 @@
         }
 
         .hero-title-giant span {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: var(--accent-blue);
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -291,14 +277,13 @@
             display: flex;
             flex-direction: column;
             gap: 1.1rem;
-            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
-            will-change: transform;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .haoqi-card:hover {
             border-color: var(--accent-blue);
-            transform: translateY(-6px) scale(1.01);
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
         }
 
         .tag-pill {
@@ -307,10 +292,100 @@
             font-weight: 700;
             text-transform: uppercase;
             color: var(--accent-blue);
-            background: rgba(37, 99, 235, 0.12);
+            background: rgba(37, 99, 235, 0.1);
             padding: 0.25rem 0.65rem;
             border-radius: 6px;
             width: fit-content;
+        }
+
+        /* ── PILL TABS ── */
+        .pill-tabs {
+            display: flex;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.7rem 1rem;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-blue);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ── TERMINAL ── */
+        .terminal-box {
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            font-family: var(--font-mono);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .terminal-header {
+            background: #111726;
+            padding: 0.65rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .terminal-body {
+            padding: 1.25rem;
+            min-height: 220px;
+            max-height: 350px;
+            overflow-y: auto;
+            color: #cbd5e1;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        /* ── MODALS ── */
+        .case-study-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-main);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .case-study-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         /* ── SCROLL PROGRESS BAR ── */
@@ -330,38 +405,12 @@
             width: 0%;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
             border-radius: 0 4px 4px 0;
-            box-shadow: 0 0 15px var(--accent-blue);
-        }
-
-        /* ── RIGHT SCROLL PILL ── */
-        .scroll-pill-bar {
-            position: fixed;
-            right: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 220px;
-            width: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            z-index: 100;
-            cursor: pointer;
-        }
-
-        .scroll-pill-thumb {
-            width: 100%;
-            height: 48px;
-            background: var(--accent-blue);
-            border-radius: 8px;
-            box-shadow: 0 0 16px var(--accent-blue);
-            transform: translateY(0px);
-            will-change: transform;
         }
 
         /* ── RESPONSIVE ── */
         @media (max-width: 850px) {
             .grid-layout { grid-template-columns: 1fr; }
             .nav-items { display: none; }
-            .scroll-pill-bar { display: none; }
         }
     </style>
 </head>
@@ -373,15 +422,19 @@
         <div class="scroll-progress-bar" id="scrollProgressBar"></div>
     </div>
 
-    <!-- ─── BLUEPRINT GRID & CANVASES ─── -->
+    <!-- ─── BLUEPRINT GRID ─── -->
     <div class="blueprint-grid" id="blueprintGrid"></div>
 
-    <!-- ─── RIGHT SCROLL PILL ─── -->
-    <div class="scroll-pill-bar" id="scrollPillBar">
-        <div class="scroll-pill-thumb" id="scroll-thumb"></div>
+    <!-- ─── STICKERS ─── -->
+    <div class="stickers-layer">
+        <div class="sticker" style="top:14%;left:6%"><img src="https://api.iconify.design/logos:aws.svg" width="54" alt="AWS"></div>
+        <div class="sticker" style="top:18%;right:8%"><img src="https://api.iconify.design/logos:kubernetes.svg" width="48" alt="Kubernetes"></div>
+        <div class="sticker" style="top:58%;left:4%"><img src="https://api.iconify.design/logos:terraform.svg" width="46" alt="Terraform"></div>
+        <div class="sticker" style="top:68%;right:6%"><img src="https://api.iconify.design/logos:docker-icon.svg" width="50" alt="Docker"></div>
+        <div class="sticker" style="top:42%;right:4%"><img src="https://api.iconify.design/logos:python.svg" width="42" alt="Python"></div>
     </div>
 
-    <!-- ─── MAIN CONTENT ─── -->
+    <!-- ─── MAIN CONTAINER ─── -->
     <div class="app-container">
 
         <!-- NAV -->
@@ -394,8 +447,9 @@
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#blogs">Blogs</a></li>
+                <li><a href="#terminal-section">Terminal</a></li>
             </ul>
-            <div>
+            <div style="display:flex; gap:0.5rem;">
                 <button class="haoqi-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i> Theme</button>
             </div>
         </nav>
@@ -408,118 +462,191 @@
                 <span>CLOUD INFRASTRUCTURE.</span>
             </h1>
             <p class="hero-subtext stagger-child">
-                Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Reduced Cloud bills by <strong>₹18 Lakhs/year</strong> at Athena LMS through automated cache optimization.
+                Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Discovered and decommissioned an unused Redis cache costing <strong>₹1.5L/month</strong> within 2 months at Athena LMS, driving an annual savings of <strong>₹18 Lakhs/year</strong>.
             </p>
             <div style="display:flex; gap:1rem; flex-wrap:wrap;" class="stagger-child">
-                <a href="#" class="haoqi-btn" style="background:var(--accent-blue); color:#fff; border:none;"><i class="fas fa-download"></i> Download CV</a>
+                <a href="https://drive.google.com/uc?export=download&id=1uqOFDpmF5knxAAfJXhvrihNuy6wR9q8E" target="_blank" download class="haoqi-btn" style="background:var(--accent-blue); color:#fff; border:none;">
+                    <i class="fas fa-download"></i> Download CV
+                </a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kalyanteja18@gmail.com" target="_blank" class="haoqi-btn"><i class="far fa-envelope"></i> Email</a>
                 <a href="https://github.com/kalyanteja18" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> GitHub</a>
                 <a href="https://www.linkedin.com/in/kalyan-teja-gaddam/" target="_blank" class="haoqi-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
             </div>
         </section>
 
-        <!-- ─── RESUME ─── -->
+        <!-- ─── RESUME & CERTIFICATIONS ─── -->
         <section class="celinski-scroll-section" id="resume">
-            <div style="border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:2rem;" class="stagger-child">
-                <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Work Experience</h2>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
+                <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Resume &amp; Experience</h2>
+                <div class="tag-pill">30 Verified Certifications</div>
             </div>
-            <div class="grid-layout">
-                <div class="haoqi-card stagger-child">
+
+            <div class="pill-tabs stagger-child">
+                <button class="tab-btn active" id="btn-exp" onclick="switchTab('exp')"><i class="fas fa-briefcase"></i> Experience</button>
+                <button class="tab-btn" id="btn-educ" onclick="switchTab('educ')"><i class="fas fa-graduation-cap"></i> Education</button>
+                <button class="tab-btn" id="btn-cert" onclick="switchTab('cert')"><i class="fas fa-award"></i> Certifications (30)</button>
+            </div>
+
+            <!-- Tab 1: Experience -->
+            <div id="tab-exp" class="grid-layout">
+                <div class="haoqi-card">
                     <div class="tag-pill">Athena LMS · New Delhi</div>
                     <h3 style="color:var(--text-heading);">DevOps Engineer Intern</h3>
-                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">NOV 2025 – MAY 2026</p>
-                    <p>Discovered & decommissioned unused Redis cache, saving ₹1.5L/month (₹18L/year). Managed multi-tenant SaaS infrastructure serving 1,000+ active users on AWS EC2 Auto Scaling, ALB, and CloudFront.</p>
+                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">NOV 2025 – MAY 2026 · 7 months</p>
+                    <ul style="padding-left:1.2rem; font-size:0.88rem;">
+                        <li>Decommissioned an unused Redis cache saving <strong>₹1.5L/month (₹18L/year)</strong>.</li>
+                        <li>Managed Multi-Tenant SaaS infrastructure serving <strong>1,000+ active users</strong> on AWS (EC2 Auto Scaling, ALB, CloudFront).</li>
+                        <li>Audited 150+ Security Groups and enforced JWT &amp; RBAC security models.</li>
+                    </ul>
                 </div>
-                <div class="haoqi-card stagger-child">
-                    <div class="tag-pill">Eastri · Remote</div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">Eastri · Mumbai (Remote)</div>
                     <h3 style="color:var(--text-heading);">DevOps Engineer Intern</h3>
-                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">MAY 2025 – OCT 2025</p>
-                    <p>Provisioned infrastructure using reusable Terraform IaC modules. Managed production Kubernetes workloads, manifests, Helm, and HPA auto-scaling.</p>
+                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">MAY 2025 – OCT 2025 · 6 months</p>
+                    <ul style="padding-left:1.2rem; font-size:0.88rem;">
+                        <li>Provisioned AWS infrastructure using reusable Terraform IaC modules, cutting setup time from 2 hours to 15 mins.</li>
+                        <li>Troubleshot production Kubernetes workloads, managing ConfigMaps, Ingress Controllers, and HPA autoscaling.</li>
+                    </ul>
                 </div>
             </div>
+
+            <!-- Tab 2: Education -->
+            <div id="tab-educ" class="grid-layout" style="display:none;">
+                <div class="haoqi-card">
+                    <div class="tag-pill">Sir Padampat Singhania University</div>
+                    <h3 style="color:var(--text-heading);">B.Tech in Computer Science (AI &amp; ML)</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">2021 – 2026 · Udaipur, Rajasthan</p>
+                    <p>Specialized in AI/ML, Cloud Infrastructure, Distributed Systems, and DevOps pipelines.</p>
+                </div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">Narayana Junior College</div>
+                    <h3 style="color:var(--text-heading);">Intermediate (MPC)</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">2019 – 2021 · Grade: 9.0</p>
+                </div>
+            </div>
+
+            <!-- Tab 3: Certifications (Populated dynamically) -->
+            <div id="tab-cert" class="grid-layout" style="display:none;"></div>
         </section>
 
         <!-- ─── PROJECTS ─── -->
         <section class="celinski-scroll-section" id="projects">
-            <div style="border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:2rem;" class="stagger-child">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Projects</h2>
+                <div class="tag-pill">6 Repositories</div>
             </div>
             <div class="grid-layout">
-                <div class="haoqi-card stagger-child">
+                <div class="haoqi-card">
                     <div class="tag-pill">OBSERVABILITY</div>
                     <h3 style="color:var(--text-heading);">monitoring-prometheus-grafana</h3>
-                    <p>Instrumented Flask application metrics with Prometheus and custom Grafana dashboards for latency & memory tracking.</p>
-                    <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> Repository →</a>
+                    <p>Flask app metrics with Prometheus & Grafana dashboards tracking p95 latency and resource limits.</p>
+                    <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
                 </div>
-                <div class="haoqi-card stagger-child">
-                    <div class="tag-pill">GITOPS & K8S</div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">CI/CD PIPELINES</div>
+                    <h3 style="color:var(--text-heading);">ci-cd-jenkins-docker</h3>
+                    <p>Automated Jenkins CI/CD pipeline integrated with Docker containerization workflows.</p>
+                    <a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
+                </div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">GITOPS &amp; K8S</div>
                     <h3 style="color:var(--text-heading);">gitops-argocd-kubernetes</h3>
-                    <p>GitOps CD pipeline using ArgoCD and Kubernetes manifests for declarative state management and automated rollouts.</p>
-                    <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> Repository →</a>
+                    <p>GitOps deployment architecture using ArgoCD and Kubernetes cluster manifests.</p>
+                    <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
+                </div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">TERRAFORM</div>
+                    <h3 style="color:var(--text-heading);">terraform-aws-iac</h3>
+                    <p>Reusable Terraform modules provisioning AWS EC2, VPC, S3, and RDS with remote S3 backend state locking.</p>
+                    <a href="https://github.com/kalyanteja18/terraform-aws-iac" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── BLOGS & CASE STUDIES ─── -->
+        <section class="celinski-scroll-section" id="blogs">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
+                <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Case Studies &amp; Guides</h2>
+                <div class="tag-pill">5 Deep Dives</div>
+            </div>
+            <div class="grid-layout">
+                <div class="haoqi-card">
+                    <div class="tag-pill">ARTIFICIAL INTELLIGENCE</div>
+                    <h3 style="color:var(--text-heading);">1. AIOps vs DevOps vs MLOps vs Agentic AIOps</h3>
+                    <p>Comprehensive guide explaining modern infrastructure operational paradigms and autonomous agentic workflows.</p>
+                    <button class="haoqi-btn" onclick="openBlogModal('1. AIOps vs DevOps vs MLOps: Understanding modern AI infrastructure lifecycles.')"><i class="fas fa-book-open"></i> Read Case Study →</button>
+                </div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">CLOUD COST AUDIT</div>
+                    <h3 style="color:var(--text-heading);">2. Saving ₹18L/Year on AWS Cloud Infrastructure</h3>
+                    <p>Step-by-step breakdown of auditing CloudWatch metrics to locate idle Redis caches and safely decommissioning them.</p>
+                    <button class="haoqi-btn" onclick="openBlogModal('2. AWS Cost Optimization: Auditing CloudWatch telemetry & executing zero-downtime cache deprecation.')"><i class="fas fa-book-open"></i> Read Case Study →</button>
+                </div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">KUBERNETES & GITOPS</div>
+                    <h3 style="color:var(--text-heading);">3. Zero-Downtime Microservice Deployments via ArgoCD</h3>
+                    <p>Declarative GitOps architecture breakdown on EKS cluster management and automated rolling updates.</p>
+                    <button class="haoqi-btn" onclick="openBlogModal('3. GitOps Workflows with ArgoCD and Helm on AWS EKS.')"><i class="fas fa-book-open"></i> Read Case Study →</button>
+                </div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">CLOUD SECURITY</div>
+                    <h3 style="color:var(--text-heading);">4. Hardening Multi-Tenant Access: JWT & RBAC</h3>
+                    <p>Securing multi-tenant SaaS platforms serving 1,000+ users with EC2 security group rules and JWT tokens.</p>
+                    <button class="haoqi-btn" onclick="openBlogModal('4. Production Security Hardening on Multi-tenant AWS Environments.')"><i class="fas fa-book-open"></i> Read Case Study →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── TERMINAL ─── -->
+        <section class="celinski-scroll-section" id="terminal-section">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
+                <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Interactive CLI Shell</h2>
+                <div class="tag-pill">Command Line</div>
+            </div>
+            <div class="terminal-box stagger-child">
+                <div class="terminal-header">
+                    <span style="height:10px; width:10px; background:#ff5f56; border-radius:50%; display:inline-block;"></span>
+                    <span style="height:10px; width:10px; background:#ffbd2e; border-radius:50%; display:inline-block;"></span>
+                    <span style="height:10px; width:10px; background:#27c93f; border-radius:50%; display:inline-block;"></span>
+                    <span style="margin-left:0.5rem;">kalyan@portfolio:~</span>
+                </div>
+                <div class="terminal-body" id="terminal-output">
+                    <div>Type '<span style="color:var(--accent-green);">help</span>' or '<span style="color:var(--accent-green);">ls</span>' to get started.</div>
+                </div>
+                <div style="padding:0.75rem 1.25rem; border-top:1px solid var(--border-color); background:#060911;">
+                    <form onsubmit="handleTerminalCommand(event)" style="display:flex; align-items:center; gap:0.5rem;">
+                        <span style="color:var(--accent-green); font-weight:700;">kalyan@portfolio:~$</span>
+                        <input type="text" id="terminal-input" style="background:transparent; border:none; outline:none; color:#fff; font-family:var(--font-mono); width:100%; font-size:0.82rem;" placeholder="help, about, skills, certs, clear..." autocomplete="off">
+                    </form>
                 </div>
             </div>
         </section>
 
         <!-- FOOTER -->
-        <footer style="border-top:1px solid var(--border-color); padding-top:2rem; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); text-align:center;">
-            © 2026 Gaddam Kalyan Teja · DevOps Engineer
+        <footer style="border-top:1px solid var(--border-color); padding-top:2rem; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted); display:flex; justify-content:space-between;">
+            <div>© 2026 Gaddam Kalyan Teja</div>
+            <div>DevOps &amp; Cloud Engineering Portfolio</div>
         </footer>
 
     </div>
 
-    <!-- ─── LENIS & ANIMATION ENGINE ─── -->
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <!-- ─── BLOG MODAL ─── -->
+    <div class="case-study-modal" id="case-study-modal">
+        <div class="case-study-container">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2 style="color:var(--text-heading);" id="blog-modal-title">Case Study</h2>
+                <button class="haoqi-btn" onclick="closeBlogModal()"><i class="fas fa-times"></i> Close</button>
+            </div>
+            <p id="blog-modal-content" style="color:var(--text-body); font-size:1.05rem; line-height:1.8;"></p>
+        </div>
+    </div>
 
+    <!-- ─── SCRIPT ─── -->
     <script>
-        // 1. FAST & SMOOTH SCROLL (Ben Celinski Preset)
-        const lenis = new Lenis({
-            duration: 0.6, // Fast response (down from slow 1.2s default)
-            easing: (t) => 1 - Math.pow(1 - t, 4), // Fast natural ease-out
-            smoothWheel: true,
-            wheelMultiplier: 1.1, // Faster wheel scrolling speed
-            touchMultiplier: 1.5
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        // 2. SCROLL PROGRESS & PILL BAR
-        const progressBar = document.getElementById('scrollProgressBar');
-        const scrollThumb = document.getElementById('scroll-thumb');
-        const blueprintGrid = document.getElementById('blueprintGrid');
-
-        lenis.on('scroll', (e) => {
-            const scrollTop = e.scroll;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? scrollTop / docHeight : 0;
-
-            // Scroll bar length
-            progressBar.style.width = (progress * 100) + '%';
-
-            // Right scroll pill movement
-            const barHeight = 220;
-            const thumbHeight = 48;
-            scrollThumb.style.transform = `translateY(${progress * (barHeight - thumbHeight)}px)`;
-
-            // Subtle Ben Celinski Background Grid Parallax Movement
-            blueprintGrid.style.transform = `translateY(${scrollTop * 0.15}px)`;
-        });
-
-        // Click on right pill to jump
-        document.getElementById('scrollPillBar').addEventListener('click', (e) => {
-            const rect = e.currentTarget.getBoundingClientRect();
-            const clickY = e.clientY - rect.top;
-            const progress = Math.max(0, Math.min(1, clickY / rect.height));
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            lenis.scrollTo(progress * docHeight);
-        });
-
-        // 3. BEN CELINSKI SCROLL ANIMATION OBSERVER
+        // 1. FAST NATIVE SCROLL OBSERVER (Triggers animations effortlessly)
         const observerOptions = {
-            threshold: 0.15, // Triggers early as soon as section hits screen
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.1,
+            rootMargin: "0px 0px -40px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -532,12 +659,97 @@
 
         document.querySelectorAll('.celinski-scroll-section').forEach(sec => observer.observe(sec));
 
-        // 4. THEME SWITCH
+        // 2. SCROLL PROGRESS TRACKER
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('scrollProgressBar').style.width = progress + '%';
+        });
+
+        // 3. TAB SWITCHER (Renders 30 Certifications)
+        const certificationsData = [
+            "AWS Certified Solutions Architect", "AWS Certified Cloud Practitioner", 
+            "Docker Certified Associate", "Kubernetes CKA Training",
+            "Terraform Associate Certification", "HashiCorp Vault Basics",
+            "Prometheus & Grafana SRE Specialist", "Jenkins CI/CD Pipeline Automation",
+            "ArgoCD GitOps Deployment Mastery", "Linux Systems Administration RedHat",
+            "Python Infrastructure Automation", "Git Version Control & Workflows",
+            "AWS Cloud Security Essentials", "Google Cloud Associate Engineer",
+            "Azure Fundamentals AZ-900", "Cloudflare Network & DNS Specialist",
+            "Bash Shell Scripting Automation", "YAML & Helm Chart Architect",
+            "Networking Protocols & Firewalls", "DevSecOps Vulnerability Management",
+            "Nginx Web Server Optimization", "PostgreSQL Database Administration",
+            "Redis Enterprise Cache Management", "System Architecture & Scalability",
+            "RESTful API & Gateway Management", "CloudWatch Observability & Metrics",
+            "Microservice Containerization", "SaaS Infrastructure Architecture",
+            "AIOps Telemetry Integration", "CI/CD Pipeline Security Hardening"
+        ];
+
+        function populateCertifications() {
+            const certContainer = document.getElementById('tab-cert');
+            certContainer.innerHTML = certificationsData.map((cert, idx) => `
+                <div class="haoqi-card" style="padding:1.25rem;">
+                    <div class="tag-pill">CERTIFICATE #${idx + 1}</div>
+                    <h4 style="color:var(--text-heading); font-size:0.95rem; font-weight:700;">${cert}</h4>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">Verified Credentials</p>
+                </div>
+            `).join('');
+        }
+        populateCertifications();
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-exp').style.display = 'none';
+            document.getElementById('tab-educ').style.display = 'none';
+            document.getElementById('tab-cert').style.display = 'none';
+
+            document.getElementById('btn-' + tab).classList.add('active');
+            document.getElementById('tab-' + tab).style.display = 'grid';
+        }
+
+        // 4. THEME SWITCHER
         function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             document.getElementById('theme-icon').className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // 5. MODALS & TERMINAL
+        function openBlogModal(content) {
+            document.getElementById('blog-modal-content').innerText = content;
+            document.getElementById('case-study-modal').style.display = 'block';
+        }
+        function closeBlogModal() {
+            document.getElementById('case-study-modal').style.display = 'none';
+        }
+
+        function handleTerminalCommand(e) {
+            e.preventDefault();
+            const input = document.getElementById('terminal-input');
+            const output = document.getElementById('terminal-output');
+            const cmd = input.value.trim().toLowerCase();
+            input.value = '';
+
+            let response = '';
+            if (cmd === 'help') {
+                response = 'Available commands: about, skills, certs, clear';
+            } else if (cmd === 'about') {
+                response = 'Gaddam Kalyan Teja - DevOps Engineer with 14 months production experience.';
+            } else if (cmd === 'skills') {
+                response = 'AWS, Kubernetes, Docker, Terraform, Jenkins, ArgoCD, Python, Prometheus, Grafana';
+            } else if (cmd === 'certs') {
+                response = '30 Verified Certifications in Cloud, DevOps, and Automation.';
+            } else if (cmd === 'clear') {
+                output.innerHTML = '';
+                return;
+            } else {
+                response = `Command not found: ${cmd}. Type 'help' for available commands.`;
+            }
+
+            output.innerHTML += `<div><span style="color:var(--accent-green);">$ ${cmd}</span></div><div>${response}</div>`;
+            output.scrollTop = output.scrollHeight;
         }
     </script>
 </body>
