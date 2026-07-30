@@ -12,35 +12,31 @@
 
     <style>
         :root {
-            --bg-main: #f0f2f5;
+            --bg-main: #eef2f5;
             --bg-card: rgba(255, 255, 255, 0.85);
-            --bg-glass: rgba(255, 255, 255, 0.65);
-            --bg-input: #e2e8f0;
-            --grid-line: rgba(0, 0, 0, 0.06);
-            --border-color: rgba(0, 0, 0, 0.12);
-            --text-heading: #0f172a;
-            --text-body: #334155;
+            --bg-glass: rgba(255, 255, 255, 0.7);
+            --grid-line: rgba(0, 0, 0, 0.08);
+            --border-color: rgba(0, 0, 0, 0.15);
+            --text-heading: #090d16;
+            --text-body: #2d3748;
             --text-muted: #64748b;
             --accent-blue: #2563eb;
             --accent-green: #16a34a;
-            --accent-purple: #7c3aed;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
         [data-theme="dark"] {
-            --bg-main: #090a0f;
-            --bg-card: rgba(18, 20, 29, 0.85);
-            --bg-glass: rgba(18, 20, 29, 0.7);
-            --bg-input: #1a1d2d;
-            --grid-line: rgba(255, 255, 255, 0.05);
-            --border-color: rgba(255, 255, 255, 0.12);
+            --bg-main: #06080e;
+            --bg-card: rgba(15, 20, 32, 0.85);
+            --bg-glass: rgba(15, 20, 32, 0.7);
+            --grid-line: rgba(255, 255, 255, 0.06);
+            --border-color: rgba(255, 255, 255, 0.15);
             --text-heading: #f8fafc;
             --text-body: #94a3b8;
             --text-muted: #64748b;
             --accent-blue: #3b82f6;
             --accent-green: #22c55e;
-            --accent-purple: #a855f7;
         }
 
         * {
@@ -59,10 +55,9 @@
             min-height: 100vh;
             overflow-x: hidden;
             transition: background-color 0.4s ease, color 0.4s ease;
-            position: relative;
         }
 
-        /* TECHNICAL GRID BLUEPRINT BACKGROUND */
+        /* BLUEPRINT GRID BACKGROUND */
         .blueprint-grid {
             position: fixed;
             top: 0;
@@ -88,8 +83,8 @@
             z-index: 1;
         }
 
-        /* FLOATING STICKERS LAYER */
-        .stickers-container {
+        /* DRAGGABLE STICKERS */
+        .stickers-layer {
             position: fixed;
             top: 0;
             left: 0;
@@ -97,7 +92,6 @@
             height: 100vh;
             pointer-events: none;
             z-index: 2;
-            overflow: hidden;
         }
 
         .sticker {
@@ -110,15 +104,15 @@
         }
 
         .sticker:hover {
-            transform: scale(1.18) rotate(5deg);
+            transform: scale(1.2) rotate(8deg);
         }
 
         .sticker:active {
             cursor: grabbing;
         }
 
-        /* PAGE CONTENT WRAPPER */
-        .app-wrapper {
+        /* MAIN APP WRAPPER */
+        .app-container {
             position: relative;
             z-index: 3;
             max-width: 1280px;
@@ -126,11 +120,11 @@
             padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 3.5rem;
+            gap: 4rem;
         }
 
-        /* TECHNICAL NAVIGATION BAR */
-        .nav-bar {
+        /* HAOQI HEADER NAV */
+        .haoqi-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -144,143 +138,70 @@
             z-index: 100;
         }
 
-        .brand-logo {
+        .brand-title {
             font-family: var(--font-mono);
-            font-weight: 700;
+            font-weight: 800;
             font-size: 1rem;
             color: var(--text-heading);
             letter-spacing: -0.03em;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             text-decoration: none;
         }
 
-        .nav-links {
+        .nav-items {
             display: flex;
-            align-items: center;
             gap: 1.5rem;
             list-style: none;
         }
 
-        .nav-links a {
+        .nav-items a {
             color: var(--text-body);
             text-decoration: none;
             font-family: var(--font-mono);
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
+        .nav-items a:hover {
             color: var(--accent-blue);
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .action-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-heading);
-            padding: 0.45rem 0.85rem;
-            border-radius: 8px;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
-
-        .action-btn:hover {
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
-            transform: translateY(-1px);
         }
 
         /* HERO SECTION */
-        .hero-section {
-            min-height: 70vh;
+        .hero-banner {
+            min-height: 65vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             position: relative;
-            padding: 2rem 0;
         }
 
-        .hero-title-glitch {
-            font-size: clamp(2.5rem, 6vw, 5.5rem);
+        .hero-title-giant {
+            font-size: clamp(3rem, 7vw, 6rem);
             font-weight: 800;
             color: var(--text-heading);
-            line-height: 1.05;
+            line-height: 1.02;
             letter-spacing: -0.04em;
-            max-width: 900px;
+            max-width: 950px;
             margin-bottom: 1.5rem;
         }
 
-        .hero-title-glitch span {
+        .hero-title-giant span {
             color: var(--accent-blue);
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .hero-bio {
-            font-size: 1.25rem;
-            color: var(--text-body);
-            max-width: 680px;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .hero-meta-row {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* SECTION HEADERS */
-        .section-header {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 1.75rem;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text-heading);
-            letter-spacing: -0.03em;
-        }
-
-        /* GRID CARDS */
-        .cards-grid {
+        /* CARDS GRID */
+        .grid-layout {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
         }
 
-        .glass-card {
+        .haoqi-card {
             background: var(--bg-card);
             backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 1.75rem;
+            padding: 2rem;
             display: flex;
             flex-direction: column;
             gap: 1rem;
@@ -288,89 +209,49 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-card:hover {
+        .haoqi-card:hover {
             border-color: var(--accent-blue);
-            transform: translateY(-3px);
-            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
         }
 
-        .card-tag {
+        .tag-pill {
             font-family: var(--font-mono);
-            font-size: 0.68rem;
+            font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
             color: var(--accent-blue);
             background: rgba(37, 99, 235, 0.1);
-            padding: 0.2rem 0.5rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 6px;
             width: fit-content;
         }
 
-        .glass-card h3 {
-            font-size: 1.2rem;
-            color: var(--text-heading);
-            font-weight: 700;
-        }
-
-        /* PILL TABS */
-        .pill-tabs {
-            display: flex;
-            background: var(--bg-input);
-            border-radius: 12px;
-            padding: 4px;
-            gap: 4px;
-            margin-bottom: 1.5rem;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 0.65rem 1rem;
-            border: none;
-            background: transparent;
-            color: var(--text-muted);
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .tab-btn.active {
+        .haoqi-btn {
             background: var(--bg-card);
+            border: 1px solid var(--border-color);
             color: var(--text-heading);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: fit-content;
+            transition: all 0.2s;
+            text-decoration: none;
         }
 
-        /* TIMELINE */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        .haoqi-btn:hover {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
         }
 
-        .timeline-item {
-            border-left: 2px solid var(--border-color);
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -6px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent-blue);
-        }
-
-        /* EDITORIAL CASE STUDY / BLOG MODAL */
-        .editorial-modal {
+        /* EDITORIAL CASE STUDY MODAL VIEW */
+        .case-study-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -382,17 +263,16 @@
             overflow-y: auto;
         }
 
-        .editorial-container {
+        .case-study-container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 4rem 2rem;
             display: grid;
             grid-template-columns: 240px 1fr;
             gap: 3rem;
-            position: relative;
         }
 
-        .editorial-toc {
+        .case-study-toc {
             position: sticky;
             top: 4rem;
             height: fit-content;
@@ -405,24 +285,23 @@
             padding-right: 1.5rem;
         }
 
-        .editorial-toc a {
+        .case-study-toc a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.2s;
         }
 
-        .editorial-toc a:hover {
+        .case-study-toc a:hover {
             color: var(--text-heading);
         }
 
-        .editorial-content img {
+        .case-study-content img {
             width: 100%;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             margin: 1.5rem 0;
         }
 
-        .code-block {
+        .code-box {
             background: #0d1117;
             color: #7ee787;
             padding: 1.25rem;
@@ -431,62 +310,28 @@
             font-size: 0.82rem;
             overflow-x: auto;
             margin: 1.25rem 0;
-            border: 1px solid var(--border-color);
         }
 
-        /* TERMINAL SHELL */
-        .terminal-box {
-            background: #090d16;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            font-family: var(--font-mono);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .terminal-header {
-            background: #111726;
-            padding: 0.6rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.75rem;
-            color: #64748b;
-        }
-
-        .terminal-body {
-            padding: 1.25rem;
-            min-height: 250px;
-            max-height: 380px;
-            overflow-y: auto;
-            color: #cbd5e1;
-            font-size: 0.82rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        /* COORD FOOTER TRACKER */
+        /* CURSOR COORD TRACKER */
         .coord-tracker {
             position: fixed;
             bottom: 1rem;
             right: 1.5rem;
             font-family: var(--font-mono);
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
             background: var(--bg-glass);
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
+            padding: 0.3rem 0.75rem;
+            border-radius: 8px;
             border: 1px solid var(--border-color);
             pointer-events: none;
             z-index: 100;
         }
 
         @media (max-width: 850px) {
-            .cards-grid { grid-template-columns: 1fr; }
-            .editorial-container { grid-template-columns: 1fr; }
-            .editorial-toc { display: none; }
+            .grid-layout { grid-template-columns: 1fr; }
+            .case-study-container { grid-template-columns: 1fr; }
+            .case-study-toc { display: none; }
         }
     </style>
 </head>
@@ -498,187 +343,91 @@
     <canvas id="hero-3d-canvas"></canvas>
 
     <!-- FLOATING STICKERS LAYER -->
-    <div class="stickers-container" id="stickers-layer">
-        <div class="sticker" style="top: 12%; left: 8%"><img src="https://api.iconify.design/logos:aws.svg" width="48" alt="AWS"></div>
-        <div class="sticker" style="top: 22%; right: 10%"><img src="https://api.iconify.design/logos:kubernetes.svg" width="44" alt="Kubernetes"></div>
-        <div class="sticker" style="top: 65%; left: 5%"><img src="https://api.iconify.design/logos:terraform.svg" width="42" alt="Terraform"></div>
-        <div class="sticker" style="top: 75%; right: 8%"><img src="https://api.iconify.design/logos:docker-icon.svg" width="48" alt="Docker"></div>
-        <div class="sticker" style="top: 45%; right: 4%"><img src="https://api.iconify.design/logos:python.svg" width="40" alt="Python"></div>
+    <div class="stickers-layer">
+        <div class="sticker" style="top: 15%; left: 6%"><img src="https://api.iconify.design/logos:aws.svg" width="52" alt="AWS"></div>
+        <div class="sticker" style="top: 20%; right: 8%"><img src="https://api.iconify.design/logos:kubernetes.svg" width="48" alt="Kubernetes"></div>
+        <div class="sticker" style="top: 60%; left: 4%"><img src="https://api.iconify.design/logos:terraform.svg" width="46" alt="Terraform"></div>
+        <div class="sticker" style="top: 70%; right: 6%"><img src="https://api.iconify.design/logos:docker-icon.svg" width="50" alt="Docker"></div>
     </div>
 
     <!-- MAIN APP CONTENT -->
-    <div class="app-wrapper">
+    <div class="app-container">
 
         <!-- NAV BAR -->
-        <nav class="nav-bar">
-            <a href="#" class="brand-logo">
-                <i class="fas fa-cube" style="color:var(--accent-blue);"></i> GADDAM KALYAN TEJA
-            </a>
+        <nav class="haoqi-nav">
+            <a href="#" class="brand-title"><i class="fas fa-cube" style="color:var(--accent-blue);"></i> GADDAM KALYAN TEJA</a>
 
-            <ul class="nav-links">
+            <ul class="nav-items">
                 <li><a href="#about">About</a></li>
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#blogs">Blogs</a></li>
             </ul>
 
-            <div class="nav-controls">
-                <button class="action-btn" onclick="openSearchModal()"><i class="fas fa-search"></i> <kbd>CTRL+K</kbd></button>
-                <button class="action-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
+            <div style="display:flex; gap:0.5rem;">
+                <button class="haoqi-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i> Theme</button>
             </div>
         </nav>
 
-        <!-- HERO SECTION -->
-        <section class="hero-section" id="about">
-            <div class="card-tag">DevOps &amp; Cloud Engineering</div>
-            <h1 class="hero-title-glitch">Designing &amp; Operating <span>Scalable Cloud Infrastructure.</span></h1>
-            <p class="hero-bio">
-                Junior DevOps Engineer with <strong>14 months</strong> of production experience across Multi-Tenant SaaS systems on AWS, EKS, and CI/CD pipelines. Optimized cloud infrastructure at Athena LMS, saving <strong>₹18 Lakhs/year</strong> by auditing idle services.
+        <!-- HERO BANNER -->
+        <section class="hero-banner" id="about">
+            <div class="tag-pill">DevOps &amp; Cloud Engineering</div>
+            <h1 class="hero-title-giant">I BRING <span>CRAFT &amp; SCALE</span> TO DIGITAL SYSTEMS.</h1>
+            <p style="font-size:1.2rem; max-width:680px; margin-bottom:1.5rem;">
+                Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Saved <strong>₹18L/Year</strong> at Athena LMS.
             </p>
-
-            <div class="hero-meta-row">
-                <div><i class="fas fa-map-marker-alt"></i> India · GMT+5:30</div>
-                <div><i class="fas fa-shield-alt"></i> System Uptime: 99.9%</div>
-                <div><i class="fas fa-terminal"></i> AWS · Kubernetes · Terraform</div>
-            </div>
         </section>
 
-        <!-- RESUME & EXPERIENCE SECTION -->
+        <!-- RESUME SECTION -->
         <section id="resume">
-            <div class="section-header">
-                <h2>Experience &amp; Credentials</h2>
-                <div class="card-tag">Updated 2026</div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
+                <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Resume &amp; Credentials</h2>
+                <div class="tag-pill">Updated 2026</div>
             </div>
 
-            <div class="pill-tabs">
-                <button class="tab-btn active" id="btn-exp" onclick="switchTab('exp')"><i class="fas fa-briefcase"></i> Experience</button>
-                <button class="tab-btn" id="btn-educ" onclick="switchTab('educ')"><i class="fas fa-graduation-cap"></i> Education</button>
-                <button class="tab-btn" id="btn-cert" onclick="switchTab('cert')"><i class="fas fa-award"></i> Certifications (30)</button>
-            </div>
-
-            <div id="tab-exp" class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="glass-card">
-                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                            <div>
-                                <h3>DevOps Engineer Intern</h3>
-                                <div style="color:var(--accent-blue); font-family:var(--font-mono); font-size:0.85rem;">Athena LMS · New Delhi</div>
-                            </div>
-                            <div class="card-tag">NOV 2025 - MAY 2026</div>
-                        </div>
-                        <ul>
-                            <li>Audited Multi-AZ AWS cloud infrastructure, discovering and decommissioning an orphaned Redis cluster to reduce costs by <strong>₹1.5L/month (₹18L/year)</strong>.</li>
-                            <li>Managed multi-tenant SaaS deployment serving <strong>1,000+ users</strong> on AWS using EC2 Auto Scaling, ALB, and CloudFront (OAC).</li>
-                            <li>Audited 150+ Security Group rules and closed 25+ unnecessary open ports to establish zero-trust firewall configurations.</li>
-                        </ul>
-                    </div>
+            <div class="grid-layout">
+                <div class="haoqi-card">
+                    <div class="tag-pill">Athena LMS</div>
+                    <h3>DevOps Engineer Intern</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">Nov 2025 – May 2026 · New Delhi</p>
+                    <ul>
+                        <li>Decommissioned orphaned Redis cache, saving <strong>₹1.5L/Month (₹18L/Year)</strong>.</li>
+                        <li>Managed Multi-Tenant SaaS infrastructure for <strong>1,000+ active users</strong> on AWS.</li>
+                    </ul>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="glass-card">
-                        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                            <div>
-                                <h3>DevOps Engineer Intern</h3>
-                                <div style="color:var(--accent-blue); font-family:var(--font-mono); font-size:0.85rem;">Eastri · Mumbai (Remote)</div>
-                            </div>
-                            <div class="card-tag">MAY 2025 - OCT 2025</div>
-                        </div>
-                        <ul>
-                            <li>Provisioned AWS infrastructure using reusable Terraform IaC modules, reducing setup time from 2 hours to 15 minutes.</li>
-                            <li>Troubleshot production Kubernetes workloads, managing YAML manifests, ConfigMaps, Secrets, Ingress, and HPA.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-educ" class="timeline" style="display:none;">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="glass-card">
-                        <h3>B.Tech in CSE (AI &amp; ML Specialization)</h3>
-                        <div style="color:var(--accent-blue); font-family:var(--font-mono); font-size:0.85rem;">Sir Padampat Singhania University · Udaipur, Rajasthan</div>
-                        <p style="font-family:var(--font-mono); font-size:0.78rem;">2021 – 2026 · Graduated May 2026</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="tab-cert" class="cards-grid" style="display:none;">
-                <!-- Dynamically populated 30 certificates -->
-            </div>
-        </section>
-
-        <!-- PROJECTS SECTION -->
-        <section id="projects">
-            <div class="section-header">
-                <h2>Selected Production Projects</h2>
-                <div class="card-tag">GitHub Verified</div>
-            </div>
-
-            <div class="cards-grid">
-                <div class="glass-card">
-                    <div class="card-category-tag">OBSERVABILITY</div>
-                    <h3>monitoring-prometheus-grafana</h3>
-                    <p>Instrumented Flask application with Prometheus metrics &amp; Grafana dashboards for p95 latency, error rates, and resource utilization.</p>
-                    <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="action-btn" style="width:fit-content;"><i class="fab fa-github"></i> Repository →</a>
-                </div>
-
-                <div class="glass-card">
-                    <div class="card-category-tag">GITOPS &amp; K8S</div>
-                    <h3>gitops-argocd-kubernetes</h3>
-                    <p>GitOps continuous delivery pipeline using ArgoCD and Kubernetes cluster manifests for declarative application state management.</p>
-                    <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="action-btn" style="width:fit-content;"><i class="fab fa-github"></i> Repository →</a>
+                <div class="haoqi-card">
+                    <div class="tag-pill">Eastri</div>
+                    <h3>DevOps Engineer Intern</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">May 2025 – Oct 2025 · Mumbai (Remote)</p>
+                    <ul>
+                        <li>Provisioned AWS infrastructure using reusable Terraform IaC modules.</li>
+                        <li>Managed Kubernetes YAML manifests, ConfigMaps, Ingress, and HPA.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- BLOGS SECTION -->
+        <!-- BLOGS & CASE STUDIES SECTION -->
         <section id="blogs">
-            <div class="section-header">
-                <h2>Technical Case Studies &amp; Blogs</h2>
-                <div class="card-tag">Editorial Breakdown</div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
+                <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Case Studies &amp; Blogs</h2>
+                <div class="tag-pill">Editorial Breakdown</div>
             </div>
 
-            <div class="cards-grid">
-                <div class="glass-card">
-                    <div class="card-category-tag">ARTIFICIAL INTELLIGENCE</div>
+            <div class="grid-layout">
+                <div class="haoqi-card">
+                    <div class="tag-pill">ARTIFICIAL INTELLIGENCE</div>
                     <h3>Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h3>
                     <p>Comprehensive guide comparing modern ops paradigms: software CI/CD (DevOps), model lifecycles (MLOps), automated telemetry (AIOps), and autonomous healing agents.</p>
-                    <button class="action-btn" onclick="openBlogModal('blog1')" style="width:fit-content;"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
+                    <button class="haoqi-btn" onclick="openBlogModal('blog1')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
                 </div>
 
-                <div class="glass-card">
-                    <div class="card-category-tag">CLOUD COST AUDIT</div>
+                <div class="haoqi-card">
+                    <div class="tag-pill">CLOUD COST AUDIT</div>
                     <h3>AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h3>
                     <p>Engineering breakdown of auditing CloudWatch metrics to discover idle Redis instances, closing exposed ports, and executing zero-downtime cache decommissioning.</p>
-                    <button class="action-btn" onclick="openBlogModal('blog2')" style="width:fit-content;"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- TERMINAL SECTION -->
-        <section id="terminal-section">
-            <div class="section-header">
-                <h2>Interactive CLI Shell</h2>
-                <div class="card-tag">Command Line</div>
-            </div>
-
-            <div class="terminal-box">
-                <div class="terminal-header">
-                    <span class="dot dot-red"></span>
-                    <span class="dot dot-yellow"></span>
-                    <span class="dot dot-green"></span>
-                    <span>kalyan@portfolio:~</span>
-                </div>
-                <div class="terminal-body" id="terminal-output">
-                    <div>Type '<span style="color:var(--accent-green);">help</span>' for available CLI commands.</div>
-                </div>
-                <div style="padding: 0.75rem 1.25rem; border-top:1px solid var(--border-color); background:#060911;">
-                    <form onsubmit="handleTerminalCommand(event)" style="display:flex; align-items:center; gap:0.5rem;">
-                        <span style="color:var(--accent-green); font-weight:700;">kalyan@portfolio:~$</span>
-                        <input type="text" id="terminal-input" style="background:transparent; border:none; outline:none; color:#fff; font-family:var(--font-mono); width:100%; font-size:0.82rem;" placeholder="help, ls, about, certs, blogs, clear..." autocomplete="off">
-                    </form>
+                    <button class="haoqi-btn" onclick="openBlogModal('blog2')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
                 </div>
             </div>
         </section>
@@ -686,7 +435,7 @@
         <!-- FOOTER -->
         <footer style="border-top:1px solid var(--border-color); padding-top:2rem; display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">
             <div>© 2026 Gaddam Kalyan Teja</div>
-            <div>Designed with HAOQI-inspired WebGL Glass &amp; Engineering Grid</div>
+            <div>HAOQI.DESIGN Inspired Glass &amp; Grid Design</div>
         </footer>
 
     </div>
@@ -694,13 +443,13 @@
     <!-- COORD TRACKER -->
     <div class="coord-tracker" id="coord-tracker">0000 X 0000 Y</div>
 
-    <!-- EDITORIAL CASE STUDY / BLOG MODAL -->
-    <div class="editorial-modal" id="editorial-modal">
+    <!-- EDITORIAL CASE STUDY MODAL -->
+    <div class="case-study-modal" id="case-study-modal">
         <div style="position:fixed; top:2rem; right:2rem; z-index:1001;">
-            <button class="action-btn" onclick="closeBlogModal()"><i class="fas fa-times"></i> Close Case Study</button>
+            <button class="haoqi-btn" onclick="closeBlogModal()"><i class="fas fa-times"></i> Close Case Study</button>
         </div>
-        <div class="editorial-container">
-            <div class="editorial-toc">
+        <div class="case-study-container">
+            <div class="case-study-toc">
                 <strong style="color:var(--text-heading);">TABLE OF CONTENTS</strong>
                 <a href="#toc-1">1. Overview &amp; Definition</a>
                 <a href="#toc-2">2. System Architecture</a>
@@ -708,19 +457,11 @@
                 <a href="#toc-4">4. Production Use Cases</a>
                 <a href="#toc-5">5. Learning Roadmap</a>
             </div>
-            <div class="editorial-content" id="editorial-modal-body"></div>
+            <div class="case-study-content" id="case-study-body"></div>
         </div>
     </div>
 
-    <!-- FULLSCREEN CERTIFICATE IMAGE MODAL -->
-    <div class="editorial-modal" id="cert-modal" style="display:none; align-items:center; justify-content:center; background:rgba(0,0,0,0.85);">
-        <div style="position:relative; max-width:90%; max-height:90vh; background:var(--bg-card); padding:1rem; border-radius:12px; border:1px solid var(--border-color);">
-            <button class="action-btn" onclick="closeCertModal()" style="position:absolute; top:-12px; right:-12px; border-radius:50%; width:36px; height:32px; padding:0;"><i class="fas fa-times"></i></button>
-            <img id="cert-modal-img" src="" alt="Certificate View" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:8px;">
-        </div>
-    </div>
-
-    <!-- LIBRARIES FOR 3D CANVAS -->
+    <!-- THREE.JS LIBRARY -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
@@ -732,7 +473,7 @@
             coordTracker.textContent = `${x} X ${y} Y`;
         });
 
-        // 2. THREE.JS INFLATED LIQUID-METALLIC 3D TEXT/MESH SCENE
+        // 2. THREE.JS GLOSSY LIQUID-METALLIC 3D MESH SCENE
         const canvas = document.getElementById('hero-3d-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -742,7 +483,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Create Metallic Inflated Glass Geometry
         const torusGeo = new THREE.TorusKnotGeometry(1.8, 0.6, 128, 32);
         const metallicMat = new THREE.MeshPhysicalMaterial({
             color: 0x2563eb,
@@ -750,19 +490,17 @@
             roughness: 0.1,
             clearcoat: 1.0,
             clearcoatRoughness: 0.1,
-            reflectivity: 1.0,
-            wireframe: false
+            reflectivity: 1.0
         });
 
         const liquidMesh = new THREE.Mesh(torusGeo, metallicMat);
         scene.add(liquidMesh);
 
-        // Lighting
         const light1 = new THREE.DirectionalLight(0xffffff, 2);
         light1.position.set(5, 5, 5);
         scene.add(light1);
 
-        const light2 = new THREE.PointLight(0xa855f7, 3);
+        const light2 = new THREE.PointLight(0x7c3aed, 3);
         light2.position.set(-5, -5, -2);
         scene.add(light2);
 
@@ -790,66 +528,9 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // 3. MASTER CERTIFICATES LIST (30 Items)
-        const certificatesList = [
-            { id: "c1", title: "Python Beginner to Advanced", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
-            { id: "c2", title: "Ultimate YAML Course", fileId: "1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" },
-            { id: "c3", title: "Docker Swarm and Docker Compose", fileId: "1mt7dY7Wcvg2Dz1pRAkU9ypzmVVc2KNTU" },
-            { id: "c4", title: "AWS Cloud Practitioner 2025", fileId: "1xHmE4jm3GBSlu9O8XxXdXLH0Wp0QLyuc" },
-            { id: "c5", title: "Secure Mongo DB Self Managed: authN & auth Z", fileId: "1DfS5u10_C9oPAggehDFLHT97x6vpILcc" },
-            { id: "c6", title: "Secure Mongo DB authN & auth Z", fileId: "146OT1t8aBAsVtDrTKmZSFAjUsK8DnslO" },
-            { id: "c7", title: "Search Fundamentals", fileId: "1-T9WH_mfPmCsjWTPcAVko8JybY25NKbF" },
-            { id: "c8", title: "Monitoring Tooling", fileId: "1XqP62eSwwp7PxXYCVQ7R8Ce1IgPwXLhY" },
-            { id: "c9", title: "Indexing Designing Fundamentals", fileId: "14tRh7KawBc7IGNZonMcYDucZjHPW5VJ7" },
-            { id: "c10", title: "Fundamentals of Data Transformation", fileId: "1bGSJGOWlbnFHVEYDJXbovXALPEEdk5tm" },
-            { id: "c11", title: "Relational to Documental Model", fileId: "1Qdv6FUOeHnZsDrJ2prGdUKBR6DYo93qX" },
-            { id: "c12", title: "CRUD Operations", fileId: "1hTj_5KfAnIlueajIB4LNGFA1RINfsBsD" },
-            { id: "c13", title: "RAG with Mongo DB", fileId: "1TXez349ytdPcDHjLcY0ht-Nyt-xWpQXP" },
-            { id: "c14", title: "Vector Search Fundamentals", fileId: "1kmDRac2dzsqrAnXeiIB8MxmTOYu_CQAu" },
-            { id: "c15", title: "AI Agents with Mongo DB", fileId: "1wvDY71r_WuTg4y85bGHgDJVjDNGYusJM" },
-            { id: "c16", title: "AI and Innovation", fileId: "18rDHPmjlR2eAW4v2D-WPeq_hTA6CkJAm" },
-            { id: "c17", title: "CISCO Python 1", fileId: "1oxd1_IMxB-85RstI4pXSg9SUCNo1yesV" },
-            { id: "c18", title: "Mongo DB Overview", fileId: "1jFrIfy1TXYm6GVVcn77y_tPqgcS3N4mP" },
-            { id: "c19", title: "CISCO Python 2", fileId: "1Nxw9WJ_YheHJltbFBjshCuT0iFMVOEJg" },
-            { id: "c20", title: "Using Voyage Models with Mongo DB", fileId: "1WfJMWAEQYH8VMDfMgYr5NB1np_Gj3B0p" },
-            { id: "c21", title: "Observability with AI Agents", fileId: "1O3pjuPyVHjZFFWiW-Q2VFETkd-5tgTWv" },
-            { id: "c22", title: "Mongo DB Encryption at Rest with BYOK", fileId: "1F-fTUSjf9pHgAMbi8mjou2n_ujA6ePkL" },
-            { id: "c23", title: "Building an App with Code Agents and Mongo DB", fileId: "117u_PXqM5KCDyBpssXDA4e1WtBmGBSO1" },
-            { id: "c24", title: "Introduction to Gen AI (AWS)", fileId: "1LWxL4wrp1WdVow9mv02R0-_XBJYzE_uz" },
-            { id: "c25", title: "AI Chatbots, RAG, & Governance with Data Workflows", fileId: "1xySv7E3IkkqQoNiEkJaSXQYTjWkAI_M1" },
-            { id: "c26", title: "Cloud Computing 101 (AWS)", fileId: "13gqEUWnDUQWJIAAlGlp-YHJVusI4kjAS" },
-            { id: "c27", title: "Git and GitHub MasterClass: Git Workflow, Commands", fileId: "1XBWxeMCt1Dn-xpF60AxOK5roiHBitqyN" },
-            { id: "c28", title: "PostgreSQL Bootcamp : Complete Beginner to Advanced Course", fileId: "1UbwmZ0G0mEe2MQvVNyA7wM3Iqq_TcgXi" },
-            { id: "c29", title: "DevOps MasterClass: Terraform Kubernetes Ansible Docker", fileId: "1QWGWot_cFSNF06kqV5qTkvMYcLglF8e5" },
-            { id: "c30", title: "Docker Kubernetes MasterClass: DevOps from Scratch", fileId: "1sRzh6kMgVDBMAtY_8BpB5B3MGmpL5ZAz" }
-        ];
-
-        function renderCertificates() {
-            const certGrid = document.getElementById('tab-cert');
-            if (!certGrid) return;
-            certGrid.innerHTML = '';
-
-            certificatesList.forEach(cert => {
-                const card = document.createElement('div');
-                card.className = 'glass-card';
-                card.innerHTML = `
-                    <div class="cert-img-frame">
-                        <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" id="cert_${cert.id}" onerror="this.src='https://via.placeholder.com/600x380/0f172a/ffffff?text=${encodeURIComponent(cert.title)}'">
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3 style="font-size:0.95rem;">${cert.title}</h3>
-                        <button class="action-btn" onclick="openCertModal('https://lh3.googleusercontent.com/d/${cert.fileId}')"><i class="fas fa-expand"></i></button>
-                    </div>
-                `;
-                certGrid.appendChild(card);
-            });
-        }
-        window.addEventListener('DOMContentLoaded', renderCertificates);
-
-        // 4. BLOGS EDITORIAL DATABASE
+        // 3. BLOGS EDITORIAL DATABASE
         const blogsData = {
             blog1: {
-                title: "Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps",
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h1>
                     <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">July 2026 · By Gaddam Kalyan Teja · 10 min read</div>
@@ -866,7 +547,7 @@
                     </ul>
 
                     <h2 id="toc-2">2. System Architecture</h2>
-                    <div class="code-block">
+                    <div class="code-box">
 DevOps (CI/CD) ➔ MLOps (Model Versioning) ➔ AIOps (Telemetry Analysis) ➔ Agentic AIOps (Autonomous Healing)
                     </div>
 
@@ -877,11 +558,10 @@ DevOps (CI/CD) ➔ MLOps (Model Versioning) ➔ AIOps (Telemetry Analysis) ➔ A
                     <p>Used extensively in multi-tenant SaaS environments to prevent noisy-neighbor issues without requiring manual engineering intervention during off-hours.</p>
 
                     <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-block">Linux Admin ➔ Docker & K8s ➔ Terraform ➔ Python Automation ➔ Prometheus/Grafana ➔ MLOps ➔ Agentic LLM Tool Calling</div>
+                    <div class="code-box">Linux Admin ➔ Docker & K8s ➔ Terraform ➔ Python Automation ➔ Prometheus/Grafana ➔ MLOps ➔ Agentic LLM Tool Calling</div>
                 `
             },
             blog2: {
-                title: "AWS Cost Optimization: Auditing Unused Caches & Saving ₹18L/Year",
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h1>
                     <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">May 2026 · By Gaddam Kalyan Teja · 8 min read</div>
@@ -893,27 +573,11 @@ DevOps (CI/CD) ➔ MLOps (Model Versioning) ➔ AIOps (Telemetry Analysis) ➔ A
 
                     <h2 id="toc-2">2. Case Study: Athena LMS Redis Discovery</h2>
                     <p>At Athena LMS, inspecting CloudWatch metrics revealed an unattached ElastiCache Redis cluster running with zero active connections, generating ₹1.5 Lakhs in recurring monthly charges.</p>
-
-                    <h2 id="toc-3">3. Step-by-Step Execution</h2>
-                    <div class="code-block">
-# AWS CLI command to verify zero connections
-aws cloudwatch get-metric-statistics --namespace AWS/ElastiCache --metric-name CurrConnections --dimensions Name=CacheClusterId,Value=athena-idle-redis --start-time 2026-05-01T00:00:00Z --end-time 2026-05-15T00:00:00Z --period 86400 --statistics Average
-                    </div>
                 `
             }
         };
 
-        // 5. INTERACTIVE CONTROLS
-        function switchTab(tab) {
-            document.getElementById('tab-exp').style.display = tab === 'exp' ? 'flex' : 'none';
-            document.getElementById('tab-educ').style.display = tab === 'educ' ? 'flex' : 'none';
-            document.getElementById('tab-cert').style.display = tab === 'cert' ? 'grid' : 'none';
-
-            document.getElementById('btn-exp').classList.toggle('active', tab === 'exp');
-            document.getElementById('btn-educ').classList.toggle('active', tab === 'educ');
-            document.getElementById('btn-cert').classList.toggle('active', tab === 'cert');
-        }
-
+        // 4. CONTROLS
         function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
@@ -923,63 +587,13 @@ aws cloudwatch get-metric-statistics --namespace AWS/ElastiCache --metric-name C
 
         function openBlogModal(id) {
             if (blogsData[id]) {
-                document.getElementById('editorial-modal-body').innerHTML = blogsData[id].content;
-                document.getElementById('editorial-modal').style.display = 'block';
+                document.getElementById('case-study-body').innerHTML = blogsData[id].content;
+                document.getElementById('case-study-modal').style.display = 'block';
             }
         }
 
         function closeBlogModal() {
-            document.getElementById('editorial-modal').style.display = 'none';
-        }
-
-        function openCertModal(url) {
-            document.getElementById('cert-modal-img').src = url;
-            document.getElementById('cert-modal').style.display = 'flex';
-        }
-
-        function closeCertModal() {
-            document.getElementById('cert-modal').style.display = 'none';
-        }
-
-        // 6. TERMINAL HANDLER
-        function handleTerminalCommand(e) {
-            e.preventDefault();
-            const input = document.getElementById('terminal-input');
-            const output = document.getElementById('terminal-output');
-            const cmd = input.value.trim().toLowerCase();
-            if (!cmd) return;
-
-            const line = document.createElement('div');
-            line.innerHTML = `<span style="color:var(--accent-green);">kalyan@portfolio:~$</span> ${cmd}`;
-            output.appendChild(line);
-
-            const res = document.createElement('div');
-            res.style.color = '#94a3b8';
-
-            switch (cmd) {
-                case 'help':
-                    res.innerHTML = 'Commands: about, certs, blogs, projects, help, clear';
-                    break;
-                case 'about':
-                    res.innerHTML = 'Gaddam Kalyan Teja | DevOps & Cloud Engineer Intern | AWS, EKS, Terraform, CI/CD';
-                    break;
-                case 'certs':
-                    switchTab('cert');
-                    res.innerHTML = 'Switched to Certifications tab (30 total verified credentials).';
-                    break;
-                case 'blogs':
-                    res.innerHTML = 'Articles: 1. AIOps vs DevOps | 2. AWS Cost Optimization';
-                    break;
-                case 'clear':
-                    output.innerHTML = '';
-                    input.value = '';
-                    return;
-                default:
-                    res.innerHTML = `Command not found: ${cmd}. Type 'help' for options.`;
-            }
-            output.appendChild(res);
-            input.value = '';
-            output.scrollTop = output.scrollHeight;
+            document.getElementById('case-study-modal').style.display = 'none';
         }
     </script>
 </body>
