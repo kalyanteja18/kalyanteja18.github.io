@@ -21,7 +21,7 @@
             --text-body: #2d3748;
             --text-muted: #64748b;
             --accent-blue: #2563eb;
-            --accent-green: #22c55e;
+            --accent-green: #16a34a;
             --accent-purple: #7c3aed;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -148,6 +148,18 @@
             gap: 4.5rem;
         }
 
+        /* SCROLL REVEAL ANIMATIONS */
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* NAV BAR */
         .haoqi-nav {
             display: flex;
@@ -254,9 +266,9 @@
         .hero-subtext {
             font-size: 1.2rem;
             color: var(--text-body);
-            max-width: 720px;
+            max-width: 800px;
             margin-bottom: 2rem;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         /* GRID LAYOUT & CARDS */
@@ -573,11 +585,11 @@
         </nav>
 
         <!-- HERO BANNER -->
-        <section class="hero-banner" id="about">
+        <section class="hero-banner reveal-section" id="about">
             <div class="tag-pill">DevOps &amp; Cloud Engineering</div>
             <h1 class="hero-title-giant">I AUTOMATE, SCALE &amp; SECURE <span>CLOUD INFRASTRUCTURE.</span></h1>
             <p class="hero-subtext">
-                Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Saved <strong>₹18L/Year</strong> at Athena LMS by auditing idle cloud resources.
+                Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Discovered and decommissioned an unused Redis cache costing <strong>₹1.5L/month</strong> within 2 months at Athena LMS, driving an annual savings of <strong>₹18 Lakhs/year</strong>. Experienced in automating AWS EC2, S3, ALB, CloudFront, EKS deployments, and Prometheus/Grafana SRE observability.
             </p>
 
             <div style="display:flex; gap:1rem; flex-wrap:wrap;">
@@ -586,13 +598,16 @@
                 </a>
                 <!-- DIRECT GMAIL DRAFT REDIRECT -->
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kalyanteja18@gmail.com" target="_blank" class="haoqi-btn"><i class="far fa-envelope"></i> Send Email Direct</a>
-                <a href="https://www.linkedin.com/in/kalyan-teja-gaddam/" target="_blank" class="haoqi-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                <!-- TWITTER & INSTAGRAM ADDED NEXT TO GITHUB -->
+                <a href="https://x.com/KALYANT06423430" target="_blank" class="haoqi-btn"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+                <a href="https://www.instagram.com/kalyantejagaddam/?hl=en" target="_blank" class="haoqi-btn"><i class="fab fa-instagram"></i> Instagram</a>
                 <a href="https://github.com/kalyanteja18" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://www.linkedin.com/in/kalyan-teja-gaddam/" target="_blank" class="haoqi-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
             </div>
         </section>
 
         <!-- RESUME & CREDENTIALS SECTION -->
-        <section id="resume">
+        <section class="reveal-section" id="resume">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Resume &amp; Experience</h2>
                 <div class="tag-pill">30 Verified Certifications</div>
@@ -651,7 +666,7 @@
         </section>
 
         <!-- PROJECTS SECTION -->
-        <section id="projects">
+        <section class="reveal-section" id="projects">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Projects</h2>
                 <div class="tag-pill">6 Repositories</div>
@@ -703,7 +718,7 @@
         </section>
 
         <!-- BLOGS SECTION -->
-        <section id="blogs">
+        <section class="reveal-section" id="blogs">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Case Studies &amp; Technical Guides</h2>
                 <div class="tag-pill">5 Deep Dive Guides</div>
@@ -748,7 +763,7 @@
         </section>
 
         <!-- TERMINAL SHELL SECTION -->
-        <section id="terminal-section">
+        <section class="reveal-section" id="terminal-section">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Interactive CLI Shell</h2>
                 <div class="tag-pill">Command Line</div>
@@ -776,7 +791,7 @@
         <!-- FOOTER -->
         <footer style="border-top:1px solid var(--border-color); padding-top:2rem; display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">
             <div>© 2026 Gaddam Kalyan Teja</div>
-            <div>GMT+5:30 · Systems Operational</div>
+            <div>DevOps &amp; Cloud Engineering Portfolio</div>
         </footer>
 
     </div>
@@ -825,7 +840,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
-        // 1. CURSOR COORD TRACKER & SCROLL THUMB TRACKING
+        // 1. CURSOR COORD TRACKER, RETRO DUST & SCROLL ANIMATION OBSERVER
         const coordTracker = document.getElementById('coord-tracker');
         const scrollThumb = document.getElementById('scroll-thumb');
 
@@ -834,7 +849,6 @@
             const y = String(e.clientY).padStart(4, '0');
             coordTracker.textContent = `${x} X ${y} Y`;
 
-            // SPAWN GREEN RETRO PIXEL DUST
             if (Math.random() > 0.4) {
                 const pixel = document.createElement('div');
                 pixel.className = 'pixel-block';
@@ -855,6 +869,17 @@
             const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
             scrollThumb.style.transform = `translateY(${scrollPercent * 180}px)`;
         });
+
+        // Intersection Observer for Smooth Section Scroll Transitions
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal-section').forEach(sec => observer.observe(sec));
 
         // 2. THREE.JS ELASTIC JELLY MESH 3D SCENE
         const canvas = document.getElementById('hero-3d-canvas');
@@ -895,22 +920,14 @@
             mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         });
 
-        window.addEventListener('mousedown', () => {
-            scaleTarget = 1.35; // Jelly Stretch Effect on Click
-        });
-
-        window.addEventListener('mouseup', () => {
-            scaleTarget = 1.0;
-        });
+        window.addEventListener('mousedown', () => { scaleTarget = 1.35; });
+        window.addEventListener('mouseup', () => { scaleTarget = 1.0; });
 
         function animate3D() {
             requestAnimationFrame(animate3D);
-
-            // Jelly deformation and elastic rotation
             liquidMesh.rotation.x += 0.003 + mouseY * 0.01;
             liquidMesh.rotation.y += 0.005 + mouseX * 0.01;
 
-            // Elastic scale spring interpolation
             liquidMesh.scale.x += (scaleTarget - liquidMesh.scale.x) * 0.1;
             liquidMesh.scale.y += (scaleTarget - liquidMesh.scale.y) * 0.1;
             liquidMesh.scale.z += (scaleTarget - liquidMesh.scale.z) * 0.1;
@@ -925,30 +942,39 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // 3. WEB AUDIO SYNTHESIZER FOR BACKGROUND MUSIC
+        // 3. RELIABLE MULTI-TONE WEB AUDIO SYNTHESIZER
         let audioCtx = null;
         let isPlaying = false;
-        let oscillator = null;
+        let activeNodes = [];
 
         function toggleAudio() {
             const btn = document.getElementById('sound-btn');
             if (!isPlaying) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                oscillator = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-
-                oscillator.type = 'sine';
-                oscillator.frequency.setValueAtTime(110, audioCtx.currentTime); // Low smooth ambient hum
-                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-
-                oscillator.connect(gain);
-                gain.connect(audioCtx.destination);
-                oscillator.start();
+                
+                // Polyphonic ambient chord frequencies (A Major 9 Ambient Pad)
+                const freqs = [110.00, 164.81, 220.00, 277.18, 329.63];
+                
+                freqs.forEach(f => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(f, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
+                    
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    
+                    activeNodes.push(osc);
+                });
 
                 isPlaying = true;
                 btn.innerHTML = '<i class="fas fa-volume-up"></i> SOUND[\/]';
             } else {
-                if (oscillator) oscillator.stop();
+                activeNodes.forEach(n => n.stop());
+                activeNodes = [];
                 isPlaying = false;
                 btn.innerHTML = '<i class="fas fa-volume-mute"></i> SOUND[\/]';
             }
@@ -1010,126 +1036,164 @@
         }
         window.addEventListener('DOMContentLoaded', renderCertificates);
 
-        // 5. BLOGS EDITORIAL DATABASE (ALL 5 BLOGS INCLUDED)
+        // 5. BLOGS EDITORIAL DATABASE (5 EXTENDED IN-DEPTH GUIDES)
         const blogsData = {
             blog1: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">July 2026 · By Gaddam Kalyan Teja · 10 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">July 2026 · By Gaddam Kalyan Teja · 12 min read</div>
 
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="AI Operations">
 
                     <h2 id="toc-1">1. Overview &amp; Definition</h2>
                     <p>Modern software delivery has transformed from monolithic deployments to automated cloud pipelines. Understanding operational paradigms is essential for building scalable systems:</p>
                     <ul>
-                        <li><strong>DevOps</strong>: Automates code deployment and infrastructure provisioning using CI/CD and IaC.</li>
-                        <li><strong>MLOps</strong>: Manages machine learning model training, dataset versioning, and feature stores.</li>
-                        <li><strong>AIOps</strong>: Analyzes real-time cloud telemetry (logs, metrics) to detect anomalies.</li>
-                        <li><strong>Agentic AIOps</strong>: Deploys autonomous LLM agents that execute corrective runbooks and self-heal production failures.</li>
+                        <li><strong>DevOps</strong>: Merges software development and IT operations through automated CI/CD and Infrastructure as Code (IaC).</li>
+                        <li><strong>MLOps</strong>: Extends DevOps principles to machine learning model training, dataset versioning, feature stores, and model registries.</li>
+                        <li><strong>AIOps</strong>: Uses machine learning algorithms to process real-time cloud telemetry (logs, metrics, traces) for proactive anomaly detection.</li>
+                        <li><strong>Agentic AIOps</strong>: Represents autonomous system remediation—deploying self-directed LLM agents equipped with tool-calling capabilities to perform root-cause analysis and execute corrective runbooks.</li>
                     </ul>
 
                     <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
                     <div class="code-box">
-DevOps (CI/CD) ➔ MLOps (Model Versioning) ➔ AIOps (Telemetry Analysis) ➔ Agentic AIOps (Autonomous Healing)
+[DevOps Pipeline] ➔ CI/CD Automation ➔ Terraform Provisioning
+       ↓
+[MLOps Platform]  ➔ Model Versioning ➔ Feature Store Registry
+       ↓
+[AIOps Engine]    ➔ CloudWatch / Prometheus Telemetry ➔ Anomaly Correlation
+       ↓
+[Agentic AIOps]   ➔ LLM Tool Calling ➔ kubectl Remediation ➔ Incident Resolved
                     </div>
 
                     <h2 id="toc-3">3. Step-by-Step Execution</h2>
-                    <p>When an incident occurs in a Kubernetes cluster, an Autonomous AI Agent inspects pod logs using <code>kubectl logs</code>, identifies memory exhaustion, automatically triggers a pod restart, and logs the RCA ticket.</p>
+                    <p>When an incident occurs in an EKS cluster, an Autonomous AI Agent executes the following workflow:</p>
+                    <ol>
+                        <li>Interprets Prometheus PagerDuty webhook alert payload indicating high HTTP 5xx error rate.</li>
+                        <li>Runs <code>kubectl logs -n production -l app=payment-service --tail=100</code> to extract stack traces.</li>
+                        <li>Identifies OOMKilled condition on active pods.</li>
+                        <li>Patches deployment manifest memory limits via <code>kubectl scale deployment payment-service --replicas=5</code>.</li>
+                        <li>Posts post-mortem incident summary directly to Slack channels.</li>
+                    </ol>
 
                     <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Used extensively in multi-tenant SaaS environments to prevent noisy-neighbor issues without requiring manual engineering intervention during off-hours.</p>
+                    <p>Enables zero-touch incident remediation across multi-tenant SaaS environments serving 1,000+ active users without requiring manual engineering wakeups during off-hours.</p>
 
                     <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">Linux Admin ➔ Docker & K8s ➔ Terraform ➔ Python Automation ➔ Prometheus/Grafana ➔ MLOps ➔ Agentic LLM Tool Calling</div>
+                    <div class="code-box">Linux Administration ➔ Docker & K8s ➔ Terraform IaC ➔ Python Automation ➔ Prometheus/Grafana ➔ MLOps (Kubeflow) ➔ Agentic LLM Tool Calling</div>
                 `
             },
             blog2: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">May 2026 · By Gaddam Kalyan Teja · 8 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">May 2026 · By Gaddam Kalyan Teja · 10 min read</div>
 
                     <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Cloud Cost Optimization">
 
                     <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>Unmonitored cloud resources create ongoing financial drain. Cloud cost governance establishes continuous visibility over infrastructure expenditures.</p>
+                    <p>Unmonitored cloud resources cause severe financial drift. Establishing cost governance frameworks ensures maximum operational ROI while eliminating orphaned infrastructure.</p>
 
                     <h2 id="toc-2">2. Case Study: Athena LMS Redis Discovery</h2>
-                    <p>At Athena LMS, inspecting CloudWatch metrics revealed an unattached ElastiCache Redis cluster running with zero active connections, generating ₹1.5 Lakhs in recurring monthly charges.</p>
+                    <p>Within two months of onboarding at Athena LMS, inspecting CloudWatch metrics revealed an unattached ElastiCache Redis cluster running with zero active connections, generating ₹1.5 Lakhs in recurring monthly charges since August 2025.</p>
 
                     <h2 id="toc-3">3. Step-by-Step Execution</h2>
                     <div class="code-box">
-# AWS CLI command to verify zero active connections
-aws cloudwatch get-metric-statistics --namespace AWS/ElastiCache --metric-name CurrConnections --dimensions Name=CacheClusterId,Value=athena-idle-redis --start-time 2026-05-01T00:00:00Z --end-time 2026-05-15T00:00:00Z --period 86400 --statistics Average
+# Step 1: Query CloudWatch metrics for idle ElastiCache Redis clusters
+aws cloudwatch get-metric-statistics \
+    --namespace AWS/ElastiCache \
+    --metric-name CurrConnections \
+    --dimensions Name=CacheClusterId,Value=athena-idle-redis \
+    --start-time 2026-05-01T00:00:00Z \
+    --end-time 2026-05-15T00:00:00Z \
+    --period 86400 \
+    --statistics Average
+
+# Step 2: Safely create final manual snapshot prior to deletion
+aws elasticache create-snapshot \
+    --cache-cluster-id athena-idle-redis \
+    --snapshot-name athena-redis-final-pre-decommission
+
+# Step 3: Destroy instance via Terraform to maintain IaC state sync
+terraform destroy -target=module.redis_cache
                     </div>
 
                     <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Cost governance frameworks integrate AWS Cost Explorer APIs into Jenkins/GitHub Actions pipelines to prevent unapproved infrastructure spin-ups.</p>
+                    <p>Integrating Infracost into GitHub Actions PR pipelines automatically flags unexpected cost increments before merging code.</p>
 
                     <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">AWS CloudWatch ➔ Cost Explorer ➔ Infracost ➔ Terraform Lifecycle Locks ➔ Automated Cloud Governance</div>
+                    <div class="code-box">AWS CloudWatch ➔ Cost Explorer APIs ➔ Infracost PR Automation ➔ Terraform State Management ➔ Enterprise Cloud Governance</div>
                 `
             },
             blog3: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">March 2026 · By Gaddam Kalyan Teja · 9 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">March 2026 · By Gaddam Kalyan Teja · 10 min read</div>
 
                     <img src="https://images.unsplash.com/photo-1667372335854-c2a2a69094f6?auto=format&fit=crop&w=1200&q=80" alt="Kubernetes Operations">
 
                     <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>GitOps enforces continuous deployment by treating Git repositories as the single source of truth for Kubernetes cluster state.</p>
+                    <p>GitOps establishes continuous deployment by treating Git repositories as the absolute source of truth for Kubernetes cluster state management.</p>
 
                     <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
                     <div class="code-box">
-Git Commit ➔ ArgoCD Sync Controller ➔ Helm Manifest Render ➔ EKS Rolling Update ➔ Pod Readiness Probes Passed ➔ Active Traffic Route
+Git Commit ➔ GitHub Webhook ➔ ArgoCD Sync Controller ➔ Helm Manifest Render ➔ EKS Rolling Update ➔ Pod Readiness Probes Passed ➔ Active Ingress Route
                     </div>
 
                     <h2 id="toc-3">3. Step-by-Step Execution</h2>
-                    <p>Configuring readiness and liveness probes in Helm templates ensures Kubernetes ALB Ingress Controller routes traffic exclusively to healthy pods during updates.</p>
+                    <p>Configuring readiness and liveness probes in Helm templates ensures Kubernetes ALB Ingress Controller routes traffic exclusively to healthy pods during updates:</p>
+                    <div class="code-box">
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
+                    </div>
 
                     <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Guarantees 99.9% uptime during peak application traffic across EKS production clusters.</p>
+                    <p>Guarantees 99.9% application uptime during peak multi-tenant traffic spikes across EKS production environments.</p>
 
                     <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">Docker ➔ Kubernetes Fundamentals ➔ Helm Charts ➔ ArgoCD GitOps ➔ EKS Deployment Automation</div>
+                    <div class="code-box">Docker ➔ Kubernetes Fundamentals ➔ Helm Chart Templates ➔ ArgoCD GitOps ➔ AWS EKS Cluster Orchestration</div>
                 `
             },
             blog4: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">January 2026 · By Gaddam Kalyan Teja · 8 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">January 2026 · By Gaddam Kalyan Teja · 10 min read</div>
 
                     <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Security Cloud Vault">
 
                     <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>Multi-tenant security isolation prevents data leakage across organization boundaries in SaaS cloud systems.</p>
+                    <p>Multi-tenant security isolation prevents unauthorized cross-tenant data access across multi-user cloud platforms.</p>
 
                     <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
-                    <p>Hardened 20+ EC2 instances, closed 25+ unnecessary open ports, and validated cryptographic JWT signatures at the API Gateway layer.</p>
+                    <p>Audited 150+ AWS Security Group rules, closed 25+ unnecessary open ports, and validated cryptographic JWT signatures at the Application Load Balancer (ALB) and ingress layers.</p>
 
                     <h2 id="toc-3">3. Step-by-Step Execution</h2>
                     <div class="code-box">
-# Security Group port lock example
-aws ec2 revoke-security-group-ingress --group-id sg-0123456789 --protocol tcp --port 22 --cidr 0.0.0.0/0
+# Lock down EC2 Security Group SSH access strictly to bastion host IP
+aws ec2 revoke-security-group-ingress \
+    --group-id sg-0123456789 \
+    --protocol tcp --port 22 \
+    --cidr 0.0.0.0/0
                     </div>
 
                     <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Secured Multi-Tenant access for 1,000+ active SaaS users across dev, staging, and production environments.</p>
+                    <p>Enforces zero-trust RBAC access controls for 1,000+ active SaaS users across dev, staging, and production environments.</p>
 
                     <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">AWS IAM ➔ EC2 Security Groups ➔ JWT Signature Verification ➔ Role-Based Access Control (RBAC)</div>
+                    <div class="code-box">AWS IAM & Policy Engine ➔ Security Group Ingress Locks ➔ JWT Token Verification ➔ Role-Based Access Control (RBAC)</div>
                 `
             },
             blog5: {
-                title: "Lowering MTTR: Prometheus Metrics, Alertmanager, & Grafana",
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">November 2025 · By Gaddam Kalyan Teja · 8 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">November 2025 · By Gaddam Kalyan Teja · 10 min read</div>
 
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Grafana Operations Dashboard">
 
                     <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>Observability provides continuous visibility into microservice latency, CPU throttling, and memory leakage.</p>
+                    <p>Site Reliability Engineering (SRE) observability enables instant visibility into microservice latency, CPU throttling, and memory leaks.</p>
 
                     <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
                     <div class="code-box">
@@ -1137,10 +1201,16 @@ Flask App (Prometheus Client) ➔ Prometheus Scrape Target ➔ Alertmanager Rule
                     </div>
 
                     <h2 id="toc-3">3. Step-by-Step Execution</h2>
-                    <p>Instrumented Python microservices with custom request counters and latency histogram buckets to catch anomalies before SLA breaches occur.</p>
+                    <p>Instrumented Python microservices with custom request counters and latency histogram buckets:</p>
+                    <div class="code-box">
+from prometheus_client import Counter, Histogram
+
+REQUEST_COUNT = Counter('app_requests_total', 'Total HTTP Requests', ['method', 'endpoint', 'status'])
+LATENCY = Histogram('app_request_latency_seconds', 'Request Latency')
+                    </div>
 
                     <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Reduced Mean Time to Resolution (MTTR) by over 40% across production incidents.</p>
+                    <p>Reduced Mean Time to Resolution (MTTR) by over 40% across production incident responses.</p>
 
                     <h2 id="toc-5">5. Learning Roadmap</h2>
                     <div class="code-box">Metrics Instrumentation ➔ Prometheus Scraping ➔ PromQL Querying ➔ Alertmanager Configuration ➔ Grafana Dashboards</div>
