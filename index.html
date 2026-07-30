@@ -52,13 +52,13 @@
             box-sizing: border-box;
         }
 
-        html,
-        body {
-            height: 100%;
-            overflow-x: hidden;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
+            min-height: 100vh;
+            overflow-x: hidden;
             background-color: var(--bg-main);
             color: var(--text-body);
             font-family: var(--font-sans);
@@ -658,7 +658,7 @@
         </nav>
 
         <!-- ─── HERO ─── -->
-        <section class="celinski-scroll-section hero-banner" id="about">
+        <section class="celinski-scroll-section hero-banner visible" id="about">
             <div class="tag-pill stagger-child">DevOps &amp; Cloud Engineering</div>
             <h1 class="hero-title-giant stagger-child" id="animated-hero-title">
                 I AUTOMATE, SCALE &amp; <span class="no-break">SECURE</span><br />
@@ -838,7 +838,7 @@
         </div>
     </div>
 
-    <!-- ─── THREE.JS ─── -->
+    <!-- ─── THREE.JS & LENIS ─── -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 
@@ -847,7 +847,8 @@
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true
+            smoothWheel: true,
+            smoothTouch: false
         });
 
         function raf(time) {
@@ -873,6 +874,7 @@
             scrollThumb.style.transform = `translateY(${progress * maxTranslate}px)`;
         }
 
+        lenis.on('scroll', updateScroll);
         window.addEventListener('scroll', updateScroll);
 
         scrollPillBar.addEventListener('click', (e) => {
@@ -880,7 +882,7 @@
             const clickY = e.clientY - rect.top;
             const progress = Math.max(0, Math.min(1, clickY / rect.height));
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            window.scrollTo({ top: progress * docHeight, behavior: 'smooth' });
+            lenis.scrollTo(progress * docHeight);
         });
 
         // ── Scroll Intersection Observer for Animated Entries ──
@@ -890,7 +892,7 @@
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.05 });
 
         document.querySelectorAll('.celinski-scroll-section').forEach(sec => observer.observe(sec));
 
@@ -904,8 +906,31 @@
 
         // ── Mouse & Parallax FX ──
         window.addEventListener('mousemove', (e) => {
-            document.getElementById('coord-tracker').textContent = `${String(e.clientX).padStart(4, '0')} X ${String(e.clientY).padStart(4, '0')} Y`;
+            const coordTracker = document.getElementById('coord-tracker');
+            if (coordTracker) {
+                coordTracker.textContent = `${String(e.clientX).padStart(4, '0')} X ${String(e.clientY).padStart(4, '0')} Y`;
+            }
         });
+
+        // Tab Switching Functionality
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-exp').style.display = 'none';
+            document.getElementById('tab-educ').style.display = 'none';
+            document.getElementById('tab-cert').style.display = 'none';
+
+            document.getElementById('btn-' + tab).classList.add('active');
+            document.getElementById('tab-' + tab).style.display = 'grid';
+        }
+
+        // Dummy modal controls for safety
+        function openSearchModal() { document.getElementById('search-modal').style.display = 'flex'; }
+        function closeSearchModal() { document.getElementById('search-modal').style.display = 'none'; }
+        function openBlogModal(id) { document.getElementById('case-study-modal').style.display = 'block'; }
+        function closeBlogModal() { document.getElementById('case-study-modal').style.display = 'none'; }
+        function closeCertModal() { document.getElementById('cert-modal').style.display = 'none'; }
+        function handleTerminalCommand(e) { e.preventDefault(); }
+        function filterSearch() {}
     </script>
 </body>
 </html>
