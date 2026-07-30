@@ -82,6 +82,7 @@
             background-size: 80px 80px;
             pointer-events: none;
             z-index: 0;
+            transition: transform 0.1s ease-out;
         }
 
         /* ── THREE.JS CANVAS ── */
@@ -93,6 +94,18 @@
             height: 100vh;
             pointer-events: none;
             z-index: 1;
+        }
+
+        /* ── RIPPLE OVERLAY ── */
+        #ripple-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
         }
 
         /* ── PIXEL TRAIL ── */
@@ -126,6 +139,7 @@
             height: 100vh;
             pointer-events: none;
             z-index: 2;
+            transition: transform 0.1s ease-out;
         }
 
         .sticker {
@@ -157,7 +171,7 @@
         }
 
         /* ═══════════════════════════════════════════════
-                   BEN CELINSKI – SCROLL ANIMATIONS
+                   CELINSKI‑STYLE SCROLL ANIMATIONS
                    ═══════════════════════════════════════════════ */
         .celinski-scroll-section {
             min-height: 85vh;
@@ -165,7 +179,6 @@
             flex-direction: column;
             justify-content: center;
             opacity: 0;
-            /* will be overridden per data-animation */
             transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
                 filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -173,7 +186,6 @@
             position: relative;
         }
 
-        /* animation types – applied via data-animation */
         .celinski-scroll-section[data-animation="fade-up"] {
             transform: translateY(70px) scale(0.96);
             filter: blur(4px);
@@ -203,14 +215,12 @@
             filter: none;
         }
 
-        /* visible state – all animations resolve to this */
         .celinski-scroll-section.visible {
             opacity: 1;
             transform: translate(0, 0) scale(1) rotate(0deg);
             filter: blur(0px);
         }
 
-        /* staggered children inside sections */
         .celinski-scroll-section .stagger-child {
             opacity: 0;
             transform: translateY(40px);
@@ -387,10 +397,12 @@
             gap: 1.1rem;
             position: relative;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
         .haoqi-card:hover {
             border-color: var(--accent-blue);
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.01);
             box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
         }
 
@@ -551,7 +563,7 @@
             gap: 0.5rem;
         }
 
-        /* ── SCROLL PROGRESS BAR (top of page) ── */
+        /* ── SCROLL PROGRESS BAR ── */
         .scroll-progress-track {
             position: fixed;
             top: 0;
@@ -571,7 +583,7 @@
             box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
         }
 
-        /* ── RIGHT SCROLL PILL INDICATOR ── */
+        /* ── RIGHT SCROLL PILL ── */
         .scroll-pill-bar {
             position: fixed;
             right: 1.2rem;
@@ -673,8 +685,9 @@
     </div>
 
     <!-- ─── BLUEPRINT GRID & 3D ─── -->
-    <div class="blueprint-grid"></div>
+    <div class="blueprint-grid" id="blueprintGrid"></div>
     <canvas id="hero-3d-canvas"></canvas>
+    <canvas id="ripple-canvas"></canvas>
 
     <!-- ─── PIXEL TRAIL ─── -->
     <div id="pixel-trail-container"></div>
@@ -685,7 +698,7 @@
     </div>
 
     <!-- ─── STICKERS ─── -->
-    <div class="stickers-layer" id="stickers-layer">
+    <div class="stickers-layer" id="stickersLayer">
         <div class="sticker" style="top:14%;left:6%"><img src="https://api.iconify.design/logos:aws.svg" width="54" alt="AWS"></div>
         <div class="sticker" style="top:18%;right:8%"><img src="https://api.iconify.design/logos:kubernetes.svg" width="48" alt="Kubernetes"></div>
         <div class="sticker" style="top:58%;left:4%"><img src="https://api.iconify.design/logos:terraform.svg" width="46" alt="Terraform"></div>
@@ -901,25 +914,119 @@
 
     <script>
         // ════════════════════════════════════════════════════════════════
-        // 1.  BEN CELINSKI SCROLL OBSERVER – enhanced with rootMargin
+        // 1.  HAOQI‑STYLE RIPPLE SHADER (2D Canvas)
+        // ════════════════════════════════════════════════════════════════
+
+        const rippleCanvas = document.getElementById('ripple-canvas');
+        const ctx = rippleCanvas.getContext('2d');
+        let rippleWidth, rippleHeight;
+        let ripples = [];
+
+        function resizeRipple() {
+            rippleWidth = window.innerWidth;
+            rippleHeight = window.innerHeight;
+            rippleCanvas.width = rippleWidth;
+            rippleCanvas.height = rippleHeight;
+        }
+        resizeRipple();
+        window.addEventListener('resize', resizeRipple);
+
+        // Ripple class
+        class Ripple {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.radius = 0;
+                this.maxRadius = Math.max(rippleWidth, rippleHeight) * 0.5;
+                this.speed = 4;
+                this.opacity = 0.8;
+                this.life = 1.0;
+                this.decay = 0.008;
+            }
+
+            update() {
+                this.radius += this.speed;
+                this.life -= this.decay;
+                this.opacity = this.life * 0.8;
+                return this.life > 0;
+            }
+
+            draw() {
+                const gradient = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.radius
+                );
+                const alpha = this.opacity;
+                const theme = document.documentElement.getAttribute('data-theme');
+                const isDark = theme === 'dark';
+                const color1 = isDark ? 'rgba(59, 130, 246, ' : 'rgba(37, 99, 235, ';
+                const color2 = isDark ? 'rgba(168, 85, 247, ' : 'rgba(124, 58, 237, ';
+                gradient.addColorStop(0, color1 + alpha + ')');
+                gradient.addColorStop(0.5, color2 + (alpha * 0.5) + ')');
+                gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // glow ring
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius * 0.9, 0, Math.PI * 2);
+                ctx.strokeStyle = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        // Track mouse for ripples
+        let lastRippleTime = 0;
+        const rippleInterval = 120; // ms
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastRippleTime > rippleInterval) {
+                lastRippleTime = now;
+                ripples.push(new Ripple(e.clientX, e.clientY));
+                if (ripples.length > 30) ripples.shift();
+            }
+        });
+
+        // Click triggers a big ripple
+        document.addEventListener('click', (e) => {
+            const big = new Ripple(e.clientX, e.clientY);
+            big.maxRadius = Math.max(rippleWidth, rippleHeight) * 0.7;
+            big.speed = 6;
+            big.decay = 0.006;
+            ripples.push(big);
+        });
+
+        function animateRipples() {
+            ctx.clearRect(0, 0, rippleWidth, rippleHeight);
+            ripples = ripples.filter(r => r.update());
+            ripples.forEach(r => r.draw());
+            requestAnimationFrame(animateRipples);
+        }
+        animateRipples();
+
+        // ════════════════════════════════════════════════════════════════
+        // 2.  BEN CELINSKI SCROLL OBSERVER
         // ════════════════════════════════════════════════════════════════
 
         const celinskiObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // once visible, stop observing to reduce load
                     celinskiObserver.unobserve(entry.target);
                 }
             });
         }, {
             threshold: 0.12,
-            rootMargin: '0px 0px -30px 0px' // triggers slightly earlier
+            rootMargin: '0px 0px -30px 0px'
         });
 
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.celinski-scroll-section').forEach(sec => {
-                // if already visible on load, mark it
                 const rect = sec.getBoundingClientRect();
                 const winHeight = window.innerHeight;
                 if (rect.top < winHeight * 0.85 && rect.bottom > 0) {
@@ -928,13 +1035,10 @@
                     celinskiObserver.observe(sec);
                 }
             });
-
-            // Also observe any new sections that might be added dynamically
-            // (but we have them all statically)
         });
 
         // ════════════════════════════════════════════════════════════════
-        // 2.  SCROLL PROGRESS – top bar + right pill
+        // 3.  SCROLL PROGRESS
         // ════════════════════════════════════════════════════════════════
 
         function updateScrollProgress() {
@@ -943,10 +1047,8 @@
             const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
             const percent = Math.round(progress * 100);
 
-            // top progress bar
             document.getElementById('scrollProgressBar').style.width = percent + '%';
 
-            // right pill thumb
             const thumb = document.getElementById('scroll-thumb');
             const barHeight = 180;
             const thumbHeight = 48;
@@ -956,11 +1058,10 @@
 
         window.addEventListener('scroll', updateScrollProgress);
         window.addEventListener('resize', updateScrollProgress);
-        // initial call after layout settles
         setTimeout(updateScrollProgress, 100);
 
         // ════════════════════════════════════════════════════════════════
-        // 3.  KINETIC LETTER SPLITTING
+        // 4.  KINETIC LETTER SPLITTING
         // ════════════════════════════════════════════════════════════════
 
         function applyKineticTypography(elementId) {
@@ -977,16 +1078,25 @@
         }
 
         // ════════════════════════════════════════════════════════════════
-        // 4.  CURSOR COORD + RETRO PIXEL TRAIL
+        // 5.  CURSOR COORD + PIXEL TRAIL + PARALLAX
         // ════════════════════════════════════════════════════════════════
 
         const coordTracker = document.getElementById('coord-tracker');
+        const grid = document.getElementById('blueprintGrid');
+        const stickers = document.getElementById('stickersLayer');
 
         window.addEventListener('mousemove', (e) => {
             const x = String(e.clientX).padStart(4, '0');
             const y = String(e.clientY).padStart(4, '0');
             coordTracker.textContent = `${x} X ${y} Y`;
 
+            // Parallax
+            const px = (e.clientX / window.innerWidth - 0.5) * 20;
+            const py = (e.clientY / window.innerHeight - 0.5) * 20;
+            grid.style.transform = `translate(${px * 0.1}px, ${py * 0.1}px)`;
+            stickers.style.transform = `translate(${px * 0.3}px, ${py * 0.3}px)`;
+
+            // Pixel trail
             if (Math.random() > 0.45) {
                 const pixel = document.createElement('div');
                 pixel.className = 'pixel-block';
@@ -1002,31 +1112,72 @@
         });
 
         // ════════════════════════════════════════════════════════════════
-        // 5.  THREE.JS ELASTIC JELLY MESH
+        // 6.  THREE.JS – SHADER‑DRIVEN GLOWING KNOT
         // ════════════════════════════════════════════════════════════════
 
-        const canvas = document.getElementById('hero-3d-canvas');
+        const canvas3d = document.getElementById('hero-3d-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 6;
 
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        const renderer3d = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true, antialias: true });
+        renderer3d.setSize(window.innerWidth, window.innerHeight);
+        renderer3d.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        const torusGeo = new THREE.TorusKnotGeometry(1.8, 0.6, 128, 32);
-        const metallicMat = new THREE.MeshPhysicalMaterial({
-            color: 0x2563eb,
-            metalness: 0.85,
-            roughness: 0.15,
-            clearcoat: 1.0,
-            clearcoatRoughness: 0.1,
-            reflectivity: 1.0
+        // ── Custom Shader Material ──
+        const vertexShader = `
+            varying vec3 vNormal;
+            varying vec3 vPosition;
+            void main() {
+                vNormal = normalize(normalMatrix * normal);
+                vPosition = (modelViewMatrix * vec4(position, 1.0)).xyz;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        `;
+
+        const fragmentShader = `
+            uniform float uTime;
+            uniform vec2 uMouse;
+            uniform vec3 uColor1;
+            uniform vec3 uColor2;
+            varying vec3 vNormal;
+            varying vec3 vPosition;
+
+            void main() {
+                vec3 viewDir = normalize(-vPosition);
+                float fresnel = 1.0 - max(dot(viewDir, vNormal), 0.0);
+                fresnel = pow(fresnel, 2.2);
+
+                float mixFactor = 0.5 + 0.5 * sin(uTime * 0.5 + uMouse.x * 2.0);
+                vec3 baseColor = mix(uColor1, uColor2, mixFactor);
+
+                float glow = fresnel * (0.8 + 0.4 * sin(uTime * 0.8 + uMouse.y * 3.0));
+                vec3 finalColor = baseColor + vec3(0.6, 0.2, 0.8) * glow;
+
+                gl_FragColor = vec4(finalColor, 1.0);
+            }
+        `;
+
+        const uniforms = {
+            uTime: { value: 0 },
+            uMouse: { value: new THREE.Vector2(0, 0) },
+            uColor1: { value: new THREE.Color(0x2563eb) },
+            uColor2: { value: new THREE.Color(0x7c3aed) }
+        };
+
+        const shaderMat = new THREE.ShaderMaterial({
+            vertexShader,
+            fragmentShader,
+            uniforms,
+            wireframe: false,
+            side: THREE.DoubleSide,
         });
 
-        const liquidMesh = new THREE.Mesh(torusGeo, metallicMat);
+        const torusGeo = new THREE.TorusKnotGeometry(1.8, 0.6, 128, 32);
+        const liquidMesh = new THREE.Mesh(torusGeo, shaderMat);
         scene.add(liquidMesh);
 
+        // ── Lights ──
         const light1 = new THREE.DirectionalLight(0xffffff, 2.5);
         light1.position.set(5, 5, 5);
         scene.add(light1);
@@ -1035,6 +1186,7 @@
         light2.position.set(-5, -5, -2);
         scene.add(light2);
 
+        // ── Mouse tracking ──
         let mouseX = 0,
             mouseY = 0;
         let scaleTarget = 1.0;
@@ -1042,13 +1194,26 @@
         window.addEventListener('mousemove', (e) => {
             mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
             mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            uniforms.uMouse.value.set(mouseX, mouseY);
         });
 
         window.addEventListener('mousedown', () => { scaleTarget = 1.35; });
         window.addEventListener('mouseup', () => { scaleTarget = 1.0; });
 
+        // ── Theme sync for shader colors ──
+        function updateShaderColors() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            uniforms.uColor1.value.set(isDark ? 0x3b82f6 : 0x2563eb);
+            uniforms.uColor2.value.set(isDark ? 0xa855f7 : 0x7c3aed);
+        }
+        updateShaderColors();
+
+        // ── Animation loop ──
         function animate3D() {
             requestAnimationFrame(animate3D);
+
+            uniforms.uTime.value += 0.01;
+
             liquidMesh.rotation.x += 0.003 + mouseY * 0.01;
             liquidMesh.rotation.y += 0.005 + mouseX * 0.01;
 
@@ -1056,18 +1221,37 @@
             liquidMesh.scale.y += (scaleTarget - liquidMesh.scale.y) * 0.1;
             liquidMesh.scale.z += (scaleTarget - liquidMesh.scale.z) * 0.1;
 
-            renderer.render(scene, camera);
+            renderer3d.render(scene, camera);
         }
         animate3D();
 
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer3d.setSize(window.innerWidth, window.innerHeight);
         });
 
         // ════════════════════════════════════════════════════════════════
-        // 6.  CERTIFICATES DATA (30)
+        // 7.  CARD 3D TILT
+        // ════════════════════════════════════════════════════════════════
+
+        document.querySelectorAll('.haoqi-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                const rotateX = y * -8;
+                const rotateY = x * 8;
+                card.style.transform =
+                    `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px) scale(1.01)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+            });
+        });
+
+        // ════════════════════════════════════════════════════════════════
+        // 8.  CERTIFICATES DATA (30)
         // ════════════════════════════════════════════════════════════════
 
         const certificatesList = [
@@ -1124,7 +1308,7 @@
         }
 
         // ════════════════════════════════════════════════════════════════
-        // 7.  BLOGS DATA
+        // 9.  BLOGS DATA
         // ════════════════════════════════════════════════════════════════
 
         const blogsData = {
@@ -1216,7 +1400,7 @@
         };
 
         // ════════════════════════════════════════════════════════════════
-        // 8.  UI CONTROLS
+        // 10. UI CONTROLS
         // ════════════════════════════════════════════════════════════════
 
         function switchTab(tab) {
@@ -1233,6 +1417,7 @@
             const next = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             document.getElementById('theme-icon').className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            updateShaderColors();
         }
 
         function openBlogModal(id) {
@@ -1295,7 +1480,7 @@
         }
 
         // ════════════════════════════════════════════════════════════════
-        // 9.  TERMINAL HANDLER
+        // 11. TERMINAL HANDLER
         // ════════════════════════════════════════════════════════════════
 
         function handleTerminalCommand(e) {
@@ -1360,7 +1545,6 @@
             applyKineticTypography('animated-hero-title');
             updateScrollProgress();
 
-            // Re-check visibility after fonts & layout settle
             setTimeout(() => {
                 document.querySelectorAll('.celinski-scroll-section:not(.visible)').forEach(sec => {
                     const rect = sec.getBoundingClientRect();
@@ -1372,7 +1556,6 @@
             }, 300);
         });
 
-        // also update progress on any scroll after load
         window.addEventListener('load', () => {
             setTimeout(updateScrollProgress, 200);
         });
