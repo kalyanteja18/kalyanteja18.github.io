@@ -266,14 +266,22 @@
         }
 
         .hero-title-giant {
-            font-size: clamp(2.8rem, 6vw, 5.2rem);
-            font-weight: 800;
-            color: var(--text-heading);
-            line-height: 1.05;
-            letter-spacing: -0.04em;
-            max-width: 980px;
-            margin-bottom: 1.5rem;
-        }
+        font-size: clamp(2.2rem, 4.8vw, 4.2rem); /* Slightly tuned down max size to fit comfortably */
+        font-weight: 800;
+        color: var(--text-heading);
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        max-width: 980px;
+        margin-bottom: 1.5rem;
+        word-break: normal;
+        overflow-wrap: normal;
+    }
+
+/* Prevent target words from breaking mid-word */
+.no-break {
+    white-space: nowrap;
+    display: inline-block;
+}
 
         .hero-title-giant span {
             color: var(--accent-blue);
@@ -607,7 +615,8 @@
         <section class="hero-banner celinski-scroll-section" id="about">
             <div class="tag-pill">DevOps &amp; Cloud Engineering</div>
             <h1 class="hero-title-giant" id="animated-hero-title">
-                I AUTOMATE, SCALE &amp; SECURE <span>CLOUD INFRASTRUCTURE.</span>
+            I AUTOMATE, SCALE &amp; <span class="no-break">SECURE</span><br />
+            <span>CLOUD <span class="no-break">INFRASTRUCTURE.</span></span>
             </h1>
             <p class="hero-subtext">
                 Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Discovered and decommissioned an unused Redis cache costing <strong>₹1.5L/month</strong> within 2 months at Athena LMS, driving an annual savings of <strong>₹18 Lakhs/year</strong>. Experienced in automating AWS EC2, S3, ALB, CloudFront, EKS deployments, and Prometheus/Grafana SRE observability.
