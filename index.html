@@ -75,19 +75,17 @@
             overflow-x: hidden;
         }
 
-        /* GEOMETRIC POLYGON BACKGROUND ARTWORK */
-        .bg-poly-left, .bg-poly-right {
+        /* 3D WEBGL CANVAS BACKGROUND */
+        #webgl-canvas {
             position: fixed;
             top: 0;
-            bottom: 0;
-            width: 320px;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.85;
+            opacity: 0.45;
         }
-
-        .bg-poly-left { left: 0; }
-        .bg-poly-right { right: 0; }
 
         .wrapper {
             max-width: 1100px;
@@ -621,161 +619,45 @@
             object-fit: cover;
         }
 
-        /* TOOLS & TECHNOLOGIES SECTION */
-        .tech-category-card {
+        /* BLOG ARTICLE MODAL TYPOGRAPHY & VISUALS */
+        .blog-article-content img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 1.25rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .blog-article-content h4 {
+            color: var(--text-heading);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .blog-article-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .blog-article-content ul, .blog-article-content ol {
+            padding-left: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-article-content li {
+            margin-bottom: 0.4rem;
+        }
+
+        .code-snippet {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
-        .tech-category-title {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
-
-        .tech-pills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tech-pill {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 0.35rem 0.65rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-heading);
-        }
-
-        .tech-badge {
-            font-family: var(--font-mono);
-            font-size: 0.6rem;
-            font-weight: 700;
-            padding: 0.15rem 0.35rem;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .badge-adv {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent-blue);
-        }
-
-        .badge-int {
-            background: rgba(139, 92, 246, 0.15);
-            color: #a78bfa;
-        }
-
-        /* GAINED SKILLS BADGES IN EXPERIENCE */
-        .skills-gained-box {
-            margin-top: 0.85rem;
-            padding-top: 0.75rem;
-            border-top: 1px dashed var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .skills-gained-title {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .skills-gained-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-
-        .skill-tag {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--accent-blue);
-            padding: 0.15rem 0.5rem;
-            border-radius: 12px;
-        }
-
-        /* INTERACTIVE TERMINAL WINDOW */
-        .terminal-box {
-            background: #090a0d;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .terminal-bar {
-            background: #14161f;
-            padding: 0.5rem 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.7rem;
-        }
-
-        .terminal-body {
             padding: 1rem;
-            min-height: 280px;
-            max-height: 400px;
-            overflow-y: auto;
-            color: #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .terminal-line {
-            line-height: 1.5;
-            word-break: break-all;
-        }
-
-        .terminal-prompt {
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        .terminal-input-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.25rem;
-        }
-
-        .terminal-input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--text-heading);
             font-family: var(--font-mono);
             font-size: 0.8rem;
-            width: 100%;
+            color: var(--accent-green);
+            overflow-x: auto;
+            margin: 1rem 0;
         }
 
         /* MODALS */
@@ -809,10 +691,10 @@
 
         .close-modal {
             position: absolute;
-            top: -12px;
-            right: -12px;
-            width: 30px;
-            height: 30px;
+            top: 1rem;
+            right: 1.25rem;
+            width: 32px;
+            height: 32px;
             background: var(--accent-blue);
             color: #fff;
             border-radius: 50%;
@@ -820,432 +702,26 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
-        /* SEARCH MODAL */
-        .search-modal-box {
-            width: 480px;
-            max-width: 90%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
-        .search-input-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.65rem 0.85rem;
-        }
-
-        .search-input-wrapper input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: var(--text-heading);
-            font-family: var(--font-sans);
-            font-size: 0.9rem;
-            width: 100%;
-        }
-
-        .search-results-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-            max-height: 280px;
-            overflow-y: auto;
-        }
-
-        .search-result-item {
-            padding: 0.65rem 0.85rem;
-            border-radius: 8px;
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            color: var(--text-heading);
-            text-decoration: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.82rem;
-            transition: all 0.2s;
-        }
-
-        .search-result-item:hover {
-            border-color: var(--accent-blue);
-            background: var(--bg-accent-subtle);
-        }
-
-        /* TIMELINE (RESUME) */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            position: relative;
-            padding-left: 0.85rem;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-left: 1.25rem;
-            border-left: 2px solid var(--border-color);
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -6px;
-            top: 4px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent-green);
-        }
-
-        .timeline-card {
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.25rem;
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 0.35rem;
-        }
-
-        .timeline-role {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--text-heading);
-        }
-
-        .badge-now {
-            font-family: var(--font-mono);
-            font-size: 0.62rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            background: rgba(34, 197, 94, 0.1);
-            padding: 0.15rem 0.55rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-            border: 1px solid rgba(34, 197, 94, 0.2);
-        }
-
-        .badge-now::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--accent-green);
-            box-shadow: 0 0 6px var(--accent-green);
-        }
-
-        .timeline-company {
-            color: var(--accent-blue);
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .timeline-meta {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            margin-bottom: 0.85rem;
-        }
-
-        .timeline-body ul {
-            padding-left: 1.1rem;
-            font-size: 0.85rem;
-            color: var(--text-body);
-        }
-
-        .timeline-body li {
-            margin-bottom: 0.4rem;
-        }
-
-        /* REPO GRID (PROJECTS) */
-        .repo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.85rem;
-        }
-
-        .repo-card {
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 1.1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 0.85rem;
-            transition: border-color 0.2s;
-        }
-
-        .repo-card:hover {
-            border-color: var(--accent-blue);
-        }
-
-        .repo-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-heading);
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
-        }
-
-        .repo-desc {
-            font-size: 0.8rem;
-            color: var(--text-body);
-        }
-
-        .repo-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border-color);
-            padding-top: 0.65rem;
-        }
-
-        .repo-stats {
-            display: flex;
-            gap: 0.75rem;
-        }
-
-        /* CONTACT SECTION */
-        .contact-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.3fr;
-            gap: 1.75rem;
-        }
-
-        .contact-info-box {
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 1.35rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-        }
-
-        .contact-detail {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-body);
-            font-size: 0.85rem;
-        }
-
-        .contact-detail i {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--accent-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .contact-detail a {
-            color: var(--text-body);
-            text-decoration: none;
-        }
-
-        .contact-detail a:hover { color: var(--text-heading); }
-
-        .form-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 0.85rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.85rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
-
-        .form-group label {
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--text-body);
-        }
-
-        .form-group input,
-        .form-group textarea {
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.65rem 0.85rem;
-            color: var(--text-heading);
-            font-family: var(--font-sans);
-            font-size: 0.82rem;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--accent-blue);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 95px;
-        }
-
-        .form-meta {
-            text-align: right;
-            font-family: var(--font-mono);
-            font-size: 0.62rem;
-            color: var(--text-muted);
-        }
-
-        .btn-submit {
-            background: var(--accent-blue);
-            color: #ffffff;
-            border: none;
-            border-radius: 8px;
-            padding: 0.75rem 1.35rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.45rem;
-            transition: background 0.2s;
-        }
-
-        .btn-submit:hover {
-            background: var(--accent-blue-hover);
-        }
-
-        .form-status-msg {
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 6px;
-            display: none;
-        }
-
-        /* FOOTER */
-        .console-footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
-
-        .footer-status {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
+            z-index: 10;
         }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
-            .sidebar {
-                position: static;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .cards-grid,
-            .repo-grid,
-            .contact-layout {
-                grid-template-columns: 1fr;
-            }
-            .bg-poly-left, .bg-poly-right {
-                display: none;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .console-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .status-block {
-                border-left: none;
-                padding-left: 0;
-                border-top: 1px solid var(--border-color);
-                padding-top: 0.85rem;
-                width: 100%;
-            }
-            .header-actions {
-                align-items: flex-start;
-                width: 100%;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
+            .main-layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .cards-grid, .contact-layout { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- LEFT GEOMETRIC POLYGON BACKGROUND ARTWORK -->
-    <svg class="bg-poly-left" viewBox="0 0 320 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="0,0 180,0 90,140" fill="#ef4444" opacity="0.85"/>
-        <polygon points="180,0 320,0 230,120 90,140" fill="#f59e0b" opacity="0.85"/>
-        <polygon points="0,0 90,140 0,260" fill="#10b981" opacity="0.85"/>
-        <polygon points="90,140 230,120 160,280" fill="#3b82f6" opacity="0.85"/>
-        <polygon points="230,120 320,0 320,240 160,280" fill="#f97316" opacity="0.85"/>
-        <polygon points="0,260 90,140 160,280 40,380" fill="#06b6d4" opacity="0.85"/>
-        <polygon points="160,280 320,240 280,420 180,450" fill="#8b5cf6" opacity="0.85"/>
-        <polygon points="0,260 40,380 0,520" fill="#ec4899" opacity="0.85"/>
-        <polygon points="40,380 180,450 80,600" fill="#10b981" opacity="0.85"/>
-        <polygon points="180,450 280,420 320,620 190,650" fill="#f59e0b" opacity="0.85"/>
-        <polygon points="80,600 190,650 100,780" fill="#3b82f6" opacity="0.85"/>
-        <polygon points="0,520 40,380 80,600 0,720" fill="#f43f5e" opacity="0.85"/>
-    </svg>
-
-    <!-- RIGHT GEOMETRIC POLYGON BACKGROUND ARTWORK -->
-    <svg class="bg-poly-right" viewBox="0 0 320 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="140,0 320,0 230,140" fill="#f59e0b" opacity="0.85"/>
-        <polygon points="0,0 140,0 230,140 90,120" fill="#ef4444" opacity="0.85"/>
-        <polygon points="230,140 320,0 320,260" fill="#3b82f6" opacity="0.85"/>
-        <polygon points="90,120 230,140 160,280" fill="#10b981" opacity="0.85"/>
-        <polygon points="160,280 320,260 280,420 180,450" fill="#ec4899" opacity="0.85"/>
-        <polygon points="280,420 320,260 320,540" fill="#f97316" opacity="0.85"/>
-        <polygon points="180,450 280,420 320,540 220,640" fill="#8b5cf6" opacity="0.85"/>
-    </svg>
+    <!-- 3D WEBGL INTERACTIVE CANVAS BACKGROUND -->
+    <canvas id="webgl-canvas"></canvas>
 
     <div class="wrapper">
 
@@ -1284,7 +760,6 @@
             </div>
 
             <div class="header-actions">
-                <!-- DIRECT GOOGLE DRIVE RESUME DOWNLOAD LINK -->
                 <a href="https://drive.google.com/uc?export=download&id=1uqOFDpmF5knxAAfJXhvrihNuy6wR9q8E" target="_blank" download="Gaddam_Kalyan_Teja_Resume.pdf" class="btn-main">
                     <i class="fas fa-download"></i> Download CV
                 </a>
@@ -1309,7 +784,6 @@
                     <span class="dot dot-green"></span>
                 </div>
 
-                <!-- GEOMETRIC ARTWORK -->
                 <div class="sidebar-art">
                     <div class="art-block" style="background:#3b82f6;"></div>
                     <div class="art-block" style="background:#22c55e;"></div>
@@ -1504,10 +978,8 @@
                                         <li>Hardened cloud security: audited 150+ security group rules, closed 25+ unnecessary open ports, and implemented least-privilege firewall policies across 20+ EC2 instances.</li>
                                         <li>Monitored production infrastructure using Amazon CloudWatch Metrics &amp; Logs, investigated 15+ production incidents, performed root cause analysis (RCA), and collaborated with developers to reduce mean time to resolution (MTTR).</li>
                                         <li>Implemented <strong>JWT authentication &amp; RBAC</strong> authorization across dev, staging, and production environments, ensuring secure tenant-aware access controls for 1,000+ users.</li>
-                                        <li>Maintained infrastructure documentation, deployment runbooks, troubleshooting guides, and architecture diagrams to support consistent deployments and operational support.</li>
                                     </ul>
 
-                                    <!-- Gained Skills Badges -->
                                     <div class="skills-gained-box">
                                         <div class="skills-gained-title"><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Skills &amp; Technologies Gained:</div>
                                         <div class="skills-gained-list">
@@ -1519,7 +991,6 @@
                                             <span class="skill-tag">CloudWatch</span>
                                             <span class="skill-tag">JWT</span>
                                             <span class="skill-tag">RBAC</span>
-                                            <span class="skill-tag">Cost Auditing</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1542,7 +1013,6 @@
                                         <li>Managed Kubernetes microservice deployments using YAML manifests, Deployments, Services, Config Maps, Secrets, Ingress Controllers, and Horizontal Pod Autoscalers across production clusters, achieving 99.9% availability.</li>
                                     </ul>
 
-                                    <!-- Gained Skills Badges -->
                                     <div class="skills-gained-box">
                                         <div class="skills-gained-title"><i class="fas fa-check-circle" style="color:var(--accent-green);"></i> Skills &amp; Technologies Gained:</div>
                                         <div class="skills-gained-list">
@@ -1552,7 +1022,6 @@
                                             <span class="skill-tag">YAML Manifests</span>
                                             <span class="skill-tag">Ingress Controllers</span>
                                             <span class="skill-tag">HPA</span>
-                                            <span class="skill-tag">Linux Utilities</span>
                                         </div>
                                     </div>
                                 </div>
@@ -1560,7 +1029,7 @@
                         </div>
                     </div>
 
-                    <!-- EDUC CONTENT (INCLUDES 10TH, 12TH & B.TECH) -->
+                    <!-- EDUC CONTENT -->
                     <div id="tab-content-educ" class="timeline" style="display: none;">
                         <div class="timeline-item">
                             <div class="timeline-dot"></div>
@@ -1605,88 +1074,12 @@
                     </div>
                 </section>
 
-                <!-- PROJECTS SECTION -->
-                <section id="projects">
-                    <div class="section-header">
-                        <h2>Projects</h2>
-                        <div class="title-underline"></div>
-                    </div>
-
-                    <div class="repo-grid">
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> monitoring-prometheus-grafana</div>
-                                <div class="repo-desc" style="margin-top:0.35rem;">Instrumented Flask application with Prometheus metrics &amp; Grafana dashboards for p95 latency, error rates, and CPU/memory usage.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats"><span><i class="far fa-star"></i> 0</span><span><i class="fas fa-code-branch"></i> 0</span></div>
-                                <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> ci-cd-jenkins-docker</div>
-                                <div class="repo-desc" style="margin-top:0.35rem;">Automated Jenkins CI/CD Pipeline integrated with Docker containerization workflows for continuous delivery.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats"><span><i class="far fa-star"></i> 0</span><span><i class="fas fa-code-branch"></i> 0</span></div>
-                                <a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> gitops-argocd-kubernetes</div>
-                                <div class="repo-desc" style="margin-top:0.35rem;">GitOps continuous delivery architecture using ArgoCD and Kubernetes cluster manifests for declarative application management.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats"><span><i class="far fa-star"></i> 0</span><span><i class="fas fa-code-branch"></i> 0</span></div>
-                                <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> cloudformation-aws-infra</div>
-                                <div class="repo-desc" style="margin-top:0.35rem;">AWS CloudFormation templates for automated Infrastructure as Code cloud provisioning.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats"><span><i class="far fa-star"></i> 0</span><span><i class="fas fa-code-branch"></i> 0</span></div>
-                                <a href="https://github.com/kalyanteja18/cloudformation-aws-infra" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> terraform-aws-iac</div>
-                                <div class="repo-desc" style="margin-top:0.35rem;">Provisioned production-grade AWS infrastructure (EC2, VPC, S3, RDS) using reusable Terraform modules with remote state.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats"><span><i class="far fa-star"></i> 0</span><span><i class="fas fa-code-branch"></i> 0</span></div>
-                                <a href="https://github.com/kalyanteja18/terraform-aws-iac" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-
-                        <div class="repo-card">
-                            <div>
-                                <div class="repo-title"><i class="fab fa-github"></i> devops-cicd-github-actions</div>
-                                <div class="repo-desc" style="margin-top:0.35rem;">Built automated CI/CD pipeline using GitHub Actions - automated Docker builds, smoke testing, and AWS ECS deployments.</div>
-                            </div>
-                            <div class="repo-footer">
-                                <div class="repo-stats"><span><i class="far fa-star"></i> 0</span><span><i class="fas fa-code-branch"></i> 0</span></div>
-                                <a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank" class="link-text" style="font-size:0.75rem;">Repo →</a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- BLOGS SECTION -->
                 <section id="blogs">
                     <div class="section-header">
-                        <h2>Blogs</h2>
+                        <h2>Blogs & Architectural Guides</h2>
                         <div class="title-underline"></div>
-                        <div class="meta-tagline">Technical insights, production incident RCA, and cloud engineering takeaways</div>
+                        <div class="meta-tagline">Step-by-step breakdowns, diagrams, use cases, and roadmaps</div>
                     </div>
 
                     <div class="cards-grid">
@@ -1695,121 +1088,49 @@
                             <span class="card-category-tag">ARTIFICIAL INTELLIGENCE</span>
                             <div class="card-icon"><i class="fas fa-brain"></i></div>
                             <h3>Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h3>
-                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">July 2026 · 6 min read</p>
-                            <p>Demystifying operational paradigms: how software delivery evolved from CI/CD automation (DevOps) to machine learning lifecycle management (MLOps), automated telemetry analysis (AIOps), and autonomous self-healing execution (Agentic AIOps).</p>
-                            <button onclick="openBlogModal('blog1')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">July 2026 · 10 min read</p>
+                            <p>An architectural guide comparing modern operations paradigms: software CI/CD (DevOps), model lifecycles (MLOps), automated telemetry analysis (AIOps), and autonomous self-healing execution (Agentic AIOps).</p>
+                            <button onclick="openBlogModal('blog1')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Full Guide →</button>
                         </div>
 
                         <!-- BLOG 2 -->
                         <div class="feature-card">
-                            <span class="card-category-tag">CLOUD COST OPTIMIZATION</span>
+                            <span class="card-category-tag">CLOUD COST AUDIT</span>
                             <div class="card-icon"><i class="fas fa-wallet"></i></div>
-                            <h3>How Auditing Zombie Caches Saved ₹1.5L/Month in AWS Infrastructure</h3>
-                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">May 2026 · 5 min read</p>
-                            <p>A deep dive into discovering and safely decommissioning an unindexed ElastiCache Redis cluster at Athena LMS that had been billing unnoticed since August 2025, leading to a company-wide cloud audit framework.</p>
-                            <button onclick="openBlogModal('blog2')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                            <h3>AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">May 2026 · 8 min read</p>
+                            <p>Step-by-step engineering walkthrough on discovering zombie Redis instances, auditing security groups, reducing cloud wastage, and implementing cost governance frameworks on AWS.</p>
+                            <button onclick="openBlogModal('blog2')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Full Guide →</button>
                         </div>
 
                         <!-- BLOG 3 -->
                         <div class="feature-card">
-                            <span class="card-category-tag">KUBERNETES & GITOPS</span>
+                            <span class="card-category-tag">KUBERNETES &amp; GITOPS</span>
                             <div class="card-icon"><i class="fas fa-dharmachakra"></i></div>
-                            <h3>Zero-Downtime Microservice Deployments with ArgoCD and Helm on AWS EKS</h3>
-                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">March 2026 · 7 min read</p>
-                            <p>Exploring declarative GitOps continuous delivery workflows. Learn how pairing ArgoCD with Helm charts and Horizontal Pod Autoscalers (HPA) achieves 99.9% uptime across production clusters.</p>
-                            <button onclick="openBlogModal('blog3')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                            <h3>Zero-Downtime Microservice Deployments via ArgoCD, Helm, &amp; AWS EKS</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">March 2026 · 9 min read</p>
+                            <p>Declarative GitOps architecture breakdown. Learn how to construct automated continuous delivery pipelines with Kubernetes rolling updates, Helm charts, and HPA autoscaling.</p>
+                            <button onclick="openBlogModal('blog3')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Full Guide →</button>
                         </div>
 
                         <!-- BLOG 4 -->
                         <div class="feature-card">
                             <span class="card-category-tag">CLOUD SECURITY</span>
                             <div class="card-icon"><i class="fas fa-user-shield"></i></div>
-                            <h3>Hardening Multi-Tenant SaaS Access: Implementing JWT & RBAC at Scale</h3>
-                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">January 2026 · 6 min read</p>
-                            <p>Strategies for establishing strict tenant isolation and least-privilege security across Dev, Staging, and Production environments for platforms serving over 1,000 active concurrent users.</p>
-                            <button onclick="openBlogModal('blog4')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
+                            <h3>Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">January 2026 · 8 min read</p>
+                            <p>A step-by-step guide to securing multi-tenant cloud platforms for 1,000+ users. Covers JWT signature verification, RBAC authorization, and network port locks on EC2 security groups.</p>
+                            <button onclick="openBlogModal('blog4')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Full Guide →</button>
                         </div>
 
                         <!-- BLOG 5 -->
                         <div class="feature-card">
-                            <span class="card-category-tag">OBSERVABILITY</span>
+                            <span class="card-category-tag">OBSERVABILITY &amp; SRE</span>
                             <div class="card-icon"><i class="fas fa-chart-area"></i></div>
-                            <h3>Lowering MTTR: Setting Up Custom Prometheus Alerts and Grafana Dashboards</h3>
-                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">November 2025 · 5 min read</p>
-                            <p>A practical guide on instrumenting Flask microservices with custom request counters and latency histograms to detect production anomalies before end-users report them.</p>
-                            <button onclick="openBlogModal('blog5')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Article →</button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- TOOLS & TECHNOLOGIES SECTION -->
-                <section id="skills">
-                    <div class="section-header">
-                        <h2>Tools &amp; Technologies</h2>
-                        <div class="title-underline"></div>
-                    </div>
-
-                    <div class="cards-grid">
-                        <div class="tech-category-card">
-                            <div class="tech-category-title">Cloud &amp; Infrastructure</div>
-                            <div class="tech-pills-container">
-                                <span class="tech-pill">AWS <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Cloud Networking <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Docker <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Kubernetes <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Terraform <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">CloudFormation <span class="tech-badge badge-int">Int</span></span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-category-title">CI/CD &amp; Automation</div>
-                            <div class="tech-pills-container">
-                                <span class="tech-pill">GitHub Actions <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Jenkins <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">ArgoCD <span class="tech-badge badge-int">Int</span></span>
-                                <span class="tech-pill">Bash <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Python <span class="tech-badge badge-int">Int</span></span>
-                                <span class="tech-pill">Shell <span class="tech-badge badge-adv">Adv</span></span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-category-title">Monitoring &amp; Observability</div>
-                            <div class="tech-pills-container">
-                                <span class="tech-pill">AWS CloudWatch <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Prometheus <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Grafana <span class="tech-badge badge-adv">Adv</span></span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-category-title">Distributed Systems &amp; Compute</div>
-                            <div class="tech-pills-container">
-                                <span class="tech-pill">EC2 Auto Scaling <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Load Balancing (ALB) <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">CDN (CloudFront OAC) <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Helm <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">Linux Environment <span class="tech-badge badge-adv">Adv</span></span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-category-title">Security &amp; DevSecOps</div>
-                            <div class="tech-pills-container">
-                                <span class="tech-pill">IAM &amp; Security Groups <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">RBAC &amp; JWT <span class="tech-badge badge-adv">Adv</span></span>
-                                <span class="tech-pill">VPC &amp; Subnets <span class="tech-badge badge-adv">Adv</span></span>
-                            </div>
-                        </div>
-
-                        <div class="tech-category-card">
-                            <div class="tech-category-title">Databases &amp; Caching</div>
-                            <div class="tech-pills-container">
-                                <span class="tech-pill">PostgreSQL <span class="tech-badge badge-int">Int</span></span>
-                                <span class="tech-pill">MySQL <span class="tech-badge badge-int">Int</span></span>
-                                <span class="tech-pill">Redis <span class="tech-badge badge-int">Int</span></span>
-                            </div>
+                            <h3>Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana Dashboards</h3>
+                            <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">November 2025 · 8 min read</p>
+                            <p>Practical SRE handbook on instrumenting microservices with custom counters, building real-time Grafana dashboards, and automating incident root cause analysis (RCA).</p>
+                            <button onclick="openBlogModal('blog5')" class="btn-main" style="padding:0.4rem 0.8rem; font-size:0.75rem; width:fit-content; margin-top:0.4rem;"><i class="fas fa-book-open"></i> Read Full Guide →</button>
                         </div>
                     </div>
                 </section>
@@ -1819,11 +1140,6 @@
                     <div class="section-header">
                         <h2>Contact</h2>
                         <div class="title-underline"></div>
-                        <p style="color:var(--text-body); font-size:0.85rem;">Have a project in mind or just want to say hi? Fill out the form below.</p>
-                    </div>
-
-                    <div class="badge-now" style="width: fit-content; margin-bottom: 1.25rem;">
-                        AVAILABLE FOR PROJECTS
                     </div>
 
                     <div class="contact-layout">
@@ -1844,18 +1160,8 @@
                                 <i class="fab fa-linkedin-in"></i>
                                 <a href="https://www.linkedin.com/in/kalyan-teja-gaddam/" target="_blank">kalyan-teja-gaddam</a>
                             </div>
-
-                            <div class="contact-detail">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>India · GMT+5:30</span>
-                            </div>
-
-                            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;">
-                                <i class="far fa-clock"></i> Usually responds within 24 hours
-                            </div>
                         </div>
 
-                        <!-- FORMSPREE AJAX SUBMISSION FORM -->
                         <form class="form-grid" id="contactForm" onsubmit="submitFormspree(event)">
                             <div class="form-row">
                                 <div class="form-group">
@@ -1871,7 +1177,6 @@
                             <div class="form-group">
                                 <label for="msg">Your Message</label>
                                 <textarea id="msg" name="message" placeholder="Your Message" required></textarea>
-                                <div class="form-meta">0/500</div>
                             </div>
 
                             <button type="submit" class="btn-submit" id="submitBtn">
@@ -1882,7 +1187,7 @@
                     </div>
                 </section>
 
-                <!-- INTERACTIVE TERMINAL SECTION -->
+                <!-- TERMINAL SECTION -->
                 <section id="terminal-section">
                     <div class="section-header">
                         <h2>Terminal Shell</h2>
@@ -1899,12 +1204,11 @@
                         <div class="terminal-body" id="terminalOutput">
                             <div class="terminal-line"><span style="color:var(--accent-blue);">Interactive Terminal Shell Portfolio</span></div>
                             <div class="terminal-line" style="color:var(--text-muted);">Type '<span style="color:var(--accent-green);">help</span>' to list all available CLI commands.</div>
-                            <div class="terminal-line">----------------------------------------------------</div>
                         </div>
                         <div style="padding:0.5rem 1rem; border-top:1px solid var(--border-color); background:#0c0d12;">
                             <form class="terminal-input-wrapper" onsubmit="handleTerminalCommand(event)">
                                 <span class="terminal-prompt">kalyan@portfolio:~$</span>
-                                <input type="text" id="terminalInput" class="terminal-input" placeholder="Type a command (e.g. help, ls, about, skills, clear)..." autocomplete="off">
+                                <input type="text" id="terminalInput" class="terminal-input" placeholder="Type a command (e.g. help, ls, about, skills, blogs)..." autocomplete="off">
                             </form>
                         </div>
                     </div>
@@ -1913,14 +1217,11 @@
                 <!-- FOOTER -->
                 <footer class="console-footer">
                     <div>© 2026 Gaddam Kalyan Teja</div>
-                    <div class="footer-status">
-                        <span class="pulse-indicator"></span> All systems operational
-                    </div>
+                    <div class="footer-status"><span class="pulse-indicator"></span> All systems operational</div>
                 </footer>
 
             </main>
         </div>
-
     </div>
 
     <!-- FULLSCREEN CERTIFICATE IMAGE MODAL -->
@@ -1933,11 +1234,9 @@
 
     <!-- FULLSCREEN BLOG READER MODAL -->
     <div id="blogModal" class="modal" onclick="closeBlogModal()">
-        <div class="modal-content" onclick="event.stopPropagation()" style="max-width:800px; width:90%; max-height:85vh; overflow-y:auto; align-items:flex-start; padding:2rem;">
+        <div class="modal-content" onclick="event.stopPropagation()" style="max-width:850px; width:92%; max-height:88vh; overflow-y:auto; align-items:flex-start; padding:2rem;">
             <div class="close-modal" onclick="closeBlogModal()">&times;</div>
-            <div id="blogModalBody" style="line-height:1.7; color:var(--text-body); width:100%;">
-                <!-- Content injected dynamically -->
-            </div>
+            <div id="blogModalBody" class="blog-article-content" style="line-height:1.7; color:var(--text-body); width:100%;"></div>
         </div>
     </div>
 
@@ -1946,15 +1245,75 @@
         <div class="search-modal-box" onclick="event.stopPropagation()">
             <div class="search-input-wrapper">
                 <i class="fas fa-search" style="color:var(--text-muted);"></i>
-                <input type="text" id="searchInput" placeholder="Type to search skills, projects, experience..." onkeyup="filterSearch()">
+                <input type="text" id="searchInput" placeholder="Type to search skills, projects, blogs..." onkeyup="filterSearch()">
             </div>
-            <div class="search-results-list" id="searchResults">
-                <!-- Dynamically Populated -->
-            </div>
+            <div class="search-results-list" id="searchResults"></div>
         </div>
     </div>
 
+    <!-- THREE.JS LIBRARY FOR INTERACTIVE 3D BACKGROUND -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <script>
+        // THREE.JS INTERACTIVE 3D CANVAS BACKGROUND
+        const canvas = document.getElementById('webgl-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // 3D Icosahedron Mesh (DevOps Cloud Sphere Node)
+        const geometry = new THREE.IcosahedronGeometry(2.2, 1);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x3b82f6,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.35
+        });
+        const sphereMesh = new THREE.Mesh(geometry, material);
+        scene.add(sphereMesh);
+
+        // Core Glowing Node
+        const coreGeo = new THREE.IcosahedronGeometry(1.2, 0);
+        const coreMat = new THREE.MeshBasicMaterial({
+            color: 0x22c55e,
+            wireframe: true,
+            transparent: true,
+            opacity: 0.5
+        });
+        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+        scene.add(coreMesh);
+
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 1.5;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 1.5;
+        });
+
+        function animate3D() {
+            requestAnimationFrame(animate3D);
+            sphereMesh.rotation.x += 0.0015;
+            sphereMesh.rotation.y += 0.0025;
+            coreMesh.rotation.x -= 0.003;
+            coreMesh.rotation.y -= 0.004;
+
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+        animate3D();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
         // MASTER CERTIFICATES LIST (30 Exact Items mapped to Google Drive File IDs)
         const certificatesList = [
             { id: "c1", title: "Python Beginner to Advanced", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
@@ -1989,72 +1348,151 @@
             { id: "c30", title: "Docker Kubernetes MasterClass: DevOps from Scratch", fileId: "1sRzh6kMgVDBMAtY_8BpB5B3MGmpL5ZAz" }
         ];
 
-        // BLOG ARTICLES DATABASE
+        // DETAILED BLOG ARTICLES DATABASE WITH DIAGRAMS & ROADMAPS
         const blogsDatabase = {
             blog1: {
                 title: "Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps",
                 content: `
-                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h3>
-                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: July 2026 · By Gaddam Kalyan Teja · 6 min read</p>
-                    
-                    <p style="margin-bottom:1rem;">As modern cloud infrastructure expands, the terminology surrounding operational engineering has diversified rapidly. Here is an architectural comparison breaking down the differences between DevOps, MLOps, AIOps, and Agentic AIOps.</p>
-                    
-                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">1. DevOps (Development & Operations)</h4>
-                    <p style="margin-bottom:1rem;">DevOps unifies software development and IT operations through continuous integration and continuous delivery (CI/CD). Tools like Terraform, Docker, and GitHub Actions allow engineers to manage infrastructure as code (IaC) and automate release pipelines.</p>
+                    <h3 style="font-size:1.5rem; color:var(--text-heading); margin-bottom:0.5rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.25rem;">Published: July 2026 · By Gaddam Kalyan Teja · 10 min read</p>
 
-                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">2. MLOps (Machine Learning Operations)</h4>
-                    <p style="margin-bottom:1rem;">MLOps extends DevOps principles to machine learning models. Instead of managing static code artifacts, MLOps governs data versioning, model training, feature stores, model registries, and drift detection in production environments.</p>
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80" alt="Artificial Intelligence Cloud Operations" />
 
-                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">3. AIOps (Artificial Intelligence for IT Operations)</h4>
-                    <p style="margin-bottom:1rem;">AIOps uses machine learning to process massive streams of telemetry data (logs, metrics, and traces). Instead of setting manual alert thresholds in Prometheus or CloudWatch, AIOps platforms autonomously detect metric anomalies and correlate root causes across complex systems.</p>
+                    <h4>1. What It Is &amp; Why It Exists</h4>
+                    <p>Modern software infrastructure has scaled from single monolithic servers to complex distributed systems. To maintain reliability across cloud multi-tenant environments, distinct operational paradigms have evolved:</p>
+                    <ul>
+                        <li><strong>DevOps</strong>: Merges software development and IT operations using automated build pipelines and Infrastructure as Code (IaC).</li>
+                        <li><strong>MLOps</strong>: Extends DevOps to manage machine learning model lifecycles, dataset versioning, training pipelines, and feature stores.</li>
+                        <li><strong>AIOps</strong>: Applies AI algorithms to IT telemetry data (logs, metrics, traces) to automate anomaly detection and event correlation.</li>
+                        <li><strong>Agentic AIOps</strong>: Uses autonomous AI agents equipped with tool-calling privileges to execute end-to-end incident investigation and system self-healing.</li>
+                    </ul>
 
-                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">4. Agentic AIOps (Autonomous System Remediation)</h4>
-                    <p style="margin-bottom:1rem;">Agentic AIOps represents the next frontier: moving from detection to autonomous execution. Autonomous LLM agents equipped with system tool-calling privileges parse incident tickets, perform root cause analysis (RCA), execute corrective runbooks (such as scaling auto-scaling groups or rolling back broken Kubernetes pods), and document resolved incidents with zero manual intervention.</p>
+                    <h4>2. Architecture Visual Breakdown</h4>
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Cloud Infrastructure Server Architecture" />
+
+                    <h4>3. Step-by-Step Execution: How We Use It</h4>
+                    <ol>
+                        <li><strong>Step 1 (DevOps)</strong>: Commit infrastructure changes via Terraform and deploy containerized microservices through GitHub Actions.</li>
+                        <li><strong>Step 2 (MLOps)</strong>: Automatically re-train and evaluate ML model weights upon new data ingestion using Kubeflow.</li>
+                        <li><strong>Step 3 (AIOps)</strong>: Aggregate CloudWatch and Prometheus metrics into an anomaly detection engine to identify latency spikes before SLA breaches occur.</li>
+                        <li><strong>Step 4 (Agentic AIOps)</strong>: An AI Agent intercepts the PagerDuty alert, inspects Kubernetes pod logs via <code>kubectl</code>, restarts failing containers, and updates the incident ticket automatically.</li>
+                    </ol>
+
+                    <h4>4. Real-World Use Cases</h4>
+                    <p>In high-scale multi-tenant SaaS platforms (such as Athena LMS serving 1,000+ active users), Agentic AIOps automatically mitigates noisy-neighbor performance bottlenecks without waking on-call engineers at 3 AM.</p>
+
+                    <h4>5. Learning Roadmap</h4>
+                    <div class="code-snippet">
+Roadmap: Linux Admin ➔ Docker & Kubernetes ➔ Terraform IaC ➔ Python Scripting ➔ Prometheus/Grafana ➔ MLOps (Kubeflow) ➔ Agentic LLM Orchestration
+                    </div>
                 `
             },
             blog2: {
-                title: "How Auditing Zombie Caches Saved ₹1.5L/Month in AWS Infrastructure",
+                title: "AWS Cost Optimization: Auditing Unused Caches & Saving ₹18L/Year",
                 content: `
-                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">How Auditing Zombie Caches Saved ₹1.5L/Month in AWS Infrastructure</h3>
-                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: May 2026 · By Gaddam Kalyan Teja · 5 min read</p>
-                    
-                    <p style="margin-bottom:1rem;">Within two months of joining Athena LMS, I discovered an idle ElastiCache Redis cluster that had been generating recurring charges since August 2025 without serving live traffic.</p>
-                    
-                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">Investigation & Identification</h4>
-                    <p style="margin-bottom:1rem;">By inspecting CloudWatch metrics for Read/Write Ops and Network Throughput across our Multi-AZ AWS infrastructure, I noticed zero active cache connections on a high-spec Redis instance. Cross-referencing application deployment manifests confirmed the cache was rendered obsolete following a previous architecture migration.</p>
+                    <h3 style="font-size:1.5rem; color:var(--text-heading); margin-bottom:0.5rem;">AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.25rem;">Published: May 2026 · By Gaddam Kalyan Teja · 8 min read</p>
 
-                    <h4 style="color:var(--text-heading); margin-top:1.2rem; margin-bottom:0.4rem;">Impact & Audit Framework</h4>
-                    <p style="margin-bottom:1rem;">Decommissioning this single orphaned resource saved <strong>₹1.5 Lakhs/month (₹18 Lakhs/year)</strong>. This success triggered a company-wide cost optimization audit, where we audited 150+ security group rules, standardized instance sizes with AWS Cost Explorer, and optimized S3 storage lifecycles.</p>
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1000&q=80" alt="Cloud Cost Analytics" />
+
+                    <h4>1. What It Is &amp; Why We Need It</h4>
+                    <p>Cloud environments make resource creation instant, but without continuous monitoring, orphaned resources (zombie instances, idle caches, unattached EBS volumes) continuously drain budgets. Cloud cost optimization establishes continuous visibility and governance over cloud expenditures.</p>
+
+                    <h4>2. Case Study: The ₹1.5L/Month Athena LMS Redis Discovery</h4>
+                    <p>Within two months of onboarding at Athena LMS, I conducted a resource utilization audit across our AWS Multi-AZ infrastructure. By analyzing CloudWatch metrics for Read/Write Ops and Network Throughput, I discovered a high-spec ElastiCache Redis cluster running with <strong>zero active client connections</strong> since August 2025.</p>
+
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80" alt="Data Analytics Graphs" />
+
+                    <h4>3. Step-by-Step Decommissioning Process</h4>
+                    <ol>
+                        <li><strong>Identify</strong>: Filter ElastiCache clusters where <code>CurrConnections == 0</code> for 14+ consecutive days.</li>
+                        <li><strong>Audit Dependencies</strong>: Search application source code and Terraform state files for reference strings.</li>
+                        <li><strong>Snapshot &amp; Backup</strong>: Create a final manual Redis snapshot before deletion.</li>
+                        <li><strong>Decommission</strong>: Destroy the cluster via Terraform to maintain IaC state synchronization.</li>
+                        <li><strong>Verify</strong>: Confirm monthly savings of ₹1.5 Lakhs (₹18 Lakhs annually) in AWS Cost Explorer.</li>
+                    </ol>
+
+                    <h4>4. Real-World Use Cases &amp; Learning Roadmap</h4>
+                    <p>Cost audits should be baked into CI/CD pipelines using automated tools like AWS Infracost, AWS Cost Explorer APIs, and Curator scripts.</p>
                 `
             },
             blog3: {
-                title: "Zero-Downtime Microservice Deployments with ArgoCD and Helm on AWS EKS",
+                title: "Zero-Downtime Microservice Deployments via ArgoCD, Helm, & AWS EKS",
                 content: `
-                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Zero-Downtime Microservice Deployments with ArgoCD and Helm on AWS EKS</h3>
-                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: March 2026 · By Gaddam Kalyan Teja · 7 min read</p>
-                    
-                    <p style="margin-bottom:1rem;">Maintaining high availability across microservices requires moving from manual deployment scripts to GitOps continuous delivery.</p>
-                    <p style="margin-bottom:1rem;">By pairing <strong>ArgoCD</strong> with version-controlled <strong>Helm charts</strong> on Amazon EKS, state synchronization becomes declarative. In this post, I detail configuring readiness and liveness probes, rolling update strategies, and Horizontal Pod Autoscaling (HPA) to maintain 99.9% uptime during peak application loads.</p>
+                    <h3 style="font-size:1.5rem; color:var(--text-heading); margin-bottom:0.5rem;">Zero-Downtime Microservice Deployments via ArgoCD, Helm, &amp; AWS EKS</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.25rem;">Published: March 2026 · By Gaddam Kalyan Teja · 9 min read</p>
+
+                    <img src="https://images.unsplash.com/photo-1667372335854-c2a2a69094f6?auto=format&fit=crop&w=1000&q=80" alt="Kubernetes Container Operations" />
+
+                    <h4>1. What It Is &amp; Why We Use It</h4>
+                    <p>Traditional deployment scripts frequently cause brief service downtime during container updates. By combining <strong>GitOps (ArgoCD)</strong> with <strong>Kubernetes (AWS EKS)</strong> and <strong>Helm packaging</strong>, application updates are executed zero-downtime rolling releases.</p>
+
+                    <h4>2. System Architecture</h4>
+                    <div class="code-snippet">
+Developer Git Push ➔ GitHub Repository ➔ ArgoCD Sync Controller ➔ Helm Manifest Render ➔ EKS Rolling Update (Pod Readiness Check) ➔ Active Ingress Route
+                    </div>
+
+                    <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=1000&q=80" alt="Software Engineering Code" />
+
+                    <h4>3. How to Implement Rolling Updates</h4>
+                    <p>Define readiness and liveness probes in your Helm templates to ensure traffic is only routed to pods that are fully initialized:</p>
+                    <div class="code-snippet">
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
+                    </div>
                 `
             },
             blog4: {
-                title: "Hardening Multi-Tenant SaaS Access: Implementing JWT & RBAC at Scale",
+                title: "Hardening Multi-Tenant SaaS Access: JWT Authentication & RBAC",
                 content: `
-                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Hardening Multi-Tenant SaaS Access: Implementing JWT & RBAC at Scale</h3>
-                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: January 2026 · By Gaddam Kalyan Teja · 6 min read</p>
-                    
-                    <p style="margin-bottom:1rem;">Managing multi-tenant infrastructure for over 1,000 concurrent users requires robust security architecture to prevent cross-tenant data leaks.</p>
-                    <p style="margin-bottom:1rem;">This article outlines our approach to implementing JSON Web Token (JWT) verification alongside Role-Based Access Control (RBAC) across Dev, Staging, and Production. We also discuss closing 25+ unnecessary open ports and establishing least-privilege security group rules across 20+ EC2 instances.</p>
+                    <h3 style="font-size:1.5rem; color:var(--text-heading); margin-bottom:0.5rem;">Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.25rem;">Published: January 2026 · By Gaddam Kalyan Teja · 8 min read</p>
+
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1000&q=80" alt="Cyber Security Data Vault" />
+
+                    <h4>1. What It Is &amp; Why Security Matters</h4>
+                    <p>In a SaaS application serving 1,000+ multi-tenant users, strict isolation is paramount. Without secure authentication (JWT) and Role-Based Access Control (RBAC), unauthorized cross-tenant data access becomes a critical vulnerability.</p>
+
+                    <h4>2. Network &amp; Identity Security Architecture</h4>
+                    <p>We hardened our cloud infrastructure by closing 25+ unneeded public ports, implementing security group locks across 20+ EC2 instances, and verifying JWT cryptographical signatures at the Application Load Balancer (ALB) and ingress layers.</p>
+
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80" alt="Binary Code Security Matrix" />
+
+                    <h4>3. Implementation Roadmap</h4>
+                    <ul>
+                        <li><strong>Step 1</strong>: Issue HMAC-SHA256 signed JWT tokens containing <code>tenant_id</code> claims upon user login.</li>
+                        <li><strong>Step 2</strong>: Enforce middle-layer verification checking user scope against requested API routes.</li>
+                        <li><strong>Step 3</strong>: Restrict AWS security group ingress rules strictly to ALB security group IDs.</li>
+                    </ul>
                 `
             },
             blog5: {
-                title: "Lowering MTTR: Setting Up Custom Prometheus Alerts and Grafana Dashboards",
+                title: "Lowering MTTR: Prometheus Metrics, Alertmanager, & Grafana Dashboards",
                 content: `
-                    <h3 style="font-size:1.4rem; color:var(--text-heading); margin-bottom:0.5rem;">Lowering MTTR: Setting Up Custom Prometheus Alerts and Grafana Dashboards</h3>
-                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.5rem;">Published: November 2025 · By Gaddam Kalyan Teja · 5 min read</p>
-                    
-                    <p style="margin-bottom:1rem;">Mean Time to Resolution (MTTR) is a key Site Reliability Engineering (SRE) metric. When system failures occur, instant observability makes all the difference.</p>
-                    <p style="margin-bottom:1rem;">This guide explains how to instrument Python/Flask microservices with custom Prometheus metrics (counter rates, histogram latency buckets) and provision Grafana dashboards to monitor request throughput, error percentages, and Node Exporter system telemetry.</p>
+                    <h3 style="font-size:1.5rem; color:var(--text-heading); margin-bottom:0.5rem;">Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana Dashboards</h3>
+                    <p style="font-family:var(--font-mono); font-size:0.75rem; color:var(--accent-blue); margin-bottom:1.25rem;">Published: November 2025 · By Gaddam Kalyan Teja · 8 min read</p>
+
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="Realtime Data Operations Center Dashboard" />
+
+                    <h4>1. What It Is &amp; Why We Need Observability</h4>
+                    <p>Mean Time to Resolution (MTTR) measures how quickly an engineering team recovers from production incidents. High observability allows SRE teams to spot p95 latency spikes and memory leaks before users notice downtime.</p>
+
+                    <h4>2. Metric Collection &amp; Visualization Setup</h4>
+                    <p>By instrumenting Flask microservices with the Prometheus Client library, we track request throughput, HTTP error counters, and CPU/memory histograms directly inside custom Grafana dashboards.</p>
+
+                    <div class="code-snippet">
+from prometheus_client import Counter, Histogram
+
+REQUEST_COUNT = Counter('app_requests_total', 'Total HTTP Requests', ['method', 'endpoint', 'status'])
+LATENCY = Histogram('app_request_latency_seconds', 'Request Latency')
+                    </div>
+
+                    <h4>3. SRE Incident RCA Workflow</h4>
+                    <p>Alertmanager routes critical high-latency alerts to Slack/PagerDuty, enabling rapid Root Cause Analysis (RCA) and reducing MTTR by over 40% across production environments.</p>
                 `
             }
         };
@@ -2099,9 +1537,7 @@
                 const response = await fetch('https://formspree.io/f/mrenllvr', {
                     method: 'POST',
                     body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: { 'Accept': 'application/json' }
                 });
 
                 if (response.ok) {
@@ -2126,14 +1562,12 @@
             }
         }
 
-        // Profile Fallback
         function renderProfileFallback(imgId) {
             const img = document.getElementById(imgId);
             const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e2230'/><circle cx='50' cy='36' r='18' fill='%233b82f6'/><path d='M20 85 C 20 60, 80 60, 80 85 Z' fill='%233b82f6'/></svg>`;
             img.src = "data:image/svg+xml;utf8," + svg;
         }
 
-        // Certificate Fallback
         function renderCertFallback(imgId, title) {
             const img = document.getElementById(imgId);
             const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='380' viewBox='0 0 600 380'><rect width='600' height='380' fill='%2314161d'/><rect x='15' y='15' width='570' height='350' fill='none' stroke='%233b82f6' stroke-width='4' rx='8'/><text x='300' y='100' fill='%23ffffff' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>CERTIFICATE OF COMPLETION</text><text x='300' y='190' fill='%233b82f6' font-family='sans-serif' font-size='24' font-weight='bold' text-anchor='middle'>${title}</text><text x='300' y='260' fill='%239ea4b5' font-family='sans-serif' font-size='16' text-anchor='middle'>Presented to: Gaddam Kalyan Teja</text></svg>`;
@@ -2176,7 +1610,6 @@
             }
         }
 
-        // Dark/Light Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -2195,7 +1628,6 @@
             }
         }
 
-        // Modal for Certificates
         function viewCertModal(imgSrc) {
             const modal = document.getElementById('certModal');
             const modalImg = document.getElementById('certModalImg');
@@ -2207,7 +1639,6 @@
             document.getElementById('certModal').style.display = 'none';
         }
 
-        // Modal for Blogs
         function openBlogModal(blogId) {
             const modal = document.getElementById('blogModal');
             const body = document.getElementById('blogModalBody');
@@ -2246,11 +1677,9 @@
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">about</span>&nbsp;&nbsp;&nbsp;&nbsp;- Summary profile<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">projects</span>&nbsp;&nbsp;- List GitHub repositories<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">skills</span>&nbsp;&nbsp;&nbsp;&nbsp;- Show technical skills<br>
-                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">blogs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List written articles<br>
+                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">blogs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show written architectural guides<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">contact</span>&nbsp;&nbsp;&nbsp;- Email & phone details<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">certs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show certifications count<br>
-                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">ls</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- List directory sections<br>
-                        &nbsp;&nbsp;<span style="color:var(--accent-blue);">whoami</span>&nbsp;&nbsp;&nbsp;- Current active user<br>
                         &nbsp;&nbsp;<span style="color:var(--accent-blue);">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;- Clear shell terminal screen
                     `;
                     break;
@@ -2266,26 +1695,16 @@
                     break;
                 case 'blogs':
                     document.getElementById('blogs').scrollIntoView({ behavior: 'smooth' });
-                    response.innerHTML = `5 published articles available: AIOps vs DevOps, AWS Cost Audit, ArgoCD GitOps, JWT & RBAC SaaS Security, Prometheus Monitoring.`;
+                    response.innerHTML = `5 published technical guides available: AIOps vs DevOps, AWS Cost Audit, ArgoCD GitOps, JWT & RBAC SaaS Security, Prometheus Monitoring.`;
                     break;
                 case 'projects':
-                    response.innerHTML = `
-                        1. monitoring-prometheus-grafana<br>
-                        2. ci-cd-jenkins-docker<br>
-                        3. gitops-argocd-kubernetes<br>
-                        4. cloudformation-aws-infra<br>
-                        5. terraform-aws-iac<br>
-                        6. devops-cicd-github-actions
-                    `;
+                    response.innerHTML = `1. monitoring-prometheus-grafana<br>2. ci-cd-jenkins-docker<br>3. gitops-argocd-kubernetes<br>4. cloudformation-aws-infra<br>5. terraform-aws-iac<br>6. devops-cicd-github-actions`;
                     break;
                 case 'skills':
                     response.innerHTML = `AWS (EC2, S3, ALB, CloudFront), Terraform, Docker, Kubernetes (EKS), Helm, Jenkins, GitHub Actions, Prometheus, Grafana, Linux, Python, Bash.`;
                     break;
                 case 'contact':
                     response.innerHTML = `Email: kalyanteja18@gmail.com | Phone: +91 89853 81228 | LinkedIn: kalyan-teja-gaddam`;
-                    break;
-                case 'whoami':
-                    response.innerHTML = `visitor@kalyan-teja-portfolio`;
                     break;
                 case 'clear':
                     output.innerHTML = '';
@@ -2306,8 +1725,8 @@
             { title: "Terraform & IaC", category: "Skills", link: "#skills" },
             { title: "Docker & Kubernetes", category: "Skills", link: "#skills" },
             { title: "Ops Explained: AIOps vs DevOps vs MLOps vs Agentic AIOps", category: "Blogs", link: "#blogs" },
-            { title: "How Auditing Zombie Caches Saved ₹1.5L/Month", category: "Blogs", link: "#blogs" },
-            { title: "Zero-Downtime Deployments with ArgoCD and Helm", category: "Blogs", link: "#blogs" },
+            { title: "AWS Cost Optimization: Auditing Unused Caches", category: "Blogs", link: "#blogs" },
+            { title: "Zero-Downtime Deployments via ArgoCD and Helm", category: "Blogs", link: "#blogs" },
             { title: "Athena LMS Experience", category: "Resume", link: "exp" },
             { title: "Eastri Experience", category: "Resume", link: "exp" },
             { title: "Narayana Junior College (Intermediate)", category: "Education", link: "educ" },
