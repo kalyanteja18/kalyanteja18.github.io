@@ -48,14 +48,17 @@
             scroll-behavior: smooth;
         }
 
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             background-color: var(--bg-main);
             color: var(--text-body);
             font-family: var(--font-sans);
             font-size: 0.92rem;
             line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
             transition: background-color 0.4s ease, color 0.4s ease;
             position: relative;
         }
@@ -136,7 +139,7 @@
             cursor: grabbing;
         }
 
-        /* APP WRAPPER */
+        /* APP WRAPPER WITH SCROLL SNAP TRANSITIONS */
         .app-container {
             position: relative;
             z-index: 3;
@@ -145,19 +148,24 @@
             padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 4.5rem;
+            gap: 5rem;
         }
 
-        /* SCROLL REVEAL ANIMATIONS */
-        .reveal-section {
+        /* DRIBBBLE-STYLE INTERACTIVE SCROLL SNAP SECTION */
+        .snap-section {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(60px) scale(0.96) rotateX(10deg);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            perspective: 1000px;
         }
 
-        .reveal-section.visible {
+        .snap-section.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1) rotateX(0deg);
         }
 
         /* NAV BAR */
@@ -585,7 +593,7 @@
         </nav>
 
         <!-- HERO BANNER -->
-        <section class="hero-banner reveal-section" id="about">
+        <section class="hero-banner snap-section" id="about">
             <div class="tag-pill">DevOps &amp; Cloud Engineering</div>
             <h1 class="hero-title-giant">I AUTOMATE, SCALE &amp; SECURE <span>CLOUD INFRASTRUCTURE.</span></h1>
             <p class="hero-subtext">
@@ -596,9 +604,7 @@
                 <a href="https://drive.google.com/uc?export=download&id=1uqOFDpmF5knxAAfJXhvrihNuy6wR9q8E" target="_blank" download="Gaddam_Kalyan_Teja_Resume.pdf" class="haoqi-btn" style="background:var(--accent-blue); color:#fff; border:none;">
                     <i class="fas fa-download"></i> Download CV
                 </a>
-                <!-- DIRECT GMAIL DRAFT REDIRECT -->
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kalyanteja18@gmail.com" target="_blank" class="haoqi-btn"><i class="far fa-envelope"></i> Send Email Direct</a>
-                <!-- TWITTER & INSTAGRAM ADDED NEXT TO GITHUB -->
                 <a href="https://x.com/KALYANT06423430" target="_blank" class="haoqi-btn"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
                 <a href="https://www.instagram.com/kalyantejagaddam/?hl=en" target="_blank" class="haoqi-btn"><i class="fab fa-instagram"></i> Instagram</a>
                 <a href="https://github.com/kalyanteja18" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> GitHub</a>
@@ -607,7 +613,7 @@
         </section>
 
         <!-- RESUME & CREDENTIALS SECTION -->
-        <section class="reveal-section" id="resume">
+        <section class="snap-section" id="resume">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Resume &amp; Experience</h2>
                 <div class="tag-pill">30 Verified Certifications</div>
@@ -666,7 +672,7 @@
         </section>
 
         <!-- PROJECTS SECTION -->
-        <section class="reveal-section" id="projects">
+        <section class="snap-section" id="projects">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Projects</h2>
                 <div class="tag-pill">6 Repositories</div>
@@ -718,7 +724,7 @@
         </section>
 
         <!-- BLOGS SECTION -->
-        <section class="reveal-section" id="blogs">
+        <section class="snap-section" id="blogs">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Case Studies &amp; Technical Guides</h2>
                 <div class="tag-pill">5 Deep Dive Guides</div>
@@ -727,35 +733,35 @@
             <div class="grid-layout">
                 <div class="haoqi-card">
                     <div class="tag-pill">ARTIFICIAL INTELLIGENCE</div>
-                    <h3>Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h3>
-                    <p>Comprehensive guide comparing modern ops paradigms: software CI/CD (DevOps), model lifecycles (MLOps), automated telemetry (AIOps), and autonomous healing agents.</p>
+                    <h3>1. AIOps vs DevOps vs MLOps vs Agentic AIOps</h3>
+                    <p>Understanding operational boundaries: software CI/CD (DevOps), model lifecycles (MLOps), automated telemetry (AIOps), and autonomous healing agents.</p>
                     <button class="haoqi-btn" onclick="openBlogModal('blog1')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
                 </div>
 
                 <div class="haoqi-card">
                     <div class="tag-pill">CLOUD COST AUDIT</div>
-                    <h3>AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h3>
+                    <h3>2. AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h3>
                     <p>Engineering breakdown of auditing CloudWatch metrics to discover idle Redis instances, closing exposed ports, and executing zero-downtime cache decommissioning.</p>
                     <button class="haoqi-btn" onclick="openBlogModal('blog2')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
                 </div>
 
                 <div class="haoqi-card">
                     <div class="tag-pill">KUBERNETES &amp; GITOPS</div>
-                    <h3>Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h3>
+                    <h3>3. Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h3>
                     <p>Declarative GitOps architecture breakdown. Construct automated continuous delivery pipelines with Kubernetes rolling updates, Helm charts, and HPA autoscaling.</p>
                     <button class="haoqi-btn" onclick="openBlogModal('blog3')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
                 </div>
 
                 <div class="haoqi-card">
                     <div class="tag-pill">CLOUD SECURITY</div>
-                    <h3>Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h3>
+                    <h3>4. Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h3>
                     <p>Securing multi-tenant cloud platforms for 1,000+ users. Covers JWT signature verification, RBAC authorization, and network port locks on EC2 security groups.</p>
                     <button class="haoqi-btn" onclick="openBlogModal('blog4')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
                 </div>
 
                 <div class="haoqi-card">
                     <div class="tag-pill">OBSERVABILITY &amp; SRE</div>
-                    <h3>Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h3>
+                    <h3>5. Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h3>
                     <p>Practical SRE handbook on instrumenting microservices with custom counters, building real-time Grafana dashboards, and automating incident root cause analysis (RCA).</p>
                     <button class="haoqi-btn" onclick="openBlogModal('blog5')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
                 </div>
@@ -763,7 +769,7 @@
         </section>
 
         <!-- TERMINAL SHELL SECTION -->
-        <section class="reveal-section" id="terminal-section">
+        <section class="snap-section" id="terminal-section">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Interactive CLI Shell</h2>
                 <div class="tag-pill">Command Line</div>
@@ -807,11 +813,11 @@
         <div class="case-study-container">
             <div class="case-study-toc">
                 <strong style="color:var(--text-heading);">TABLE OF CONTENTS</strong>
-                <a href="#toc-1">1. Overview &amp; Definition</a>
-                <a href="#toc-2">2. Architecture &amp; Diagrams</a>
-                <a href="#toc-3">3. Step-by-Step Execution</a>
-                <a href="#toc-4">4. Production Use Cases</a>
-                <a href="#toc-5">5. Learning Roadmap</a>
+                <a href="#toc-why">1. Why This Matters</a>
+                <a href="#toc-how">2. How To Use It</a>
+                <a href="#toc-arch">3. Architecture Diagram</a>
+                <a href="#toc-road">4. Roadmap To Adopt</a>
+                <a href="#toc-real">5. Real-Life Example</a>
             </div>
             <div class="case-study-content" id="case-study-body"></div>
         </div>
@@ -840,7 +846,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
-        // 1. CURSOR COORD TRACKER, RETRO DUST & SCROLL ANIMATION OBSERVER
+        // 1. CURSOR COORD TRACKER, RETRO DUST & DRIBBBLE SNAP OBSERVER
         const coordTracker = document.getElementById('coord-tracker');
         const scrollThumb = document.getElementById('scroll-thumb');
 
@@ -870,16 +876,16 @@
             scrollThumb.style.transform = `translateY(${scrollPercent * 180}px)`;
         });
 
-        // Intersection Observer for Smooth Section Scroll Transitions
+        // Intersection Observer for Smooth Section Snap-Scroll Transitions
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.2 });
 
-        document.querySelectorAll('.reveal-section').forEach(sec => observer.observe(sec));
+        document.querySelectorAll('.snap-section').forEach(sec => observer.observe(sec));
 
         // 2. THREE.JS ELASTIC JELLY MESH 3D SCENE
         const canvas = document.getElementById('hero-3d-canvas');
@@ -942,7 +948,7 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // 3. RELIABLE MULTI-TONE WEB AUDIO SYNTHESIZER
+        // 3. MULTI-TONE WEB AUDIO SYNTHESIZER
         let audioCtx = null;
         let isPlaying = false;
         let activeNodes = [];
@@ -952,7 +958,6 @@
             if (!isPlaying) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // Polyphonic ambient chord frequencies (A Major 9 Ambient Pad)
                 const freqs = [110.00, 164.81, 220.00, 277.18, 329.63];
                 
                 freqs.forEach(f => {
@@ -1036,50 +1041,42 @@
         }
         window.addEventListener('DOMContentLoaded', renderCertificates);
 
-        // 5. BLOGS EDITORIAL DATABASE (5 EXTENDED IN-DEPTH GUIDES)
+        // 5. BLOGS EDITORIAL DATABASE (RESTORED COMPLETE CONTENT)
         const blogsData = {
             blog1: {
                 content: `
-                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h1>
+                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">AIOps vs DevOps vs MLOps vs Agentic AIOps</h1>
                     <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">July 2026 · By Gaddam Kalyan Teja · 12 min read</div>
 
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="AI Operations">
 
-                    <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>Modern software delivery has transformed from monolithic deployments to automated cloud pipelines. Understanding operational paradigms is essential for building scalable systems:</p>
+                    <h2 id="toc-why">1. Why This Matters</h2>
+                    <p>Every "Ops" term gets thrown around interchangeably, but they solve different problems. DevOps automates how software ships. MLOps automates how models get trained and deployed. AIOps automates how you watch systems — using AI to cut through alert noise. Agentic AIOps is the newest layer: instead of just detecting a problem, an AI agent investigates and fixes it. Understanding where each one starts and stops matters because teams waste budget buying an "AIOps platform" when what they actually needed was basic CI/CD discipline, or vice versa.</p>
+
+                    <h2 id="toc-how">2. How To Use It</h2>
                     <ul>
-                        <li><strong>DevOps</strong>: Merges software development and IT operations through automated CI/CD and Infrastructure as Code (IaC).</li>
-                        <li><strong>MLOps</strong>: Extends DevOps principles to machine learning model training, dataset versioning, feature stores, and model registries.</li>
-                        <li><strong>AIOps</strong>: Uses machine learning algorithms to process real-time cloud telemetry (logs, metrics, traces) for proactive anomaly detection.</li>
-                        <li><strong>Agentic AIOps</strong>: Represents autonomous system remediation—deploying self-directed LLM agents equipped with tool-calling capabilities to perform root-cause analysis and execute corrective runbooks.</li>
+                        <li>Start with DevOps fundamentals (CI/CD, IaC, version control) before layering anything AI-driven on top — AIOps on a broken pipeline just automates the chaos faster.</li>
+                        <li>Adopt MLOps only when you have models in production that need retraining, versioning, and drift monitoring (tools: MLflow, Kubeflow, SageMaker Pipelines).</li>
+                        <li>Adopt AIOps once you have enough telemetry (logs, metrics, traces) that a human can no longer eyeball it — tools like Datadog Watchdog, Dynatrace Davis, or Moogsoft correlate anomalies across thousands of signals.</li>
+                        <li>Move to Agentic AIOps only after AIOps is trusted for detection — agentic tools should execute pre-approved remediation, not open-ended fixes.</li>
                     </ul>
 
-                    <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
+                    <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-[DevOps Pipeline] ➔ CI/CD Automation ➔ Terraform Provisioning
-       ↓
-[MLOps Platform]  ➔ Model Versioning ➔ Feature Store Registry
-       ↓
-[AIOps Engine]    ➔ CloudWatch / Prometheus Telemetry ➔ Anomaly Correlation
-       ↓
-[Agentic AIOps]   ➔ LLM Tool Calling ➔ kubectl Remediation ➔ Incident Resolved
+[Dev Commits] ➔ [DevOps CI/CD] ➔ [K8s Deploy] ➔ [Logs/Metrics/Traces Telemetry]
+                                                      ↓
+[ML Model]    ➔ [MLOps Pipeline] ➔ [K8s Deploy] ➔ [AIOps Anomaly Detection]
+                                                      ↓
+                                        [Agentic AI Autonomous Remediation]
+                                                      ↓ (Auto-Restart/Scale)
+                                                [K8s Cluster State]
                     </div>
 
-                    <h2 id="toc-3">3. Step-by-Step Execution</h2>
-                    <p>When an incident occurs in an EKS cluster, an Autonomous AI Agent executes the following workflow:</p>
-                    <ol>
-                        <li>Interprets Prometheus PagerDuty webhook alert payload indicating high HTTP 5xx error rate.</li>
-                        <li>Runs <code>kubectl logs -n production -l app=payment-service --tail=100</code> to extract stack traces.</li>
-                        <li>Identifies OOMKilled condition on active pods.</li>
-                        <li>Patches deployment manifest memory limits via <code>kubectl scale deployment payment-service --replicas=5</code>.</li>
-                        <li>Posts post-mortem incident summary directly to Slack channels.</li>
-                    </ol>
+                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                    <div class="code-box">Phase 1: Stabilize CI/CD & IaC ➔ Phase 2: Telemetry via Prometheus ➔ Phase 3: AIOps Anomaly Alerts ➔ Phase 4: Agentic Auto-Remediation</div>
 
-                    <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Enables zero-touch incident remediation across multi-tenant SaaS environments serving 1,000+ active users without requiring manual engineering wakeups during off-hours.</p>
-
-                    <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">Linux Administration ➔ Docker & K8s ➔ Terraform IaC ➔ Python Automation ➔ Prometheus/Grafana ➔ MLOps (Kubeflow) ➔ Agentic LLM Tool Calling</div>
+                    <h2 id="toc-real">5. Real-Life Example</h2>
+                    <p>A mid-size fintech had 400+ alerts a day, most duplicates from the same root cause. They didn't need "AI" — they needed alert correlation. Rolling out an AIOps layer on top of their existing Prometheus stack cut alert volume by ~85%, and only after 6 months of trust-building did they let an agent auto-restart crashlooping pods, saving roughly 3 hours/week of on-call time.</p>
                 `
             },
             blog2: {
@@ -1089,38 +1086,27 @@
 
                     <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Cloud Cost Optimization">
 
-                    <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>Unmonitored cloud resources cause severe financial drift. Establishing cost governance frameworks ensures maximum operational ROI while eliminating orphaned infrastructure.</p>
+                    <h2 id="toc-why">1. Why This Matters</h2>
+                    <p>Cloud bills grow silently — nobody decommissions a Redis instance the same way they'd cancel a subscription. Idle caches, oversized instance types, and forgotten dev environments are the single biggest source of AWS waste. A structured audit process turns "the bill is high" into a specific, defensible savings number.</p>
 
-                    <h2 id="toc-2">2. Case Study: Athena LMS Redis Discovery</h2>
-                    <p>Within two months of onboarding at Athena LMS, inspecting CloudWatch metrics revealed an unattached ElastiCache Redis cluster running with zero active connections, generating ₹1.5 Lakhs in recurring monthly charges since August 2025.</p>
+                    <h2 id="toc-how">2. How To Use It</h2>
+                    <ul>
+                        <li>Pull CloudWatch metrics (CPU, network, cache hit rate) for every ElastiCache/Redis node over a 30-day window.</li>
+                        <li>Flag anything with near-zero connections or hit rate below a threshold (e.g., &lt;5%) as an idle candidate.</li>
+                        <li>Cross-check with security groups — idle caches often have exposed ports (6379) left open.</li>
+                        <li>Decommission in stages: snapshot ➔ detach from app config ➔ scale down ➔ terminate.</li>
+                    </ul>
 
-                    <h2 id="toc-3">3. Step-by-Step Execution</h2>
+                    <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-# Step 1: Query CloudWatch metrics for idle ElastiCache Redis clusters
-aws cloudwatch get-metric-statistics \
-    --namespace AWS/ElastiCache \
-    --metric-name CurrConnections \
-    --dimensions Name=CacheClusterId,Value=athena-idle-redis \
-    --start-time 2026-05-01T00:00:00Z \
-    --end-time 2026-05-15T00:00:00Z \
-    --period 86400 \
-    --statistics Average
-
-# Step 2: Safely create final manual snapshot prior to deletion
-aws elasticache create-snapshot \
-    --cache-cluster-id athena-idle-redis \
-    --snapshot-name athena-redis-final-pre-decommission
-
-# Step 3: Destroy instance via Terraform to maintain IaC state sync
-terraform destroy -target=module.redis_cache
+[CloudWatch Metrics] ➔ [Audit Script (boto3)] ➔ [Idle Report] ➔ [Snapshot] ➔ [Lock Security Group] ➔ [Terminate] ➔ [Cost Explorer Tracker]
                     </div>
 
-                    <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Integrating Infracost into GitHub Actions PR pipelines automatically flags unexpected cost increments before merging code.</p>
+                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                    <div class="code-box">Week 1: Export CloudWatch Metrics ➔ Week 2: Scoring Script ➔ Week 3: Owner Validation & Port Lock ➔ Week 4: Staged Decommission</div>
 
-                    <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">AWS CloudWatch ➔ Cost Explorer APIs ➔ Infracost PR Automation ➔ Terraform State Management ➔ Enterprise Cloud Governance</div>
+                    <h2 id="toc-real">5. Real-Life Example</h2>
+                    <p>An internal audit of Athena LMS's ElastiCache fleet found Redis nodes with &lt;3% CPU utilization and open ports to 0.0.0.0/0 — leftovers from a deprecated feature. Snapshotting, locking down the security groups, and terminating them removed ₹1.5L/month in recurring cost (~₹18L/year), with zero downtime.</p>
                 `
             },
             blog3: {
@@ -1130,30 +1116,27 @@ terraform destroy -target=module.redis_cache
 
                     <img src="https://images.unsplash.com/photo-1667372335854-c2a2a69094f6?auto=format&fit=crop&w=1200&q=80" alt="Kubernetes Operations">
 
-                    <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>GitOps establishes continuous deployment by treating Git repositories as the absolute source of truth for Kubernetes cluster state management.</p>
+                    <h2 id="toc-why">1. Why This Matters</h2>
+                    <p>Manual kubectl apply deployments don't scale past a handful of services and are impossible to audit. GitOps makes Git the single source of truth — what's in the repo is what's running in the cluster, always, with a full history of every change.</p>
 
-                    <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
+                    <h2 id="toc-how">2. How To Use It</h2>
+                    <ul>
+                        <li>Structure a Git repo with one manifest/Helm chart directory per environment (dev/staging/prod).</li>
+                        <li>Point ArgoCD at the repo; it continuously reconciles cluster state to match Git.</li>
+                        <li>Use rolling updates with maxSurge/maxUnavailable tuned per service.</li>
+                        <li>Layer in Horizontal Pod Autoscaler (HPA) so scale-out happens automatically under load.</li>
+                    </ul>
+
+                    <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-Git Commit ➔ GitHub Webhook ➔ ArgoCD Sync Controller ➔ Helm Manifest Render ➔ EKS Rolling Update ➔ Pod Readiness Probes Passed ➔ Active Ingress Route
+[Dev Git Push] ➔ [Git Repo (Helm)] ➔ [ArgoCD Controller] ➔ [EKS Rolling Update] ➔ [Readiness Probe Check] ➔ [ALB Traffic Shift]
                     </div>
 
-                    <h2 id="toc-3">3. Step-by-Step Execution</h2>
-                    <p>Configuring readiness and liveness probes in Helm templates ensures Kubernetes ALB Ingress Controller routes traffic exclusively to healthy pods during updates:</p>
-                    <div class="code-box">
-readinessProbe:
-  httpGet:
-    path: /healthz
-    port: 8080
-  initialDelaySeconds: 5
-  periodSeconds: 10
-                    </div>
+                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                    <div class="code-box">Phase 1: Helm Charts & External Config ➔ Phase 2: Install ArgoCD ➔ Phase 3: Auto-Sync & Probes ➔ Phase 4: HPA & PodDisruptionBudgets</div>
 
-                    <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Guarantees 99.9% application uptime during peak multi-tenant traffic spikes across EKS production environments.</p>
-
-                    <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">Docker ➔ Kubernetes Fundamentals ➔ Helm Chart Templates ➔ ArgoCD GitOps ➔ AWS EKS Cluster Orchestration</div>
+                    <h2 id="toc-real">5. Real-Life Example</h2>
+                    <p>A team running microservices on EKS used to deploy via a shared Jenkins job that occasionally pushed bad config directly to prod. Moving to ArgoCD with Git as the source of truth meant every deploy was a PR — reviewable and revertible with git revert. Rolling updates auto-rolled-back bad deploys within 90 seconds.</p>
                 `
             },
             blog4: {
@@ -1161,28 +1144,29 @@ readinessProbe:
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h1>
                     <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">January 2026 · By Gaddam Kalyan Teja · 10 min read</div>
 
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Security Cloud Vault">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Security Vault">
 
-                    <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>Multi-tenant security isolation prevents unauthorized cross-tenant data access across multi-user cloud platforms.</p>
+                    <h2 id="toc-why">1. Why This Matters</h2>
+                    <p>In a multi-tenant SaaS, the worst-case bug isn't a crash — it's Tenant A seeing Tenant B's data. Authentication proves who someone is; authorization (RBAC) decides what they can touch. Getting this wrong at scale (1,000+ users) is a breach waiting to happen.</p>
 
-                    <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
-                    <p>Audited 150+ AWS Security Group rules, closed 25+ unnecessary open ports, and validated cryptographic JWT signatures at the Application Load Balancer (ALB) and ingress layers.</p>
+                    <h2 id="toc-how">2. How To Use It</h2>
+                    <ul>
+                        <li>Issue short-lived JWTs (15-30 min) signed with an asymmetric key (RS256), with tenant ID and role embedded as claims.</li>
+                        <li>Enforce RBAC at the API gateway layer first, then again at the service/DB layer.</li>
+                        <li>Rotate signing keys on a schedule and support key rollover without invalidating active sessions.</li>
+                        <li>Lock down EC2 security groups so only the load balancer can reach app ports directly.</li>
+                    </ul>
 
-                    <h2 id="toc-3">3. Step-by-Step Execution</h2>
+                    <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-# Lock down EC2 Security Group SSH access strictly to bastion host IP
-aws ec2 revoke-security-group-ingress \
-    --group-id sg-0123456789 \
-    --protocol tcp --port 22 \
-    --cidr 0.0.0.0/0
+[User Login] ➔ [Auth Service] ➔ [Issue RS256 JWT] ➔ [API Gateway RBAC Check] ➔ [Microservice] ➔ [Tenant-Scoped DB Query]
                     </div>
 
-                    <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Enforces zero-trust RBAC access controls for 1,000+ active SaaS users across dev, staging, and production environments.</p>
+                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                    <div class="code-box">Phase 1: Short-lived Signed JWTs ➔ Phase 2: Gateway RBAC ➔ Phase 3: Row-Level Tenant DB Scoping ➔ Phase 4: Port Ingress Locks</div>
 
-                    <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">AWS IAM & Policy Engine ➔ Security Group Ingress Locks ➔ JWT Token Verification ➔ Role-Based Access Control (RBAC)</div>
+                    <h2 id="toc-real">5. Real-Life Example</h2>
+                    <p>A SaaS platform serving 1,000+ users across multiple tenants found that an internal admin API trusted the role claim in the JWT without re-verifying the signature on every hop. Adding signature re-verification at each service boundary plus tenant-scoped DB queries closed the gap completely.</p>
                 `
             },
             blog5: {
@@ -1190,30 +1174,30 @@ aws ec2 revoke-security-group-ingress \
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h1>
                     <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">November 2025 · By Gaddam Kalyan Teja · 10 min read</div>
 
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Grafana Operations Dashboard">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Grafana Dashboard">
 
-                    <h2 id="toc-1">1. Overview &amp; Definition</h2>
-                    <p>Site Reliability Engineering (SRE) observability enables instant visibility into microservice latency, CPU throttling, and memory leaks.</p>
+                    <h2 id="toc-why">1. Why This Matters</h2>
+                    <p>Mean Time To Resolution (MTTR) is the number that actually matters during an incident — how fast someone can go from alert to root cause. Custom metrics and good dashboards are what separate a 5-minute fix from a 2-hour war room.</p>
 
-                    <h2 id="toc-2">2. Architecture &amp; Diagrams</h2>
+                    <h2 id="toc-how">2. How To Use It</h2>
+                    <ul>
+                        <li>Instrument services with custom Prometheus counters/histograms for business-relevant events.</li>
+                        <li>Route alerts through Alertmanager with proper grouping and silencing so on-call gets one actionable page.</li>
+                        <li>Build Grafana dashboards around the "four golden signals" (latency, traffic, errors, saturation) per service.</li>
+                        <li>Automate root cause analysis (RCA) by correlating deploy timestamps directly on Grafana timelines.</li>
+                    </ul>
+
+                    <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-Flask App (Prometheus Client) ➔ Prometheus Scrape Target ➔ Alertmanager Rule Match ➔ Grafana Dashboard Alert Trigger
+[Microservices /metrics] ➔ [Prometheus Scraper] ➔ [Alertmanager] ➔ [On-Call Group Alert]
+                                                ➔ [Grafana Golden Signal Dashboards]
                     </div>
 
-                    <h2 id="toc-3">3. Step-by-Step Execution</h2>
-                    <p>Instrumented Python microservices with custom request counters and latency histogram buckets:</p>
-                    <div class="code-box">
-from prometheus_client import Counter, Histogram
+                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                    <div class="code-box">Week 1-2: Custom Metric Instrumentation ➔ Week 3: Alertmanager Grouping ➔ Week 4: Grafana Dashboards ➔ Month 2: Deploy Overlays</div>
 
-REQUEST_COUNT = Counter('app_requests_total', 'Total HTTP Requests', ['method', 'endpoint', 'status'])
-LATENCY = Histogram('app_request_latency_seconds', 'Request Latency')
-                    </div>
-
-                    <h2 id="toc-4">4. Production Use Cases</h2>
-                    <p>Reduced Mean Time to Resolution (MTTR) by over 40% across production incident responses.</p>
-
-                    <h2 id="toc-5">5. Learning Roadmap</h2>
-                    <div class="code-box">Metrics Instrumentation ➔ Prometheus Scraping ➔ PromQL Querying ➔ Alertmanager Configuration ➔ Grafana Dashboards</div>
+                    <h2 id="toc-real">5. Real-Life Example</h2>
+                    <p>A team's average MTTR was ~90 minutes because engineers had to manually check deploy logs and metrics in three tools. Overlaying CI/CD deploy markers directly on the Grafana error-rate graph meant the very first thing an on-call engineer saw was "this started 4 minutes after deploy #482." MTTR dropped to under 20 minutes.</p>
                 `
             }
         };
