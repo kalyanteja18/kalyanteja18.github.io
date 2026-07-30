@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <style>
+        /* ── ROOT VARIABLES ── */
         :root {
             --bg-main: #f2f4f8;
             --bg-card: rgba(255, 255, 255, 0.85);
@@ -25,6 +26,9 @@
             --accent-purple: #7c3aed;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+
+            /* scroll progress */
+            --scroll-progress: 0%;
         }
 
         [data-theme="dark"] {
@@ -41,6 +45,7 @@
             --accent-purple: #a855f7;
         }
 
+        /* ── RESET & BASE ── */
         * {
             margin: 0;
             padding: 0;
@@ -48,7 +53,8 @@
             scroll-behavior: smooth;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             overflow-x: hidden;
         }
@@ -63,14 +69,14 @@
             position: relative;
         }
 
-        /* BLUEPRINT GRID BACKGROUND */
+        /* ── BLUEPRINT GRID ── */
         .blueprint-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: 
+            background-image:
                 linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
                 linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
             background-size: 80px 80px;
@@ -78,7 +84,7 @@
             z-index: 0;
         }
 
-        /* THREE.JS 3D CANVAS OVERLAY */
+        /* ── THREE.JS CANVAS ── */
         #hero-3d-canvas {
             position: fixed;
             top: 0;
@@ -89,7 +95,7 @@
             z-index: 1;
         }
 
-        /* GREEN RETRO-PIXEL TRAIL CONTAINER */
+        /* ── PIXEL TRAIL ── */
         #pixel-trail-container {
             position: fixed;
             top: 0;
@@ -111,7 +117,7 @@
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
-        /* FLOATING DRAGGABLE STICKERS LAYER */
+        /* ── STICKERS ── */
         .stickers-layer {
             position: fixed;
             top: 0;
@@ -128,18 +134,17 @@
             cursor: grab;
             user-select: none;
             transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.25));
+            filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.25));
         }
 
         .sticker:hover {
             transform: scale(1.25) rotate(8deg);
         }
-
         .sticker:active {
             cursor: grabbing;
         }
 
-        /* APP WRAPPER */
+        /* ── APP CONTAINER ── */
         .app-container {
             position: relative;
             z-index: 3;
@@ -151,35 +156,107 @@
             gap: 5rem;
         }
 
-        /* BEN CELINSKI STYLE KINETIC SCROLL ANIMATION */
+        /* ═══════════════════════════════════════════════
+                   BEN CELINSKI – SCROLL ANIMATIONS
+                   ═══════════════════════════════════════════════ */
         .celinski-scroll-section {
             min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             opacity: 0;
-            transform: translateY(80px) scale(0.92);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
+            /* will be overridden per data-animation */
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+            position: relative;
         }
 
+        /* animation types – applied via data-animation */
+        .celinski-scroll-section[data-animation="fade-up"] {
+            transform: translateY(70px) scale(0.96);
+            filter: blur(4px);
+        }
+        .celinski-scroll-section[data-animation="fade-down"] {
+            transform: translateY(-70px) scale(0.96);
+            filter: blur(4px);
+        }
+        .celinski-scroll-section[data-animation="fade-left"] {
+            transform: translateX(80px) scale(0.96);
+            filter: blur(4px);
+        }
+        .celinski-scroll-section[data-animation="fade-right"] {
+            transform: translateX(-80px) scale(0.96);
+            filter: blur(4px);
+        }
+        .celinski-scroll-section[data-animation="zoom-in"] {
+            transform: scale(0.8) rotate(-2deg);
+            filter: blur(6px);
+        }
+        .celinski-scroll-section[data-animation="zoom-out"] {
+            transform: scale(1.1) rotate(1deg);
+            filter: blur(4px);
+        }
+        .celinski-scroll-section[data-animation="none"] {
+            transform: none;
+            filter: none;
+        }
+
+        /* visible state – all animations resolve to this */
         .celinski-scroll-section.visible {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translate(0, 0) scale(1) rotate(0deg);
+            filter: blur(0px);
         }
 
-        /* LETTER HOVER ANIMATION */
+        /* staggered children inside sections */
+        .celinski-scroll-section .stagger-child {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .celinski-scroll-section.visible .stagger-child {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(3) {
+            transition-delay: 0.25s;
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(4) {
+            transition-delay: 0.35s;
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(5) {
+            transition-delay: 0.45s;
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(6) {
+            transition-delay: 0.55s;
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(7) {
+            transition-delay: 0.65s;
+        }
+        .celinski-scroll-section.visible .stagger-child:nth-child(8) {
+            transition-delay: 0.75s;
+        }
+
+        /* ── LETTER HOVER ── */
         .char-hover {
             display: inline-block;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
         }
-
         .char-hover:hover {
             transform: translateY(-8px) scale(1.2);
             color: var(--accent-blue);
         }
 
-        /* NAV BAR */
+        /* ── NAV ── */
         .haoqi-nav {
             display: flex;
             align-items: center;
@@ -211,7 +288,6 @@
             gap: 1.75rem;
             list-style: none;
         }
-
         .nav-items a {
             color: var(--text-body);
             text-decoration: none;
@@ -222,7 +298,6 @@
             letter-spacing: 0.05em;
             transition: color 0.2s;
         }
-
         .nav-items a:hover {
             color: var(--accent-blue);
         }
@@ -249,14 +324,13 @@
             transition: all 0.2s;
             text-decoration: none;
         }
-
         .haoqi-btn:hover {
             border-color: var(--accent-blue);
             color: var(--accent-blue);
             transform: translateY(-2px);
         }
 
-        /* HERO BANNER */
+        /* ── HERO ── */
         .hero-banner {
             min-height: 70vh;
             display: flex;
@@ -266,23 +340,20 @@
         }
 
         .hero-title-giant {
-        font-size: clamp(2.2rem, 4.8vw, 4.2rem); /* Slightly tuned down max size to fit comfortably */
-        font-weight: 800;
-        color: var(--text-heading);
-        line-height: 1.15;
-        letter-spacing: -0.03em;
-        max-width: 980px;
-        margin-bottom: 1.5rem;
-        word-break: normal;
-        overflow-wrap: normal;
-    }
-
-/* Prevent target words from breaking mid-word */
-.no-break {
-    white-space: nowrap;
-    display: inline-block;
-}
-
+            font-size: clamp(2.2rem, 4.8vw, 4.2rem);
+            font-weight: 800;
+            color: var(--text-heading);
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            max-width: 980px;
+            margin-bottom: 1.5rem;
+            word-break: normal;
+            overflow-wrap: normal;
+        }
+        .no-break {
+            white-space: nowrap;
+            display: inline-block;
+        }
         .hero-title-giant span {
             color: var(--accent-blue);
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
@@ -298,7 +369,7 @@
             line-height: 1.65;
         }
 
-        /* GRID LAYOUT & CARDS */
+        /* ── GRID & CARDS ── */
         .grid-layout {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -317,11 +388,10 @@
             position: relative;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .haoqi-card:hover {
             border-color: var(--accent-blue);
             transform: translateY(-4px);
-            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.2);
         }
 
         .tag-pill {
@@ -351,14 +421,13 @@
             border: 1px solid var(--border-color);
             background: #0f172a;
         }
-
         .cert-img-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        /* PILL TABS */
+        /* ── PILL TABS ── */
         .pill-tabs {
             display: flex;
             background: var(--bg-card);
@@ -368,7 +437,6 @@
             gap: 4px;
             margin-bottom: 1.5rem;
         }
-
         .tab-btn {
             flex: 1;
             padding: 0.7rem 1rem;
@@ -386,14 +454,13 @@
             justify-content: center;
             gap: 0.5rem;
         }
-
         .tab-btn.active {
             background: var(--accent-blue);
             color: #ffffff;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
-        /* EDITORIAL CASE STUDY MODAL VIEW */
+        /* ── CASE STUDY MODAL ── */
         .case-study-modal {
             display: none;
             position: fixed;
@@ -405,7 +472,6 @@
             z-index: 1000;
             overflow-y: auto;
         }
-
         .case-study-container {
             max-width: 1100px;
             margin: 0 auto;
@@ -414,7 +480,6 @@
             grid-template-columns: 240px 1fr;
             gap: 3.5rem;
         }
-
         .case-study-toc {
             position: sticky;
             top: 5rem;
@@ -427,17 +492,14 @@
             border-right: 1px solid var(--border-color);
             padding-right: 1.5rem;
         }
-
         .case-study-toc a {
             color: var(--text-muted);
             text-decoration: none;
             transition: color 0.2s;
         }
-
         .case-study-toc a:hover {
             color: var(--text-heading);
         }
-
         .case-study-content img {
             width: 100%;
             border-radius: 12px;
@@ -458,16 +520,15 @@
             white-space: pre-wrap;
         }
 
-        /* TERMINAL SHELL */
+        /* ── TERMINAL ── */
         .terminal-box {
             background: #090d16;
             border: 1px solid var(--border-color);
             border-radius: 16px;
             overflow: hidden;
             font-family: var(--font-mono);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
-
         .terminal-header {
             background: #111726;
             padding: 0.65rem 1rem;
@@ -478,7 +539,6 @@
             font-size: 0.75rem;
             color: #64748b;
         }
-
         .terminal-body {
             padding: 1.25rem;
             min-height: 250px;
@@ -491,29 +551,55 @@
             gap: 0.5rem;
         }
 
-        /* RIGHT SCROLLBAR PILL INDICATOR */
+        /* ── SCROLL PROGRESS BAR (top of page) ── */
+        .scroll-progress-track {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .scroll-progress-bar {
+            height: 100%;
+            width: var(--scroll-progress);
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 0 4px 4px 0;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ── RIGHT SCROLL PILL INDICATOR ── */
         .scroll-pill-bar {
             position: fixed;
             right: 1.2rem;
-            top: 30%;
-            height: 220px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 180px;
             width: 4px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 4px;
             z-index: 100;
             pointer-events: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
         }
-
+        .scroll-pill-bar:hover {
+            opacity: 1;
+        }
         .scroll-pill-thumb {
             width: 100%;
-            height: 40px;
+            height: 48px;
             background: var(--accent-green);
             border-radius: 4px;
-            box-shadow: 0 0 10px var(--accent-green);
-            transition: transform 0.1s linear;
+            box-shadow: 0 0 16px var(--accent-green);
+            transition: transform 0.08s linear;
+            transform: translateY(0px);
         }
 
-        /* CURSOR COORD TRACKER */
+        /* ── COORD TRACKER ── */
         .coord-tracker {
             position: fixed;
             bottom: 1rem;
@@ -529,7 +615,7 @@
             z-index: 100;
         }
 
-        /* SEARCH MODAL */
+        /* ── SEARCH MODAL ── */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -537,13 +623,12 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(8px);
             z-index: 1001;
             align-items: center;
             justify-content: center;
         }
-
         .search-box {
             width: 520px;
             max-width: 90%;
@@ -556,47 +641,66 @@
             gap: 1rem;
         }
 
+        /* ── RESPONSIVE ── */
         @media (max-width: 850px) {
-            .grid-layout { grid-template-columns: 1fr; }
-            .case-study-container { grid-template-columns: 1fr; }
-            .case-study-toc { display: none; }
-            .nav-items { display: none; }
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            .case-study-container {
+                grid-template-columns: 1fr;
+            }
+            .case-study-toc {
+                display: none;
+            }
+            .nav-items {
+                display: none;
+            }
+            .scroll-pill-bar {
+                display: none;
+            }
+            .coord-tracker {
+                display: none;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- BLUEPRINT GRID & 3D CANVAS -->
+    <!-- ─── SCROLL PROGRESS BAR ─── -->
+    <div class="scroll-progress-track">
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+
+    <!-- ─── BLUEPRINT GRID & 3D ─── -->
     <div class="blueprint-grid"></div>
     <canvas id="hero-3d-canvas"></canvas>
 
-    <!-- PIXEL TRAIL CONTAINER -->
+    <!-- ─── PIXEL TRAIL ─── -->
     <div id="pixel-trail-container"></div>
 
-    <!-- RIGHT FLOATING SCROLL PILL INDICATOR -->
+    <!-- ─── RIGHT SCROLL PILL ─── -->
     <div class="scroll-pill-bar">
         <div class="scroll-pill-thumb" id="scroll-thumb"></div>
     </div>
 
-    <!-- FLOATING STICKERS LAYER -->
+    <!-- ─── STICKERS ─── -->
     <div class="stickers-layer" id="stickers-layer">
-        <div class="sticker" style="top: 14%; left: 6%"><img src="https://api.iconify.design/logos:aws.svg" width="54" alt="AWS"></div>
-        <div class="sticker" style="top: 18%; right: 8%"><img src="https://api.iconify.design/logos:kubernetes.svg" width="48" alt="Kubernetes"></div>
-        <div class="sticker" style="top: 58%; left: 4%"><img src="https://api.iconify.design/logos:terraform.svg" width="46" alt="Terraform"></div>
-        <div class="sticker" style="top: 68%; right: 6%"><img src="https://api.iconify.design/logos:docker-icon.svg" width="50" alt="Docker"></div>
-        <div class="sticker" style="top: 42%; right: 4%"><img src="https://api.iconify.design/logos:python.svg" width="42" alt="Python"></div>
+        <div class="sticker" style="top:14%;left:6%"><img src="https://api.iconify.design/logos:aws.svg" width="54" alt="AWS"></div>
+        <div class="sticker" style="top:18%;right:8%"><img src="https://api.iconify.design/logos:kubernetes.svg" width="48" alt="Kubernetes"></div>
+        <div class="sticker" style="top:58%;left:4%"><img src="https://api.iconify.design/logos:terraform.svg" width="46" alt="Terraform"></div>
+        <div class="sticker" style="top:68%;right:6%"><img src="https://api.iconify.design/logos:docker-icon.svg" width="50" alt="Docker"></div>
+        <div class="sticker" style="top:42%;right:4%"><img src="https://api.iconify.design/logos:python.svg" width="42" alt="Python"></div>
     </div>
 
-    <!-- MAIN APP CONTENT -->
+    <!-- ─── MAIN APP ─── -->
     <div class="app-container">
 
-        <!-- NAV BAR -->
+        <!-- NAV -->
         <nav class="haoqi-nav">
             <a href="#" class="brand-title">
                 <i class="fas fa-cube" style="color:var(--accent-blue);"></i> GADDAM KALYAN TEJA
             </a>
-
             <ul class="nav-items">
                 <li><a href="#about">About</a></li>
                 <li><a href="#resume">Resume</a></li>
@@ -604,29 +708,27 @@
                 <li><a href="#blogs">Blogs</a></li>
                 <li><a href="#terminal-section">Terminal</a></li>
             </ul>
-
             <div class="nav-actions">
                 <button class="haoqi-btn" onclick="openSearchModal()"><i class="fas fa-search"></i> <kbd>CTRL+K</kbd></button>
                 <button class="haoqi-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i> Theme</button>
             </div>
         </nav>
 
-        <!-- HERO BANNER -->
-        <section class="hero-banner celinski-scroll-section" id="about">
-            <div class="tag-pill">DevOps &amp; Cloud Engineering</div>
-            <h1 class="hero-title-giant" id="animated-hero-title">
-            I AUTOMATE, SCALE &amp; <span class="no-break">SECURE</span><br />
-            <span>CLOUD <span class="no-break">INFRASTRUCTURE.</span></span>
+        <!-- ─── HERO ─── -->
+        <section class="celinski-scroll-section hero-banner" id="about" data-animation="fade-up">
+            <div class="tag-pill stagger-child">DevOps &amp; Cloud Engineering</div>
+            <h1 class="hero-title-giant stagger-child" id="animated-hero-title">
+                I AUTOMATE, SCALE &amp; <span class="no-break">SECURE</span><br />
+                <span>CLOUD <span class="no-break">INFRASTRUCTURE.</span></span>
             </h1>
-            <p class="hero-subtext">
+            <p class="hero-subtext stagger-child">
                 Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Discovered and decommissioned an unused Redis cache costing <strong>₹1.5L/month</strong> within 2 months at Athena LMS, driving an annual savings of <strong>₹18 Lakhs/year</strong>. Experienced in automating AWS EC2, S3, ALB, CloudFront, EKS deployments, and Prometheus/Grafana SRE observability.
             </p>
-
-            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;" class="stagger-child">
                 <a href="https://drive.google.com/uc?export=download&id=1uqOFDpmF5knxAAfJXhvrihNuy6wR9q8E" target="_blank" download="Gaddam_Kalyan_Teja_Resume.pdf" class="haoqi-btn" style="background:var(--accent-blue); color:#fff; border:none;">
                     <i class="fas fa-download"></i> Download CV
                 </a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kalyanteja18@gmail.com" target="_blank" class="haoqi-btn"><i class="far fa-envelope"></i> Send Email Direct</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kalyanteja18@gmail.com" target="_blank" class="haoqi-btn"><i class="far fa-envelope"></i> Email</a>
                 <a href="https://x.com/KALYANT06423430" target="_blank" class="haoqi-btn"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
                 <a href="https://www.instagram.com/kalyantejagaddam/?hl=en" target="_blank" class="haoqi-btn"><i class="fab fa-instagram"></i> Instagram</a>
                 <a href="https://github.com/kalyanteja18" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> GitHub</a>
@@ -634,22 +736,22 @@
             </div>
         </section>
 
-        <!-- RESUME & CREDENTIALS SECTION -->
-        <section class="celinski-scroll-section" id="resume">
-            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
+        <!-- ─── RESUME ─── -->
+        <section class="celinski-scroll-section" id="resume" data-animation="fade-left">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Resume &amp; Experience</h2>
                 <div class="tag-pill">30 Verified Certifications</div>
             </div>
 
-            <div class="pill-tabs">
+            <div class="pill-tabs stagger-child">
                 <button class="tab-btn active" id="btn-exp" onclick="switchTab('exp')"><i class="fas fa-briefcase"></i> Experience</button>
                 <button class="tab-btn" id="btn-educ" onclick="switchTab('educ')"><i class="fas fa-graduation-cap"></i> Education</button>
                 <button class="tab-btn" id="btn-cert" onclick="switchTab('cert')"><i class="fas fa-award"></i> Certifications (30)</button>
             </div>
 
-            <!-- EXPERIENCE CONTENT -->
+            <!-- Experience -->
             <div id="tab-exp" class="grid-layout">
-                <div class="haoqi-card">
+                <div class="haoqi-card stagger-child">
                     <div class="tag-pill">Athena LMS · New Delhi</div>
                     <h3>DevOps Engineer Intern</h3>
                     <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">NOV 2025 – MAY 2026 · 7 months</p>
@@ -659,8 +761,7 @@
                         <li>Audited 150+ Security Group rules, closed 25+ unneeded open ports, and enforced JWT &amp; RBAC security models.</li>
                     </ul>
                 </div>
-
-                <div class="haoqi-card">
+                <div class="haoqi-card stagger-child">
                     <div class="tag-pill">Eastri · Mumbai (Remote)</div>
                     <h3>DevOps Engineer Intern</h3>
                     <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">MAY 2025 – OCT 2025 · 6 months</p>
@@ -671,133 +772,63 @@
                 </div>
             </div>
 
-            <!-- EDUCATION CONTENT -->
+            <!-- Education -->
             <div id="tab-educ" class="grid-layout" style="display:none;">
-                <div class="haoqi-card">
+                <div class="haoqi-card stagger-child">
                     <div class="tag-pill">Sir Padampat Singhania University</div>
                     <h3>B.Tech in Computer Science Engineering (AI &amp; ML)</h3>
                     <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">2021 – 2026 · Udaipur, Rajasthan</p>
                     <p>Specialized in AI/ML, Cloud Infrastructure, Systems Architecture, and Distributed Systems.</p>
                 </div>
-
-                <div class="haoqi-card">
+                <div class="haoqi-card stagger-child">
                     <div class="tag-pill">Narayana Junior College</div>
                     <h3>Intermediate (MPC)</h3>
                     <p style="font-family:var(--font-mono); font-size:0.8rem; color:var(--text-muted);">2019 – 2021 · Grade: 9.0</p>
                 </div>
             </div>
 
-            <!-- CERTIFICATIONS CONTENT (30 Items) -->
-            <div id="tab-cert" class="grid-layout" style="display:none;">
-                <!-- Dynamically Populated -->
-            </div>
+            <!-- Certifications -->
+            <div id="tab-cert" class="grid-layout" style="display:none;"></div>
         </section>
 
-        <!-- PROJECTS SECTION -->
-        <section class="celinski-scroll-section" id="projects">
-            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
+        <!-- ─── PROJECTS ─── -->
+        <section class="celinski-scroll-section" id="projects" data-animation="fade-right">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Projects</h2>
                 <div class="tag-pill">6 Repositories</div>
             </div>
-
             <div class="grid-layout">
-                <div class="haoqi-card">
-                    <div class="tag-pill">OBSERVABILITY</div>
-                    <h3>monitoring-prometheus-grafana</h3>
-                    <p>Instrumented Flask application with Prometheus metrics &amp; Grafana dashboards for p95 latency, error rates, and resource utilization.</p>
-                    <a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">CI/CD PIPELINES</div>
-                    <h3>ci-cd-jenkins-docker</h3>
-                    <p>Automated Jenkins CI/CD Pipeline integrated with Docker containerization workflows for continuous delivery.</p>
-                    <a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">GITOPS &amp; K8S</div>
-                    <h3>gitops-argocd-kubernetes</h3>
-                    <p>GitOps continuous delivery pipeline using ArgoCD and Kubernetes cluster manifests for declarative application state management.</p>
-                    <a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">AWS IAC</div>
-                    <h3>cloudformation-aws-infra</h3>
-                    <p>AWS CloudFormation templates for automated Infrastructure as Code cloud provisioning and multi-region deployment.</p>
-                    <a href="https://github.com/kalyanteja18/cloudformation-aws-infra" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">TERRAFORM</div>
-                    <h3>terraform-aws-iac</h3>
-                    <p>Provisioned production-grade AWS infrastructure (EC2, VPC, S3, RDS) using reusable Terraform modules with remote state backend.</p>
-                    <a href="https://github.com/kalyanteja18/terraform-aws-iac" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">GITHUB ACTIONS</div>
-                    <h3>devops-cicd-github-actions</h3>
-                    <p>Automated CI/CD workflow using GitHub Actions - automated Docker builds, smoke testing, and AWS ECS service deployments.</p>
-                    <a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a>
-                </div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">OBSERVABILITY</div><h3>monitoring-prometheus-grafana</h3><p>Instrumented Flask application with Prometheus metrics &amp; Grafana dashboards for p95 latency, error rates, and resource utilization.</p><a href="https://github.com/kalyanteja18/monitoring-prometheus-grafana" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">CI/CD PIPELINES</div><h3>ci-cd-jenkins-docker</h3><p>Automated Jenkins CI/CD Pipeline integrated with Docker containerization workflows for continuous delivery.</p><a href="https://github.com/kalyanteja18/ci-cd-jenkins-docker" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">GITOPS &amp; K8S</div><h3>gitops-argocd-kubernetes</h3><p>GitOps continuous delivery pipeline using ArgoCD and Kubernetes cluster manifests for declarative application state management.</p><a href="https://github.com/kalyanteja18/gitops-argocd-kubernetes" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">AWS IAC</div><h3>cloudformation-aws-infra</h3><p>AWS CloudFormation templates for automated Infrastructure as Code cloud provisioning and multi-region deployment.</p><a href="https://github.com/kalyanteja18/cloudformation-aws-infra" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">TERRAFORM</div><h3>terraform-aws-iac</h3><p>Provisioned production-grade AWS infrastructure (EC2, VPC, S3, RDS) using reusable Terraform modules with remote state backend.</p><a href="https://github.com/kalyanteja18/terraform-aws-iac" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">GITHUB ACTIONS</div><h3>devops-cicd-github-actions</h3><p>Automated CI/CD workflow using GitHub Actions - automated Docker builds, smoke testing, and AWS ECS service deployments.</p><a href="https://github.com/kalyanteja18/devops-cicd-github-actions" target="_blank" class="haoqi-btn"><i class="fab fa-github"></i> View Repository →</a></div>
             </div>
         </section>
 
-        <!-- BLOGS SECTION -->
-        <section class="celinski-scroll-section" id="blogs">
-            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
+        <!-- ─── BLOGS ─── -->
+        <section class="celinski-scroll-section" id="blogs" data-animation="zoom-in">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Case Studies &amp; Technical Guides</h2>
                 <div class="tag-pill">5 Deep Dive Guides</div>
             </div>
-
             <div class="grid-layout">
-                <div class="haoqi-card">
-                    <div class="tag-pill">ARTIFICIAL INTELLIGENCE</div>
-                    <h3>1. AIOps vs DevOps vs MLOps vs Agentic AIOps</h3>
-                    <p>Understanding operational boundaries: software CI/CD (DevOps), model lifecycles (MLOps), automated telemetry (AIOps), and autonomous healing agents.</p>
-                    <button class="haoqi-btn" onclick="openBlogModal('blog1')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">CLOUD COST AUDIT</div>
-                    <h3>2. AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h3>
-                    <p>Engineering breakdown of auditing CloudWatch metrics to discover idle Redis instances, closing exposed ports, and executing zero-downtime cache decommissioning.</p>
-                    <button class="haoqi-btn" onclick="openBlogModal('blog2')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">KUBERNETES &amp; GITOPS</div>
-                    <h3>3. Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h3>
-                    <p>Declarative GitOps architecture breakdown. Construct automated continuous delivery pipelines with Kubernetes rolling updates, Helm charts, and HPA autoscaling.</p>
-                    <button class="haoqi-btn" onclick="openBlogModal('blog3')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">CLOUD SECURITY</div>
-                    <h3>4. Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h3>
-                    <p>Securing multi-tenant cloud platforms for 1,000+ users. Covers JWT signature verification, RBAC authorization, and network port locks on EC2 security groups.</p>
-                    <button class="haoqi-btn" onclick="openBlogModal('blog4')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
-                </div>
-
-                <div class="haoqi-card">
-                    <div class="tag-pill">OBSERVABILITY &amp; SRE</div>
-                    <h3>5. Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h3>
-                    <p>Practical SRE handbook on instrumenting microservices with custom counters, building real-time Grafana dashboards, and automating incident root cause analysis (RCA).</p>
-                    <button class="haoqi-btn" onclick="openBlogModal('blog5')"><i class="fas fa-book-open"></i> Read Full Case Study →</button>
-                </div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">ARTIFICIAL INTELLIGENCE</div><h3>1. AIOps vs DevOps vs MLOps vs Agentic AIOps</h3><p>Understanding operational boundaries: software CI/CD (DevOps), model lifecycles (MLOps), automated telemetry (AIOps), and autonomous healing agents.</p><button class="haoqi-btn" onclick="openBlogModal('blog1')"><i class="fas fa-book-open"></i> Read Full Case Study →</button></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">CLOUD COST AUDIT</div><h3>2. AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h3><p>Engineering breakdown of auditing CloudWatch metrics to discover idle Redis instances, closing exposed ports, and executing zero-downtime cache decommissioning.</p><button class="haoqi-btn" onclick="openBlogModal('blog2')"><i class="fas fa-book-open"></i> Read Full Case Study →</button></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">KUBERNETES &amp; GITOPS</div><h3>3. Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h3><p>Declarative GitOps architecture breakdown. Construct automated continuous delivery pipelines with Kubernetes rolling updates, Helm charts, and HPA autoscaling.</p><button class="haoqi-btn" onclick="openBlogModal('blog3')"><i class="fas fa-book-open"></i> Read Full Case Study →</button></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">CLOUD SECURITY</div><h3>4. Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h3><p>Securing multi-tenant cloud platforms for 1,000+ users. Covers JWT signature verification, RBAC authorization, and network port locks on EC2 security groups.</p><button class="haoqi-btn" onclick="openBlogModal('blog4')"><i class="fas fa-book-open"></i> Read Full Case Study →</button></div>
+                <div class="haoqi-card stagger-child"><div class="tag-pill">OBSERVABILITY &amp; SRE</div><h3>5. Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h3><p>Practical SRE handbook on instrumenting microservices with custom counters, building real-time Grafana dashboards, and automating incident root cause analysis (RCA).</p><button class="haoqi-btn" onclick="openBlogModal('blog5')"><i class="fas fa-book-open"></i> Read Full Case Study →</button></div>
             </div>
         </section>
 
-        <!-- TERMINAL SHELL SECTION -->
-        <section class="celinski-scroll-section" id="terminal-section">
-            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
+        <!-- ─── TERMINAL ─── -->
+        <section class="celinski-scroll-section" id="terminal-section" data-animation="fade-up">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;" class="stagger-child">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Interactive CLI Shell</h2>
                 <div class="tag-pill">Command Line</div>
             </div>
-
-            <div class="terminal-box">
+            <div class="terminal-box stagger-child">
                 <div class="terminal-header">
                     <span class="dot dot-red"></span>
                     <span class="dot dot-yellow"></span>
@@ -807,7 +838,7 @@
                 <div class="terminal-body" id="terminal-output">
                     <div>Type '<span style="color:var(--accent-green);">help</span>' for available CLI commands.</div>
                 </div>
-                <div style="padding: 0.75rem 1.25rem; border-top:1px solid var(--border-color); background:#060911;">
+                <div style="padding:0.75rem 1.25rem; border-top:1px solid var(--border-color); background:#060911;">
                     <form onsubmit="handleTerminalCommand(event)" style="display:flex; align-items:center; gap:0.5rem;">
                         <span style="color:var(--accent-green); font-weight:700;">kalyan@portfolio:~$</span>
                         <input type="text" id="terminal-input" style="background:transparent; border:none; outline:none; color:#fff; font-family:var(--font-mono); width:100%; font-size:0.82rem;" placeholder="help, ls, about, certs, blogs, clear..." autocomplete="off">
@@ -824,10 +855,10 @@
 
     </div>
 
-    <!-- CURSOR COORD TRACKER -->
+    <!-- ─── COORD TRACKER ─── -->
     <div class="coord-tracker" id="coord-tracker">0000 X 0000 Y</div>
 
-    <!-- FULLSCREEN EDITORIAL CASE STUDY MODAL -->
+    <!-- ─── CASE STUDY MODAL ─── -->
     <div class="case-study-modal" id="case-study-modal">
         <div style="position:fixed; top:2rem; right:2rem; z-index:1001;">
             <button class="haoqi-btn" onclick="closeBlogModal()"><i class="fas fa-times"></i> Close Case Study</button>
@@ -845,7 +876,7 @@
         </div>
     </div>
 
-    <!-- FULLSCREEN CERTIFICATE IMAGE MODAL -->
+    <!-- ─── CERT MODAL ─── -->
     <div class="case-study-modal" id="cert-modal" style="align-items:center; justify-content:center; background:rgba(0,0,0,0.85);">
         <div style="position:relative; max-width:90%; max-height:90vh; background:var(--bg-card); padding:1rem; border-radius:16px; border:1px solid var(--border-color);">
             <button class="haoqi-btn" onclick="closeCertModal()" style="position:absolute; top:-12px; right:-12px; border-radius:50%; width:36px; height:32px; padding:0;"><i class="fas fa-times"></i></button>
@@ -853,7 +884,7 @@
         </div>
     </div>
 
-    <!-- SEARCH MODAL OVERLAY -->
+    <!-- ─── SEARCH MODAL ─── -->
     <div class="modal-overlay" id="search-modal" onclick="closeSearchModal()">
         <div class="search-box" onclick="event.stopPropagation()">
             <div style="display:flex; align-items:center; gap:0.75rem; background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; padding:0.75rem 1rem;">
@@ -864,17 +895,79 @@
         </div>
     </div>
 
-    <!-- THREE.JS LIBRARY -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- ─── THREE.JS ─── -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js">
+    </script>
 
     <script>
-        // 1. KINETIC LETTER SPLITTING HOVER ANIMATION
+        // ════════════════════════════════════════════════════════════════
+        // 1.  BEN CELINSKI SCROLL OBSERVER – enhanced with rootMargin
+        // ════════════════════════════════════════════════════════════════
+
+        const celinskiObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // once visible, stop observing to reduce load
+                    celinskiObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: '0px 0px -30px 0px' // triggers slightly earlier
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.celinski-scroll-section').forEach(sec => {
+                // if already visible on load, mark it
+                const rect = sec.getBoundingClientRect();
+                const winHeight = window.innerHeight;
+                if (rect.top < winHeight * 0.85 && rect.bottom > 0) {
+                    sec.classList.add('visible');
+                } else {
+                    celinskiObserver.observe(sec);
+                }
+            });
+
+            // Also observe any new sections that might be added dynamically
+            // (but we have them all statically)
+        });
+
+        // ════════════════════════════════════════════════════════════════
+        // 2.  SCROLL PROGRESS – top bar + right pill
+        // ════════════════════════════════════════════════════════════════
+
+        function updateScrollProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
+            const percent = Math.round(progress * 100);
+
+            // top progress bar
+            document.getElementById('scrollProgressBar').style.width = percent + '%';
+
+            // right pill thumb
+            const thumb = document.getElementById('scroll-thumb');
+            const barHeight = 180;
+            const thumbHeight = 48;
+            const maxTranslate = barHeight - thumbHeight;
+            thumb.style.transform = `translateY(${progress * maxTranslate}px)`;
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+        window.addEventListener('resize', updateScrollProgress);
+        // initial call after layout settles
+        setTimeout(updateScrollProgress, 100);
+
+        // ════════════════════════════════════════════════════════════════
+        // 3.  KINETIC LETTER SPLITTING
+        // ════════════════════════════════════════════════════════════════
+
         function applyKineticTypography(elementId) {
             const el = document.getElementById(elementId);
             if (!el) return;
             const text = el.innerText;
             el.innerHTML = '';
-            
             [...text].forEach(char => {
                 const span = document.createElement('span');
                 span.className = 'char-hover';
@@ -883,54 +976,41 @@
             });
         }
 
-        // 2. CURSOR COORD TRACKER, RETRO DUST & BEN CELINSKI SCROLL OBSERVER
+        // ════════════════════════════════════════════════════════════════
+        // 4.  CURSOR COORD + RETRO PIXEL TRAIL
+        // ════════════════════════════════════════════════════════════════
+
         const coordTracker = document.getElementById('coord-tracker');
-        const scrollThumb = document.getElementById('scroll-thumb');
 
         window.addEventListener('mousemove', (e) => {
             const x = String(e.clientX).padStart(4, '0');
             const y = String(e.clientY).padStart(4, '0');
             coordTracker.textContent = `${x} X ${y} Y`;
 
-            if (Math.random() > 0.4) {
+            if (Math.random() > 0.45) {
                 const pixel = document.createElement('div');
                 pixel.className = 'pixel-block';
                 pixel.style.left = `${e.clientX}px`;
                 pixel.style.top = `${e.clientY}px`;
                 document.getElementById('pixel-trail-container').appendChild(pixel);
-
                 setTimeout(() => {
                     pixel.style.opacity = '0';
                     pixel.style.transform = 'scale(0.2) translateY(10px)';
                 }, 50);
-
                 setTimeout(() => { pixel.remove(); }, 650);
             }
         });
 
-        window.addEventListener('scroll', () => {
-            const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-            scrollThumb.style.transform = `translateY(${scrollPercent * 180}px)`;
-        });
+        // ════════════════════════════════════════════════════════════════
+        // 5.  THREE.JS ELASTIC JELLY MESH
+        // ════════════════════════════════════════════════════════════════
 
-        // BEN CELINSKI PORTFOLIO SCROLL ANIMATION OBSERVER
-        const celinskiObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        document.querySelectorAll('.celinski-scroll-section').forEach(sec => celinskiObserver.observe(sec));
-
-        // 3. THREE.JS ELASTIC JELLY MESH 3D SCENE
         const canvas = document.getElementById('hero-3d-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 6;
 
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -955,7 +1035,8 @@
         light2.position.set(-5, -5, -2);
         scene.add(light2);
 
-        let mouseX = 0, mouseY = 0;
+        let mouseX = 0,
+            mouseY = 0;
         let scaleTarget = 1.0;
 
         window.addEventListener('mousemove', (e) => {
@@ -985,7 +1066,10 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // 4. MASTER CERTIFICATES LIST (30 Items)
+        // ════════════════════════════════════════════════════════════════
+        // 6.  CERTIFICATES DATA (30)
+        // ════════════════════════════════════════════════════════════════
+
         const certificatesList = [
             { id: "c1", title: "Python Beginner to Advanced", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
             { id: "c2", title: "Ultimate YAML Course", fileId: "1rEAMuGC6974h5Bv_o-PSPl8RJGVhyUnm" },
@@ -1023,229 +1107,122 @@
             const certGrid = document.getElementById('tab-cert');
             if (!certGrid) return;
             certGrid.innerHTML = '';
-
             certificatesList.forEach(cert => {
                 const card = document.createElement('div');
                 card.className = 'haoqi-card';
                 card.innerHTML = `
-                    <div class="cert-img-frame">
-                        <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" onerror="this.src='https://via.placeholder.com/600x380/0f172a/ffffff?text=${encodeURIComponent(cert.title)}'">
-                    </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <h3 style="font-size:0.95rem;">${cert.title}</h3>
-                        <button class="haoqi-btn" onclick="openCertModal('https://lh3.googleusercontent.com/d/${cert.fileId}')"><i class="fas fa-expand"></i> View</button>
-                    </div>
-                `;
+                        <div class="cert-img-frame">
+                            <img src="https://lh3.googleusercontent.com/d/${cert.fileId}" alt="${cert.title}" onerror="this.src='https://via.placeholder.com/600x380/0f172a/ffffff?text=${encodeURIComponent(cert.title)}'">
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <h3 style="font-size:0.95rem;">${cert.title}</h3>
+                            <button class="haoqi-btn" onclick="openCertModal('https://lh3.googleusercontent.com/d/${cert.fileId}')"><i class="fas fa-expand"></i> View</button>
+                        </div>
+                    `;
                 certGrid.appendChild(card);
             });
         }
-        window.addEventListener('DOMContentLoaded', () => {
-            renderCertificates();
-            applyKineticTypography('animated-hero-title');
-        });
 
-        // 5. BLOGS EDITORIAL DATABASE (ALL 5 BLOGS WITH FULL VERBATIM CONTENT)
+        // ════════════════════════════════════════════════════════════════
+        // 7.  BLOGS DATA
+        // ════════════════════════════════════════════════════════════════
+
         const blogsData = {
             blog1: {
                 content: `
-                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Artificial Intelligence · By Gaddam Kalyan Teja</div>
-
-                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="AI Operations">
-
-                    <h2 id="toc-why">1. Why This Matters</h2>
-                    <p>Every "Ops" term gets thrown around interchangeably, but they solve different problems. DevOps automates how software ships. MLOps automates how models get trained and deployed. AIOps automates how you watch systems — using AI to cut through alert noise. Agentic AIOps is the newest layer: instead of just detecting a problem, an AI agent investigates and fixes it. Understanding where each one starts and stops matters because teams waste budget buying an "AIOps platform" when what they actually needed was basic CI/CD discipline, or vice versa.</p>
-
-                    <h2 id="toc-how">2. How To Use It</h2>
-                    <ul>
-                        <li>Start with DevOps fundamentals (CI/CD, IaC, version control) before layering anything AI-driven on top — AIOps on a broken pipeline just automates the chaos faster.</li>
-                        <li>Adopt MLOps only when you have models in production that need retraining, versioning, and drift monitoring (tools: MLflow, Kubeflow, SageMaker Pipelines).</li>
-                        <li>Adopt AIOps once you have enough telemetry (logs, metrics, traces) that a human can no longer eyeball it — tools like Datadog Watchdog, Dynatrace Davis, or Moogsoft correlate anomalies across thousands of signals.</li>
-                        <li>Move to Agentic AIOps only after AIOps is trusted for detection — agentic tools (e.g., PagerDuty AIOps agents, self-healing runbooks in Kubernetes operators) should execute pre-approved remediation, not open-ended fixes.</li>
-                    </ul>
-
-                    <h2 id="toc-arch">3. Architecture Diagram</h2>
-                    <div class="code-box">
-[Dev Commits] ➔ [DevOps CI/CD] ➔ [K8s Deploy] ➔ [Logs/Metrics/Traces Telemetry]
-                                                      ↓
-[ML Model]    ➔ [MLOps Pipeline] ➔ [K8s Deploy] ➔ [AIOps Anomaly Detection]
-                                                      ↓
-                                        [Agentic AI Autonomous Remediation]
-                                                      ↓ (Auto-Restart/Scale)
-                                                [K8s Cluster State]
-                    </div>
-
-                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <ul>
-                        <li><strong>Phase 1 (Weeks 1-4):</strong> Stabilize CI/CD, get IaC (Terraform) in place, ensure every deploy is reproducible.</li>
-                        <li><strong>Phase 2 (Weeks 5-8):</strong> Instrument everything — Prometheus/Grafana or a SaaS APM. No AIOps without data.</li>
-                        <li><strong>Phase 3 (Weeks 9-12):</strong> Introduce AIOps for anomaly detection and noise reduction only (no auto-remediation yet).</li>
-                        <li><strong>Phase 4 (Month 4+):</strong> Pilot agentic remediation on low-risk, reversible actions (e.g., pod restarts) before touching anything stateful.</li>
-                    </ul>
-
-                    <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>A mid-size fintech had 400+ alerts a day, most duplicates from the same root cause. They didn't need "AI" — they needed alert correlation. Rolling out an AIOps layer on top of their existing Prometheus stack cut alert volume by ~85%, and only after 6 months of trust-building did they let an agent auto-restart crashlooping pods, saving roughly 3 hours/week of on-call time.</p>
-                `
+                        <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h1>
+                        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Artificial Intelligence · By Gaddam Kalyan Teja</div>
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="AI Operations">
+                        <h2 id="toc-why">1. Why This Matters</h2>
+                        <p>Every "Ops" term gets thrown around interchangeably, but they solve different problems. DevOps automates how software ships. MLOps automates how models get trained and deployed. AIOps automates how you watch systems — using AI to cut through alert noise. Agentic AIOps is the newest layer: instead of just detecting a problem, an AI agent investigates and fixes it. Understanding where each one starts and stops matters because teams waste budget buying an "AIOps platform" when what they actually needed was basic CI/CD discipline, or vice versa.</p>
+                        <h2 id="toc-how">2. How To Use It</h2>
+                        <ul><li>Start with DevOps fundamentals (CI/CD, IaC, version control) before layering anything AI-driven on top — AIOps on a broken pipeline just automates the chaos faster.</li><li>Adopt MLOps only when you have models in production that need retraining, versioning, and drift monitoring (tools: MLflow, Kubeflow, SageMaker Pipelines).</li><li>Adopt AIOps once you have enough telemetry (logs, metrics, traces) that a human can no longer eyeball it — tools like Datadog Watchdog, Dynatrace Davis, or Moogsoft correlate anomalies across thousands of signals.</li><li>Move to Agentic AIOps only after AIOps is trusted for detection — agentic tools (e.g., PagerDuty AIOps agents, self-healing runbooks in Kubernetes operators) should execute pre-approved remediation, not open-ended fixes.</li></ul>
+                        <h2 id="toc-arch">3. Architecture Diagram</h2>
+                        <div class="code-box">[Dev Commits] ➔ [DevOps CI/CD] ➔ [K8s Deploy] ➔ [Logs/Metrics/Traces Telemetry]\n                                                      ↓\n[ML Model]    ➔ [MLOps Pipeline] ➔ [K8s Deploy] ➔ [AIOps Anomaly Detection]\n                                                      ↓\n                                        [Agentic AI Autonomous Remediation]\n                                                      ↓ (Auto-Restart/Scale)\n                                                [K8s Cluster State]</div>
+                        <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                        <ul><li><strong>Phase 1 (Weeks 1-4):</strong> Stabilize CI/CD, get IaC (Terraform) in place, ensure every deploy is reproducible.</li><li><strong>Phase 2 (Weeks 5-8):</strong> Instrument everything — Prometheus/Grafana or a SaaS APM. No AIOps without data.</li><li><strong>Phase 3 (Weeks 9-12):</strong> Introduce AIOps for anomaly detection and noise reduction only (no auto-remediation yet).</li><li><strong>Phase 4 (Month 4+):</strong> Pilot agentic remediation on low-risk, reversible actions (e.g., pod restarts) before touching anything stateful.</li></ul>
+                        <h2 id="toc-real">5. Real-Life Example</h2>
+                        <p>A mid-size fintech had 400+ alerts a day, most duplicates from the same root cause. They didn't need "AI" — they needed alert correlation. Rolling out an AIOps layer on top of their existing Prometheus stack cut alert volume by ~85%, and only after 6 months of trust-building did they let an agent auto-restart crashlooping pods, saving roughly 3 hours/week of on-call time.</p>
+                    `
             },
             blog2: {
                 content: `
-                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Cloud Cost Audit · By Gaddam Kalyan Teja</div>
-
-                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Cloud Cost Audit">
-
-                    <h2 id="toc-why">1. Why This Matters</h2>
-                    <p>Cloud bills grow silently — nobody decommissions a Redis instance the same way they'd cancel a subscription. Idle caches, oversized instance types, and forgotten dev environments are the single biggest source of AWS waste. A structured audit process turns "the bill is high" into a specific, defensible savings number.</p>
-
-                    <h2 id="toc-how">2. How To Use It</h2>
-                    <ul>
-                        <li>Pull CloudWatch metrics (CPU, network, cache hit rate) for every ElastiCache/Redis node over a 30-day window.</li>
-                        <li>Flag anything with near-zero connections or hit rate below a threshold (e.g., &lt;5%) as an idle candidate.</li>
-                        <li>Cross-check with security groups — idle caches often have exposed ports (6379) left open, which is a security risk on top of a cost one.</li>
-                        <li>Decommission in stages: snapshot ➔ detach from app config ➔ scale down ➔ terminate, with a rollback window before final deletion.</li>
-                    </ul>
-
-                    <h2 id="toc-arch">3. Architecture Diagram</h2>
-                    <div class="code-box">
-[CloudWatch Metrics] ➔ [Cost Audit Script - boto3/Python] ➔ [Idle Resource Report]
-                                                                  ↓
-[Monthly Savings in Cost Explorer] ➔ [Terminate] ➔ [Scale Down] ➔ [Close Security Group Ports]
-                    </div>
-
-                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <ul>
-                        <li><strong>Week 1:</strong> Export 30-90 days of CloudWatch metrics for all cache/DB instances.</li>
-                        <li><strong>Week 2:</strong> Build a scoring script (Python/boto3) to flag low-utilization resources.</li>
-                        <li><strong>Week 3:</strong> Validate with app owners, check exposed security group ports.</li>
-                        <li><strong>Week 4:</strong> Execute staged decommission with rollback snapshots; document savings in a cost report.</li>
-                    </ul>
-
-                    <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>An internal audit of a SaaS platform's ElastiCache fleet found 6 Redis nodes with &lt;3% CPU utilization and open ports to 0.0.0.0/0 — leftovers from a deprecated feature. Snapshotting, locking down the security groups, and terminating them after a 2-week safety window removed roughly ₹1.5L/month in recurring cost (~₹18L/year), with zero downtime because traffic was verified to be already routing elsewhere.</p>
-                `
+                        <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h1>
+                        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Cloud Cost Audit · By Gaddam Kalyan Teja</div>
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Cloud Cost Audit">
+                        <h2 id="toc-why">1. Why This Matters</h2>
+                        <p>Cloud bills grow silently — nobody decommissions a Redis instance the same way they'd cancel a subscription. Idle caches, oversized instance types, and forgotten dev environments are the single biggest source of AWS waste. A structured audit process turns "the bill is high" into a specific, defensible savings number.</p>
+                        <h2 id="toc-how">2. How To Use It</h2>
+                        <ul><li>Pull CloudWatch metrics (CPU, network, cache hit rate) for every ElastiCache/Redis node over a 30-day window.</li><li>Flag anything with near-zero connections or hit rate below a threshold (e.g., &lt;5%) as an idle candidate.</li><li>Cross-check with security groups — idle caches often have exposed ports (6379) left open, which is a security risk on top of a cost one.</li><li>Decommission in stages: snapshot ➔ detach from app config ➔ scale down ➔ terminate, with a rollback window before final deletion.</li></ul>
+                        <h2 id="toc-arch">3. Architecture Diagram</h2>
+                        <div class="code-box">[CloudWatch Metrics] ➔ [Cost Audit Script - boto3/Python] ➔ [Idle Resource Report]\n                                                                  ↓\n[Monthly Savings in Cost Explorer] ➔ [Terminate] ➔ [Scale Down] ➔ [Close Security Group Ports]</div>
+                        <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                        <ul><li><strong>Week 1:</strong> Export 30-90 days of CloudWatch metrics for all cache/DB instances.</li><li><strong>Week 2:</strong> Build a scoring script (Python/boto3) to flag low-utilization resources.</li><li><strong>Week 3:</strong> Validate with app owners, check exposed security group ports.</li><li><strong>Week 4:</strong> Execute staged decommission with rollback snapshots; document savings in a cost report.</li></ul>
+                        <h2 id="toc-real">5. Real-Life Example</h2>
+                        <p>An internal audit of a SaaS platform's ElastiCache fleet found 6 Redis nodes with &lt;3% CPU utilization and open ports to 0.0.0.0/0 — leftovers from a deprecated feature. Snapshotting, locking down the security groups, and terminating them after a 2-week safety window removed roughly ₹1.5L/month in recurring cost (~₹18L/year), with zero downtime because traffic was verified to be already routing elsewhere.</p>
+                    `
             },
             blog3: {
                 content: `
-                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Kubernetes &amp; GitOps · By Gaddam Kalyan Teja</div>
-
-                    <img src="https://images.unsplash.com/photo-1667372335854-c2a2a69094f6?auto=format&fit=crop&w=1200&q=80" alt="Kubernetes Deployment">
-
-                    <h2 id="toc-why">1. Why This Matters</h2>
-                    <p>Manual kubectl apply deployments don't scale past a handful of services and are impossible to audit. GitOps makes Git the single source of truth — what's in the repo is what's running in the cluster, always, with a full history of every change.</p>
-
-                    <h2 id="toc-how">2. How To Use It</h2>
-                    <ul>
-                        <li>Structure a Git repo with one manifest/Helm chart directory per environment (dev/staging/prod).</li>
-                        <li>Point ArgoCD at the repo; it continuously reconciles cluster state to match Git, not the other way around.</li>
-                        <li>Use rolling updates with maxSurge/maxUnavailable tuned per service, and readiness probes strict enough to catch bad pods before they take traffic.</li>
-                        <li>Layer in Horizontal Pod Autoscaler (HPA) so scale-out happens automatically under load instead of manual intervention.</li>
-                    </ul>
-
-                    <h2 id="toc-arch">3. Architecture Diagram</h2>
-                    <div class="code-box">
-[Developer git push] ➔ [Git Repo - Helm Charts] ➔ [ArgoCD Controller sync] ➔ [AWS EKS Cluster]
-                                                                                   ↓
-[ArgoCD Auto-Rollback] ➔ [Readiness Probe Fail] ➔ [Pods Test] ➔ [ReplicaSet Rolling Update]
-                                                       ↓ (Pass)
-                                            [ALB / Service Traffic Shift]
-                    </div>
-
-                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <ul>
-                        <li><strong>Phase 1:</strong> Containerize services, write Helm charts, move all config out of the cluster into Git.</li>
-                        <li><strong>Phase 2:</strong> Install ArgoCD, connect it to the repo, verify manual sync works.</li>
-                        <li><strong>Phase 3:</strong> Enable auto-sync with self-heal, add readiness/liveness probes to every deployment.</li>
-                        <li><strong>Phase 4:</strong> Add HPA and PodDisruptionBudgets so rolling updates never drop below minimum healthy replicas.</li>
-                    </ul>
-
-                    <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>A team running 12 microservices on EKS used to deploy via a shared Jenkins job that occasionally pushed bad config directly to prod. Moving to ArgoCD with Git as the source of truth meant every deploy was a PR — reviewable and revertible with git revert. Rolling updates with proper readiness probes meant a bad deploy of the payments service was auto-rolled-back by ArgoCD within 90 seconds, before it affected more than 2% of traffic.</p>
-                `
+                        <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h1>
+                        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Kubernetes &amp; GitOps · By Gaddam Kalyan Teja</div>
+                        <img src="https://images.unsplash.com/photo-1667372335854-c2a2a69094f6?auto=format&fit=crop&w=1200&q=80" alt="Kubernetes Deployment">
+                        <h2 id="toc-why">1. Why This Matters</h2>
+                        <p>Manual kubectl apply deployments don't scale past a handful of services and are impossible to audit. GitOps makes Git the single source of truth — what's in the repo is what's running in the cluster, always, with a full history of every change.</p>
+                        <h2 id="toc-how">2. How To Use It</h2>
+                        <ul><li>Structure a Git repo with one manifest/Helm chart directory per environment (dev/staging/prod).</li><li>Point ArgoCD at the repo; it continuously reconciles cluster state to match Git, not the other way around.</li><li>Use rolling updates with maxSurge/maxUnavailable tuned per service, and readiness probes strict enough to catch bad pods before they take traffic.</li><li>Layer in Horizontal Pod Autoscaler (HPA) so scale-out happens automatically under load instead of manual intervention.</li></ul>
+                        <h2 id="toc-arch">3. Architecture Diagram</h2>
+                        <div class="code-box">[Developer git push] ➔ [Git Repo - Helm Charts] ➔ [ArgoCD Controller sync] ➔ [AWS EKS Cluster]\n                                                                                   ↓\n[ArgoCD Auto-Rollback] ➔ [Readiness Probe Fail] ➔ [Pods Test] ➔ [ReplicaSet Rolling Update]\n                                                       ↓ (Pass)\n                                            [ALB / Service Traffic Shift]</div>
+                        <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                        <ul><li><strong>Phase 1:</strong> Containerize services, write Helm charts, move all config out of the cluster into Git.</li><li><strong>Phase 2:</strong> Install ArgoCD, connect it to the repo, verify manual sync works.</li><li><strong>Phase 3:</strong> Enable auto-sync with self-heal, add readiness/liveness probes to every deployment.</li><li><strong>Phase 4:</strong> Add HPA and PodDisruptionBudgets so rolling updates never drop below minimum healthy replicas.</li></ul>
+                        <h2 id="toc-real">5. Real-Life Example</h2>
+                        <p>A team running 12 microservices on EKS used to deploy via a shared Jenkins job that occasionally pushed bad config directly to prod. Moving to ArgoCD with Git as the source of truth meant every deploy was a PR — reviewable and revertible with git revert. Rolling updates with proper readiness probes meant a bad deploy of the payments service was auto-rolled-back by ArgoCD within 90 seconds, before it affected more than 2% of traffic.</p>
+                    `
             },
             blog4: {
                 content: `
-                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Cloud Security · By Gaddam Kalyan Teja</div>
-
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Cloud Security">
-
-                    <h2 id="toc-why">1. Why This Matters</h2>
-                    <p>In a multi-tenant SaaS, the worst-case bug isn't a crash — it's Tenant A seeing Tenant B's data. Authentication proves who someone is; authorization (RBAC) decides what they can touch. Getting this wrong at scale (1,000+ users) is a breach waiting to happen, not a hypothetical.</p>
-
-                    <h2 id="toc-how">2. How To Use It</h2>
-                    <ul>
-                        <li>Issue short-lived JWTs (15-30 min) signed with an asymmetric key (RS256), with tenant ID and role embedded as claims — never trust a role claim without verifying the signature server-side on every request.</li>
-                        <li>Enforce RBAC at the API gateway layer first (coarse-grained: can this role hit this endpoint), then again at the service/DB layer (fine-grained: can this user touch this row).</li>
-                        <li>Rotate signing keys on a schedule and support key rollover without invalidating all active sessions.</li>
-                        <li>Lock down EC2 security groups so only the load balancer can reach app ports directly — no direct public access to instances.</li>
-                    </ul>
-
-                    <h2 id="toc-arch">3. Architecture Diagram</h2>
-                    <div class="code-box">
-[User Login] ➔ [Auth Service] ➔ [Signed JWT (RS256)] ➔ [API Gateway] ➔ [RBAC Policy Check]
-                                                                               ↓ (Allowed)
-[EC2 Security Group (ALB Only Ingress)] ➔ [Tenant-Scoped DB Query] ➔ [Microservice Route]
-                    </div>
-
-                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <ul>
-                        <li><strong>Phase 1:</strong> Move to short-lived JWTs with proper signature verification on every request (not just at login).</li>
-                        <li><strong>Phase 2:</strong> Define role-permission matrices; enforce at the gateway.</li>
-                        <li><strong>Phase 3:</strong> Add row-level tenant scoping at the database/service layer as a second line of defense.</li>
-                        <li><strong>Phase 4:</strong> Lock security groups to least-privilege ingress; audit with automated port-scan checks in CI.</li>
-                    </ul>
-
-                    <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>A SaaS platform serving 1,000+ users across multiple tenants found, during a security review, that an internal admin API trusted the role claim in the JWT without re-verifying the signature on every hop between microservices. A forged token could have escalated privileges. Adding signature re-verification at each service boundary plus tenant-scoped DB queries closed the gap before it reached production.</p>
-                `
+                        <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h1>
+                        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Cloud Security · By Gaddam Kalyan Teja</div>
+                        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Cloud Security">
+                        <h2 id="toc-why">1. Why This Matters</h2>
+                        <p>In a multi-tenant SaaS, the worst-case bug isn't a crash — it's Tenant A seeing Tenant B's data. Authentication proves who someone is; authorization (RBAC) decides what they can touch. Getting this wrong at scale (1,000+ users) is a breach waiting to happen, not a hypothetical.</p>
+                        <h2 id="toc-how">2. How To Use It</h2>
+                        <ul><li>Issue short-lived JWTs (15-30 min) signed with an asymmetric key (RS256), with tenant ID and role embedded as claims — never trust a role claim without verifying the signature server-side on every request.</li><li>Enforce RBAC at the API gateway layer first (coarse-grained: can this role hit this endpoint), then again at the service/DB layer (fine-grained: can this user touch this row).</li><li>Rotate signing keys on a schedule and support key rollover without invalidating all active sessions.</li><li>Lock down EC2 security groups so only the load balancer can reach app ports directly — no direct public access to instances.</li></ul>
+                        <h2 id="toc-arch">3. Architecture Diagram</h2>
+                        <div class="code-box">[User Login] ➔ [Auth Service] ➔ [Signed JWT (RS256)] ➔ [API Gateway] ➔ [RBAC Policy Check]\n                                                                               ↓ (Allowed)\n[EC2 Security Group (ALB Only Ingress)] ➔ [Tenant-Scoped DB Query] ➔ [Microservice Route]</div>
+                        <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                        <ul><li><strong>Phase 1:</strong> Move to short-lived JWTs with proper signature verification on every request (not just at login).</li><li><strong>Phase 2:</strong> Define role-permission matrices; enforce at the gateway.</li><li><strong>Phase 3:</strong> Add row-level tenant scoping at the database/service layer as a second line of defense.</li><li><strong>Phase 4:</strong> Lock security groups to least-privilege ingress; audit with automated port-scan checks in CI.</li></ul>
+                        <h2 id="toc-real">5. Real-Life Example</h2>
+                        <p>A SaaS platform serving 1,000+ users across multiple tenants found, during a security review, that an internal admin API trusted the role claim in the JWT without re-verifying the signature on every hop between microservices. A forged token could have escalated privileges. Adding signature re-verification at each service boundary plus tenant-scoped DB queries closed the gap before it reached production.</p>
+                    `
             },
             blog5: {
                 content: `
-                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Observability &amp; SRE · By Gaddam Kalyan Teja</div>
-
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Grafana Observability">
-
-                    <h2 id="toc-why">1. Why This Matters</h2>
-                    <p>Mean Time To Resolution (MTTR) is the number that actually matters during an incident — not whether you have "observability," but how fast someone can go from alert to root cause. Custom metrics and good dashboards are what separate a 5-minute fix from a 2-hour war room.</p>
-
-                    <h2 id="toc-how">2. How To Use It</h2>
-                    <ul>
-                        <li>Instrument services with custom Prometheus counters/histograms for business-relevant events (e.g., failed payments, queue depth) — not just CPU/memory, which rarely tell you why something broke.</li>
-                        <li>Route alerts through Alertmanager with proper grouping and silencing so on-call gets one actionable page, not fifty.</li>
-                        <li>Build Grafana dashboards around the "four golden signals" (latency, traffic, errors, saturation) per service, with drill-down links from a high-level overview to per-pod detail.</li>
-                        <li>Automate root cause analysis (RCA) by correlating deploy timestamps (from your CI/CD system) directly on the same Grafana timeline as error spikes.</li>
-                    </ul>
-
-                    <h2 id="toc-arch">3. Architecture Diagram</h2>
-                    <div class="code-box">
-[Microservices /metrics] ➔ [Prometheus Scraper] ➔ [Alertmanager Grouped Alert] ➔ [On-Call Engineer]
-                                                ➔ [Grafana Dashboards] ➔ [CI/CD Deploy Markers]
-                                                                               ↓
-                                                                [Faster Root Cause ID & Fix]
-                    </div>
-
-                    <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <ul>
-                        <li><strong>Week 1-2:</strong> Instrument core services with custom Prometheus metrics beyond default CPU/memory.</li>
-                        <li><strong>Week 3:</strong> Set up Alertmanager routing/grouping so alerts map to actual on-call ownership.</li>
-                        <li><strong>Week 4:</strong> Build Grafana dashboards per service using the four golden signals.</li>
-                        <li><strong>Month 2:</strong> Overlay deploy events on dashboards so incident timelines instantly show "did this start right after a deploy."</li>
-                    </ul>
-
-                    <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>A team's average MTTR was ~90 minutes because engineers had to manually check deploy logs, then metrics, then traces, in three different tools. Overlaying CI/CD deploy markers directly on the Grafana error-rate graph meant the very first thing an on-call engineer saw during a spike was "this started 4 minutes after deploy #482." MTTR dropped to under 20 minutes for deploy-caused incidents.</p>
-                `
+                        <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h1>
+                        <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Observability &amp; SRE · By Gaddam Kalyan Teja</div>
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Grafana Observability">
+                        <h2 id="toc-why">1. Why This Matters</h2>
+                        <p>Mean Time To Resolution (MTTR) is the number that actually matters during an incident — not whether you have "observability," but how fast someone can go from alert to root cause. Custom metrics and good dashboards are what separate a 5-minute fix from a 2-hour war room.</p>
+                        <h2 id="toc-how">2. How To Use It</h2>
+                        <ul><li>Instrument services with custom Prometheus counters/histograms for business-relevant events (e.g., failed payments, queue depth) — not just CPU/memory, which rarely tell you why something broke.</li><li>Route alerts through Alertmanager with proper grouping and silencing so on-call gets one actionable page, not fifty.</li><li>Build Grafana dashboards around the "four golden signals" (latency, traffic, errors, saturation) per service, with drill-down links from a high-level overview to per-pod detail.</li><li>Automate root cause analysis (RCA) by correlating deploy timestamps (from your CI/CD system) directly on the same Grafana timeline as error spikes.</li></ul>
+                        <h2 id="toc-arch">3. Architecture Diagram</h2>
+                        <div class="code-box">[Microservices /metrics] ➔ [Prometheus Scraper] ➔ [Alertmanager Grouped Alert] ➔ [On-Call Engineer]\n                                                ➔ [Grafana Dashboards] ➔ [CI/CD Deploy Markers]\n                                                                               ↓\n                                                                [Faster Root Cause ID & Fix]</div>
+                        <h2 id="toc-road">4. Roadmap To Adopt</h2>
+                        <ul><li><strong>Week 1-2:</strong> Instrument core services with custom Prometheus metrics beyond default CPU/memory.</li><li><strong>Week 3:</strong> Set up Alertmanager routing/grouping so alerts map to actual on-call ownership.</li><li><strong>Week 4:</strong> Build Grafana dashboards per service using the four golden signals.</li><li><strong>Month 2:</strong> Overlay deploy events on dashboards so incident timelines instantly show "did this start right after a deploy."</li></ul>
+                        <h2 id="toc-real">5. Real-Life Example</h2>
+                        <p>A team's average MTTR was ~90 minutes because engineers had to manually check deploy logs, then metrics, then traces, in three different tools. Overlaying CI/CD deploy markers directly on the Grafana error-rate graph meant the very first thing an on-call engineer saw during a spike was "this started 4 minutes after deploy #482." MTTR dropped to under 20 minutes for deploy-caused incidents.</p>
+                    `
             }
         };
 
-        // 6. CONTROLS & MODALS
+        // ════════════════════════════════════════════════════════════════
+        // 8.  UI CONTROLS
+        // ════════════════════════════════════════════════════════════════
+
         function switchTab(tab) {
             document.getElementById('tab-exp').style.display = tab === 'exp' ? 'grid' : 'none';
             document.getElementById('tab-educ').style.display = tab === 'educ' ? 'grid' : 'none';
             document.getElementById('tab-cert').style.display = tab === 'cert' ? 'grid' : 'none';
-
             document.getElementById('btn-exp').classList.toggle('active', tab === 'exp');
             document.getElementById('btn-educ').classList.toggle('active', tab === 'educ');
             document.getElementById('btn-cert').classList.toggle('active', tab === 'cert');
@@ -1262,20 +1239,24 @@
             if (blogsData[id]) {
                 document.getElementById('case-study-body').innerHTML = blogsData[id].content;
                 document.getElementById('case-study-modal').style.display = 'block';
+                document.body.style.overflow = 'hidden';
             }
         }
 
         function closeBlogModal() {
             document.getElementById('case-study-modal').style.display = 'none';
+            document.body.style.overflow = '';
         }
 
         function openCertModal(url) {
             document.getElementById('cert-modal-img').src = url;
             document.getElementById('cert-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeCertModal() {
             document.getElementById('cert-modal').style.display = 'none';
+            document.body.style.overflow = '';
         }
 
         function openSearchModal() {
@@ -1291,7 +1272,6 @@
             const query = document.getElementById('search-input').value.toLowerCase();
             const results = document.getElementById('search-results');
             results.innerHTML = '';
-
             const db = [
                 { title: "AWS (EC2, VPC, S3, IAM, EKS)", cat: "Skills" },
                 { title: "Terraform Infrastructure as Code", cat: "Skills" },
@@ -1299,7 +1279,6 @@
                 { title: "AWS Cost Optimization: Auditing Unused Caches", cat: "Blogs" },
                 { title: "Athena LMS DevOps Intern Experience", cat: "Experience" }
             ];
-
             const filtered = db.filter(i => i.title.toLowerCase().includes(query) || i.cat.toLowerCase().includes(query));
             filtered.forEach(i => {
                 const item = document.createElement('div');
@@ -1309,12 +1288,16 @@
                 item.style.fontSize = '0.8rem';
                 item.style.display = 'flex';
                 item.style.justifyContent = 'space-between';
-                item.innerHTML = `<span>${i.title}</span><span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-muted);">${i.cat}</span>`;
+                item.innerHTML =
+                    `<span>${i.title}</span><span style="font-family:var(--font-mono); font-size:0.7rem; color:var(--text-muted);">${i.cat}</span>`;
                 results.appendChild(item);
             });
         }
 
-        // 7. TERMINAL HANDLER
+        // ════════════════════════════════════════════════════════════════
+        // 9.  TERMINAL HANDLER
+        // ════════════════════════════════════════════════════════════════
+
         function handleTerminalCommand(e) {
             e.preventDefault();
             const input = document.getElementById('terminal-input');
@@ -1341,7 +1324,8 @@
                     res.innerHTML = 'Switched to Certifications view (30 verified credentials).';
                     break;
                 case 'blogs':
-                    res.innerHTML = 'Articles: 1. AIOps vs DevOps | 2. AWS Cost Optimization | 3. ArgoCD GitOps | 4. JWT RBAC Security | 5. Prometheus Monitoring';
+                    res.innerHTML =
+                        'Articles: 1. AIOps vs DevOps | 2. AWS Cost Optimization | 3. ArgoCD GitOps | 4. JWT RBAC Security | 5. Prometheus Monitoring';
                     break;
                 case 'clear':
                     output.innerHTML = '';
@@ -1355,6 +1339,8 @@
             output.scrollTop = output.scrollHeight;
         }
 
+        // ─── KEYBOARD SHORTCUTS ────────────────────────────────────────
+
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
                 e.preventDefault();
@@ -1366,6 +1352,31 @@
                 closeBlogModal();
             }
         });
+
+        // ─── INIT ──────────────────────────────────────────────────────
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCertificates();
+            applyKineticTypography('animated-hero-title');
+            updateScrollProgress();
+
+            // Re-check visibility after fonts & layout settle
+            setTimeout(() => {
+                document.querySelectorAll('.celinski-scroll-section:not(.visible)').forEach(sec => {
+                    const rect = sec.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+                        sec.classList.add('visible');
+                    }
+                });
+                updateScrollProgress();
+            }, 300);
+        });
+
+        // also update progress on any scroll after load
+        window.addEventListener('load', () => {
+            setTimeout(updateScrollProgress, 200);
+        });
     </script>
+
 </body>
 </html>
