@@ -139,7 +139,7 @@
             cursor: grabbing;
         }
 
-        /* APP WRAPPER WITH SCROLL SNAP TRANSITIONS */
+        /* APP WRAPPER */
         .app-container {
             position: relative;
             z-index: 3;
@@ -151,21 +151,32 @@
             gap: 5rem;
         }
 
-        /* DRIBBBLE-STYLE INTERACTIVE SCROLL SNAP SECTION */
-        .snap-section {
+        /* BEN CELINSKI STYLE KINETIC SCROLL ANIMATION */
+        .celinski-scroll-section {
             min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             opacity: 0;
-            transform: translateY(60px) scale(0.96) rotateX(10deg);
-            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-            perspective: 1000px;
+            transform: translateY(80px) scale(0.92);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
-        .snap-section.visible {
+        .celinski-scroll-section.visible {
             opacity: 1;
-            transform: translateY(0) scale(1) rotateX(0deg);
+            transform: translateY(0) scale(1);
+        }
+
+        /* LETTER HOVER ANIMATION */
+        .char-hover {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+        }
+
+        .char-hover:hover {
+            transform: translateY(-8px) scale(1.2);
+            color: var(--accent-blue);
         }
 
         /* NAV BAR */
@@ -436,6 +447,7 @@
             overflow-x: auto;
             margin: 1.25rem 0;
             border: 1px solid var(--border-color);
+            white-space: pre-wrap;
         }
 
         /* TERMINAL SHELL */
@@ -586,16 +598,17 @@
             </ul>
 
             <div class="nav-actions">
-                <button class="haoqi-btn" id="sound-btn" onclick="toggleAudio()"><i class="fas fa-volume-mute"></i> SOUND[\/]</button>
                 <button class="haoqi-btn" onclick="openSearchModal()"><i class="fas fa-search"></i> <kbd>CTRL+K</kbd></button>
                 <button class="haoqi-btn" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i> Theme</button>
             </div>
         </nav>
 
         <!-- HERO BANNER -->
-        <section class="hero-banner snap-section" id="about">
+        <section class="hero-banner celinski-scroll-section" id="about">
             <div class="tag-pill">DevOps &amp; Cloud Engineering</div>
-            <h1 class="hero-title-giant">I AUTOMATE, SCALE &amp; SECURE <span>CLOUD INFRASTRUCTURE.</span></h1>
+            <h1 class="hero-title-giant" id="animated-hero-title">
+                I AUTOMATE, SCALE &amp; SECURE <span>CLOUD INFRASTRUCTURE.</span>
+            </h1>
             <p class="hero-subtext">
                 Junior DevOps Engineer with <strong>14 months</strong> of production experience operating Multi-Tenant Cloud SaaS infrastructure on AWS, Kubernetes, and IaC pipelines. Discovered and decommissioned an unused Redis cache costing <strong>₹1.5L/month</strong> within 2 months at Athena LMS, driving an annual savings of <strong>₹18 Lakhs/year</strong>. Experienced in automating AWS EC2, S3, ALB, CloudFront, EKS deployments, and Prometheus/Grafana SRE observability.
             </p>
@@ -613,7 +626,7 @@
         </section>
 
         <!-- RESUME & CREDENTIALS SECTION -->
-        <section class="snap-section" id="resume">
+        <section class="celinski-scroll-section" id="resume">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Resume &amp; Experience</h2>
                 <div class="tag-pill">30 Verified Certifications</div>
@@ -672,7 +685,7 @@
         </section>
 
         <!-- PROJECTS SECTION -->
-        <section class="snap-section" id="projects">
+        <section class="celinski-scroll-section" id="projects">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Projects</h2>
                 <div class="tag-pill">6 Repositories</div>
@@ -724,7 +737,7 @@
         </section>
 
         <!-- BLOGS SECTION -->
-        <section class="snap-section" id="blogs">
+        <section class="celinski-scroll-section" id="blogs">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Case Studies &amp; Technical Guides</h2>
                 <div class="tag-pill">5 Deep Dive Guides</div>
@@ -769,7 +782,7 @@
         </section>
 
         <!-- TERMINAL SHELL SECTION -->
-        <section class="snap-section" id="terminal-section">
+        <section class="celinski-scroll-section" id="terminal-section">
             <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid var(--border-color); padding-bottom:1rem; margin-bottom:1.5rem;">
                 <h2 style="font-size:2rem; font-weight:800; color:var(--text-heading);">Interactive CLI Shell</h2>
                 <div class="tag-pill">Command Line</div>
@@ -846,7 +859,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <script>
-        // 1. CURSOR COORD TRACKER, RETRO DUST & DRIBBBLE SNAP OBSERVER
+        // 1. KINETIC LETTER SPLITTING HOVER ANIMATION
+        function applyKineticTypography(elementId) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText;
+            el.innerHTML = '';
+            
+            [...text].forEach(char => {
+                const span = document.createElement('span');
+                span.className = 'char-hover';
+                span.innerText = char === ' ' ? '\u00A0' : char;
+                el.appendChild(span);
+            });
+        }
+
+        // 2. CURSOR COORD TRACKER, RETRO DUST & BEN CELINSKI SCROLL OBSERVER
         const coordTracker = document.getElementById('coord-tracker');
         const scrollThumb = document.getElementById('scroll-thumb');
 
@@ -876,18 +904,18 @@
             scrollThumb.style.transform = `translateY(${scrollPercent * 180}px)`;
         });
 
-        // Intersection Observer for Smooth Section Snap-Scroll Transitions
-        const observer = new IntersectionObserver((entries) => {
+        // BEN CELINSKI PORTFOLIO SCROLL ANIMATION OBSERVER
+        const celinskiObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.15 });
 
-        document.querySelectorAll('.snap-section').forEach(sec => observer.observe(sec));
+        document.querySelectorAll('.celinski-scroll-section').forEach(sec => celinskiObserver.observe(sec));
 
-        // 2. THREE.JS ELASTIC JELLY MESH 3D SCENE
+        // 3. THREE.JS ELASTIC JELLY MESH 3D SCENE
         const canvas = document.getElementById('hero-3d-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -948,43 +976,6 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // 3. MULTI-TONE WEB AUDIO SYNTHESIZER
-        let audioCtx = null;
-        let isPlaying = false;
-        let activeNodes = [];
-
-        function toggleAudio() {
-            const btn = document.getElementById('sound-btn');
-            if (!isPlaying) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                const freqs = [110.00, 164.81, 220.00, 277.18, 329.63];
-                
-                freqs.forEach(f => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(f, audioCtx.currentTime);
-                    gain.gain.setValueAtTime(0.015, audioCtx.currentTime);
-                    
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start();
-                    
-                    activeNodes.push(osc);
-                });
-
-                isPlaying = true;
-                btn.innerHTML = '<i class="fas fa-volume-up"></i> SOUND[\/]';
-            } else {
-                activeNodes.forEach(n => n.stop());
-                activeNodes = [];
-                isPlaying = false;
-                btn.innerHTML = '<i class="fas fa-volume-mute"></i> SOUND[\/]';
-            }
-        }
-
         // 4. MASTER CERTIFICATES LIST (30 Items)
         const certificatesList = [
             { id: "c1", title: "Python Beginner to Advanced", fileId: "1DsVV-h1nnhjpiCUjgIyl_tIwST7pIA8W" },
@@ -1039,14 +1030,17 @@
                 certGrid.appendChild(card);
             });
         }
-        window.addEventListener('DOMContentLoaded', renderCertificates);
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCertificates();
+            applyKineticTypography('animated-hero-title');
+        });
 
-        // 5. BLOGS EDITORIAL DATABASE (RESTORED COMPLETE CONTENT)
+        // 5. BLOGS EDITORIAL DATABASE (ALL 5 BLOGS WITH FULL VERBATIM CONTENT)
         const blogsData = {
             blog1: {
                 content: `
-                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">AIOps vs DevOps vs MLOps vs Agentic AIOps</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">July 2026 · By Gaddam Kalyan Teja · 12 min read</div>
+                    <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Ops Explained: AIOps vs. DevOps vs. MLOps vs. Agentic AIOps</h1>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Artificial Intelligence · By Gaddam Kalyan Teja</div>
 
                     <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80" alt="AI Operations">
 
@@ -1058,7 +1052,7 @@
                         <li>Start with DevOps fundamentals (CI/CD, IaC, version control) before layering anything AI-driven on top — AIOps on a broken pipeline just automates the chaos faster.</li>
                         <li>Adopt MLOps only when you have models in production that need retraining, versioning, and drift monitoring (tools: MLflow, Kubeflow, SageMaker Pipelines).</li>
                         <li>Adopt AIOps once you have enough telemetry (logs, metrics, traces) that a human can no longer eyeball it — tools like Datadog Watchdog, Dynatrace Davis, or Moogsoft correlate anomalies across thousands of signals.</li>
-                        <li>Move to Agentic AIOps only after AIOps is trusted for detection — agentic tools should execute pre-approved remediation, not open-ended fixes.</li>
+                        <li>Move to Agentic AIOps only after AIOps is trusted for detection — agentic tools (e.g., PagerDuty AIOps agents, self-healing runbooks in Kubernetes operators) should execute pre-approved remediation, not open-ended fixes.</li>
                     </ul>
 
                     <h2 id="toc-arch">3. Architecture Diagram</h2>
@@ -1073,7 +1067,12 @@
                     </div>
 
                     <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <div class="code-box">Phase 1: Stabilize CI/CD & IaC ➔ Phase 2: Telemetry via Prometheus ➔ Phase 3: AIOps Anomaly Alerts ➔ Phase 4: Agentic Auto-Remediation</div>
+                    <ul>
+                        <li><strong>Phase 1 (Weeks 1-4):</strong> Stabilize CI/CD, get IaC (Terraform) in place, ensure every deploy is reproducible.</li>
+                        <li><strong>Phase 2 (Weeks 5-8):</strong> Instrument everything — Prometheus/Grafana or a SaaS APM. No AIOps without data.</li>
+                        <li><strong>Phase 3 (Weeks 9-12):</strong> Introduce AIOps for anomaly detection and noise reduction only (no auto-remediation yet).</li>
+                        <li><strong>Phase 4 (Month 4+):</strong> Pilot agentic remediation on low-risk, reversible actions (e.g., pod restarts) before touching anything stateful.</li>
+                    </ul>
 
                     <h2 id="toc-real">5. Real-Life Example</h2>
                     <p>A mid-size fintech had 400+ alerts a day, most duplicates from the same root cause. They didn't need "AI" — they needed alert correlation. Rolling out an AIOps layer on top of their existing Prometheus stack cut alert volume by ~85%, and only after 6 months of trust-building did they let an agent auto-restart crashlooping pods, saving roughly 3 hours/week of on-call time.</p>
@@ -1082,9 +1081,9 @@
             blog2: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">AWS Cost Optimization: Auditing Unused Caches &amp; Saving ₹18L/Year</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">May 2026 · By Gaddam Kalyan Teja · 10 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Cloud Cost Audit · By Gaddam Kalyan Teja</div>
 
-                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Cloud Cost Optimization">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80" alt="Cloud Cost Audit">
 
                     <h2 id="toc-why">1. Why This Matters</h2>
                     <p>Cloud bills grow silently — nobody decommissions a Redis instance the same way they'd cancel a subscription. Idle caches, oversized instance types, and forgotten dev environments are the single biggest source of AWS waste. A structured audit process turns "the bill is high" into a specific, defensible savings number.</p>
@@ -1093,28 +1092,35 @@
                     <ul>
                         <li>Pull CloudWatch metrics (CPU, network, cache hit rate) for every ElastiCache/Redis node over a 30-day window.</li>
                         <li>Flag anything with near-zero connections or hit rate below a threshold (e.g., &lt;5%) as an idle candidate.</li>
-                        <li>Cross-check with security groups — idle caches often have exposed ports (6379) left open.</li>
-                        <li>Decommission in stages: snapshot ➔ detach from app config ➔ scale down ➔ terminate.</li>
+                        <li>Cross-check with security groups — idle caches often have exposed ports (6379) left open, which is a security risk on top of a cost one.</li>
+                        <li>Decommission in stages: snapshot ➔ detach from app config ➔ scale down ➔ terminate, with a rollback window before final deletion.</li>
                     </ul>
 
                     <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-[CloudWatch Metrics] ➔ [Audit Script (boto3)] ➔ [Idle Report] ➔ [Snapshot] ➔ [Lock Security Group] ➔ [Terminate] ➔ [Cost Explorer Tracker]
+[CloudWatch Metrics] ➔ [Cost Audit Script - boto3/Python] ➔ [Idle Resource Report]
+                                                                  ↓
+[Monthly Savings in Cost Explorer] ➔ [Terminate] ➔ [Scale Down] ➔ [Close Security Group Ports]
                     </div>
 
                     <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <div class="code-box">Week 1: Export CloudWatch Metrics ➔ Week 2: Scoring Script ➔ Week 3: Owner Validation & Port Lock ➔ Week 4: Staged Decommission</div>
+                    <ul>
+                        <li><strong>Week 1:</strong> Export 30-90 days of CloudWatch metrics for all cache/DB instances.</li>
+                        <li><strong>Week 2:</strong> Build a scoring script (Python/boto3) to flag low-utilization resources.</li>
+                        <li><strong>Week 3:</strong> Validate with app owners, check exposed security group ports.</li>
+                        <li><strong>Week 4:</strong> Execute staged decommission with rollback snapshots; document savings in a cost report.</li>
+                    </ul>
 
                     <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>An internal audit of Athena LMS's ElastiCache fleet found Redis nodes with &lt;3% CPU utilization and open ports to 0.0.0.0/0 — leftovers from a deprecated feature. Snapshotting, locking down the security groups, and terminating them removed ₹1.5L/month in recurring cost (~₹18L/year), with zero downtime.</p>
+                    <p>An internal audit of a SaaS platform's ElastiCache fleet found 6 Redis nodes with &lt;3% CPU utilization and open ports to 0.0.0.0/0 — leftovers from a deprecated feature. Snapshotting, locking down the security groups, and terminating them after a 2-week safety window removed roughly ₹1.5L/month in recurring cost (~₹18L/year), with zero downtime because traffic was verified to be already routing elsewhere.</p>
                 `
             },
             blog3: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Zero-Downtime Microservice Deployments via ArgoCD &amp; AWS EKS</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">March 2026 · By Gaddam Kalyan Teja · 10 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Kubernetes &amp; GitOps · By Gaddam Kalyan Teja</div>
 
-                    <img src="https://images.unsplash.com/photo-1667372335854-c2a2a69094f6?auto=format&fit=crop&w=1200&q=80" alt="Kubernetes Operations">
+                    <img src="https://images.unsplash.com/photo-1667372335854-c2a2a69094f6?auto=format&fit=crop&w=1200&q=80" alt="Kubernetes Deployment">
 
                     <h2 id="toc-why">1. Why This Matters</h2>
                     <p>Manual kubectl apply deployments don't scale past a handful of services and are impossible to audit. GitOps makes Git the single source of truth — what's in the repo is what's running in the cluster, always, with a full history of every change.</p>
@@ -1122,82 +1128,105 @@
                     <h2 id="toc-how">2. How To Use It</h2>
                     <ul>
                         <li>Structure a Git repo with one manifest/Helm chart directory per environment (dev/staging/prod).</li>
-                        <li>Point ArgoCD at the repo; it continuously reconciles cluster state to match Git.</li>
-                        <li>Use rolling updates with maxSurge/maxUnavailable tuned per service.</li>
-                        <li>Layer in Horizontal Pod Autoscaler (HPA) so scale-out happens automatically under load.</li>
+                        <li>Point ArgoCD at the repo; it continuously reconciles cluster state to match Git, not the other way around.</li>
+                        <li>Use rolling updates with maxSurge/maxUnavailable tuned per service, and readiness probes strict enough to catch bad pods before they take traffic.</li>
+                        <li>Layer in Horizontal Pod Autoscaler (HPA) so scale-out happens automatically under load instead of manual intervention.</li>
                     </ul>
 
                     <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-[Dev Git Push] ➔ [Git Repo (Helm)] ➔ [ArgoCD Controller] ➔ [EKS Rolling Update] ➔ [Readiness Probe Check] ➔ [ALB Traffic Shift]
+[Developer git push] ➔ [Git Repo - Helm Charts] ➔ [ArgoCD Controller sync] ➔ [AWS EKS Cluster]
+                                                                                   ↓
+[ArgoCD Auto-Rollback] ➔ [Readiness Probe Fail] ➔ [Pods Test] ➔ [ReplicaSet Rolling Update]
+                                                       ↓ (Pass)
+                                            [ALB / Service Traffic Shift]
                     </div>
 
                     <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <div class="code-box">Phase 1: Helm Charts & External Config ➔ Phase 2: Install ArgoCD ➔ Phase 3: Auto-Sync & Probes ➔ Phase 4: HPA & PodDisruptionBudgets</div>
+                    <ul>
+                        <li><strong>Phase 1:</strong> Containerize services, write Helm charts, move all config out of the cluster into Git.</li>
+                        <li><strong>Phase 2:</strong> Install ArgoCD, connect it to the repo, verify manual sync works.</li>
+                        <li><strong>Phase 3:</strong> Enable auto-sync with self-heal, add readiness/liveness probes to every deployment.</li>
+                        <li><strong>Phase 4:</strong> Add HPA and PodDisruptionBudgets so rolling updates never drop below minimum healthy replicas.</li>
+                    </ul>
 
                     <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>A team running microservices on EKS used to deploy via a shared Jenkins job that occasionally pushed bad config directly to prod. Moving to ArgoCD with Git as the source of truth meant every deploy was a PR — reviewable and revertible with git revert. Rolling updates auto-rolled-back bad deploys within 90 seconds.</p>
+                    <p>A team running 12 microservices on EKS used to deploy via a shared Jenkins job that occasionally pushed bad config directly to prod. Moving to ArgoCD with Git as the source of truth meant every deploy was a PR — reviewable and revertible with git revert. Rolling updates with proper readiness probes meant a bad deploy of the payments service was auto-rolled-back by ArgoCD within 90 seconds, before it affected more than 2% of traffic.</p>
                 `
             },
             blog4: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Hardening Multi-Tenant SaaS Access: JWT Authentication &amp; RBAC</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">January 2026 · By Gaddam Kalyan Teja · 10 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Cloud Security · By Gaddam Kalyan Teja</div>
 
-                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Security Vault">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80" alt="Cloud Security">
 
                     <h2 id="toc-why">1. Why This Matters</h2>
-                    <p>In a multi-tenant SaaS, the worst-case bug isn't a crash — it's Tenant A seeing Tenant B's data. Authentication proves who someone is; authorization (RBAC) decides what they can touch. Getting this wrong at scale (1,000+ users) is a breach waiting to happen.</p>
+                    <p>In a multi-tenant SaaS, the worst-case bug isn't a crash — it's Tenant A seeing Tenant B's data. Authentication proves who someone is; authorization (RBAC) decides what they can touch. Getting this wrong at scale (1,000+ users) is a breach waiting to happen, not a hypothetical.</p>
 
                     <h2 id="toc-how">2. How To Use It</h2>
                     <ul>
-                        <li>Issue short-lived JWTs (15-30 min) signed with an asymmetric key (RS256), with tenant ID and role embedded as claims.</li>
-                        <li>Enforce RBAC at the API gateway layer first, then again at the service/DB layer.</li>
-                        <li>Rotate signing keys on a schedule and support key rollover without invalidating active sessions.</li>
-                        <li>Lock down EC2 security groups so only the load balancer can reach app ports directly.</li>
+                        <li>Issue short-lived JWTs (15-30 min) signed with an asymmetric key (RS256), with tenant ID and role embedded as claims — never trust a role claim without verifying the signature server-side on every request.</li>
+                        <li>Enforce RBAC at the API gateway layer first (coarse-grained: can this role hit this endpoint), then again at the service/DB layer (fine-grained: can this user touch this row).</li>
+                        <li>Rotate signing keys on a schedule and support key rollover without invalidating all active sessions.</li>
+                        <li>Lock down EC2 security groups so only the load balancer can reach app ports directly — no direct public access to instances.</li>
                     </ul>
 
                     <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-[User Login] ➔ [Auth Service] ➔ [Issue RS256 JWT] ➔ [API Gateway RBAC Check] ➔ [Microservice] ➔ [Tenant-Scoped DB Query]
+[User Login] ➔ [Auth Service] ➔ [Signed JWT (RS256)] ➔ [API Gateway] ➔ [RBAC Policy Check]
+                                                                               ↓ (Allowed)
+[EC2 Security Group (ALB Only Ingress)] ➔ [Tenant-Scoped DB Query] ➔ [Microservice Route]
                     </div>
 
                     <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <div class="code-box">Phase 1: Short-lived Signed JWTs ➔ Phase 2: Gateway RBAC ➔ Phase 3: Row-Level Tenant DB Scoping ➔ Phase 4: Port Ingress Locks</div>
+                    <ul>
+                        <li><strong>Phase 1:</strong> Move to short-lived JWTs with proper signature verification on every request (not just at login).</li>
+                        <li><strong>Phase 2:</strong> Define role-permission matrices; enforce at the gateway.</li>
+                        <li><strong>Phase 3:</strong> Add row-level tenant scoping at the database/service layer as a second line of defense.</li>
+                        <li><strong>Phase 4:</strong> Lock security groups to least-privilege ingress; audit with automated port-scan checks in CI.</li>
+                    </ul>
 
                     <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>A SaaS platform serving 1,000+ users across multiple tenants found that an internal admin API trusted the role claim in the JWT without re-verifying the signature on every hop. Adding signature re-verification at each service boundary plus tenant-scoped DB queries closed the gap completely.</p>
+                    <p>A SaaS platform serving 1,000+ users across multiple tenants found, during a security review, that an internal admin API trusted the role claim in the JWT without re-verifying the signature on every hop between microservices. A forged token could have escalated privileges. Adding signature re-verification at each service boundary plus tenant-scoped DB queries closed the gap before it reached production.</p>
                 `
             },
             blog5: {
                 content: `
                     <h1 style="font-size:2.5rem; color:var(--text-heading); font-weight:800; margin-bottom:1rem;">Lowering MTTR: Prometheus Metrics, Alertmanager, &amp; Grafana</h1>
-                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">November 2025 · By Gaddam Kalyan Teja · 10 min read</div>
+                    <div style="font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-blue); margin-bottom:2rem;">Category: Observability &amp; SRE · By Gaddam Kalyan Teja</div>
 
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Grafana Dashboard">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Grafana Observability">
 
                     <h2 id="toc-why">1. Why This Matters</h2>
-                    <p>Mean Time To Resolution (MTTR) is the number that actually matters during an incident — how fast someone can go from alert to root cause. Custom metrics and good dashboards are what separate a 5-minute fix from a 2-hour war room.</p>
+                    <p>Mean Time To Resolution (MTTR) is the number that actually matters during an incident — not whether you have "observability," but how fast someone can go from alert to root cause. Custom metrics and good dashboards are what separate a 5-minute fix from a 2-hour war room.</p>
 
                     <h2 id="toc-how">2. How To Use It</h2>
                     <ul>
-                        <li>Instrument services with custom Prometheus counters/histograms for business-relevant events.</li>
-                        <li>Route alerts through Alertmanager with proper grouping and silencing so on-call gets one actionable page.</li>
-                        <li>Build Grafana dashboards around the "four golden signals" (latency, traffic, errors, saturation) per service.</li>
-                        <li>Automate root cause analysis (RCA) by correlating deploy timestamps directly on Grafana timelines.</li>
+                        <li>Instrument services with custom Prometheus counters/histograms for business-relevant events (e.g., failed payments, queue depth) — not just CPU/memory, which rarely tell you why something broke.</li>
+                        <li>Route alerts through Alertmanager with proper grouping and silencing so on-call gets one actionable page, not fifty.</li>
+                        <li>Build Grafana dashboards around the "four golden signals" (latency, traffic, errors, saturation) per service, with drill-down links from a high-level overview to per-pod detail.</li>
+                        <li>Automate root cause analysis (RCA) by correlating deploy timestamps (from your CI/CD system) directly on the same Grafana timeline as error spikes.</li>
                     </ul>
 
                     <h2 id="toc-arch">3. Architecture Diagram</h2>
                     <div class="code-box">
-[Microservices /metrics] ➔ [Prometheus Scraper] ➔ [Alertmanager] ➔ [On-Call Group Alert]
-                                                ➔ [Grafana Golden Signal Dashboards]
+[Microservices /metrics] ➔ [Prometheus Scraper] ➔ [Alertmanager Grouped Alert] ➔ [On-Call Engineer]
+                                                ➔ [Grafana Dashboards] ➔ [CI/CD Deploy Markers]
+                                                                               ↓
+                                                                [Faster Root Cause ID & Fix]
                     </div>
 
                     <h2 id="toc-road">4. Roadmap To Adopt</h2>
-                    <div class="code-box">Week 1-2: Custom Metric Instrumentation ➔ Week 3: Alertmanager Grouping ➔ Week 4: Grafana Dashboards ➔ Month 2: Deploy Overlays</div>
+                    <ul>
+                        <li><strong>Week 1-2:</strong> Instrument core services with custom Prometheus metrics beyond default CPU/memory.</li>
+                        <li><strong>Week 3:</strong> Set up Alertmanager routing/grouping so alerts map to actual on-call ownership.</li>
+                        <li><strong>Week 4:</strong> Build Grafana dashboards per service using the four golden signals.</li>
+                        <li><strong>Month 2:</strong> Overlay deploy events on dashboards so incident timelines instantly show "did this start right after a deploy."</li>
+                    </ul>
 
                     <h2 id="toc-real">5. Real-Life Example</h2>
-                    <p>A team's average MTTR was ~90 minutes because engineers had to manually check deploy logs and metrics in three tools. Overlaying CI/CD deploy markers directly on the Grafana error-rate graph meant the very first thing an on-call engineer saw was "this started 4 minutes after deploy #482." MTTR dropped to under 20 minutes.</p>
+                    <p>A team's average MTTR was ~90 minutes because engineers had to manually check deploy logs, then metrics, then traces, in three different tools. Overlaying CI/CD deploy markers directly on the Grafana error-rate graph meant the very first thing an on-call engineer saw during a spike was "this started 4 minutes after deploy #482." MTTR dropped to under 20 minutes for deploy-caused incidents.</p>
                 `
             }
         };
